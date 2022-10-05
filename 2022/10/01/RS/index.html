@@ -20,32 +20,31 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"olive-2019.github.io","root":"/Olivia_Lam.github.io/","images":"/Olivia_Lam.github.io/images","scheme":"Gemini","darkmode":false,"version":"8.13.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/Olivia_Lam.github.io/js/config.js"></script>
 
-    <meta name="description" content="低代码开发推荐系统相关内容">
+    <meta name="description" content="低代码开发推荐系统">
 <meta property="og:type" content="article">
-<meta property="og:title" content="RS">
+<meta property="og:title" content="Automating the Synthesis of Recommender Systems for Modelling Languages">
 <meta property="og:url" content="https://olive-2019.github.io/Olivia_Lam.github.io/2022/10/01/RS/index.html">
 <meta property="og:site_name" content="Lam&#39;s Blog">
-<meta property="og:description" content="低代码开发推荐系统相关内容">
+<meta property="og:description" content="低代码开发推荐系统">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://olive-2019.github.io/Olivia_Lam.github.io/image/RS/1664682903194.png">
 <meta property="og:image" content="https://olive-2019.github.io/Olivia_Lam.github.io/image/RS/1664682869810.png">
 <meta property="article:published_time" content="2022-10-01T08:04:51.000Z">
-<meta property="article:modified_time" content="2022-10-02T03:55:06.207Z">
+<meta property="article:modified_time" content="2022-10-03T03:49:46.199Z">
 <meta property="article:author" content="Olivia Lam">
 <meta property="article:tag" content="lowcomote">
 <meta property="article:tag" content="RS">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://olive-2019.github.io/Olivia_Lam.github.io/image/RS/1664682903194.png">
+<meta name="twitter:image" content="https://olive-2019.github.io/Olivia_Lam.github.io/image/RS/1664682869810.png">
 
 
 <link rel="canonical" href="https://olive-2019.github.io/Olivia_Lam.github.io/2022/10/01/RS/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://olive-2019.github.io/Olivia_Lam.github.io/2022/10/01/RS/","path":"2022/10/01/RS/","title":"RS"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://olive-2019.github.io/Olivia_Lam.github.io/2022/10/01/RS/","path":"2022/10/01/RS/","title":"Automating the Synthesis of Recommender Systems for Modelling Languages"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>RS | Lam's Blog</title>
+<title>Automating the Synthesis of Recommender Systems for Modelling Languages | Lam's Blog</title>
   
 
 
@@ -121,7 +120,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Automating-the-Synthesis-of-Recommender-Systems-for-Modelling-Languages%EF%BC%88%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F%E8%87%AA%E5%8A%A8%E5%BB%BA%E6%A8%A1%EF%BC%89"><span class="nav-number">1.</span> <span class="nav-text">Automating the Synthesis of Recommender Systems for Modelling Languages（推荐系统自动建模）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%91%98%E8%A6%81"><span class="nav-number">1.1.</span> <span class="nav-text">摘要</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RS-%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F"><span class="nav-number">1.2.</span> <span class="nav-text">RS 推荐系统</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8F%90%E5%87%BA%E7%9A%84%E6%96%B9%E6%B3%95"><span class="nav-number">1.3.</span> <span class="nav-text">提出的方法</span></a></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%91%98%E8%A6%81"><span class="nav-number">1.</span> <span class="nav-text">摘要</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#RS-%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F"><span class="nav-number">2.</span> <span class="nav-text">RS 推荐系统</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%8F%90%E5%87%BA%E7%9A%84%E6%96%B9%E6%B3%95"><span class="nav-number">3.</span> <span class="nav-text">提出的方法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Droid-DSL%EF%BC%88%E4%B8%80%E7%A7%8D%E9%A2%86%E5%9F%9F%E7%89%B9%E5%AE%9A%E8%AF%AD%E8%A8%80%EF%BC%89"><span class="nav-number">4.</span> <span class="nav-text">Droid DSL（一种领域特定语言）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9E%B6%E6%9E%84%E4%B8%8E%E6%94%AF%E6%92%91%E5%B7%A5%E5%85%B7"><span class="nav-number">5.</span> <span class="nav-text">架构与支撑工具</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9E%B6%E6%9E%84"><span class="nav-number">5.1.</span> <span class="nav-text">架构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%94%AF%E6%92%91%E5%B7%A5%E5%85%B7"><span class="nav-number">5.2.</span> <span class="nav-text">支撑工具</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%87%AA%E5%B7%B1%E7%9A%84%E4%B8%80%E7%82%B9%E7%A2%8E%E7%A2%8E%E5%BF%B5"><span class="nav-number">6.</span> <span class="nav-text">自己的一点碎碎念</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -202,12 +201,12 @@
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="RS | Lam's Blog">
+      <meta itemprop="name" content="Automating the Synthesis of Recommender Systems for Modelling Languages | Lam's Blog">
       <meta itemprop="description" content="">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          RS
+          Automating the Synthesis of Recommender Systems for Modelling Languages
         </h1>
 
         <div class="post-meta-container">
@@ -225,7 +224,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2022-10-02 11:55:06" itemprop="dateModified" datetime="2022-10-02T11:55:06+08:00">2022-10-02</time>
+      <time title="修改时间：2022-10-03 11:49:46" itemprop="dateModified" datetime="2022-10-03T11:49:46+08:00">2022-10-03</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -251,7 +250,7 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>620</span>
+      <span>1.3k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
@@ -269,18 +268,32 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <p>低代码开发推荐系统相关内容</p>
+        <p>低代码开发推荐系统</p>
 <span id="more"></span>
 
-<h1 id="Automating-the-Synthesis-of-Recommender-Systems-for-Modelling-Languages（推荐系统自动建模）"><a href="#Automating-the-Synthesis-of-Recommender-Systems-for-Modelling-Languages（推荐系统自动建模）" class="headerlink" title="Automating the Synthesis of Recommender Systems for Modelling Languages（推荐系统自动建模）"></a>Automating the Synthesis of Recommender Systems for Modelling Languages（推荐系统自动建模）</h1><p><img src="/Olivia_Lam.github.io/image/RS/1664682903194.png" alt="1664682903194"></p>
-<h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>希望能使用推荐系统建模，但是推荐系统的开发存在需要难以考虑的问题和专业知识，所以提出了一个针对建模语言的推荐系统自动生成工具。为评估该系统，实验测试了一个生成的推荐系统和聊天程序建模。</p>
-<h2 id="RS-推荐系统"><a href="#RS-推荐系统" class="headerlink" title="RS 推荐系统"></a>RS 推荐系统</h2><p>推荐系统的目标用户是生成的且偏好是有特殊含义的。例如，用户可能是一个未完成的类，需要被推荐方法和成员变量。</p>
+<h1 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h1><p>希望能使用推荐系统建模，但是推荐系统的开发存在需要难以考虑的问题和专业知识，所以提出了一个针对软件模型的<strong>推荐系统自动生成工具</strong>。为评估该系统，实验测试了一个生成的推荐系统和聊天程序建模。</p>
+<h1 id="RS-推荐系统"><a href="#RS-推荐系统" class="headerlink" title="RS 推荐系统"></a>RS 推荐系统</h1><p>推荐系统的目标用户是生成的且偏好是有特殊含义的。例如，用户可能是一个未完成的类，需要被推荐方法和成员变量。</p>
 <p>推荐系统的两种信息源：<strong>基于内容</strong>（Content-based CB）、<strong>协同过滤</strong>（collaborative filtering CF）。基于内容评估用户历史数据，协同过滤评估用户相似性。此外，协同过滤可以评估用户或项目之间的相似性。典型的混合策略是使用CB的相似性代替CF的评级。</p>
 <p>推荐系统评价方法：<strong>在线</strong>、<strong>离线</strong>。在线方法使用在线A&#x2F;B测试实时获取影响，离线方法使用历史数据，分为训练集和测试集。</p>
-<p>常用评价指标：精度、（precision）、召回率（recall）、F1、平均精度（MAP）、归一化累积好处（nDCG，评估最有用的项目是否出现在推荐列表的顶部位置）</p>
-<p>补充评价指标：用户空间覆盖（USC，评估覆盖了多少用户）、项目空间覆盖（ISC，评估覆盖了多少项目）</p>
-<p>提出的自动生成推荐系统允许配置这几个方面的参数：推荐方法、目标用户、项目、离线评价方法和指标</p>
-<h2 id="提出的方法"><a href="#提出的方法" class="headerlink" title="提出的方法"></a>提出的方法</h2><p><img src="/Olivia_Lam.github.io/image/RS/1664682869810.png" alt="1664682869810"></p>
+<p>常用评价指标：<strong>精度</strong>、（precision）、<strong>召回率</strong>（recall）、<strong>F1</strong>、<strong>平均精度</strong>（MAP）、<strong>归一化累积好处</strong>（nDCG，评估最有用的项目是否出现在推荐列表的顶部位置）</p>
+<p>补充评价指标：<strong>用户空间覆盖</strong>（USC，评估覆盖了多少用户）、<strong>项目空间覆盖</strong>（ISC，评估覆盖了多少项目）</p>
+<p>提出的自动生成推荐系统允许配置这几个方面的参数：<strong>推荐方法、目标用户、项目、离线评价方法和指标</strong></p>
+<h1 id="提出的方法"><a href="#提出的方法" class="headerlink" title="提出的方法"></a>提出的方法</h1><p><img src="/Olivia_Lam.github.io/image/RS/1664682869810.png" alt="1664682869810"></p>
+<p><strong>流程：</strong></p>
+<ol>
+<li>选择推荐系统需要推荐的元素，如类的属性，过程的任务。指定推荐方法、训练数据集、推荐系统指标</li>
+<li>推荐系统训练过程</li>
+<li>选择推荐方法，系统自动生成可以集成到不同建模工具里的推荐系统</li>
+</ol>
+<h1 id="Droid-DSL（一种领域特定语言）"><a href="#Droid-DSL（一种领域特定语言）" class="headerlink" title="Droid DSL（一种领域特定语言）"></a>Droid DSL（一种领域特定语言）</h1><p>用来描述提出的自动生成推荐系统的一种语言</p>
+<h1 id="架构与支撑工具"><a href="#架构与支撑工具" class="headerlink" title="架构与支撑工具"></a>架构与支撑工具</h1><h2 id="架构"><a href="#架构" class="headerlink" title="架构"></a>架构</h2><p>该系统的架构由三个模块组成，分别是配置器、服务、客户。</p>
+<p>第一个模块是<strong>配置器</strong>，该模块提供了配置、评估、生成推荐系统的功能。同时也提供了一个eclipse编辑器用于指定推荐系统内容（1）。该内容作为推荐系统评价系统的输入。推荐系统评价系统依赖于RankSys和RiVal，其中RankSys是实现推荐系统的框架，RiVal是一个数据划分和推荐系统评价的工具集。每一个指标都会显示在Eclipse的视图里（3）。根据得到的指标，推荐系统设计人员可以选择一种推荐方法并生成一系列配置文件。</p>
+<p>第二个模块是DROID<strong>服务</strong>，该模块使用了第一个模块生成的配置文件。通过4模块生成不同的配置文件可以适配不同的建模语言。</p>
+<p>第三个模块是<strong>客户</strong>，这个系统允许客户使用基于JSON的模型表示发送请求。</p>
+<h2 id="支撑工具"><a href="#支撑工具" class="headerlink" title="支撑工具"></a>支撑工具</h2><p>配置器部分的工具是eclipse的一个插件，支持使用DSL配置、查看指标结果。</p>
+<p>服务方面采用方式是，客户端提交JSON格式的请求，服务端处理并返回推荐系统名字和JSON格式的推荐系统。服务主要包含三个模块，推荐器（用于处理客户端请求）、内容解析（用于解析JSON文件）、推荐系统生成器</p>
+<h1 id="自己的一点碎碎念"><a href="#自己的一点碎碎念" class="headerlink" title="自己的一点碎碎念"></a>自己的一点碎碎念</h1><p>其实就是一个支持用户定制推荐系统的低代码开发平台，但是跟清华数为的项目有些差异。这里还需要使用一些类似yml的DSL书写配置，不是完全的图形化界面。</p>
+<p>从文章看来，工具应该是已经开发完可以用的了，文章中也给了链接，但是还没真正安装试试。</p>
 
     </div>
 
