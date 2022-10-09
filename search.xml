@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title>Recommender Systems in Model-Driven Engineering</title>
+    <url>/Olivia_Lam.github.io/2022/10/05/Engineering/</url>
+    <content><![CDATA[<p>推荐系统在软件建模中的作用的综述，应该不是我们关注的重点</p>
+<span id="more"></span>
+
+<h1 id="三个问题"><a href="#三个问题" class="headerlink" title="三个问题"></a>三个问题</h1><ol>
+<li>推荐系统在软件建模中起什么作用？<br>通常用于完成和修复工件。<br>通常是独立于语言的，特定的一般针对UML或过程建模符号</li>
+<li>哪些推荐技术用于支持软件建模？评价方法？<br>基于内容&gt;基于知识<br>评价方法：离线</li>
+<li>推荐系统还有什么可做的？<br>几乎没有用于模型转化或代码生成的推荐系统，很少推荐系统用于创建、重用、查找工件。此外，还有有效的软件建模的工件库、协同过滤利用群体知识、基于用户的推荐系统评估、与低代码平台的有效寄成机制</li>
+</ol>
+]]></content>
+      <categories>
+        <category>论文</category>
+      </categories>
+      <tags>
+        <tag>RS</tag>
+        <tag>lowcomote</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Automating the Synthesis of Recommender Systems for Modelling Languages</title>
+    <url>/Olivia_Lam.github.io/2022/10/01/RS/</url>
+    <content><![CDATA[<p>低代码开发推荐系统</p>
+<span id="more"></span>
+
+<h1 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h1><p>希望能使用推荐系统建模，但是推荐系统的开发存在需要难以考虑的问题和专业知识，所以提出了一个针对软件模型的<strong>推荐系统自动生成工具</strong>。为评估该系统，实验测试了一个生成的推荐系统和聊天程序建模。</p>
+<h1 id="RS-推荐系统"><a href="#RS-推荐系统" class="headerlink" title="RS 推荐系统"></a>RS 推荐系统</h1><p>推荐系统的目标用户是生成的且偏好是有特殊含义的。例如，用户可能是一个未完成的类，需要被推荐方法和成员变量。</p>
+<p>推荐系统的两种信息源：<strong>基于内容</strong>（Content-based CB）、<strong>协同过滤</strong>（collaborative filtering CF）。基于内容评估用户历史数据，协同过滤评估用户相似性。此外，协同过滤可以评估用户或项目之间的相似性。典型的混合策略是使用CB的相似性代替CF的评级。</p>
+<p>推荐系统评价方法：<strong>在线</strong>、<strong>离线</strong>。在线方法使用在线A&#x2F;B测试实时获取影响，离线方法使用历史数据，分为训练集和测试集。</p>
+<p>常用评价指标：<strong>精度</strong>、（precision）、<strong>召回率</strong>（recall）、<strong>F1</strong>、<strong>平均精度</strong>（MAP）、<strong>归一化累积好处</strong>（nDCG，评估最有用的项目是否出现在推荐列表的顶部位置）</p>
+<p>补充评价指标：<strong>用户空间覆盖</strong>（USC，评估覆盖了多少用户）、<strong>项目空间覆盖</strong>（ISC，评估覆盖了多少项目）</p>
+<p>提出的自动生成推荐系统允许配置这几个方面的参数：<strong>推荐方法、目标用户、项目、离线评价方法和指标</strong></p>
+<h1 id="提出的方法"><a href="#提出的方法" class="headerlink" title="提出的方法"></a>提出的方法</h1><p><img src="/Olivia_Lam.github.io/Olivia_Lam.github/image/RS/1665226282989.png" alt="1665226282989"></p>
+<p><strong>流程：</strong></p>
+<ol>
+<li>选择推荐系统需要推荐的元素，如类的属性，过程的任务。指定推荐方法、训练数据集、推荐系统指标</li>
+<li>推荐系统训练过程</li>
+<li>选择推荐方法，系统自动生成可以集成到不同建模工具里的推荐系统</li>
+</ol>
+<h1 id="Droid-DSL（一种领域特定语言）"><a href="#Droid-DSL（一种领域特定语言）" class="headerlink" title="Droid DSL（一种领域特定语言）"></a>Droid DSL（一种领域特定语言）</h1><p>用来描述提出的自动生成推荐系统的一种语言</p>
+<h1 id="架构与支撑工具"><a href="#架构与支撑工具" class="headerlink" title="架构与支撑工具"></a>架构与支撑工具</h1><h2 id="架构"><a href="#架构" class="headerlink" title="架构"></a>架构</h2><p>该系统的架构由三个模块组成，分别是配置器、服务、客户。</p>
+<p>第一个模块是<strong>配置器</strong>，该模块提供了配置、评估、生成推荐系统的功能。同时也提供了一个eclipse编辑器用于指定推荐系统内容（1）。该内容作为推荐系统评价系统的输入。推荐系统评价系统依赖于RankSys和RiVal，其中RankSys是实现推荐系统的框架，RiVal是一个数据划分和推荐系统评价的工具集。每一个指标都会显示在Eclipse的视图里（3）。根据得到的指标，推荐系统设计人员可以选择一种推荐方法并生成一系列配置文件。</p>
+<p>第二个模块是DROID<strong>服务</strong>，该模块使用了第一个模块生成的配置文件。通过4模块生成不同的配置文件可以适配不同的建模语言。</p>
+<p>第三个模块是<strong>客户</strong>，这个系统允许客户使用基于JSON的模型表示发送请求。</p>
+<h2 id="支撑工具"><a href="#支撑工具" class="headerlink" title="支撑工具"></a>支撑工具</h2><p>配置器部分的工具是eclipse的一个插件，支持使用DSL配置、查看指标结果。</p>
+<p>服务方面采用方式是，客户端提交JSON格式的请求，服务端处理并返回推荐系统名字和JSON格式的推荐系统。服务主要包含三个模块，推荐器（用于处理客户端请求）、内容解析（用于解析JSON文件）、推荐系统生成器</p>
+<h1 id="自己的一点碎碎念"><a href="#自己的一点碎碎念" class="headerlink" title="自己的一点碎碎念"></a>自己的一点碎碎念</h1><p>其实就是一个支持用户定制推荐系统的低代码开发平台，但是跟清华数为的项目有些差异。这里还需要使用一些类似yml的DSL书写配置，不是完全的图形化界面。</p>
+<p>从文章看来，工具应该是已经开发完可以用的了，文章中也给了链接，但是还没真正安装试试。</p>
+]]></content>
+      <categories>
+        <category>论文</category>
+      </categories>
+      <tags>
+        <tag>RS</tag>
+        <tag>lowcomote</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Towards automating the construction of recommender systems for low-code development platforms</title>
+    <url>/Olivia_Lam.github.io/2022/10/08/RS3/</url>
+    <content><![CDATA[<p>用于低代码开发平台的推荐系统</p>
+<span id="more"></span>
+
+<h1 id="4个问题"><a href="#4个问题" class="headerlink" title="4个问题"></a>4个问题</h1><ol>
+<li>推荐系统可以帮助类建模吗？</li>
+<li>哪一种推荐方法在相关属性、方法、超类的推荐上性能最好？</li>
+<li>混合方法会更好吗？</li>
+<li>考虑用户覆盖率和项目覆盖率时，哪一种方法会更好？</li>
+</ol>
+<h1 id="动机"><a href="#动机" class="headerlink" title="动机"></a>动机</h1><p>在使用低代码开发平台开发应用时，需要推荐系统推荐一些工件，如类中的属性和方法。</p>
+<h1 id="方法概述"><a href="#方法概述" class="headerlink" title="方法概述"></a>方法概述</h1><p><img src="/Olivia_Lam.github.io/Olivia_Lam.github/image/RS3/1665226767819.png" alt="1665226767819"></p>
+<p>推荐系统设计者使用DSL定义元模型（1），假设存在模型库（2）用于推荐。生成一个定制的推荐系统，嵌入到低代码开发平台之中，向开发者提供建议。</p>
+<h1 id="提出的方法"><a href="#提出的方法" class="headerlink" title="提出的方法"></a>提出的方法</h1><p><img src="/Olivia_Lam.github.io/Olivia_Lam.github/image/RS3/1665227277118.png" alt="1665227277118"></p>
+<p>设计者只需要完成前两布，即数据收集和使用DSL配置推荐系统。第三步到第七步都是自动完成的</p>
+<h2 id="DSL配置"><a href="#DSL配置" class="headerlink" title="DSL配置"></a>DSL配置</h2><p>跟之前那篇一样</p>
+<h2 id="数据预处理"><a href="#数据预处理" class="headerlink" title="数据预处理"></a>数据预处理</h2><p>流程：</p>
+<ol>
+<li>获取模型</li>
+<li>提取与配置的用户、项目、项目特征类型对应的模型对象</li>
+<li>生成用户-项目和项目-特征矩阵</li>
+</ol>
+<p>例子：</p>
+<p><img src="/Olivia_Lam.github.io/Olivia_Lam.github/image/RS3/1665245563318.png" alt="1665245563318"></p>
+<p>（1）获取模型</p>
+<p>（2）提取所有的用户（3）提取所有项目的名字（4）提取项目特征</p>
+<p>（5）（6）两个矩阵</p>
+<h2 id="推荐系统引擎"><a href="#推荐系统引擎" class="headerlink" title="推荐系统引擎"></a>推荐系统引擎</h2><p>对应图4的步骤4-7，包括数据切割、推荐系统生成、训练、评价和部署。</p>
+<p><img src="/Olivia_Lam.github.io/Olivia_Lam.github/image/RS3/1665246085399.png" alt="1665246085399"></p>
+<p>每一个候选推荐系统被评价都会有一个分数，设计者可以看到这个分数。</p>
+<p>我们希望能够自动生成一个最佳配置的推荐系统。</p>
+<h1 id="实验验证"><a href="#实验验证" class="headerlink" title="实验验证"></a>实验验证</h1><h2 id="数据集"><a href="#数据集" class="headerlink" title="数据集"></a>数据集</h2><p><img src="/Olivia_Lam.github.io/Olivia_Lam.github/image/RS3/1665332963070.png" alt="1665332963070"></p>
+<p>三个数据集，前两个是人工构造的（后一个是前一个变换来的），最后一个是真实数据</p>
+<h2 id="实验设计"><a href="#实验设计" class="headerlink" title="实验设计"></a>实验设计</h2><h3 id="数据分割"><a href="#数据分割" class="headerlink" title="数据分割"></a>数据分割</h3><p>十重交叉验证、8：2分层抽样（每个类的80%项目用于训练）划分训练集和测试集</p>
+<h3 id="推荐方法"><a href="#推荐方法" class="headerlink" title="推荐方法"></a>推荐方法</h3><p>协同过滤、基于内容、混合</p>
+<h3 id="评估指标"><a href="#评估指标" class="headerlink" title="评估指标"></a>评估指标</h3><p>精度（相关的推荐项目的百分比）、召回率（推荐列表中包含相关项目的百分比）、F1、覆盖率（用户空间覆盖率、项目空间覆盖率）、标准化折扣累计收益（nDCG，最相关的项目在不在列表顶部）</p>
+<h2 id="实验结果"><a href="#实验结果" class="headerlink" title="实验结果"></a>实验结果</h2><p><img src="/Olivia_Lam.github.io/Olivia_Lam.github/image/RS3/1665332667791.png" alt="1665332667791"></p>
+<p>AtlanEcore数据集上性能较好，估计是数据集较大的缘故</p>
+<p>回答四个问题</p>
+<h3 id="推荐系统可以帮助类建模吗？"><a href="#推荐系统可以帮助类建模吗？" class="headerlink" title="推荐系统可以帮助类建模吗？"></a>推荐系统可以帮助类建模吗？</h3><h3 id="哪一种推荐方法在相关属性、方法、超类的推荐上性能最好？"><a href="#哪一种推荐方法在相关属性、方法、超类的推荐上性能最好？" class="headerlink" title="哪一种推荐方法在相关属性、方法、超类的推荐上性能最好？"></a>哪一种推荐方法在相关属性、方法、超类的推荐上性能最好？</h3><h3 id="混合方法会更好吗？"><a href="#混合方法会更好吗？" class="headerlink" title="混合方法会更好吗？"></a>混合方法会更好吗？</h3><h3 id="考虑用户覆盖率和项目覆盖率时，哪一种方法会更好？"><a href="#考虑用户覆盖率和项目覆盖率时，哪一种方法会更好？" class="headerlink" title="考虑用户覆盖率和项目覆盖率时，哪一种方法会更好？"></a>考虑用户覆盖率和项目覆盖率时，哪一种方法会更好？</h3>]]></content>
+      <categories>
+        <category>论文</category>
+      </categories>
+      <tags>
+        <tag>RS</tag>
+        <tag>lowcomote</tag>
+      </tags>
+  </entry>
+</search>
