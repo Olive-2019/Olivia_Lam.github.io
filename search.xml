@@ -1,26 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>Recommender Systems in Model-Driven Engineering</title>
-    <url>/Olivia_Lam.github.io/2022/10/05/Engineering/</url>
-    <content><![CDATA[<p>推荐系统在软件建模中的作用的综述，应该不是我们关注的重点</p>
-<span id="more"></span>
-
-<h1 id="三个问题"><a href="#三个问题" class="headerlink" title="三个问题"></a>三个问题</h1><ol>
-<li>推荐系统在软件建模中起什么作用？<br>通常用于完成和修复工件。<br>通常是独立于语言的，特定的一般针对UML或过程建模符号</li>
-<li>哪些推荐技术用于支持软件建模？评价方法？<br>基于内容&gt;基于知识<br>评价方法：离线</li>
-<li>推荐系统还有什么可做的？<br>几乎没有用于模型转化或代码生成的推荐系统，很少推荐系统用于创建、重用、查找工件。此外，还有有效的软件建模的工件库、协同过滤利用群体知识、基于用户的推荐系统评估、与低代码平台的有效寄成机制</li>
-</ol>
-]]></content>
-      <categories>
-        <category>论文</category>
-      </categories>
-      <tags>
-        <tag>RS</tag>
-        <tag>lowcomote</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Automating the Synthesis of Recommender Systems for Modelling Languages</title>
     <url>/Olivia_Lam.github.io/2022/10/01/RS/</url>
     <content><![CDATA[<p>低代码开发推荐系统</p>
@@ -54,8 +34,28 @@
         <category>论文</category>
       </categories>
       <tags>
-        <tag>RS</tag>
         <tag>lowcomote</tag>
+        <tag>RS</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Recommender Systems in Model-Driven Engineering</title>
+    <url>/Olivia_Lam.github.io/2022/10/05/Engineering/</url>
+    <content><![CDATA[<p>推荐系统在软件建模中的作用的综述，应该不是我们关注的重点</p>
+<span id="more"></span>
+
+<h1 id="三个问题"><a href="#三个问题" class="headerlink" title="三个问题"></a>三个问题</h1><ol>
+<li>推荐系统在软件建模中起什么作用？<br>通常用于完成和修复工件。<br>通常是独立于语言的，特定的一般针对UML或过程建模符号</li>
+<li>哪些推荐技术用于支持软件建模？评价方法？<br>基于内容&gt;基于知识<br>评价方法：离线</li>
+<li>推荐系统还有什么可做的？<br>几乎没有用于模型转化或代码生成的推荐系统，很少推荐系统用于创建、重用、查找工件。此外，还有有效的软件建模的工件库、协同过滤利用群体知识、基于用户的推荐系统评估、与低代码平台的有效寄成机制</li>
+</ol>
+]]></content>
+      <categories>
+        <category>论文</category>
+      </categories>
+      <tags>
+        <tag>lowcomote</tag>
+        <tag>RS</tag>
       </tags>
   </entry>
   <entry>
@@ -99,13 +99,19 @@
 <h2 id="实验结果"><a href="#实验结果" class="headerlink" title="实验结果"></a>实验结果</h2><p><img src="/Olivia_Lam.github.io/Olivia_Lam.github/image/RS3/1665332667791.png" alt="1665332667791"></p>
 <p>AtlanEcore数据集上性能较好，估计是数据集较大的缘故</p>
 <p>回答四个问题</p>
-<h3 id="推荐系统可以帮助类建模吗？"><a href="#推荐系统可以帮助类建模吗？" class="headerlink" title="推荐系统可以帮助类建模吗？"></a>推荐系统可以帮助类建模吗？</h3><h3 id="哪一种推荐方法在相关属性、方法、超类的推荐上性能最好？"><a href="#哪一种推荐方法在相关属性、方法、超类的推荐上性能最好？" class="headerlink" title="哪一种推荐方法在相关属性、方法、超类的推荐上性能最好？"></a>哪一种推荐方法在相关属性、方法、超类的推荐上性能最好？</h3><h3 id="混合方法会更好吗？"><a href="#混合方法会更好吗？" class="headerlink" title="混合方法会更好吗？"></a>混合方法会更好吗？</h3><h3 id="考虑用户覆盖率和项目覆盖率时，哪一种方法会更好？"><a href="#考虑用户覆盖率和项目覆盖率时，哪一种方法会更好？" class="headerlink" title="考虑用户覆盖率和项目覆盖率时，哪一种方法会更好？"></a>考虑用户覆盖率和项目覆盖率时，哪一种方法会更好？</h3>]]></content>
+<h3 id="推荐系统可以帮助类建模吗？"><a href="#推荐系统可以帮助类建模吗？" class="headerlink" title="推荐系统可以帮助类建模吗？"></a>推荐系统可以帮助类建模吗？</h3><p>所有方法在所有数据集上精度都在0.2-0.3之间，但是论文里说F1到达0.28+，就可以用了</p>
+<h3 id="哪一种推荐方法在相关属性、方法、超类的推荐上性能最好？"><a href="#哪一种推荐方法在相关属性、方法、超类的推荐上性能最好？" class="headerlink" title="哪一种推荐方法在相关属性、方法、超类的推荐上性能最好？"></a>哪一种推荐方法在相关属性、方法、超类的推荐上性能最好？</h3><p>不同的数据集上最佳方法不同</p>
+<h3 id="混合方法会更好吗？"><a href="#混合方法会更好吗？" class="headerlink" title="混合方法会更好吗？"></a>混合方法会更好吗？</h3><p>在Synthetic数据集上混合方法表现更好</p>
+<h3 id="考虑用户覆盖率和项目覆盖率时，哪一种方法会更好？"><a href="#考虑用户覆盖率和项目覆盖率时，哪一种方法会更好？" class="headerlink" title="考虑用户覆盖率和项目覆盖率时，哪一种方法会更好？"></a>考虑用户覆盖率和项目覆盖率时，哪一种方法会更好？</h3><p>精度和召回率低的混合方法给出了高用户覆盖率和低项目覆盖率。用户覆盖率需要以项目覆盖率为代价</p>
+<h2 id="实验结果有效性的威胁"><a href="#实验结果有效性的威胁" class="headerlink" title="实验结果有效性的威胁"></a>实验结果有效性的威胁</h2><h3 id="内部威胁"><a href="#内部威胁" class="headerlink" title="内部威胁"></a>内部威胁</h3><p>研究和结论之间的相关性。由于数据集是人工创建的，而且数据量小，可能存在引入误差的问题。所以存在AtlanEcore数据集。</p>
+<h3 id="外部威胁"><a href="#外部威胁" class="headerlink" title="外部威胁"></a>外部威胁</h3><p>模型的推广性。实验是面向具体任务和语言的，将来可能用于其它任务、以及其它数据集。</p>
+]]></content>
       <categories>
         <category>论文</category>
       </categories>
       <tags>
-        <tag>RS</tag>
         <tag>lowcomote</tag>
+        <tag>RS</tag>
       </tags>
   </entry>
 </search>
