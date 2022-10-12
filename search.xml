@@ -1,23 +1,80 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>Recommender Systems in Model-Driven Engineering</title>
-    <url>/Olivia_Lam.github.io/2022/10/05/Engineering/</url>
-    <content><![CDATA[<p>推荐系统在软件建模中的作用的综述，应该不是我们关注的重点</p>
+    <title>lowcomote</title>
+    <url>/Olivia_Lam.github.io/2022/10/11/lowcomote/</url>
+    <content><![CDATA[<p>低代码开发的一个基金项目，15个方向探查笔记</p>
 <span id="more"></span>
 
-<h1 id="三个问题"><a href="#三个问题" class="headerlink" title="三个问题"></a>三个问题</h1><ol>
-<li>推荐系统在软件建模中起什么作用？<br>通常用于完成和修复工件。<br>通常是独立于语言的，特定的一般针对UML或过程建模符号</li>
-<li>哪些推荐技术用于支持软件建模？评价方法？<br>基于内容&gt;基于知识<br>评价方法：离线</li>
-<li>推荐系统还有什么可做的？<br>几乎没有用于模型转化或代码生成的推荐系统，很少推荐系统用于创建、重用、查找工件。此外，还有有效的软件建模的工件库、协同过滤利用群体知识、基于用户的推荐系统评估、与低代码平台的有效寄成机制</li>
+<h1 id="ESR-1-Scaling-Up-Citizen-Development-with-Recommender-Chatbots（使用推荐系统提高低代码开发人员体验）"><a href="#ESR-1-Scaling-Up-Citizen-Development-with-Recommender-Chatbots（使用推荐系统提高低代码开发人员体验）" class="headerlink" title="ESR 1: Scaling Up Citizen Development with Recommender Chatbots（使用推荐系统提高低代码开发人员体验）"></a>ESR 1: Scaling Up Citizen Development with Recommender Chatbots（使用推荐系统提高低代码开发人员体验）</h1><p>为了提高LCDP用户开发效率以及开发体验，在LCDP平台嵌入集成了推荐系统的聊天机器人，给开发者推荐下一步需要的项目。</p>
+<p>看了挂出来的三篇文章，一篇是自动生成RS、一篇是RS应用在MDE、一篇是RS在MDE中作用的综述。第一篇讲的是通过DSL配置RS并生成、评估的过程，第二篇讲的是RS在LCDP中应用的架构，第三篇讲了一下RS在MDE中的作用，没细看。</p>
+<blockquote>
+<p>自动生成RS：<a href="https://olive-2019.github.io/Olivia_Lam.github.io/2022/10/01/RS/#more" title="自动生成RS">Automating the Synthesis of Recommender Systems for Modelling Languages</a></p>
+<p>RS应用在MDE：<a href="https://olive-2019.github.io/Olivia_Lam.github.io/2022/10/08/RS3/">Towards automating the construction of recommender systems for low-code development platforms</a></p>
+<p>RS在MDE中的综述：<a href="https://olive-2019.github.io/Olivia_Lam.github.io/2022/10/05/Engineering/#more">Recommender Systems in Model-Driven Engineering</a></p>
+</blockquote>
+<h1 id="ESR-2-Scalable-Cloud-Based-Heterogeneous-Modelling（基于云的可拓展异构）"><a href="#ESR-2-Scalable-Cloud-Based-Heterogeneous-Modelling（基于云的可拓展异构）" class="headerlink" title="ESR 2: Scalable Cloud-Based Heterogeneous Modelling（基于云的可拓展异构）"></a>ESR 2: Scalable Cloud-Based Heterogeneous Modelling（基于云的可拓展异构）</h1><p>目前没找到其它资料（没有具体的工作），只看了一下介绍，应该是优化LCDP编辑器的搭建。之前用的JavaScript技术过于底层，开发不友好。目标是建立基于工程语言原理（其实没读懂这个是啥？）的界面开发，大概就是配置一下就能生成界面的意思吧。</p>
+<h1 id="ESR-3-Deploying-and-Scaling-Knowledge-Models-in-Data-Science"><a href="#ESR-3-Deploying-and-Scaling-Knowledge-Models-in-Data-Science" class="headerlink" title="ESR 3: Deploying and Scaling Knowledge Models in Data Science"></a>ESR 3: Deploying and Scaling Knowledge Models in Data Science</h1>]]></content>
+      <categories>
+        <category>基金项目</category>
+      </categories>
+      <tags>
+        <tag>lowcomote</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>A Model-Driven Engineering Approach for Monitoring Machine Learning Models</title>
+    <url>/Olivia_Lam.github.io/2022/10/11/MDEforMLMonitor/</url>
+    <content><![CDATA[<p>机器学习监控的软件工程方法</p>
+<span id="more"></span>
+
+<h1 id="机器学习监控领域介绍"><a href="#机器学习监控领域介绍" class="headerlink" title="机器学习监控领域介绍"></a>机器学习监控领域介绍</h1><p>有监督学习假设输入输出遵循某联合概率分布，但是现实世界是一个复杂的非稳定环境。随着时间的推移，联合概率分布会发生变化。该情况已经得到了很多研究，如概念漂移&#x2F;偏移、协变量&#x2F;采样移位、先验概率移位以及更一般的数据集移位。</p>
+<p>对于这种现象，已经有很多的解决方法，如使用测试集输入的边缘概率分布调整训练模型等。</p>
+<p>另一种方法是在线学习，即不断学习输入。当环境随时间变化时，这种方法比较好，但是需要稳定的标记输入。</p>
+<p>也有混合的方法，就是一批一批地训练和调整。</p>
+<h1 id="元模型"><a href="#元模型" class="headerlink" title="元模型"></a>元模型</h1><p><img src="https://github.com/Olive-2019/Lam-s-Blog-source/blob/master/MDEforMLMonitor/structure.jpg?raw=true" alt="模型结构" title="元模型"></p>
+<h2 id="Deployment类"><a href="#Deployment类" class="headerlink" title="Deployment类"></a>Deployment类</h2><p>模型类和偏移检测类的父类，系统中只有一个模型子类和多个偏移检测子类</p>
+<h2 id="Model类"><a href="#Model类" class="headerlink" title="Model类"></a>Model类</h2><p>被监测的模型，有多个特征输入和一个输出。属性包含模型名字、模型序列化的URL、创建模型的框架（如tensorflow）。</p>
+<h2 id="IO类"><a href="#IO类" class="headerlink" title="IO类"></a>IO类</h2><p>属性包括输入输出的名字和属性</p>
+<h2 id="DriftDetector类"><a href="#DriftDetector类" class="headerlink" title="DriftDetector类"></a>DriftDetector类</h2><p>漂移检测类用于定期执行检测，确定是否需要纠正。属性包括检测器名字、执行频率、当漂移发生时需要发送消息的email地址。</p>
+<h3 id="DataDriftDetector类"><a href="#DataDriftDetector类" class="headerlink" title="DataDriftDetector类"></a>DataDriftDetector类</h3><p>接收无标记的数据</p>
+<h3 id="ConceptDriftDetector类"><a href="#ConceptDriftDetector类" class="headerlink" title="ConceptDriftDetector类"></a>ConceptDriftDetector类</h3><p>需要一组预测的标签，随后获得实际标签</p>
+<h1 id="生成的工件"><a href="#生成的工件" class="headerlink" title="生成的工件"></a>生成的工件</h1><p>系统具体采用Kubernetes技术。M2T（model to text）生成Kubernetes清单，包含了预分配资源和需要在集群上执行的容器化应用程序。系统的某些组件使用开源的自定义Kubernetes资源，其它部分使用在容器注册表中开发和编制所以的容器化应用程序。</p>
+<p><img src="https://github.com/Olive-2019/Lam-s-Blog-source/blob/master/MDEforMLMonitor/generatedArtifact.jpg?raw=true" alt="generatedArtifact"></p>
+<h2 id="Inference-Service-推理服务"><a href="#Inference-Service-推理服务" class="headerlink" title="Inference Service 推理服务"></a>Inference Service 推理服务</h2><h3 id="Model-Server模型服务器"><a href="#Model-Server模型服务器" class="headerlink" title="Model Server模型服务器"></a>Model Server模型服务器</h3><p>提供推理服务</p>
+<h3 id="Logger-记录者"><a href="#Logger-记录者" class="headerlink" title="Logger 记录者"></a>Logger 记录者</h3><p>记录模型服务器的请求和响应信息</p>
+<h2 id="Message-Queue-消息队列"><a href="#Message-Queue-消息队列" class="headerlink" title="Message Queue 消息队列"></a>Message Queue 消息队列</h2><p>从Logger接收消息，路由至Database Writer</p>
+<h2 id="Database-Writer-数据库写者"><a href="#Database-Writer-数据库写者" class="headerlink" title="Database Writer 数据库写者"></a>Database Writer 数据库写者</h2><p>两个数据来源，第一个是推理服务器的事件，第二个是ML模型的性能</p>
+<h2 id="Database-数据库"><a href="#Database-数据库" class="headerlink" title="Database 数据库"></a>Database 数据库</h2><p>Mysql</p>
+<h2 id="Drift-Detection-Execution-偏移检测执行器"><a href="#Drift-Detection-Execution-偏移检测执行器" class="headerlink" title="Drift Detection Execution 偏移检测执行器"></a>Drift Detection Execution 偏移检测执行器</h2><p>定期执行漂移检测算法。专家课自行编写算法，只需包含检测算法，不必包含警告等。</p>
+<h2 id="Configuration-配置"><a href="#Configuration-配置" class="headerlink" title="Configuration 配置"></a>Configuration 配置</h2><p>需求写在配置文件中，容器内运行的应用程序可以读取配置文件并调整行为。</p>
+<h2 id="Proxy-代理"><a href="#Proxy-代理" class="headerlink" title="Proxy 代理"></a>Proxy 代理</h2><p>转发请求至database writer或model server，分流</p>
+<h1 id="平台"><a href="#平台" class="headerlink" title="平台"></a>平台</h1><p>为了操作便利性，提供了Web应用程序。</p>
+<h2 id="主要功能"><a href="#主要功能" class="headerlink" title="主要功能"></a>主要功能</h2><p>创作和提交MDE模型</p>
+<ol>
+<li>用户填写表单，包含元模型各个类的属性</li>
+<li>M2T生成Kubernetes清单</li>
+<li>Kubernetes清单用作Kubernetes的CLI工具的输入</li>
+<li>CLI工具将Kubernetes清单中指定的对象发送到集群的API服务器</li>
+<li>形成ML监控系统的部署</li>
 </ol>
+<h2 id="辅助功能"><a href="#辅助功能" class="headerlink" title="辅助功能"></a>辅助功能</h2><ul>
+<li>列出当前监控的所有ML模型，每个模型包含两个URL，一个用于发送推理请求，另一个用于发送反馈数据</li>
+<li>提供表单，将序列化的ML模型上传到云端</li>
+<li>提供表单，将数据集上传到云端</li>
+<li>用户可以Python函数形式自定义漂移检测算法。用户自定义的代码将与漂移检测器的基本模板结合，构建容器映像，并注册到注册表上。</li>
+</ul>
+<h1 id="拓展工作"><a href="#拓展工作" class="headerlink" title="拓展工作"></a>拓展工作</h1><p>漂移检测的时机：目前定时，可以定量</p>
+<p>足够抽象的漂移检测算法类：目前是两个类</p>
+<p>漂移发生时的行为：目前是发邮件</p>
+<p>差分部署：希望修改某些部分的时候不必完全重新部署</p>
 ]]></content>
       <categories>
         <category>论文</category>
       </categories>
       <tags>
-        <tag>RS</tag>
         <tag>lowcomote</tag>
+        <tag>ML monitor</tag>
       </tags>
   </entry>
   <entry>
@@ -76,6 +133,26 @@
       </tags>
   </entry>
   <entry>
+    <title>Recommender Systems in Model-Driven Engineering</title>
+    <url>/Olivia_Lam.github.io/2022/10/05/Engineering/</url>
+    <content><![CDATA[<p>推荐系统在软件建模中的作用的综述，应该不是我们关注的重点</p>
+<span id="more"></span>
+
+<h1 id="三个问题"><a href="#三个问题" class="headerlink" title="三个问题"></a>三个问题</h1><ol>
+<li>推荐系统在软件建模中起什么作用？<br>通常用于完成和修复工件。<br>通常是独立于语言的，特定的一般针对UML或过程建模符号</li>
+<li>哪些推荐技术用于支持软件建模？评价方法？<br>基于内容&gt;基于知识<br>评价方法：离线</li>
+<li>推荐系统还有什么可做的？<br>几乎没有用于模型转化或代码生成的推荐系统，很少推荐系统用于创建、重用、查找工件。此外，还有有效的软件建模的工件库、协同过滤利用群体知识、基于用户的推荐系统评估、与低代码平台的有效寄成机制</li>
+</ol>
+]]></content>
+      <categories>
+        <category>论文</category>
+      </categories>
+      <tags>
+        <tag>RS</tag>
+        <tag>lowcomote</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Automating the Synthesis of Recommender Systems for Modelling Languages</title>
     <url>/Olivia_Lam.github.io/2022/10/01/RS/</url>
     <content><![CDATA[<p>低代码开发推荐系统</p>
@@ -111,48 +188,6 @@
       <tags>
         <tag>RS</tag>
         <tag>lowcomote</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>lowcomote</title>
-    <url>/Olivia_Lam.github.io/2022/10/11/lowcomote/</url>
-    <content><![CDATA[<p>低代码开发的一个基金项目，15个方向探查笔记</p>
-<span id="more"></span>
-
-<h1 id="ESR-1-Scaling-Up-Citizen-Development-with-Recommender-Chatbots（使用推荐系统提高低代码开发人员体验）"><a href="#ESR-1-Scaling-Up-Citizen-Development-with-Recommender-Chatbots（使用推荐系统提高低代码开发人员体验）" class="headerlink" title="ESR 1: Scaling Up Citizen Development with Recommender Chatbots（使用推荐系统提高低代码开发人员体验）"></a>ESR 1: Scaling Up Citizen Development with Recommender Chatbots（使用推荐系统提高低代码开发人员体验）</h1><p>为了提高LCDP用户开发效率以及开发体验，在LCDP平台嵌入集成了推荐系统的聊天机器人，给开发者推荐下一步需要的项目。</p>
-<p>看了挂出来的三篇文章，一篇是自动生成RS、一篇是RS应用在MDE、一篇是RS在MDE中作用的综述。第一篇讲的是通过DSL配置RS并生成、评估的过程，第二篇讲的是RS在LCDP中应用的架构，第三篇讲了一下RS在MDE中的作用，没细看。</p>
-<blockquote>
-<p>自动生成RS：<a href="https://olive-2019.github.io/Olivia_Lam.github.io/2022/10/01/RS/#more" title="自动生成RS">Automating the Synthesis of Recommender Systems for Modelling Languages</a></p>
-<p>RS应用在MDE：<a href="https://olive-2019.github.io/Olivia_Lam.github.io/2022/10/08/RS3/">Towards automating the construction of recommender systems for low-code development platforms</a></p>
-<p>RS在MDE中的综述：<a href="https://olive-2019.github.io/Olivia_Lam.github.io/2022/10/05/Engineering/#more">Recommender Systems in Model-Driven Engineering</a></p>
-</blockquote>
-<h1 id="ESR-2-Scalable-Cloud-Based-Heterogeneous-Modelling（基于云的可拓展异构）"><a href="#ESR-2-Scalable-Cloud-Based-Heterogeneous-Modelling（基于云的可拓展异构）" class="headerlink" title="ESR 2: Scalable Cloud-Based Heterogeneous Modelling（基于云的可拓展异构）"></a>ESR 2: Scalable Cloud-Based Heterogeneous Modelling（基于云的可拓展异构）</h1><p>目前没找到其它资料（没有具体的工作），只看了一下介绍，应该是优化LCDP编辑器的搭建。之前用的JavaScript技术过于底层，开发不友好。目标是建立基于工程语言原理（其实没读懂这个是啥？）的界面开发，大概就是配置一下就能生成界面的意思吧。</p>
-<h1 id="ESR-3-Deploying-and-Scaling-Knowledge-Models-in-Data-Science"><a href="#ESR-3-Deploying-and-Scaling-Knowledge-Models-in-Data-Science" class="headerlink" title="ESR 3: Deploying and Scaling Knowledge Models in Data Science"></a>ESR 3: Deploying and Scaling Knowledge Models in Data Science</h1>]]></content>
-      <categories>
-        <category>基金项目</category>
-      </categories>
-      <tags>
-        <tag>lowcomote</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>A Model-Driven Engineering Approach for Monitoring Machine Learning Models</title>
-    <url>/Olivia_Lam.github.io/2022/10/11/MDEforMLMonitor/</url>
-    <content><![CDATA[<p>机器学习监控的软件工程方法</p>
-<span id="more"></span>
-
-<h1 id="机器学习监控领域介绍"><a href="#机器学习监控领域介绍" class="headerlink" title="机器学习监控领域介绍"></a>机器学习监控领域介绍</h1><p>有监督学习假设输入输出遵循某联合概率分布，但是现实世界是一个复杂的非稳定环境。随着时间的推移，联合概率分布会发生变化。该情况已经得到了很多研究，如概念漂移&#x2F;偏移、协变量&#x2F;采样移位、先验概率移位以及更一般的数据集移位。</p>
-<p>对于这种现象，已经有很多的解决方法，如使用测试集输入的边缘概率分布调整训练模型等。</p>
-<p>另一种方法是在线学习，即不断学习输入。当环境随时间变化时，这种方法比较好，但是需要稳定的标记输入。</p>
-<p>也有混合的方法，就是一批一批地训练和调整。</p>
-<h1 id="元模型"><a href="#元模型" class="headerlink" title="元模型"></a>元模型</h1><p><img src="https://github.com/Olive-2019/Lam-s-Blog-source/blob/master/MDEforMLMonitor/structure.jpg?raw=true" alt="模型结构" title="元模型"></p>
-]]></content>
-      <categories>
-        <category>论文</category>
-      </categories>
-      <tags>
-        <tag>lowcomote</tag>
-        <tag>ML monitor</tag>
       </tags>
   </entry>
 </search>

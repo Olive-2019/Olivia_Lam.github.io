@@ -28,8 +28,9 @@
 <meta property="og:description" content="机器学习监控的软件工程方法">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://github.com/Olive-2019/Lam-s-Blog-source/blob/master/MDEforMLMonitor/structure.jpg?raw=true">
+<meta property="og:image" content="https://github.com/Olive-2019/Lam-s-Blog-source/blob/master/MDEforMLMonitor/generatedArtifact.jpg?raw=true">
 <meta property="article:published_time" content="2022-10-11T15:40:38.000Z">
-<meta property="article:modified_time" content="2022-10-12T07:27:10.522Z">
+<meta property="article:modified_time" content="2022-10-12T16:56:08.959Z">
 <meta property="article:author" content="Olivia Lam">
 <meta property="article:tag" content="lowcomote">
 <meta property="article:tag" content="ML monitor">
@@ -148,7 +149,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%9B%91%E6%8E%A7%E9%A2%86%E5%9F%9F%E4%BB%8B%E7%BB%8D"><span class="nav-number">1.</span> <span class="nav-text">机器学习监控领域介绍</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%85%83%E6%A8%A1%E5%9E%8B"><span class="nav-number">2.</span> <span class="nav-text">元模型</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%9B%91%E6%8E%A7%E9%A2%86%E5%9F%9F%E4%BB%8B%E7%BB%8D"><span class="nav-number">1.</span> <span class="nav-text">机器学习监控领域介绍</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%85%83%E6%A8%A1%E5%9E%8B"><span class="nav-number">2.</span> <span class="nav-text">元模型</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Deployment%E7%B1%BB"><span class="nav-number">2.1.</span> <span class="nav-text">Deployment类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Model%E7%B1%BB"><span class="nav-number">2.2.</span> <span class="nav-text">Model类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#IO%E7%B1%BB"><span class="nav-number">2.3.</span> <span class="nav-text">IO类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DriftDetector%E7%B1%BB"><span class="nav-number">2.4.</span> <span class="nav-text">DriftDetector类</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#DataDriftDetector%E7%B1%BB"><span class="nav-number">2.4.1.</span> <span class="nav-text">DataDriftDetector类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ConceptDriftDetector%E7%B1%BB"><span class="nav-number">2.4.2.</span> <span class="nav-text">ConceptDriftDetector类</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%94%9F%E6%88%90%E7%9A%84%E5%B7%A5%E4%BB%B6"><span class="nav-number">3.</span> <span class="nav-text">生成的工件</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Inference-Service-%E6%8E%A8%E7%90%86%E6%9C%8D%E5%8A%A1"><span class="nav-number">3.1.</span> <span class="nav-text">Inference Service 推理服务</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Model-Server%E6%A8%A1%E5%9E%8B%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="nav-number">3.1.1.</span> <span class="nav-text">Model Server模型服务器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Logger-%E8%AE%B0%E5%BD%95%E8%80%85"><span class="nav-number">3.1.2.</span> <span class="nav-text">Logger 记录者</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Message-Queue-%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97"><span class="nav-number">3.2.</span> <span class="nav-text">Message Queue 消息队列</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Database-Writer-%E6%95%B0%E6%8D%AE%E5%BA%93%E5%86%99%E8%80%85"><span class="nav-number">3.3.</span> <span class="nav-text">Database Writer 数据库写者</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Database-%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="nav-number">3.4.</span> <span class="nav-text">Database 数据库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Drift-Detection-Execution-%E5%81%8F%E7%A7%BB%E6%A3%80%E6%B5%8B%E6%89%A7%E8%A1%8C%E5%99%A8"><span class="nav-number">3.5.</span> <span class="nav-text">Drift Detection Execution 偏移检测执行器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Configuration-%E9%85%8D%E7%BD%AE"><span class="nav-number">3.6.</span> <span class="nav-text">Configuration 配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Proxy-%E4%BB%A3%E7%90%86"><span class="nav-number">3.7.</span> <span class="nav-text">Proxy 代理</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%B9%B3%E5%8F%B0"><span class="nav-number">4.</span> <span class="nav-text">平台</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%BB%E8%A6%81%E5%8A%9F%E8%83%BD"><span class="nav-number">4.1.</span> <span class="nav-text">主要功能</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BE%85%E5%8A%A9%E5%8A%9F%E8%83%BD"><span class="nav-number">4.2.</span> <span class="nav-text">辅助功能</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%8B%93%E5%B1%95%E5%B7%A5%E4%BD%9C"><span class="nav-number">5.</span> <span class="nav-text">拓展工作</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -252,7 +253,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2022-10-12 15:27:10" itemprop="dateModified" datetime="2022-10-12T15:27:10+08:00">2022-10-12</time>
+      <time title="修改时间：2022-10-13 00:56:08" itemprop="dateModified" datetime="2022-10-13T00:56:08+08:00">2022-10-13</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -278,7 +279,7 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>255</span>
+      <span>1.4k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
@@ -289,6 +290,7 @@
     </span>
 </div>
 
+          
         </div>
       </header>
 
@@ -304,6 +306,41 @@
 <p>另一种方法是在线学习，即不断学习输入。当环境随时间变化时，这种方法比较好，但是需要稳定的标记输入。</p>
 <p>也有混合的方法，就是一批一批地训练和调整。</p>
 <h1 id="元模型"><a href="#元模型" class="headerlink" title="元模型"></a>元模型</h1><p><img src="https://github.com/Olive-2019/Lam-s-Blog-source/blob/master/MDEforMLMonitor/structure.jpg?raw=true" alt="模型结构" title="元模型"></p>
+<h2 id="Deployment类"><a href="#Deployment类" class="headerlink" title="Deployment类"></a>Deployment类</h2><p>模型类和偏移检测类的父类，系统中只有一个模型子类和多个偏移检测子类</p>
+<h2 id="Model类"><a href="#Model类" class="headerlink" title="Model类"></a>Model类</h2><p>被监测的模型，有多个特征输入和一个输出。属性包含模型名字、模型序列化的URL、创建模型的框架（如tensorflow）。</p>
+<h2 id="IO类"><a href="#IO类" class="headerlink" title="IO类"></a>IO类</h2><p>属性包括输入输出的名字和属性</p>
+<h2 id="DriftDetector类"><a href="#DriftDetector类" class="headerlink" title="DriftDetector类"></a>DriftDetector类</h2><p>漂移检测类用于定期执行检测，确定是否需要纠正。属性包括检测器名字、执行频率、当漂移发生时需要发送消息的email地址。</p>
+<h3 id="DataDriftDetector类"><a href="#DataDriftDetector类" class="headerlink" title="DataDriftDetector类"></a>DataDriftDetector类</h3><p>接收无标记的数据</p>
+<h3 id="ConceptDriftDetector类"><a href="#ConceptDriftDetector类" class="headerlink" title="ConceptDriftDetector类"></a>ConceptDriftDetector类</h3><p>需要一组预测的标签，随后获得实际标签</p>
+<h1 id="生成的工件"><a href="#生成的工件" class="headerlink" title="生成的工件"></a>生成的工件</h1><p>系统具体采用Kubernetes技术。M2T（model to text）生成Kubernetes清单，包含了预分配资源和需要在集群上执行的容器化应用程序。系统的某些组件使用开源的自定义Kubernetes资源，其它部分使用在容器注册表中开发和编制所以的容器化应用程序。</p>
+<p><img src="https://github.com/Olive-2019/Lam-s-Blog-source/blob/master/MDEforMLMonitor/generatedArtifact.jpg?raw=true" alt="generatedArtifact"></p>
+<h2 id="Inference-Service-推理服务"><a href="#Inference-Service-推理服务" class="headerlink" title="Inference Service 推理服务"></a>Inference Service 推理服务</h2><h3 id="Model-Server模型服务器"><a href="#Model-Server模型服务器" class="headerlink" title="Model Server模型服务器"></a>Model Server模型服务器</h3><p>提供推理服务</p>
+<h3 id="Logger-记录者"><a href="#Logger-记录者" class="headerlink" title="Logger 记录者"></a>Logger 记录者</h3><p>记录模型服务器的请求和响应信息</p>
+<h2 id="Message-Queue-消息队列"><a href="#Message-Queue-消息队列" class="headerlink" title="Message Queue 消息队列"></a>Message Queue 消息队列</h2><p>从Logger接收消息，路由至Database Writer</p>
+<h2 id="Database-Writer-数据库写者"><a href="#Database-Writer-数据库写者" class="headerlink" title="Database Writer 数据库写者"></a>Database Writer 数据库写者</h2><p>两个数据来源，第一个是推理服务器的事件，第二个是ML模型的性能</p>
+<h2 id="Database-数据库"><a href="#Database-数据库" class="headerlink" title="Database 数据库"></a>Database 数据库</h2><p>Mysql</p>
+<h2 id="Drift-Detection-Execution-偏移检测执行器"><a href="#Drift-Detection-Execution-偏移检测执行器" class="headerlink" title="Drift Detection Execution 偏移检测执行器"></a>Drift Detection Execution 偏移检测执行器</h2><p>定期执行漂移检测算法。专家课自行编写算法，只需包含检测算法，不必包含警告等。</p>
+<h2 id="Configuration-配置"><a href="#Configuration-配置" class="headerlink" title="Configuration 配置"></a>Configuration 配置</h2><p>需求写在配置文件中，容器内运行的应用程序可以读取配置文件并调整行为。</p>
+<h2 id="Proxy-代理"><a href="#Proxy-代理" class="headerlink" title="Proxy 代理"></a>Proxy 代理</h2><p>转发请求至database writer或model server，分流</p>
+<h1 id="平台"><a href="#平台" class="headerlink" title="平台"></a>平台</h1><p>为了操作便利性，提供了Web应用程序。</p>
+<h2 id="主要功能"><a href="#主要功能" class="headerlink" title="主要功能"></a>主要功能</h2><p>创作和提交MDE模型</p>
+<ol>
+<li>用户填写表单，包含元模型各个类的属性</li>
+<li>M2T生成Kubernetes清单</li>
+<li>Kubernetes清单用作Kubernetes的CLI工具的输入</li>
+<li>CLI工具将Kubernetes清单中指定的对象发送到集群的API服务器</li>
+<li>形成ML监控系统的部署</li>
+</ol>
+<h2 id="辅助功能"><a href="#辅助功能" class="headerlink" title="辅助功能"></a>辅助功能</h2><ul>
+<li>列出当前监控的所有ML模型，每个模型包含两个URL，一个用于发送推理请求，另一个用于发送反馈数据</li>
+<li>提供表单，将序列化的ML模型上传到云端</li>
+<li>提供表单，将数据集上传到云端</li>
+<li>用户可以Python函数形式自定义漂移检测算法。用户自定义的代码将与漂移检测器的基本模板结合，构建容器映像，并注册到注册表上。</li>
+</ul>
+<h1 id="拓展工作"><a href="#拓展工作" class="headerlink" title="拓展工作"></a>拓展工作</h1><p>漂移检测的时机：目前定时，可以定量</p>
+<p>足够抽象的漂移检测算法类：目前是两个类</p>
+<p>漂移发生时的行为：目前是发邮件</p>
+<p>差分部署：希望修改某些部分的时候不必完全重新部署</p>
 
     </div>
 
@@ -358,14 +395,14 @@
       <i class="fa fa-chart-line"></i>
     </span>
       <span>站点总字数：</span>
-    <span title="站点总字数">4k</span>
+    <span title="站点总字数">5k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span>站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">3 分钟</span>
+    <span title="站点阅读时长">4 分钟</span>
   </span>
 </div>
 <div class="busuanzi-count">
