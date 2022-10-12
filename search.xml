@@ -21,15 +21,58 @@
       </tags>
   </entry>
   <entry>
-    <title>A Model-Driven Engineering Approach for Monitoring Machine Learning Models</title>
-    <url>/Olivia_Lam.github.io/2022/10/11/MDEforMLMonitor/</url>
-    <content><![CDATA[]]></content>
+    <title>Towards automating the construction of recommender systems for low-code development platforms</title>
+    <url>/Olivia_Lam.github.io/2022/10/08/RS3/</url>
+    <content><![CDATA[<p>用于低代码开发平台的推荐系统</p>
+<span id="more"></span>
+
+<h1 id="4个问题"><a href="#4个问题" class="headerlink" title="4个问题"></a>4个问题</h1><ol>
+<li>推荐系统可以帮助类建模吗？</li>
+<li>哪一种推荐方法在相关属性、方法、超类的推荐上性能最好？</li>
+<li>混合方法会更好吗？</li>
+<li>考虑用户覆盖率和项目覆盖率时，哪一种方法会更好？</li>
+</ol>
+<h1 id="动机"><a href="#动机" class="headerlink" title="动机"></a>动机</h1><p>在使用低代码开发平台开发应用时，需要推荐系统推荐一些工件，如类中的属性和方法。</p>
+<h1 id="方法概述"><a href="#方法概述" class="headerlink" title="方法概述"></a>方法概述</h1><p><img src="https://github.com/Olive-2019/Lam-s-Blog-source/blob/master/RS3/1665226767819.png?raw=true" alt="架构"></p>
+<p>推荐系统设计者使用DSL定义元模型（1），假设存在模型库（2）用于推荐。生成一个定制的推荐系统，嵌入到低代码开发平台之中，向开发者提供建议。</p>
+<h1 id="提出的方法"><a href="#提出的方法" class="headerlink" title="提出的方法"></a>提出的方法</h1><p><img src="https://github.com/Olive-2019/Lam-s-Blog-source/blob/master/RS3/1665227277118.png?raw=true" alt="1665227277118"></p>
+<p>设计者只需要完成前两布，即数据收集和使用DSL配置推荐系统。第三步到第七步都是自动完成的</p>
+<h2 id="DSL配置"><a href="#DSL配置" class="headerlink" title="DSL配置"></a>DSL配置</h2><p>跟之前那篇一样</p>
+<h2 id="数据预处理"><a href="#数据预处理" class="headerlink" title="数据预处理"></a>数据预处理</h2><p>流程：</p>
+<ol>
+<li>获取模型</li>
+<li>提取与配置的用户、项目、项目特征类型对应的模型对象</li>
+<li>生成用户-项目和项目-特征矩阵</li>
+</ol>
+<p>例子：</p>
+<p><img src="https://github.com/Olive-2019/Lam-s-Blog-source/blob/master/RS3/1665245563318.png?raw=true"></p>
+<p>（1）获取模型</p>
+<p>（2）提取所有的用户（3）提取所有项目的名字（4）提取项目特征</p>
+<p>（5）（6）两个矩阵</p>
+<h2 id="推荐系统引擎"><a href="#推荐系统引擎" class="headerlink" title="推荐系统引擎"></a>推荐系统引擎</h2><p>对应图4的步骤4-7，包括数据切割、推荐系统生成、训练、评价和部署。<br><img src="https://github.com/Olive-2019/Lam-s-Blog-source/blob/master/RS3/1665246085399.png?raw=true"></p>
+<p>每一个候选推荐系统被评价都会有一个分数，设计者可以看到这个分数。</p>
+<p>我们希望能够自动生成一个最佳配置的推荐系统。</p>
+<h1 id="实验验证"><a href="#实验验证" class="headerlink" title="实验验证"></a>实验验证</h1><h2 id="数据集"><a href="#数据集" class="headerlink" title="数据集"></a>数据集</h2><p><img src="https://github.com/Olive-2019/Lam-s-Blog-source/blob/master/RS3/1665332963070.png?raw=true" alt="1665332963070"></p>
+<p>三个数据集，前两个是人工构造的（后一个是前一个变换来的），最后一个是真实数据</p>
+<h2 id="实验设计"><a href="#实验设计" class="headerlink" title="实验设计"></a>实验设计</h2><h3 id="数据分割"><a href="#数据分割" class="headerlink" title="数据分割"></a>数据分割</h3><p>十重交叉验证、8：2分层抽样（每个类的80%项目用于训练）划分训练集和测试集</p>
+<h3 id="推荐方法"><a href="#推荐方法" class="headerlink" title="推荐方法"></a>推荐方法</h3><p>协同过滤、基于内容、混合</p>
+<h3 id="评估指标"><a href="#评估指标" class="headerlink" title="评估指标"></a>评估指标</h3><p>精度（相关的推荐项目的百分比）、召回率（推荐列表中包含相关项目的百分比）、F1、覆盖率（用户空间覆盖率、项目空间覆盖率）、标准化折扣累计收益（nDCG，最相关的项目在不在列表顶部）</p>
+<h2 id="实验结果"><a href="#实验结果" class="headerlink" title="实验结果"></a>实验结果</h2><p><img src="https://github.com/Olive-2019/Lam-s-Blog-source/blob/master/RS3/1665332667791.png?raw=true" alt="1665332667791"></p>
+<p>AtlanEcore数据集上性能较好，估计是数据集较大的缘故</p>
+<p>回答四个问题</p>
+<h3 id="推荐系统可以帮助类建模吗？"><a href="#推荐系统可以帮助类建模吗？" class="headerlink" title="推荐系统可以帮助类建模吗？"></a>推荐系统可以帮助类建模吗？</h3><p>所有方法在所有数据集上精度都在0.2-0.3之间，但是论文里说F1到达0.28+，就可以用了</p>
+<h3 id="哪一种推荐方法在相关属性、方法、超类的推荐上性能最好？"><a href="#哪一种推荐方法在相关属性、方法、超类的推荐上性能最好？" class="headerlink" title="哪一种推荐方法在相关属性、方法、超类的推荐上性能最好？"></a>哪一种推荐方法在相关属性、方法、超类的推荐上性能最好？</h3><p>不同的数据集上最佳方法不同</p>
+<h3 id="混合方法会更好吗？"><a href="#混合方法会更好吗？" class="headerlink" title="混合方法会更好吗？"></a>混合方法会更好吗？</h3><p>在Synthetic数据集上混合方法表现更好</p>
+<h3 id="考虑用户覆盖率和项目覆盖率时，哪一种方法会更好？"><a href="#考虑用户覆盖率和项目覆盖率时，哪一种方法会更好？" class="headerlink" title="考虑用户覆盖率和项目覆盖率时，哪一种方法会更好？"></a>考虑用户覆盖率和项目覆盖率时，哪一种方法会更好？</h3><p>精度和召回率低的混合方法给出了高用户覆盖率和低项目覆盖率。用户覆盖率需要以项目覆盖率为代价</p>
+<h2 id="实验结果有效性的威胁"><a href="#实验结果有效性的威胁" class="headerlink" title="实验结果有效性的威胁"></a>实验结果有效性的威胁</h2><h3 id="内部威胁"><a href="#内部威胁" class="headerlink" title="内部威胁"></a>内部威胁</h3><p>研究和结论之间的相关性。由于数据集是人工创建的，而且数据量小，可能存在引入误差的问题。所以存在AtlanEcore数据集。</p>
+<h3 id="外部威胁"><a href="#外部威胁" class="headerlink" title="外部威胁"></a>外部威胁</h3><p>模型的推广性。实验是面向具体任务和语言的，将来可能用于其它任务、以及其它数据集。</p>
+]]></content>
       <categories>
         <category>论文</category>
       </categories>
       <tags>
+        <tag>RS</tag>
         <tag>lowcomote</tag>
-        <tag>ML monitor</tag>
       </tags>
   </entry>
   <entry>
@@ -45,7 +88,7 @@
 <p>常用评价指标：<strong>精度</strong>、（precision）、<strong>召回率</strong>（recall）、<strong>F1</strong>、<strong>平均精度</strong>（MAP）、<strong>归一化累积好处</strong>（nDCG，评估最有用的项目是否出现在推荐列表的顶部位置）</p>
 <p>补充评价指标：<strong>用户空间覆盖</strong>（USC，评估覆盖了多少用户）、<strong>项目空间覆盖</strong>（ISC，评估覆盖了多少项目）</p>
 <p>提出的自动生成推荐系统允许配置这几个方面的参数：<strong>推荐方法、目标用户、项目、离线评价方法和指标</strong></p>
-<h1 id="提出的方法"><a href="#提出的方法" class="headerlink" title="提出的方法"></a>提出的方法</h1><p><img src="/Olivia_Lam.github.io/image/RS/1665226282989.png" alt="1665226282989"></p>
+<h1 id="提出的方法"><a href="#提出的方法" class="headerlink" title="提出的方法"></a>提出的方法</h1><p><img src="https://github.com/Olive-2019/Lam-s-Blog-source/blob/master/RS/1665226282989.png?raw=true" alt="1665226282989"></p>
 <p><strong>流程：</strong></p>
 <ol>
 <li>选择推荐系统需要推荐的元素，如类的属性，过程的任务。指定推荐方法、训练数据集、推荐系统指标</li>
@@ -93,61 +136,23 @@
       </tags>
   </entry>
   <entry>
-    <title>Towards automating the construction of recommender systems for low-code development platforms</title>
-    <url>/Olivia_Lam.github.io/2022/10/08/RS3/</url>
-    <content><![CDATA[<p>用于低代码开发平台的推荐系统</p>
+    <title>A Model-Driven Engineering Approach for Monitoring Machine Learning Models</title>
+    <url>/Olivia_Lam.github.io/2022/10/11/MDEforMLMonitor/</url>
+    <content><![CDATA[<p>机器学习监控的软件工程方法</p>
 <span id="more"></span>
 
-<h1 id="4个问题"><a href="#4个问题" class="headerlink" title="4个问题"></a>4个问题</h1><ol>
-<li>推荐系统可以帮助类建模吗？</li>
-<li>哪一种推荐方法在相关属性、方法、超类的推荐上性能最好？</li>
-<li>混合方法会更好吗？</li>
-<li>考虑用户覆盖率和项目覆盖率时，哪一种方法会更好？</li>
-</ol>
-<h1 id="动机"><a href="#动机" class="headerlink" title="动机"></a>动机</h1><p>在使用低代码开发平台开发应用时，需要推荐系统推荐一些工件，如类中的属性和方法。</p>
-<h1 id="方法概述"><a href="#方法概述" class="headerlink" title="方法概述"></a>方法概述</h1><p><img src="http://rjkixovih.hn-bkt.clouddn.com/static/images/RS3/1665226767819.png" alt="架构"></p>
-<p>推荐系统设计者使用DSL定义元模型（1），假设存在模型库（2）用于推荐。生成一个定制的推荐系统，嵌入到低代码开发平台之中，向开发者提供建议。</p>
-<h1 id="提出的方法"><a href="#提出的方法" class="headerlink" title="提出的方法"></a>提出的方法</h1><p><img src="/Olivia_Lam.github.io/image/RS3/1665227277118.png" alt="1665227277118"></p>
-<p>设计者只需要完成前两布，即数据收集和使用DSL配置推荐系统。第三步到第七步都是自动完成的</p>
-<h2 id="DSL配置"><a href="#DSL配置" class="headerlink" title="DSL配置"></a>DSL配置</h2><p>跟之前那篇一样</p>
-<h2 id="数据预处理"><a href="#数据预处理" class="headerlink" title="数据预处理"></a>数据预处理</h2><p>流程：</p>
-<ol>
-<li>获取模型</li>
-<li>提取与配置的用户、项目、项目特征类型对应的模型对象</li>
-<li>生成用户-项目和项目-特征矩阵</li>
-</ol>
-<p>例子：</p>
-<!-- ![1665245563318](image/RS3/1665245563318.png) -->
-
-<img src="rjkixovih.hn-bkt.clouddn.com/static/images/RS3/1665245563318.png">
-<p>（1）获取模型</p>
-<p>（2）提取所有的用户（3）提取所有项目的名字（4）提取项目特征</p>
-<p>（5）（6）两个矩阵</p>
-<h2 id="推荐系统引擎"><a href="#推荐系统引擎" class="headerlink" title="推荐系统引擎"></a>推荐系统引擎</h2><p>对应图4的步骤4-7，包括数据切割、推荐系统生成、训练、评价和部署。</p>
-<img src="rjkixovih.hn-bkt.clouddn.com/static/images/RS3/1665246085399.png">
-<p>每一个候选推荐系统被评价都会有一个分数，设计者可以看到这个分数。</p>
-<p>我们希望能够自动生成一个最佳配置的推荐系统。</p>
-<h1 id="实验验证"><a href="#实验验证" class="headerlink" title="实验验证"></a>实验验证</h1><h2 id="数据集"><a href="#数据集" class="headerlink" title="数据集"></a>数据集</h2><p><img src="/Olivia_Lam.github.io/image/RS3/1665332963070.png" alt="1665332963070"></p>
-<p>三个数据集，前两个是人工构造的（后一个是前一个变换来的），最后一个是真实数据</p>
-<h2 id="实验设计"><a href="#实验设计" class="headerlink" title="实验设计"></a>实验设计</h2><h3 id="数据分割"><a href="#数据分割" class="headerlink" title="数据分割"></a>数据分割</h3><p>十重交叉验证、8：2分层抽样（每个类的80%项目用于训练）划分训练集和测试集</p>
-<h3 id="推荐方法"><a href="#推荐方法" class="headerlink" title="推荐方法"></a>推荐方法</h3><p>协同过滤、基于内容、混合</p>
-<h3 id="评估指标"><a href="#评估指标" class="headerlink" title="评估指标"></a>评估指标</h3><p>精度（相关的推荐项目的百分比）、召回率（推荐列表中包含相关项目的百分比）、F1、覆盖率（用户空间覆盖率、项目空间覆盖率）、标准化折扣累计收益（nDCG，最相关的项目在不在列表顶部）</p>
-<h2 id="实验结果"><a href="#实验结果" class="headerlink" title="实验结果"></a>实验结果</h2><p><img src="/Olivia_Lam.github.io/image/RS3/1665332667791.png" alt="1665332667791"></p>
-<p>AtlanEcore数据集上性能较好，估计是数据集较大的缘故</p>
-<p>回答四个问题</p>
-<h3 id="推荐系统可以帮助类建模吗？"><a href="#推荐系统可以帮助类建模吗？" class="headerlink" title="推荐系统可以帮助类建模吗？"></a>推荐系统可以帮助类建模吗？</h3><p>所有方法在所有数据集上精度都在0.2-0.3之间，但是论文里说F1到达0.28+，就可以用了</p>
-<h3 id="哪一种推荐方法在相关属性、方法、超类的推荐上性能最好？"><a href="#哪一种推荐方法在相关属性、方法、超类的推荐上性能最好？" class="headerlink" title="哪一种推荐方法在相关属性、方法、超类的推荐上性能最好？"></a>哪一种推荐方法在相关属性、方法、超类的推荐上性能最好？</h3><p>不同的数据集上最佳方法不同</p>
-<h3 id="混合方法会更好吗？"><a href="#混合方法会更好吗？" class="headerlink" title="混合方法会更好吗？"></a>混合方法会更好吗？</h3><p>在Synthetic数据集上混合方法表现更好</p>
-<h3 id="考虑用户覆盖率和项目覆盖率时，哪一种方法会更好？"><a href="#考虑用户覆盖率和项目覆盖率时，哪一种方法会更好？" class="headerlink" title="考虑用户覆盖率和项目覆盖率时，哪一种方法会更好？"></a>考虑用户覆盖率和项目覆盖率时，哪一种方法会更好？</h3><p>精度和召回率低的混合方法给出了高用户覆盖率和低项目覆盖率。用户覆盖率需要以项目覆盖率为代价</p>
-<h2 id="实验结果有效性的威胁"><a href="#实验结果有效性的威胁" class="headerlink" title="实验结果有效性的威胁"></a>实验结果有效性的威胁</h2><h3 id="内部威胁"><a href="#内部威胁" class="headerlink" title="内部威胁"></a>内部威胁</h3><p>研究和结论之间的相关性。由于数据集是人工创建的，而且数据量小，可能存在引入误差的问题。所以存在AtlanEcore数据集。</p>
-<h3 id="外部威胁"><a href="#外部威胁" class="headerlink" title="外部威胁"></a>外部威胁</h3><p>模型的推广性。实验是面向具体任务和语言的，将来可能用于其它任务、以及其它数据集。</p>
+<h1 id="机器学习监控领域介绍"><a href="#机器学习监控领域介绍" class="headerlink" title="机器学习监控领域介绍"></a>机器学习监控领域介绍</h1><p>有监督学习假设输入输出遵循某联合概率分布，但是现实世界是一个复杂的非稳定环境。随着时间的推移，联合概率分布会发生变化。该情况已经得到了很多研究，如概念漂移&#x2F;偏移、协变量&#x2F;采样移位、先验概率移位以及更一般的数据集移位。</p>
+<p>对于这种现象，已经有很多的解决方法，如使用测试集输入的边缘概率分布调整训练模型等。</p>
+<p>另一种方法是在线学习，即不断学习输入。当环境随时间变化时，这种方法比较好，但是需要稳定的标记输入。</p>
+<p>也有混合的方法，就是一批一批地训练和调整。</p>
+<h1 id="元模型"><a href="#元模型" class="headerlink" title="元模型"></a>元模型</h1><p><img src="https://github.com/Olive-2019/Lam-s-Blog-source/blob/master/MDEforMLMonitor/structure.jpg?raw=true" alt="模型结构" title="元模型"></p>
 ]]></content>
       <categories>
         <category>论文</category>
       </categories>
       <tags>
-        <tag>RS</tag>
         <tag>lowcomote</tag>
+        <tag>ML monitor</tag>
       </tags>
   </entry>
 </search>
