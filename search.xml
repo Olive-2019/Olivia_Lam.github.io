@@ -21,6 +21,18 @@
       </tags>
   </entry>
   <entry>
+    <title>A Model-Driven Engineering Approach for Monitoring Machine Learning Models</title>
+    <url>/Olivia_Lam.github.io/2022/10/11/MDEforMLMonitor/</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>论文</category>
+      </categories>
+      <tags>
+        <tag>lowcomote</tag>
+        <tag>ML monitor</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Automating the Synthesis of Recommender Systems for Modelling Languages</title>
     <url>/Olivia_Lam.github.io/2022/10/01/RS/</url>
     <content><![CDATA[<p>低代码开发推荐系统</p>
@@ -61,7 +73,7 @@
   <entry>
     <title>lowcomote</title>
     <url>/Olivia_Lam.github.io/2022/10/11/lowcomote/</url>
-    <content><![CDATA[<p>低代码开发的一个基金项目，15个方向笔记</p>
+    <content><![CDATA[<p>低代码开发的一个基金项目，15个方向探查笔记</p>
 <span id="more"></span>
 
 <h1 id="ESR-1-Scaling-Up-Citizen-Development-with-Recommender-Chatbots（使用推荐系统提高低代码开发人员体验）"><a href="#ESR-1-Scaling-Up-Citizen-Development-with-Recommender-Chatbots（使用推荐系统提高低代码开发人员体验）" class="headerlink" title="ESR 1: Scaling Up Citizen Development with Recommender Chatbots（使用推荐系统提高低代码开发人员体验）"></a>ESR 1: Scaling Up Citizen Development with Recommender Chatbots（使用推荐系统提高低代码开发人员体验）</h1><p>为了提高LCDP用户开发效率以及开发体验，在LCDP平台嵌入集成了推荐系统的聊天机器人，给开发者推荐下一步需要的项目。</p>
@@ -72,7 +84,7 @@
 <p>RS在MDE中的综述：<a href="https://olive-2019.github.io/Olivia_Lam.github.io/2022/10/05/Engineering/#more">Recommender Systems in Model-Driven Engineering</a></p>
 </blockquote>
 <h1 id="ESR-2-Scalable-Cloud-Based-Heterogeneous-Modelling（基于云的可拓展异构）"><a href="#ESR-2-Scalable-Cloud-Based-Heterogeneous-Modelling（基于云的可拓展异构）" class="headerlink" title="ESR 2: Scalable Cloud-Based Heterogeneous Modelling（基于云的可拓展异构）"></a>ESR 2: Scalable Cloud-Based Heterogeneous Modelling（基于云的可拓展异构）</h1><p>目前没找到其它资料（没有具体的工作），只看了一下介绍，应该是优化LCDP编辑器的搭建。之前用的JavaScript技术过于底层，开发不友好。目标是建立基于工程语言原理（其实没读懂这个是啥？）的界面开发，大概就是配置一下就能生成界面的意思吧。</p>
-]]></content>
+<h1 id="ESR-3-Deploying-and-Scaling-Knowledge-Models-in-Data-Science"><a href="#ESR-3-Deploying-and-Scaling-Knowledge-Models-in-Data-Science" class="headerlink" title="ESR 3: Deploying and Scaling Knowledge Models in Data Science"></a>ESR 3: Deploying and Scaling Knowledge Models in Data Science</h1>]]></content>
       <categories>
         <category>基金项目</category>
       </categories>
