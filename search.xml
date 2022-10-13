@@ -25,7 +25,18 @@
   <entry>
     <title>一些增强软工学生幸福感的小工具</title>
     <url>/Olivia_Lam.github.io/2022/10/13/tool/</url>
-    <content><![CDATA[<h1 id="GitHub"><a href="#GitHub" class="headerlink" title="GitHub"></a>GitHub</h1><h2 id="SwitchHosts"><a href="#SwitchHosts" class="headerlink" title="SwitchHosts"></a>SwitchHosts</h2><p>众所周知，GitHub在国内无法长期稳定有效地访问，原因是DNS污染，GitHub服务器IP在国内并未封禁，故可通过改host文件的方式访问GitHub。但长期手动修改hosts太麻烦了，购买梯子又太贵了（价格敏感性消费者.jpg），所以找到了这个自动修改hosts的神器。</p>
+    <content><![CDATA[<p>实用小工具</p>
+<span id="more"></span>
+
+<h1 id="吉大邮箱"><a href="#吉大邮箱" class="headerlink" title="吉大邮箱"></a>吉大邮箱</h1><p>吉大邮箱没有提供提醒工具，时时查网页版邮箱不太方便，此处提供两种提醒解决方案。</p>
+<h2 id="自动转发"><a href="#自动转发" class="headerlink" title="自动转发"></a>自动转发</h2><p>QQ邮箱的提醒非常好用，包括但不限于QQ（电脑端登录QQ有弹窗）和微信（手机端巨好使）的提醒，所以可以将吉大邮箱的邮件转发到QQ邮箱。同理，可以转发到任意你觉得好用的邮箱中。</p>
+<p>设置路径如下：</p>
+<p>设置-&gt;邮件收发-&gt;自动转发-&gt;选择自动转发-&gt;“转发到邮箱”中填写QQ邮箱</p>
+<h2 id="Windows版邮件"><a href="#Windows版邮件" class="headerlink" title="Windows版邮件"></a>Windows版邮件</h2><p>直接绑定就好了，感觉速度比转发的提醒慢一点。电脑端的提醒弹窗比QQ的好看一点，而且任务栏里会有提醒。</p>
+<blockquote>
+<p>老刘评价：不如转发</p>
+</blockquote>
+<h1 id="GitHub"><a href="#GitHub" class="headerlink" title="GitHub"></a>GitHub</h1><h2 id="SwitchHosts"><a href="#SwitchHosts" class="headerlink" title="SwitchHosts"></a>SwitchHosts</h2><p>众所周知，GitHub在国内无法长期稳定有效地访问，原因是DNS污染，GitHub服务器IP在国内并未封禁，故可通过改host文件的方式访问GitHub。但长期手动修改hosts太麻烦了，购买梯子又太贵了（价格敏感性消费者.jpg），所以找到了这个自动修改hosts的神器。</p>
 <h3 id="使用指南"><a href="#使用指南" class="headerlink" title="使用指南"></a>使用指南</h3><h4 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h4><p><a href="https://github.com/oldj/SwitchHosts/releases">下载地址（release版）</a>选择自己OS对应的版本，如Windows选择<a href="https://github.com/oldj/SwitchHosts/releases/download/v4.1.2/SwitchHosts_windows_installer_4.1.2.6086.exe">SwitchHosts_windows_installer_4.1.2.6086.exe</a>。</p>
 <h4 id="连接远程hosts"><a href="#连接远程hosts" class="headerlink" title="连接远程hosts"></a>连接远程hosts</h4><ol>
 <li>点击加号添加hosts</li>
@@ -48,7 +59,7 @@
 <h3 id="使用评价"><a href="#使用评价" class="headerlink" title="使用评价"></a>使用评价</h3><p>目前GitHub访问体验完全无痛，不用再担心push的时候老半天push不上去。而且比梯子强的是，这玩意只在访问GitHub的时候重定向了IP地址，访问国内其它网站不会发生绕来绕去过慢的现象。</p>
 <p>这里要post一段和老刘有趣的对话</p>
 <blockquote>
-<p>我：兴高采烈，抓着老刘看我桌面的SwitchHosts疯狂安利</p>
+<p>我：兴高采烈，抓着老刘看我桌面的SwitchHosts，疯狂安利</p>
 <p>老刘：我还有两年到期（看傻子.jpg）</p>
 <p>我：我这个月底就到期了。。。你有钱你清高</p>
 </blockquote>
