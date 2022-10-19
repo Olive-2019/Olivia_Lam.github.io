@@ -1,6 +1,275 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>AutoGenRS4LCDP</title>
+    <url>/Olivia_Lam.github.io/2022/10/19/AutoGenRS4LCDP/</url>
+    <content><![CDATA[<p>自动生成服务于LCDP的推荐系统</p>
+<span id="more"></span>
+
+<h1 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h1><h2 id="时间线"><a href="#时间线" class="headerlink" title="时间线"></a>时间线</h2><p>2020年发了第一篇关于自动生成推荐系统集成到MDE中的文章，相对来说只是理论为主。</p>
+<blockquote>
+<p><em>Towards automating the construction of recommender systems for low-code development platforms</em></p>
+</blockquote>
+<p>2021年发了第二篇同一主题的文章，相比上一篇，似乎已经有了具体工具（没找到可运行版本，只有图片），也做了集成到eclipse以外平台的尝试（chatbot），但是似乎并没有真正用上NLP，还是以命令和选项的形式交互、</p>
+<blockquote>
+<p><em>Automating the Synthesis of Recommender Systems for Modelling Languages</em></p>
+</blockquote>
+<h2 id="人物机构"><a href="#人物机构" class="headerlink" title="人物机构"></a>人物机构</h2><h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>RS在MDE中有重要的作用，但是RS的生成需要特殊的知识和时间，故设计一个通用的，能自动生成用于LCDP的RS。</p>
+<h2 id="实施方案的技术路线"><a href="#实施方案的技术路线" class="headerlink" title="实施方案的技术路线"></a>实施方案的技术路线</h2><h3 id="技术架构"><a href="#技术架构" class="headerlink" title="技术架构"></a>技术架构</h3><p><img src="https://github.com/Olive-2019/Lam-Blog-resource/blob/master/images/AutoGenRS4LCDP/overview.jpg?raw=true" alt="overview" title="架构"></p>
+<ol>
+<li>RS设计师提供元模型</li>
+<li>模型仓库（训练数据）</li>
+<li>RS设计师使用DSL语言定义元模型的元素（包括user、item、item特征、推荐系统的配置）</li>
+<li>框架为LCDP自动生成一个定制的推荐系统</li>
+<li>开发者将会在LCDP中获得建议，形式包括图上的提示、实例碎片甚至是使用自然语言的交互机器人</li>
+</ol>
+<h3 id="流程架构"><a href="#流程架构" class="headerlink" title="流程架构"></a>流程架构</h3><p><img src="https://github.com/Olive-2019/Lam-Blog-resource/blob/master/images/AutoGenRS4LCDP/overview%20of%20process.jpg?raw=true" alt="overview of process" title="流程架构"><br>step1-2人工配置，step3-7自动生成</p>
+<h4 id="通过DSL配置-step2"><a href="#通过DSL配置-step2" class="headerlink" title="通过DSL配置(step2)"></a>通过DSL配置(step2)</h4><p><img src="https://github.com/Olive-2019/Lam-Blog-resource/blob/master/images/AutoGenRS4LCDP/DSL%20meta-model.jpg?raw=true" alt="DSL meta-model" title="DSL 元模型"></p>
+<p>包含推荐系统的创建方法、数据划分方法、评价方法等，以下为实例</p>
+<p><img src="https://github.com/Olive-2019/Lam-Blog-resource/blob/master/images/AutoGenRS4LCDP/DSL.jpg?raw=true" alt="DSL example" title="DSL实例"></p>
+<h4 id="数据准备-step3"><a href="#数据准备-step3" class="headerlink" title="数据准备(step3)"></a>数据准备(step3)</h4><p><img src="https://github.com/Olive-2019/Lam-Blog-resource/blob/master/images/AutoGenRS4LCDP/%E6%95%B0%E6%8D%AE%E9%A2%84%E5%A4%84%E7%90%86.jpg?raw=true" alt="数据预处理" title="数据预处理"></p>
+<p>数据准备步骤：</p>
+<ol>
+<li>获取模型</li>
+<li>数据预处理（模型提取）</li>
+<li>生成user-item矩阵和item-feature矩阵</li>
+</ol>
+<p><img src="https://github.com/Olive-2019/Lam-Blog-resource/blob/master/images/AutoGenRS4LCDP/%E6%95%B0%E6%8D%AE%E9%A2%84%E5%A4%84%E7%90%86%E4%BE%8B%E5%AD%90.jpg?raw=true" alt="数据预处理实例" title="数据预处理实例"></p>
+<ol>
+<li>原始数据（模型）</li>
+<li>提取user（各个类）</li>
+<li>提取item（各个属性）</li>
+<li>提取item的feature（各属性的名字和类型）</li>
+<li>生成user-item矩阵</li>
+<li>生成item-feature矩阵</li>
+</ol>
+<h4 id="推荐系统引擎-step3-4"><a href="#推荐系统引擎-step3-4" class="headerlink" title="推荐系统引擎(step3-4)"></a>推荐系统引擎(step3-4)</h4><p><img src="https://github.com/Olive-2019/Lam-Blog-resource/blob/master/images/AutoGenRS4LCDP/RS%E5%BC%95%E6%93%8E.jpg?raw=true" alt="推荐系统引擎" title="推荐系统引擎"></p>
+<h5 id="数据集划分-2"><a href="#数据集划分-2" class="headerlink" title="数据集划分(2)"></a>数据集划分(2)</h5><p>根据DSL指定的比例划分训练集和测试集</p>
+<h5 id="训练"><a href="#训练" class="headerlink" title="训练"></a>训练</h5><p>根据DSL配置(3)，使用训练集数据(4)训练推荐系统。</p>
+<p>根据配置信息，训练的推荐系统可能有多个</p>
+<h5 id="测试-5-7"><a href="#测试-5-7" class="headerlink" title="测试(5)(7)"></a>测试(5)(7)</h5><p>每一个备选推荐系统都在测试数据集上进行测试，得出一系列分数</p>
+<h2 id="结果"><a href="#结果" class="headerlink" title="结果"></a>结果</h2><h3 id="有效性测试"><a href="#有效性测试" class="headerlink" title="有效性测试"></a>有效性测试</h3><p>概述20年文章的有效性测试，21年只是换了数据集，差别不大</p>
+<h4 id="数据集"><a href="#数据集" class="headerlink" title="数据集"></a>数据集</h4><p><img src="https://github.com/Olive-2019/Lam-Blog-resource/blob/master/images/AutoGenRS4LCDP/%E6%95%B0%E6%8D%AE%E9%9B%86.jpg?raw=true" alt="数据集" title="数据集"><br>数据集有三个：</p>
+<p>第一个是将互联网上找到的类图使用EMF转化为模型库中的标准模型，</p>
+<p>第二个是第一个模型的扩展版，将第一个模型中的一些名词同义替代</p>
+<p>第三个数据集是元模型（元模型也类似于类图）</p>
+<h4 id="实验条件设置"><a href="#实验条件设置" class="headerlink" title="实验条件设置"></a>实验条件设置</h4><h5 id="推荐系统配置"><a href="#推荐系统配置" class="headerlink" title="推荐系统配置"></a>推荐系统配置</h5><p>前两个数据集与前面的DSL实例配置一样。由于第三个数据集是元模型，user和item略有不同，但大体类似</p>
+<h5 id="数据集划分"><a href="#数据集划分" class="headerlink" title="数据集划分"></a>数据集划分</h5><p>训练集：测试集&#x3D;8：2</p>
+<h5 id="训练过程"><a href="#训练过程" class="headerlink" title="训练过程"></a>训练过程</h5><p>十折交叉验证，求结果均值</p>
+<h5 id="推荐系统方法"><a href="#推荐系统方法" class="headerlink" title="推荐系统方法"></a>推荐系统方法</h5><h6 id="协同过滤-collaborative-filtering"><a href="#协同过滤-collaborative-filtering" class="headerlink" title="协同过滤(collaborative filtering)"></a>协同过滤(collaborative filtering)</h6><p>基线方法：pop</p>
+<p>基于user的：cfubk(k表示k近邻，例如k&#x3D;3时是cfub3)</p>
+<p>基于item的：cfibk(同上)</p>
+<h6 id="基于内容-content-based"><a href="#基于内容-content-based" class="headerlink" title="基于内容(content-based)"></a>基于内容(content-based)</h6><p>简写cb</p>
+<h6 id="混合"><a href="#混合" class="headerlink" title="混合"></a>混合</h6><p>cbubk(同上)</p>
+<h5 id="指标"><a href="#指标" class="headerlink" title="指标"></a>指标</h5><h6 id="精度precision"><a href="#精度precision" class="headerlink" title="精度precision"></a>精度precision</h6><p>推荐列表里相关的项目占比</p>
+<h6 id="召回率recall"><a href="#召回率recall" class="headerlink" title="召回率recall"></a>召回率recall</h6><p>相关项目在推荐列表里的占比</p>
+<h6 id="F1"><a href="#F1" class="headerlink" title="F1"></a>F1</h6><p>前两个指标的调和平均</p>
+<h6 id="用户覆盖率USC"><a href="#用户覆盖率USC" class="headerlink" title="用户覆盖率USC"></a>用户覆盖率USC</h6><p>推荐系统可以服务的用户比例</p>
+<h6 id="项目覆盖率ISC"><a href="#项目覆盖率ISC" class="headerlink" title="项目覆盖率ISC"></a>项目覆盖率ISC</h6><p>推荐系统可以推荐的项目占比</p>
+<h6 id="归一化折损累计增益nDCG-Normalized-Discounted-Cumulative-Gain"><a href="#归一化折损累计增益nDCG-Normalized-Discounted-Cumulative-Gain" class="headerlink" title="归一化折损累计增益nDCG(Normalized Discounted Cumulative Gain)"></a>归一化折损累计增益nDCG(Normalized Discounted Cumulative Gain)</h6><p>衡量最相关的项目是否在推荐列表顶端</p>
+<h4 id="实验结果"><a href="#实验结果" class="headerlink" title="实验结果"></a>实验结果</h4><p><img src="https://github.com/Olive-2019/Lam-Blog-resource/blob/master/images/AutoGenRS4LCDP/%E5%AE%9E%E9%AA%8C%E7%BB%93%E6%9E%9C.jpg?raw=true" alt="实验结果" title="实验结果"><br>可以看到，在AtlanEcore数据集上的表现更好，也许是因为该数据集规模较大（AtlanEcore数据集有300个模型，其它数据集只有29&#x2F;58个模型）</p>
+<h5 id="研究目标"><a href="#研究目标" class="headerlink" title="研究目标"></a>研究目标</h5><h6 id="推荐系统可以帮助建模吗？"><a href="#推荐系统可以帮助建模吗？" class="headerlink" title="推荐系统可以帮助建模吗？"></a>推荐系统可以帮助建模吗？</h6><p>可以，AtlanEcore数据集在cfub2方法下F1达到了0.289，效果较好</p>
+<h6 id="哪些推荐方法有最好的效果？"><a href="#哪些推荐方法有最好的效果？" class="headerlink" title="哪些推荐方法有最好的效果？"></a>哪些推荐方法有最好的效果？</h6><p>Synthetic数据集上，cbib方法最好（混合方法）</p>
+<p>SyntheticExtended和AtlanEcore数据集上，cfub2方法最好（协同过滤）</p>
+<h6 id="混合方法会更好吗？"><a href="#混合方法会更好吗？" class="headerlink" title="混合方法会更好吗？"></a>混合方法会更好吗？</h6><p>Synthetic数据集上混合方法表现更好，但是该数据集较小，不确定是否有关。</p>
+<h6 id="在考虑到用户覆盖率和项目覆盖率时，什么方法更好？"><a href="#在考虑到用户覆盖率和项目覆盖率时，什么方法更好？" class="headerlink" title="在考虑到用户覆盖率和项目覆盖率时，什么方法更好？"></a>在考虑到用户覆盖率和项目覆盖率时，什么方法更好？</h6><p>通常来说，高用户覆盖率与低项目覆盖率并行，用户覆盖率较高的方法意味着较低的项目覆盖率</p>
+<p>pop和cb方法的用户覆盖率高，而协同过滤方法的项目覆盖率较高</p>
+<h3 id="平台集成测试：chatbot"><a href="#平台集成测试：chatbot" class="headerlink" title="平台集成测试：chatbot"></a>平台集成测试：chatbot</h3><p>这个测试在21年的论文中才有，主要目的是看RS集成到其它较复杂的平台时的困难<br><img src="https://github.com/Olive-2019/Lam-Blog-resource/blob/master/images/AutoGenRS4LCDP/architecture%20of%20integration.jpg?raw=true" alt="集成架构" title="集成架构"><br>前端包含推荐系统命令和交互平台，后端包括推荐系统handler和转换器</p>
+<h4 id="效果图"><a href="#效果图" class="headerlink" title="效果图"></a>效果图</h4><p><img src="https://github.com/Olive-2019/Lam-Blog-resource/blob/master/images/AutoGenRS4LCDP/%E6%95%88%E6%9E%9C%E5%9B%BE.jpg?raw=true" alt="效果图" title="效果图"></p>
+<p><img src="https://github.com/Olive-2019/Lam-Blog-resource/blob/master/images/AutoGenRS4LCDP/%E6%95%88%E6%9E%9C%E5%9B%BE2.jpg?raw=true" alt="效果图" title="效果图"></p>
+<h4 id="代码量"><a href="#代码量" class="headerlink" title="代码量"></a>代码量</h4><p><img src="https://github.com/Olive-2019/Lam-Blog-resource/blob/master/images/AutoGenRS4LCDP/LOC.jpg?raw=true" alt="LOC" title="LOC"></p>
+<p>可以看到代码主要集中在前端，且代码量都不大</p>
+<h2 id="论文优势"><a href="#论文优势" class="headerlink" title="论文优势"></a>论文优势</h2><p>架构较为清晰</p>
+<p>实验设置明确，可复现性高</p>
+<h2 id="论文局限性"><a href="#论文局限性" class="headerlink" title="论文局限性"></a>论文局限性</h2><p>无落地实例，甚至实验都是一个小的模块</p>
+<p>所谓的NLP颇有挂羊头卖狗肉嫌疑，目前虽然有集成到chatbot里的例子，但只是在生成类的时候使用到了自然语言，如果想要使用推荐系统，还是需要使用命令和选项交互的形式。</p>
+<h2 id="启发"><a href="#启发" class="headerlink" title="启发"></a>启发</h2><h3 id="在DWF中的使用"><a href="#在DWF中的使用" class="headerlink" title="在DWF中的使用"></a>在DWF中的使用</h3><p>定制表单模型或者应用模型时，可以给出一定的建议</p>
+<h3 id="构建难度"><a href="#构建难度" class="headerlink" title="构建难度"></a>构建难度</h3><h4 id="开发难度"><a href="#开发难度" class="headerlink" title="开发难度"></a>开发难度</h4><p>文章给的架构比较清晰，代码量应该不大</p>
+<h4 id="数据困境"><a href="#数据困境" class="headerlink" title="数据困境"></a>数据困境</h4><p>首先是用户，由于DWF是面向企业的，用户量相对较小，且用户之间的关联度较低</p>
+<p>其次是数据量，与上一个原因类似，对于某一个用户来说真正有效的可能只有自己的历史数据，而这个数据量并不大，故训练起推荐系统来可能较为困难</p>
+<h4 id="应用困境"><a href="#应用困境" class="headerlink" title="应用困境"></a>应用困境</h4><p>目前不知道推荐系统对于DWF模型这种数据集是否有效，如果要开发应用的话，最好先做在数据集上推荐系统的裸实验。</p>
+]]></content>
+      <categories>
+        <category>论文阅读笔记</category>
+      </categories>
+      <tags>
+        <tag>RS</tag>
+        <tag>MDE</tag>
+        <tag>lowcomote</tag>
+        <tag>chatbot</tag>
+        <tag>NLP</tag>
+        <tag>LCDP</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>A Model-Driven Engineering Approach for Monitoring Machine Learning Models</title>
+    <url>/Olivia_Lam.github.io/2022/10/11/MDEforMLMonitor/</url>
+    <content><![CDATA[<p>机器学习监控的软件工程方法</p>
+<span id="more"></span>
+
+<h1 id="机器学习监控领域介绍"><a href="#机器学习监控领域介绍" class="headerlink" title="机器学习监控领域介绍"></a>机器学习监控领域介绍</h1><p>有监督学习假设输入输出遵循某联合概率分布，但是现实世界是一个复杂的非稳定环境。随着时间的推移，联合概率分布会发生变化。该情况已经得到了很多研究，如概念漂移&#x2F;偏移、协变量&#x2F;采样移位、先验概率移位以及更一般的数据集移位。</p>
+<p>对于这种现象，已经有很多的解决方法，如使用测试集输入的边缘概率分布调整训练模型等。</p>
+<p>另一种方法是在线学习，即不断学习输入。当环境随时间变化时，这种方法比较好，但是需要稳定的标记输入。</p>
+<p>也有混合的方法，就是一批一批地训练和调整。</p>
+<h1 id="元模型"><a href="#元模型" class="headerlink" title="元模型"></a>元模型</h1><p><img src="https://github.com/Olive-2019/Lam-s-Blog-source/blob/master/MDEforMLMonitor/structure.jpg?raw=true" alt="模型结构" title="元模型"></p>
+<h2 id="Deployment类"><a href="#Deployment类" class="headerlink" title="Deployment类"></a>Deployment类</h2><p>模型类和偏移检测类的父类，系统中只有一个模型子类和多个偏移检测子类</p>
+<h2 id="Model类"><a href="#Model类" class="headerlink" title="Model类"></a>Model类</h2><p>被监测的模型，有多个特征输入和一个输出。属性包含模型名字、模型序列化的URL、创建模型的框架（如tensorflow）。</p>
+<h2 id="IO类"><a href="#IO类" class="headerlink" title="IO类"></a>IO类</h2><p>属性包括输入输出的名字和属性</p>
+<h2 id="DriftDetector类"><a href="#DriftDetector类" class="headerlink" title="DriftDetector类"></a>DriftDetector类</h2><p>漂移检测类用于定期执行检测，确定是否需要纠正。属性包括检测器名字、执行频率、当漂移发生时需要发送消息的email地址。</p>
+<h3 id="DataDriftDetector类"><a href="#DataDriftDetector类" class="headerlink" title="DataDriftDetector类"></a>DataDriftDetector类</h3><p>接收无标记的数据</p>
+<h3 id="ConceptDriftDetector类"><a href="#ConceptDriftDetector类" class="headerlink" title="ConceptDriftDetector类"></a>ConceptDriftDetector类</h3><p>需要一组预测的标签，随后获得实际标签</p>
+<h1 id="生成的工件"><a href="#生成的工件" class="headerlink" title="生成的工件"></a>生成的工件</h1><p>系统具体采用Kubernetes技术。M2T（model to text）生成Kubernetes清单，包含了预分配资源和需要在集群上执行的容器化应用程序。系统的某些组件使用开源的自定义Kubernetes资源，其它部分使用在容器注册表中开发和编制所以的容器化应用程序。</p>
+<p><img src="https://github.com/Olive-2019/Lam-s-Blog-source/blob/master/MDEforMLMonitor/generatedArtifact.jpg?raw=true" alt="generatedArtifact"></p>
+<h2 id="Inference-Service-推理服务"><a href="#Inference-Service-推理服务" class="headerlink" title="Inference Service 推理服务"></a>Inference Service 推理服务</h2><h3 id="Model-Server模型服务器"><a href="#Model-Server模型服务器" class="headerlink" title="Model Server模型服务器"></a>Model Server模型服务器</h3><p>提供推理服务</p>
+<h3 id="Logger-记录者"><a href="#Logger-记录者" class="headerlink" title="Logger 记录者"></a>Logger 记录者</h3><p>记录模型服务器的请求和响应信息</p>
+<h2 id="Message-Queue-消息队列"><a href="#Message-Queue-消息队列" class="headerlink" title="Message Queue 消息队列"></a>Message Queue 消息队列</h2><p>从Logger接收消息，路由至Database Writer</p>
+<h2 id="Database-Writer-数据库写者"><a href="#Database-Writer-数据库写者" class="headerlink" title="Database Writer 数据库写者"></a>Database Writer 数据库写者</h2><p>两个数据来源，第一个是推理服务器的事件，第二个是ML模型的性能</p>
+<h2 id="Database-数据库"><a href="#Database-数据库" class="headerlink" title="Database 数据库"></a>Database 数据库</h2><p>Mysql</p>
+<h2 id="Drift-Detection-Execution-偏移检测执行器"><a href="#Drift-Detection-Execution-偏移检测执行器" class="headerlink" title="Drift Detection Execution 偏移检测执行器"></a>Drift Detection Execution 偏移检测执行器</h2><p>定期执行漂移检测算法。专家课自行编写算法，只需包含检测算法，不必包含警告等。</p>
+<h2 id="Configuration-配置"><a href="#Configuration-配置" class="headerlink" title="Configuration 配置"></a>Configuration 配置</h2><p>需求写在配置文件中，容器内运行的应用程序可以读取配置文件并调整行为。</p>
+<h2 id="Proxy-代理"><a href="#Proxy-代理" class="headerlink" title="Proxy 代理"></a>Proxy 代理</h2><p>转发请求至database writer或model server，分流</p>
+<h1 id="平台"><a href="#平台" class="headerlink" title="平台"></a>平台</h1><p>为了操作便利性，提供了Web应用程序。</p>
+<h2 id="主要功能"><a href="#主要功能" class="headerlink" title="主要功能"></a>主要功能</h2><p>创作和提交MDE模型</p>
+<ol>
+<li>用户填写表单，包含元模型各个类的属性</li>
+<li>M2T生成Kubernetes清单</li>
+<li>Kubernetes清单用作Kubernetes的CLI工具的输入</li>
+<li>CLI工具将Kubernetes清单中指定的对象发送到集群的API服务器</li>
+<li>形成ML监控系统的部署</li>
+</ol>
+<h2 id="辅助功能"><a href="#辅助功能" class="headerlink" title="辅助功能"></a>辅助功能</h2><ul>
+<li>列出当前监控的所有ML模型，每个模型包含两个URL，一个用于发送推理请求，另一个用于发送反馈数据</li>
+<li>提供表单，将序列化的ML模型上传到云端</li>
+<li>提供表单，将数据集上传到云端</li>
+<li>用户可以Python函数形式自定义漂移检测算法。用户自定义的代码将与漂移检测器的基本模板结合，构建容器映像，并注册到注册表上。</li>
+</ul>
+<h1 id="拓展工作"><a href="#拓展工作" class="headerlink" title="拓展工作"></a>拓展工作</h1><p>漂移检测的时机：目前定时，可以定量</p>
+<p>足够抽象的漂移检测算法类：目前是两个类</p>
+<p>漂移发生时的行为：目前是发邮件</p>
+<p>差分部署：希望修改某些部分的时候不必完全重新部署</p>
+]]></content>
+      <categories>
+        <category>论文</category>
+      </categories>
+      <tags>
+        <tag>lowcomote</tag>
+        <tag>ML monitor</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Recommender Systems in Model-Driven Engineering</title>
+    <url>/Olivia_Lam.github.io/2022/10/05/Engineering/</url>
+    <content><![CDATA[<p>推荐系统在软件建模中的作用的综述，应该不是我们关注的重点</p>
+<span id="more"></span>
+
+<h1 id="三个问题"><a href="#三个问题" class="headerlink" title="三个问题"></a>三个问题</h1><ol>
+<li>推荐系统在软件建模中起什么作用？<br>通常用于完成和修复工件。<br>通常是独立于语言的，特定的一般针对UML或过程建模符号</li>
+<li>哪些推荐技术用于支持软件建模？评价方法？<br>基于内容&gt;基于知识<br>评价方法：离线</li>
+<li>推荐系统还有什么可做的？<br>几乎没有用于模型转化或代码生成的推荐系统，很少推荐系统用于创建、重用、查找工件。此外，还有有效的软件建模的工件库、协同过滤利用群体知识、基于用户的推荐系统评估、与低代码平台的有效寄成机制</li>
+</ol>
+]]></content>
+      <categories>
+        <category>论文</category>
+      </categories>
+      <tags>
+        <tag>RS</tag>
+        <tag>lowcomote</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Automating the Synthesis of Recommender Systems for Modelling Languages</title>
+    <url>/Olivia_Lam.github.io/2022/10/01/RS/</url>
+    <content><![CDATA[<p>低代码开发推荐系统</p>
+<span id="more"></span>
+
+<h1 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h1><p>希望能使用推荐系统建模，但是推荐系统的开发存在需要难以考虑的问题和专业知识，所以提出了一个针对软件模型的<strong>推荐系统自动生成工具</strong>。为评估该系统，实验测试了一个生成的推荐系统和聊天程序建模。</p>
+<h1 id="RS-推荐系统"><a href="#RS-推荐系统" class="headerlink" title="RS 推荐系统"></a>RS 推荐系统</h1><p>推荐系统的目标用户是生成的且偏好是有特殊含义的。例如，用户可能是一个未完成的类，需要被推荐方法和成员变量。</p>
+<p>推荐系统的两种信息源：<strong>基于内容</strong>（Content-based CB）、<strong>协同过滤</strong>（collaborative filtering CF）。基于内容评估用户历史数据，协同过滤评估用户相似性。此外，协同过滤可以评估用户或项目之间的相似性。典型的混合策略是使用CB的相似性代替CF的评级。</p>
+<p>推荐系统评价方法：<strong>在线</strong>、<strong>离线</strong>。在线方法使用在线A&#x2F;B测试实时获取影响，离线方法使用历史数据，分为训练集和测试集。</p>
+<p>常用评价指标：<strong>精度</strong>、（precision）、<strong>召回率</strong>（recall）、<strong>F1</strong>、<strong>平均精度</strong>（MAP）、<strong>归一化累积好处</strong>（nDCG，评估最有用的项目是否出现在推荐列表的顶部位置）</p>
+<p>补充评价指标：<strong>用户空间覆盖</strong>（USC，评估覆盖了多少用户）、<strong>项目空间覆盖</strong>（ISC，评估覆盖了多少项目）</p>
+<p>提出的自动生成推荐系统允许配置这几个方面的参数：<strong>推荐方法、目标用户、项目、离线评价方法和指标</strong></p>
+<h1 id="提出的方法"><a href="#提出的方法" class="headerlink" title="提出的方法"></a>提出的方法</h1><p><img src="https://github.com/Olive-2019/Lam-s-Blog-source/blob/master/RS/1665226282989.png?raw=true" alt="1665226282989"></p>
+<p><strong>流程：</strong></p>
+<ol>
+<li>选择推荐系统需要推荐的元素，如类的属性，过程的任务。指定推荐方法、训练数据集、推荐系统指标</li>
+<li>推荐系统训练过程</li>
+<li>选择推荐方法，系统自动生成可以集成到不同建模工具里的推荐系统</li>
+</ol>
+<h1 id="Droid-DSL（一种领域特定语言）"><a href="#Droid-DSL（一种领域特定语言）" class="headerlink" title="Droid DSL（一种领域特定语言）"></a>Droid DSL（一种领域特定语言）</h1><p>用来描述提出的自动生成推荐系统的一种语言</p>
+<h1 id="架构与支撑工具"><a href="#架构与支撑工具" class="headerlink" title="架构与支撑工具"></a>架构与支撑工具</h1><h2 id="架构"><a href="#架构" class="headerlink" title="架构"></a>架构</h2><p>该系统的架构由三个模块组成，分别是配置器、服务、客户。</p>
+<p>第一个模块是<strong>配置器</strong>，该模块提供了配置、评估、生成推荐系统的功能。同时也提供了一个eclipse编辑器用于指定推荐系统内容（1）。该内容作为推荐系统评价系统的输入。推荐系统评价系统依赖于RankSys和RiVal，其中RankSys是实现推荐系统的框架，RiVal是一个数据划分和推荐系统评价的工具集。每一个指标都会显示在Eclipse的视图里（3）。根据得到的指标，推荐系统设计人员可以选择一种推荐方法并生成一系列配置文件。</p>
+<p>第二个模块是DROID<strong>服务</strong>，该模块使用了第一个模块生成的配置文件。通过4模块生成不同的配置文件可以适配不同的建模语言。</p>
+<p>第三个模块是<strong>客户</strong>，这个系统允许客户使用基于JSON的模型表示发送请求。</p>
+<h2 id="支撑工具"><a href="#支撑工具" class="headerlink" title="支撑工具"></a>支撑工具</h2><p>配置器部分的工具是eclipse的一个插件，支持使用DSL配置、查看指标结果。</p>
+<p>服务方面采用方式是，客户端提交JSON格式的请求，服务端处理并返回推荐系统名字和JSON格式的推荐系统。服务主要包含三个模块，推荐器（用于处理客户端请求）、内容解析（用于解析JSON文件）、推荐系统生成器</p>
+<h1 id="自己的一点碎碎念"><a href="#自己的一点碎碎念" class="headerlink" title="自己的一点碎碎念"></a>自己的一点碎碎念</h1><p>其实就是一个支持用户定制推荐系统的低代码开发平台，但是跟清华数为的项目有些差异。这里还需要使用一些类似yml的DSL书写配置，不是完全的图形化界面。</p>
+<p>从文章看来，工具应该是已经开发完可以用的了，文章中也给了链接，但是还没真正安装试试。</p>
+]]></content>
+      <categories>
+        <category>论文</category>
+      </categories>
+      <tags>
+        <tag>RS</tag>
+        <tag>lowcomote</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Towards automating the construction of recommender systems for low-code development platforms</title>
+    <url>/Olivia_Lam.github.io/2022/10/08/RS3/</url>
+    <content><![CDATA[<p>用于低代码开发平台的推荐系统</p>
+<span id="more"></span>
+
+<h1 id="4个问题"><a href="#4个问题" class="headerlink" title="4个问题"></a>4个问题</h1><ol>
+<li>推荐系统可以帮助类建模吗？</li>
+<li>哪一种推荐方法在相关属性、方法、超类的推荐上性能最好？</li>
+<li>混合方法会更好吗？</li>
+<li>考虑用户覆盖率和项目覆盖率时，哪一种方法会更好？</li>
+</ol>
+<h1 id="动机"><a href="#动机" class="headerlink" title="动机"></a>动机</h1><p>在使用低代码开发平台开发应用时，需要推荐系统推荐一些工件，如类中的属性和方法。</p>
+<h1 id="方法概述"><a href="#方法概述" class="headerlink" title="方法概述"></a>方法概述</h1><p><img src="https://github.com/Olive-2019/Lam-s-Blog-source/blob/master/RS3/1665226767819.png?raw=true" alt="架构"></p>
+<p>推荐系统设计者使用DSL定义元模型（1），假设存在模型库（2）用于推荐。生成一个定制的推荐系统，嵌入到低代码开发平台之中，向开发者提供建议。</p>
+<h1 id="提出的方法"><a href="#提出的方法" class="headerlink" title="提出的方法"></a>提出的方法</h1><p><img src="https://github.com/Olive-2019/Lam-s-Blog-source/blob/master/RS3/1665227277118.png?raw=true" alt="1665227277118"></p>
+<p>设计者只需要完成前两布，即数据收集和使用DSL配置推荐系统。第三步到第七步都是自动完成的</p>
+<h2 id="DSL配置"><a href="#DSL配置" class="headerlink" title="DSL配置"></a>DSL配置</h2><p>跟之前那篇一样</p>
+<h2 id="数据预处理"><a href="#数据预处理" class="headerlink" title="数据预处理"></a>数据预处理</h2><p>流程：</p>
+<ol>
+<li>获取模型</li>
+<li>提取与配置的用户、项目、项目特征类型对应的模型对象</li>
+<li>生成用户-项目和项目-特征矩阵</li>
+</ol>
+<p>例子：</p>
+<p><img src="https://github.com/Olive-2019/Lam-s-Blog-source/blob/master/RS3/1665245563318.png?raw=true"></p>
+<p>（1）获取模型</p>
+<p>（2）提取所有的用户（3）提取所有项目的名字（4）提取项目特征</p>
+<p>（5）（6）两个矩阵</p>
+<h2 id="推荐系统引擎"><a href="#推荐系统引擎" class="headerlink" title="推荐系统引擎"></a>推荐系统引擎</h2><p>对应图4的步骤4-7，包括数据切割、推荐系统生成、训练、评价和部署。<br><img src="https://github.com/Olive-2019/Lam-s-Blog-source/blob/master/RS3/1665246085399.png?raw=true"></p>
+<p>每一个候选推荐系统被评价都会有一个分数，设计者可以看到这个分数。</p>
+<p>我们希望能够自动生成一个最佳配置的推荐系统。</p>
+<h1 id="实验验证"><a href="#实验验证" class="headerlink" title="实验验证"></a>实验验证</h1><h2 id="数据集"><a href="#数据集" class="headerlink" title="数据集"></a>数据集</h2><p><img src="https://github.com/Olive-2019/Lam-s-Blog-source/blob/master/RS3/1665332963070.png?raw=true" alt="1665332963070"></p>
+<p>三个数据集，前两个是人工构造的（后一个是前一个变换来的），最后一个是真实数据</p>
+<h2 id="实验设计"><a href="#实验设计" class="headerlink" title="实验设计"></a>实验设计</h2><h3 id="数据分割"><a href="#数据分割" class="headerlink" title="数据分割"></a>数据分割</h3><p>十重交叉验证、8：2分层抽样（每个类的80%项目用于训练）划分训练集和测试集</p>
+<h3 id="推荐方法"><a href="#推荐方法" class="headerlink" title="推荐方法"></a>推荐方法</h3><p>协同过滤、基于内容、混合</p>
+<h3 id="评估指标"><a href="#评估指标" class="headerlink" title="评估指标"></a>评估指标</h3><p>精度（相关的推荐项目的百分比）、召回率（推荐列表中包含相关项目的百分比）、F1、覆盖率（用户空间覆盖率、项目空间覆盖率）、标准化折扣累计收益（nDCG，最相关的项目在不在列表顶部）</p>
+<h2 id="实验结果"><a href="#实验结果" class="headerlink" title="实验结果"></a>实验结果</h2><p><img src="https://github.com/Olive-2019/Lam-s-Blog-source/blob/master/RS3/1665332667791.png?raw=true" alt="1665332667791"></p>
+<p>AtlanEcore数据集上性能较好，估计是数据集较大的缘故</p>
+<p>回答四个问题</p>
+<h3 id="推荐系统可以帮助类建模吗？"><a href="#推荐系统可以帮助类建模吗？" class="headerlink" title="推荐系统可以帮助类建模吗？"></a>推荐系统可以帮助类建模吗？</h3><p>所有方法在所有数据集上精度都在0.2-0.3之间，但是论文里说F1到达0.28+，就可以用了</p>
+<h3 id="哪一种推荐方法在相关属性、方法、超类的推荐上性能最好？"><a href="#哪一种推荐方法在相关属性、方法、超类的推荐上性能最好？" class="headerlink" title="哪一种推荐方法在相关属性、方法、超类的推荐上性能最好？"></a>哪一种推荐方法在相关属性、方法、超类的推荐上性能最好？</h3><p>不同的数据集上最佳方法不同</p>
+<h3 id="混合方法会更好吗？"><a href="#混合方法会更好吗？" class="headerlink" title="混合方法会更好吗？"></a>混合方法会更好吗？</h3><p>在Synthetic数据集上混合方法表现更好</p>
+<h3 id="考虑用户覆盖率和项目覆盖率时，哪一种方法会更好？"><a href="#考虑用户覆盖率和项目覆盖率时，哪一种方法会更好？" class="headerlink" title="考虑用户覆盖率和项目覆盖率时，哪一种方法会更好？"></a>考虑用户覆盖率和项目覆盖率时，哪一种方法会更好？</h3><p>精度和召回率低的混合方法给出了高用户覆盖率和低项目覆盖率。用户覆盖率需要以项目覆盖率为代价</p>
+<h2 id="实验结果有效性的威胁"><a href="#实验结果有效性的威胁" class="headerlink" title="实验结果有效性的威胁"></a>实验结果有效性的威胁</h2><h3 id="内部威胁"><a href="#内部威胁" class="headerlink" title="内部威胁"></a>内部威胁</h3><p>研究和结论之间的相关性。由于数据集是人工创建的，而且数据量小，可能存在引入误差的问题。所以存在AtlanEcore数据集。</p>
+<h3 id="外部威胁"><a href="#外部威胁" class="headerlink" title="外部威胁"></a>外部威胁</h3><p>模型的推广性。实验是面向具体任务和语言的，将来可能用于其它任务、以及其它数据集。</p>
+]]></content>
+      <categories>
+        <category>论文</category>
+      </categories>
+      <tags>
+        <tag>RS</tag>
+        <tag>lowcomote</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>lowcomote</title>
     <url>/Olivia_Lam.github.io/2022/10/11/lowcomote/</url>
     <content><![CDATA[<p>低代码开发的一个基金项目，15个方向探查笔记</p>
@@ -60,174 +329,6 @@
       </categories>
       <tags>
         <tag>软件</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>A Model-Driven Engineering Approach for Monitoring Machine Learning Models</title>
-    <url>/Olivia_Lam.github.io/2022/10/11/MDEforMLMonitor/</url>
-    <content><![CDATA[<p>机器学习监控的软件工程方法</p>
-<span id="more"></span>
-
-<h1 id="机器学习监控领域介绍"><a href="#机器学习监控领域介绍" class="headerlink" title="机器学习监控领域介绍"></a>机器学习监控领域介绍</h1><p>有监督学习假设输入输出遵循某联合概率分布，但是现实世界是一个复杂的非稳定环境。随着时间的推移，联合概率分布会发生变化。该情况已经得到了很多研究，如概念漂移&#x2F;偏移、协变量&#x2F;采样移位、先验概率移位以及更一般的数据集移位。</p>
-<p>对于这种现象，已经有很多的解决方法，如使用测试集输入的边缘概率分布调整训练模型等。</p>
-<p>另一种方法是在线学习，即不断学习输入。当环境随时间变化时，这种方法比较好，但是需要稳定的标记输入。</p>
-<p>也有混合的方法，就是一批一批地训练和调整。</p>
-<h1 id="元模型"><a href="#元模型" class="headerlink" title="元模型"></a>元模型</h1><p><img src="https://github.com/Olive-2019/Lam-s-Blog-source/blob/master/MDEforMLMonitor/structure.jpg?raw=true" alt="模型结构" title="元模型"></p>
-<h2 id="Deployment类"><a href="#Deployment类" class="headerlink" title="Deployment类"></a>Deployment类</h2><p>模型类和偏移检测类的父类，系统中只有一个模型子类和多个偏移检测子类</p>
-<h2 id="Model类"><a href="#Model类" class="headerlink" title="Model类"></a>Model类</h2><p>被监测的模型，有多个特征输入和一个输出。属性包含模型名字、模型序列化的URL、创建模型的框架（如tensorflow）。</p>
-<h2 id="IO类"><a href="#IO类" class="headerlink" title="IO类"></a>IO类</h2><p>属性包括输入输出的名字和属性</p>
-<h2 id="DriftDetector类"><a href="#DriftDetector类" class="headerlink" title="DriftDetector类"></a>DriftDetector类</h2><p>漂移检测类用于定期执行检测，确定是否需要纠正。属性包括检测器名字、执行频率、当漂移发生时需要发送消息的email地址。</p>
-<h3 id="DataDriftDetector类"><a href="#DataDriftDetector类" class="headerlink" title="DataDriftDetector类"></a>DataDriftDetector类</h3><p>接收无标记的数据</p>
-<h3 id="ConceptDriftDetector类"><a href="#ConceptDriftDetector类" class="headerlink" title="ConceptDriftDetector类"></a>ConceptDriftDetector类</h3><p>需要一组预测的标签，随后获得实际标签</p>
-<h1 id="生成的工件"><a href="#生成的工件" class="headerlink" title="生成的工件"></a>生成的工件</h1><p>系统具体采用Kubernetes技术。M2T（model to text）生成Kubernetes清单，包含了预分配资源和需要在集群上执行的容器化应用程序。系统的某些组件使用开源的自定义Kubernetes资源，其它部分使用在容器注册表中开发和编制所以的容器化应用程序。</p>
-<p><img src="https://github.com/Olive-2019/Lam-s-Blog-source/blob/master/MDEforMLMonitor/generatedArtifact.jpg?raw=true" alt="generatedArtifact"></p>
-<h2 id="Inference-Service-推理服务"><a href="#Inference-Service-推理服务" class="headerlink" title="Inference Service 推理服务"></a>Inference Service 推理服务</h2><h3 id="Model-Server模型服务器"><a href="#Model-Server模型服务器" class="headerlink" title="Model Server模型服务器"></a>Model Server模型服务器</h3><p>提供推理服务</p>
-<h3 id="Logger-记录者"><a href="#Logger-记录者" class="headerlink" title="Logger 记录者"></a>Logger 记录者</h3><p>记录模型服务器的请求和响应信息</p>
-<h2 id="Message-Queue-消息队列"><a href="#Message-Queue-消息队列" class="headerlink" title="Message Queue 消息队列"></a>Message Queue 消息队列</h2><p>从Logger接收消息，路由至Database Writer</p>
-<h2 id="Database-Writer-数据库写者"><a href="#Database-Writer-数据库写者" class="headerlink" title="Database Writer 数据库写者"></a>Database Writer 数据库写者</h2><p>两个数据来源，第一个是推理服务器的事件，第二个是ML模型的性能</p>
-<h2 id="Database-数据库"><a href="#Database-数据库" class="headerlink" title="Database 数据库"></a>Database 数据库</h2><p>Mysql</p>
-<h2 id="Drift-Detection-Execution-偏移检测执行器"><a href="#Drift-Detection-Execution-偏移检测执行器" class="headerlink" title="Drift Detection Execution 偏移检测执行器"></a>Drift Detection Execution 偏移检测执行器</h2><p>定期执行漂移检测算法。专家课自行编写算法，只需包含检测算法，不必包含警告等。</p>
-<h2 id="Configuration-配置"><a href="#Configuration-配置" class="headerlink" title="Configuration 配置"></a>Configuration 配置</h2><p>需求写在配置文件中，容器内运行的应用程序可以读取配置文件并调整行为。</p>
-<h2 id="Proxy-代理"><a href="#Proxy-代理" class="headerlink" title="Proxy 代理"></a>Proxy 代理</h2><p>转发请求至database writer或model server，分流</p>
-<h1 id="平台"><a href="#平台" class="headerlink" title="平台"></a>平台</h1><p>为了操作便利性，提供了Web应用程序。</p>
-<h2 id="主要功能"><a href="#主要功能" class="headerlink" title="主要功能"></a>主要功能</h2><p>创作和提交MDE模型</p>
-<ol>
-<li>用户填写表单，包含元模型各个类的属性</li>
-<li>M2T生成Kubernetes清单</li>
-<li>Kubernetes清单用作Kubernetes的CLI工具的输入</li>
-<li>CLI工具将Kubernetes清单中指定的对象发送到集群的API服务器</li>
-<li>形成ML监控系统的部署</li>
-</ol>
-<h2 id="辅助功能"><a href="#辅助功能" class="headerlink" title="辅助功能"></a>辅助功能</h2><ul>
-<li>列出当前监控的所有ML模型，每个模型包含两个URL，一个用于发送推理请求，另一个用于发送反馈数据</li>
-<li>提供表单，将序列化的ML模型上传到云端</li>
-<li>提供表单，将数据集上传到云端</li>
-<li>用户可以Python函数形式自定义漂移检测算法。用户自定义的代码将与漂移检测器的基本模板结合，构建容器映像，并注册到注册表上。</li>
-</ul>
-<h1 id="拓展工作"><a href="#拓展工作" class="headerlink" title="拓展工作"></a>拓展工作</h1><p>漂移检测的时机：目前定时，可以定量</p>
-<p>足够抽象的漂移检测算法类：目前是两个类</p>
-<p>漂移发生时的行为：目前是发邮件</p>
-<p>差分部署：希望修改某些部分的时候不必完全重新部署</p>
-]]></content>
-      <categories>
-        <category>论文</category>
-      </categories>
-      <tags>
-        <tag>lowcomote</tag>
-        <tag>ML monitor</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Towards automating the construction of recommender systems for low-code development platforms</title>
-    <url>/Olivia_Lam.github.io/2022/10/08/RS3/</url>
-    <content><![CDATA[<p>用于低代码开发平台的推荐系统</p>
-<span id="more"></span>
-
-<h1 id="4个问题"><a href="#4个问题" class="headerlink" title="4个问题"></a>4个问题</h1><ol>
-<li>推荐系统可以帮助类建模吗？</li>
-<li>哪一种推荐方法在相关属性、方法、超类的推荐上性能最好？</li>
-<li>混合方法会更好吗？</li>
-<li>考虑用户覆盖率和项目覆盖率时，哪一种方法会更好？</li>
-</ol>
-<h1 id="动机"><a href="#动机" class="headerlink" title="动机"></a>动机</h1><p>在使用低代码开发平台开发应用时，需要推荐系统推荐一些工件，如类中的属性和方法。</p>
-<h1 id="方法概述"><a href="#方法概述" class="headerlink" title="方法概述"></a>方法概述</h1><p><img src="https://github.com/Olive-2019/Lam-s-Blog-source/blob/master/RS3/1665226767819.png?raw=true" alt="架构"></p>
-<p>推荐系统设计者使用DSL定义元模型（1），假设存在模型库（2）用于推荐。生成一个定制的推荐系统，嵌入到低代码开发平台之中，向开发者提供建议。</p>
-<h1 id="提出的方法"><a href="#提出的方法" class="headerlink" title="提出的方法"></a>提出的方法</h1><p><img src="https://github.com/Olive-2019/Lam-s-Blog-source/blob/master/RS3/1665227277118.png?raw=true" alt="1665227277118"></p>
-<p>设计者只需要完成前两布，即数据收集和使用DSL配置推荐系统。第三步到第七步都是自动完成的</p>
-<h2 id="DSL配置"><a href="#DSL配置" class="headerlink" title="DSL配置"></a>DSL配置</h2><p>跟之前那篇一样</p>
-<h2 id="数据预处理"><a href="#数据预处理" class="headerlink" title="数据预处理"></a>数据预处理</h2><p>流程：</p>
-<ol>
-<li>获取模型</li>
-<li>提取与配置的用户、项目、项目特征类型对应的模型对象</li>
-<li>生成用户-项目和项目-特征矩阵</li>
-</ol>
-<p>例子：</p>
-<p><img src="https://github.com/Olive-2019/Lam-s-Blog-source/blob/master/RS3/1665245563318.png?raw=true"></p>
-<p>（1）获取模型</p>
-<p>（2）提取所有的用户（3）提取所有项目的名字（4）提取项目特征</p>
-<p>（5）（6）两个矩阵</p>
-<h2 id="推荐系统引擎"><a href="#推荐系统引擎" class="headerlink" title="推荐系统引擎"></a>推荐系统引擎</h2><p>对应图4的步骤4-7，包括数据切割、推荐系统生成、训练、评价和部署。<br><img src="https://github.com/Olive-2019/Lam-s-Blog-source/blob/master/RS3/1665246085399.png?raw=true"></p>
-<p>每一个候选推荐系统被评价都会有一个分数，设计者可以看到这个分数。</p>
-<p>我们希望能够自动生成一个最佳配置的推荐系统。</p>
-<h1 id="实验验证"><a href="#实验验证" class="headerlink" title="实验验证"></a>实验验证</h1><h2 id="数据集"><a href="#数据集" class="headerlink" title="数据集"></a>数据集</h2><p><img src="https://github.com/Olive-2019/Lam-s-Blog-source/blob/master/RS3/1665332963070.png?raw=true" alt="1665332963070"></p>
-<p>三个数据集，前两个是人工构造的（后一个是前一个变换来的），最后一个是真实数据</p>
-<h2 id="实验设计"><a href="#实验设计" class="headerlink" title="实验设计"></a>实验设计</h2><h3 id="数据分割"><a href="#数据分割" class="headerlink" title="数据分割"></a>数据分割</h3><p>十重交叉验证、8：2分层抽样（每个类的80%项目用于训练）划分训练集和测试集</p>
-<h3 id="推荐方法"><a href="#推荐方法" class="headerlink" title="推荐方法"></a>推荐方法</h3><p>协同过滤、基于内容、混合</p>
-<h3 id="评估指标"><a href="#评估指标" class="headerlink" title="评估指标"></a>评估指标</h3><p>精度（相关的推荐项目的百分比）、召回率（推荐列表中包含相关项目的百分比）、F1、覆盖率（用户空间覆盖率、项目空间覆盖率）、标准化折扣累计收益（nDCG，最相关的项目在不在列表顶部）</p>
-<h2 id="实验结果"><a href="#实验结果" class="headerlink" title="实验结果"></a>实验结果</h2><p><img src="https://github.com/Olive-2019/Lam-s-Blog-source/blob/master/RS3/1665332667791.png?raw=true" alt="1665332667791"></p>
-<p>AtlanEcore数据集上性能较好，估计是数据集较大的缘故</p>
-<p>回答四个问题</p>
-<h3 id="推荐系统可以帮助类建模吗？"><a href="#推荐系统可以帮助类建模吗？" class="headerlink" title="推荐系统可以帮助类建模吗？"></a>推荐系统可以帮助类建模吗？</h3><p>所有方法在所有数据集上精度都在0.2-0.3之间，但是论文里说F1到达0.28+，就可以用了</p>
-<h3 id="哪一种推荐方法在相关属性、方法、超类的推荐上性能最好？"><a href="#哪一种推荐方法在相关属性、方法、超类的推荐上性能最好？" class="headerlink" title="哪一种推荐方法在相关属性、方法、超类的推荐上性能最好？"></a>哪一种推荐方法在相关属性、方法、超类的推荐上性能最好？</h3><p>不同的数据集上最佳方法不同</p>
-<h3 id="混合方法会更好吗？"><a href="#混合方法会更好吗？" class="headerlink" title="混合方法会更好吗？"></a>混合方法会更好吗？</h3><p>在Synthetic数据集上混合方法表现更好</p>
-<h3 id="考虑用户覆盖率和项目覆盖率时，哪一种方法会更好？"><a href="#考虑用户覆盖率和项目覆盖率时，哪一种方法会更好？" class="headerlink" title="考虑用户覆盖率和项目覆盖率时，哪一种方法会更好？"></a>考虑用户覆盖率和项目覆盖率时，哪一种方法会更好？</h3><p>精度和召回率低的混合方法给出了高用户覆盖率和低项目覆盖率。用户覆盖率需要以项目覆盖率为代价</p>
-<h2 id="实验结果有效性的威胁"><a href="#实验结果有效性的威胁" class="headerlink" title="实验结果有效性的威胁"></a>实验结果有效性的威胁</h2><h3 id="内部威胁"><a href="#内部威胁" class="headerlink" title="内部威胁"></a>内部威胁</h3><p>研究和结论之间的相关性。由于数据集是人工创建的，而且数据量小，可能存在引入误差的问题。所以存在AtlanEcore数据集。</p>
-<h3 id="外部威胁"><a href="#外部威胁" class="headerlink" title="外部威胁"></a>外部威胁</h3><p>模型的推广性。实验是面向具体任务和语言的，将来可能用于其它任务、以及其它数据集。</p>
-]]></content>
-      <categories>
-        <category>论文</category>
-      </categories>
-      <tags>
-        <tag>RS</tag>
-        <tag>lowcomote</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Recommender Systems in Model-Driven Engineering</title>
-    <url>/Olivia_Lam.github.io/2022/10/05/Engineering/</url>
-    <content><![CDATA[<p>推荐系统在软件建模中的作用的综述，应该不是我们关注的重点</p>
-<span id="more"></span>
-
-<h1 id="三个问题"><a href="#三个问题" class="headerlink" title="三个问题"></a>三个问题</h1><ol>
-<li>推荐系统在软件建模中起什么作用？<br>通常用于完成和修复工件。<br>通常是独立于语言的，特定的一般针对UML或过程建模符号</li>
-<li>哪些推荐技术用于支持软件建模？评价方法？<br>基于内容&gt;基于知识<br>评价方法：离线</li>
-<li>推荐系统还有什么可做的？<br>几乎没有用于模型转化或代码生成的推荐系统，很少推荐系统用于创建、重用、查找工件。此外，还有有效的软件建模的工件库、协同过滤利用群体知识、基于用户的推荐系统评估、与低代码平台的有效寄成机制</li>
-</ol>
-]]></content>
-      <categories>
-        <category>论文</category>
-      </categories>
-      <tags>
-        <tag>RS</tag>
-        <tag>lowcomote</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Automating the Synthesis of Recommender Systems for Modelling Languages</title>
-    <url>/Olivia_Lam.github.io/2022/10/01/RS/</url>
-    <content><![CDATA[<p>低代码开发推荐系统</p>
-<span id="more"></span>
-
-<h1 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h1><p>希望能使用推荐系统建模，但是推荐系统的开发存在需要难以考虑的问题和专业知识，所以提出了一个针对软件模型的<strong>推荐系统自动生成工具</strong>。为评估该系统，实验测试了一个生成的推荐系统和聊天程序建模。</p>
-<h1 id="RS-推荐系统"><a href="#RS-推荐系统" class="headerlink" title="RS 推荐系统"></a>RS 推荐系统</h1><p>推荐系统的目标用户是生成的且偏好是有特殊含义的。例如，用户可能是一个未完成的类，需要被推荐方法和成员变量。</p>
-<p>推荐系统的两种信息源：<strong>基于内容</strong>（Content-based CB）、<strong>协同过滤</strong>（collaborative filtering CF）。基于内容评估用户历史数据，协同过滤评估用户相似性。此外，协同过滤可以评估用户或项目之间的相似性。典型的混合策略是使用CB的相似性代替CF的评级。</p>
-<p>推荐系统评价方法：<strong>在线</strong>、<strong>离线</strong>。在线方法使用在线A&#x2F;B测试实时获取影响，离线方法使用历史数据，分为训练集和测试集。</p>
-<p>常用评价指标：<strong>精度</strong>、（precision）、<strong>召回率</strong>（recall）、<strong>F1</strong>、<strong>平均精度</strong>（MAP）、<strong>归一化累积好处</strong>（nDCG，评估最有用的项目是否出现在推荐列表的顶部位置）</p>
-<p>补充评价指标：<strong>用户空间覆盖</strong>（USC，评估覆盖了多少用户）、<strong>项目空间覆盖</strong>（ISC，评估覆盖了多少项目）</p>
-<p>提出的自动生成推荐系统允许配置这几个方面的参数：<strong>推荐方法、目标用户、项目、离线评价方法和指标</strong></p>
-<h1 id="提出的方法"><a href="#提出的方法" class="headerlink" title="提出的方法"></a>提出的方法</h1><p><img src="https://github.com/Olive-2019/Lam-s-Blog-source/blob/master/RS/1665226282989.png?raw=true" alt="1665226282989"></p>
-<p><strong>流程：</strong></p>
-<ol>
-<li>选择推荐系统需要推荐的元素，如类的属性，过程的任务。指定推荐方法、训练数据集、推荐系统指标</li>
-<li>推荐系统训练过程</li>
-<li>选择推荐方法，系统自动生成可以集成到不同建模工具里的推荐系统</li>
-</ol>
-<h1 id="Droid-DSL（一种领域特定语言）"><a href="#Droid-DSL（一种领域特定语言）" class="headerlink" title="Droid DSL（一种领域特定语言）"></a>Droid DSL（一种领域特定语言）</h1><p>用来描述提出的自动生成推荐系统的一种语言</p>
-<h1 id="架构与支撑工具"><a href="#架构与支撑工具" class="headerlink" title="架构与支撑工具"></a>架构与支撑工具</h1><h2 id="架构"><a href="#架构" class="headerlink" title="架构"></a>架构</h2><p>该系统的架构由三个模块组成，分别是配置器、服务、客户。</p>
-<p>第一个模块是<strong>配置器</strong>，该模块提供了配置、评估、生成推荐系统的功能。同时也提供了一个eclipse编辑器用于指定推荐系统内容（1）。该内容作为推荐系统评价系统的输入。推荐系统评价系统依赖于RankSys和RiVal，其中RankSys是实现推荐系统的框架，RiVal是一个数据划分和推荐系统评价的工具集。每一个指标都会显示在Eclipse的视图里（3）。根据得到的指标，推荐系统设计人员可以选择一种推荐方法并生成一系列配置文件。</p>
-<p>第二个模块是DROID<strong>服务</strong>，该模块使用了第一个模块生成的配置文件。通过4模块生成不同的配置文件可以适配不同的建模语言。</p>
-<p>第三个模块是<strong>客户</strong>，这个系统允许客户使用基于JSON的模型表示发送请求。</p>
-<h2 id="支撑工具"><a href="#支撑工具" class="headerlink" title="支撑工具"></a>支撑工具</h2><p>配置器部分的工具是eclipse的一个插件，支持使用DSL配置、查看指标结果。</p>
-<p>服务方面采用方式是，客户端提交JSON格式的请求，服务端处理并返回推荐系统名字和JSON格式的推荐系统。服务主要包含三个模块，推荐器（用于处理客户端请求）、内容解析（用于解析JSON文件）、推荐系统生成器</p>
-<h1 id="自己的一点碎碎念"><a href="#自己的一点碎碎念" class="headerlink" title="自己的一点碎碎念"></a>自己的一点碎碎念</h1><p>其实就是一个支持用户定制推荐系统的低代码开发平台，但是跟清华数为的项目有些差异。这里还需要使用一些类似yml的DSL书写配置，不是完全的图形化界面。</p>
-<p>从文章看来，工具应该是已经开发完可以用的了，文章中也给了链接，但是还没真正安装试试。</p>
-]]></content>
-      <categories>
-        <category>论文</category>
-      </categories>
-      <tags>
-        <tag>RS</tag>
-        <tag>lowcomote</tag>
       </tags>
   </entry>
 </search>

@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/Olivia_Lam.github.io/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/Olivia_Lam.github.io/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/Olivia_Lam.github.io/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/Olivia_Lam.github.io/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/Olivia_Lam.github.io/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha256-AbA177XfpSnFEvgpYu1jMygiLabzPCJCRIBtR5jGc0k=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"olive-2019.github.io","root":"/Olivia_Lam.github.io/","images":"/Olivia_Lam.github.io/images","scheme":"Gemini","darkmode":false,"version":"8.13.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/Olivia_Lam.github.io/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/Olivia_Lam.github.io/js/config.js"></script>
+
+    <meta name="description" content="自动生成服务于LCDP的推荐系统">
+<meta property="og:type" content="article">
+<meta property="og:title" content="AutoGenRS4LCDP">
+<meta property="og:url" content="https://olive-2019.github.io/Olivia_Lam.github.io/2022/10/19/AutoGenRS4LCDP/index.html">
+<meta property="og:site_name" content="Lam&#39;s Blog">
+<meta property="og:description" content="自动生成服务于LCDP的推荐系统">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://github.com/Olive-2019/Lam-Blog-resource/blob/master/images/AutoGenRS4LCDP/overview.jpg?raw=true">
+<meta property="og:image" content="https://github.com/Olive-2019/Lam-Blog-resource/blob/master/images/AutoGenRS4LCDP/overview%20of%20process.jpg?raw=true">
+<meta property="og:image" content="https://github.com/Olive-2019/Lam-Blog-resource/blob/master/images/AutoGenRS4LCDP/DSL%20meta-model.jpg?raw=true">
+<meta property="og:image" content="https://github.com/Olive-2019/Lam-Blog-resource/blob/master/images/AutoGenRS4LCDP/DSL.jpg?raw=true">
+<meta property="og:image" content="https://github.com/Olive-2019/Lam-Blog-resource/blob/master/images/AutoGenRS4LCDP/%E6%95%B0%E6%8D%AE%E9%A2%84%E5%A4%84%E7%90%86.jpg?raw=true">
+<meta property="og:image" content="https://github.com/Olive-2019/Lam-Blog-resource/blob/master/images/AutoGenRS4LCDP/%E6%95%B0%E6%8D%AE%E9%A2%84%E5%A4%84%E7%90%86%E4%BE%8B%E5%AD%90.jpg?raw=true">
+<meta property="og:image" content="https://github.com/Olive-2019/Lam-Blog-resource/blob/master/images/AutoGenRS4LCDP/RS%E5%BC%95%E6%93%8E.jpg?raw=true">
+<meta property="og:image" content="https://github.com/Olive-2019/Lam-Blog-resource/blob/master/images/AutoGenRS4LCDP/%E6%95%B0%E6%8D%AE%E9%9B%86.jpg?raw=true">
+<meta property="og:image" content="https://github.com/Olive-2019/Lam-Blog-resource/blob/master/images/AutoGenRS4LCDP/%E5%AE%9E%E9%AA%8C%E7%BB%93%E6%9E%9C.jpg?raw=true">
+<meta property="og:image" content="https://github.com/Olive-2019/Lam-Blog-resource/blob/master/images/AutoGenRS4LCDP/architecture%20of%20integration.jpg?raw=true">
+<meta property="og:image" content="https://github.com/Olive-2019/Lam-Blog-resource/blob/master/images/AutoGenRS4LCDP/%E6%95%88%E6%9E%9C%E5%9B%BE.jpg?raw=true">
+<meta property="og:image" content="https://github.com/Olive-2019/Lam-Blog-resource/blob/master/images/AutoGenRS4LCDP/%E6%95%88%E6%9E%9C%E5%9B%BE2.jpg?raw=true">
+<meta property="og:image" content="https://github.com/Olive-2019/Lam-Blog-resource/blob/master/images/AutoGenRS4LCDP/LOC.jpg?raw=true">
+<meta property="article:published_time" content="2022-10-18T16:51:43.000Z">
+<meta property="article:modified_time" content="2022-10-19T07:33:31.082Z">
+<meta property="article:author" content="Olivia Lam">
+<meta property="article:tag" content="RS">
+<meta property="article:tag" content="MDE">
+<meta property="article:tag" content="lowcomote">
+<meta property="article:tag" content="chatbot">
+<meta property="article:tag" content="NLP">
+<meta property="article:tag" content="LCDP">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://github.com/Olive-2019/Lam-Blog-resource/blob/master/images/AutoGenRS4LCDP/overview.jpg?raw=true">
+
+
+<link rel="canonical" href="https://olive-2019.github.io/Olivia_Lam.github.io/2022/10/19/AutoGenRS4LCDP/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://olive-2019.github.io/Olivia_Lam.github.io/2022/10/19/AutoGenRS4LCDP/","path":"2022/10/19/AutoGenRS4LCDP/","title":"AutoGenRS4LCDP"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>AutoGenRS4LCDP | Lam's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/Olivia_Lam.github.io/css/noscript.css">
+  </noscript>
+  <meta name="referrer" content="no-referrer"/>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/Olivia_Lam.github.io/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Lam's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/Olivia_Lam.github.io/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/Olivia_Lam.github.io/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/Olivia_Lam.github.io/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/Olivia_Lam.github.io/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%91%98%E8%A6%81"><span class="nav-number">1.</span> <span class="nav-text">摘要</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%97%B6%E9%97%B4%E7%BA%BF"><span class="nav-number">1.1.</span> <span class="nav-text">时间线</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%BA%E7%89%A9%E6%9C%BA%E6%9E%84"><span class="nav-number">1.2.</span> <span class="nav-text">人物机构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%97%AE%E9%A2%98"><span class="nav-number">1.3.</span> <span class="nav-text">问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E6%96%BD%E6%96%B9%E6%A1%88%E7%9A%84%E6%8A%80%E6%9C%AF%E8%B7%AF%E7%BA%BF"><span class="nav-number">1.4.</span> <span class="nav-text">实施方案的技术路线</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8A%80%E6%9C%AF%E6%9E%B6%E6%9E%84"><span class="nav-number">1.4.1.</span> <span class="nav-text">技术架构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B5%81%E7%A8%8B%E6%9E%B6%E6%9E%84"><span class="nav-number">1.4.2.</span> <span class="nav-text">流程架构</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%80%9A%E8%BF%87DSL%E9%85%8D%E7%BD%AE-step2"><span class="nav-number">1.4.2.1.</span> <span class="nav-text">通过DSL配置(step2)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%87%86%E5%A4%87-step3"><span class="nav-number">1.4.2.2.</span> <span class="nav-text">数据准备(step3)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F%E5%BC%95%E6%93%8E-step3-4"><span class="nav-number">1.4.2.3.</span> <span class="nav-text">推荐系统引擎(step3-4)</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E9%9B%86%E5%88%92%E5%88%86-2"><span class="nav-number">1.4.2.3.1.</span> <span class="nav-text">数据集划分(2)</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%AE%AD%E7%BB%83"><span class="nav-number">1.4.2.3.2.</span> <span class="nav-text">训练</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%B5%8B%E8%AF%95-5-7"><span class="nav-number">1.4.2.3.3.</span> <span class="nav-text">测试(5)(7)</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%93%E6%9E%9C"><span class="nav-number">1.5.</span> <span class="nav-text">结果</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%89%E6%95%88%E6%80%A7%E6%B5%8B%E8%AF%95"><span class="nav-number">1.5.1.</span> <span class="nav-text">有效性测试</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E9%9B%86"><span class="nav-number">1.5.1.1.</span> <span class="nav-text">数据集</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%9E%E9%AA%8C%E6%9D%A1%E4%BB%B6%E8%AE%BE%E7%BD%AE"><span class="nav-number">1.5.1.2.</span> <span class="nav-text">实验条件设置</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F%E9%85%8D%E7%BD%AE"><span class="nav-number">1.5.1.2.1.</span> <span class="nav-text">推荐系统配置</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E9%9B%86%E5%88%92%E5%88%86"><span class="nav-number">1.5.1.2.2.</span> <span class="nav-text">数据集划分</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%AE%AD%E7%BB%83%E8%BF%87%E7%A8%8B"><span class="nav-number">1.5.1.2.3.</span> <span class="nav-text">训练过程</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F%E6%96%B9%E6%B3%95"><span class="nav-number">1.5.1.2.4.</span> <span class="nav-text">推荐系统方法</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E5%8D%8F%E5%90%8C%E8%BF%87%E6%BB%A4-collaborative-filtering"><span class="nav-number">1.5.1.2.4.1.</span> <span class="nav-text">协同过滤(collaborative filtering)</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E5%9F%BA%E4%BA%8E%E5%86%85%E5%AE%B9-content-based"><span class="nav-number">1.5.1.2.4.2.</span> <span class="nav-text">基于内容(content-based)</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E6%B7%B7%E5%90%88"><span class="nav-number">1.5.1.2.4.3.</span> <span class="nav-text">混合</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%8C%87%E6%A0%87"><span class="nav-number">1.5.1.2.5.</span> <span class="nav-text">指标</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E7%B2%BE%E5%BA%A6precision"><span class="nav-number">1.5.1.2.5.1.</span> <span class="nav-text">精度precision</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E5%8F%AC%E5%9B%9E%E7%8E%87recall"><span class="nav-number">1.5.1.2.5.2.</span> <span class="nav-text">召回率recall</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#F1"><span class="nav-number">1.5.1.2.5.3.</span> <span class="nav-text">F1</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E7%94%A8%E6%88%B7%E8%A6%86%E7%9B%96%E7%8E%87USC"><span class="nav-number">1.5.1.2.5.4.</span> <span class="nav-text">用户覆盖率USC</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E9%A1%B9%E7%9B%AE%E8%A6%86%E7%9B%96%E7%8E%87ISC"><span class="nav-number">1.5.1.2.5.5.</span> <span class="nav-text">项目覆盖率ISC</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E5%BD%92%E4%B8%80%E5%8C%96%E6%8A%98%E6%8D%9F%E7%B4%AF%E8%AE%A1%E5%A2%9E%E7%9B%8AnDCG-Normalized-Discounted-Cumulative-Gain"><span class="nav-number">1.5.1.2.5.6.</span> <span class="nav-text">归一化折损累计增益nDCG(Normalized Discounted Cumulative Gain)</span></a></li></ol></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%9E%E9%AA%8C%E7%BB%93%E6%9E%9C"><span class="nav-number">1.5.1.3.</span> <span class="nav-text">实验结果</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%A0%94%E7%A9%B6%E7%9B%AE%E6%A0%87"><span class="nav-number">1.5.1.3.1.</span> <span class="nav-text">研究目标</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F%E5%8F%AF%E4%BB%A5%E5%B8%AE%E5%8A%A9%E5%BB%BA%E6%A8%A1%E5%90%97%EF%BC%9F"><span class="nav-number">1.5.1.3.1.1.</span> <span class="nav-text">推荐系统可以帮助建模吗？</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E5%93%AA%E4%BA%9B%E6%8E%A8%E8%8D%90%E6%96%B9%E6%B3%95%E6%9C%89%E6%9C%80%E5%A5%BD%E7%9A%84%E6%95%88%E6%9E%9C%EF%BC%9F"><span class="nav-number">1.5.1.3.1.2.</span> <span class="nav-text">哪些推荐方法有最好的效果？</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E6%B7%B7%E5%90%88%E6%96%B9%E6%B3%95%E4%BC%9A%E6%9B%B4%E5%A5%BD%E5%90%97%EF%BC%9F"><span class="nav-number">1.5.1.3.1.3.</span> <span class="nav-text">混合方法会更好吗？</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E5%9C%A8%E8%80%83%E8%99%91%E5%88%B0%E7%94%A8%E6%88%B7%E8%A6%86%E7%9B%96%E7%8E%87%E5%92%8C%E9%A1%B9%E7%9B%AE%E8%A6%86%E7%9B%96%E7%8E%87%E6%97%B6%EF%BC%8C%E4%BB%80%E4%B9%88%E6%96%B9%E6%B3%95%E6%9B%B4%E5%A5%BD%EF%BC%9F"><span class="nav-number">1.5.1.3.1.4.</span> <span class="nav-text">在考虑到用户覆盖率和项目覆盖率时，什么方法更好？</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B9%B3%E5%8F%B0%E9%9B%86%E6%88%90%E6%B5%8B%E8%AF%95%EF%BC%9Achatbot"><span class="nav-number">1.5.2.</span> <span class="nav-text">平台集成测试：chatbot</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%95%88%E6%9E%9C%E5%9B%BE"><span class="nav-number">1.5.2.1.</span> <span class="nav-text">效果图</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81%E9%87%8F"><span class="nav-number">1.5.2.2.</span> <span class="nav-text">代码量</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AE%BA%E6%96%87%E4%BC%98%E5%8A%BF"><span class="nav-number">1.6.</span> <span class="nav-text">论文优势</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AE%BA%E6%96%87%E5%B1%80%E9%99%90%E6%80%A7"><span class="nav-number">1.7.</span> <span class="nav-text">论文局限性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%90%AF%E5%8F%91"><span class="nav-number">1.8.</span> <span class="nav-text">启发</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9C%A8DWF%E4%B8%AD%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="nav-number">1.8.1.</span> <span class="nav-text">在DWF中的使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9E%84%E5%BB%BA%E9%9A%BE%E5%BA%A6"><span class="nav-number">1.8.2.</span> <span class="nav-text">构建难度</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%BC%80%E5%8F%91%E9%9A%BE%E5%BA%A6"><span class="nav-number">1.8.2.1.</span> <span class="nav-text">开发难度</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%9B%B0%E5%A2%83"><span class="nav-number">1.8.2.2.</span> <span class="nav-text">数据困境</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%BA%94%E7%94%A8%E5%9B%B0%E5%A2%83"><span class="nav-number">1.8.2.3.</span> <span class="nav-text">应用困境</span></a></li></ol></li></ol></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Olivia Lam</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/Olivia_Lam.github.io/archives/">
+          <span class="site-state-item-count">7</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/Olivia_Lam.github.io/categories/">
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/Olivia_Lam.github.io/tags/">
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Olive-2019" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Olive-2019" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://olive-2019.github.io/Olivia_Lam.github.io/2022/10/19/AutoGenRS4LCDP/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/Olivia_Lam.github.io/images/avatar.gif">
+      <meta itemprop="name" content="Olivia Lam">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lam's Blog">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="AutoGenRS4LCDP | Lam's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          AutoGenRS4LCDP
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2022-10-19 00:51:43 / 修改时间：15:33:31" itemprop="dateCreated datePublished" datetime="2022-10-19T00:51:43+08:00">2022-10-19</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/Olivia_Lam.github.io/categories/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">论文阅读笔记</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>2.2k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>2 分钟</span>
+    </span>
+</div>
+
+          
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>自动生成服务于LCDP的推荐系统</p>
+<span id="more"></span>
+
+<h1 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h1><h2 id="时间线"><a href="#时间线" class="headerlink" title="时间线"></a>时间线</h2><p>2020年发了第一篇关于自动生成推荐系统集成到MDE中的文章，相对来说只是理论为主。</p>
+<blockquote>
+<p><em>Towards automating the construction of recommender systems for low-code development platforms</em></p>
+</blockquote>
+<p>2021年发了第二篇同一主题的文章，相比上一篇，似乎已经有了具体工具（没找到可运行版本，只有图片），也做了集成到eclipse以外平台的尝试（chatbot），但是似乎并没有真正用上NLP，还是以命令和选项的形式交互、</p>
+<blockquote>
+<p><em>Automating the Synthesis of Recommender Systems for Modelling Languages</em></p>
+</blockquote>
+<h2 id="人物机构"><a href="#人物机构" class="headerlink" title="人物机构"></a>人物机构</h2><h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>RS在MDE中有重要的作用，但是RS的生成需要特殊的知识和时间，故设计一个通用的，能自动生成用于LCDP的RS。</p>
+<h2 id="实施方案的技术路线"><a href="#实施方案的技术路线" class="headerlink" title="实施方案的技术路线"></a>实施方案的技术路线</h2><h3 id="技术架构"><a href="#技术架构" class="headerlink" title="技术架构"></a>技术架构</h3><p><img src="https://github.com/Olive-2019/Lam-Blog-resource/blob/master/images/AutoGenRS4LCDP/overview.jpg?raw=true" alt="overview" title="架构"></p>
+<ol>
+<li>RS设计师提供元模型</li>
+<li>模型仓库（训练数据）</li>
+<li>RS设计师使用DSL语言定义元模型的元素（包括user、item、item特征、推荐系统的配置）</li>
+<li>框架为LCDP自动生成一个定制的推荐系统</li>
+<li>开发者将会在LCDP中获得建议，形式包括图上的提示、实例碎片甚至是使用自然语言的交互机器人</li>
+</ol>
+<h3 id="流程架构"><a href="#流程架构" class="headerlink" title="流程架构"></a>流程架构</h3><p><img src="https://github.com/Olive-2019/Lam-Blog-resource/blob/master/images/AutoGenRS4LCDP/overview%20of%20process.jpg?raw=true" alt="overview of process" title="流程架构"><br>step1-2人工配置，step3-7自动生成</p>
+<h4 id="通过DSL配置-step2"><a href="#通过DSL配置-step2" class="headerlink" title="通过DSL配置(step2)"></a>通过DSL配置(step2)</h4><p><img src="https://github.com/Olive-2019/Lam-Blog-resource/blob/master/images/AutoGenRS4LCDP/DSL%20meta-model.jpg?raw=true" alt="DSL meta-model" title="DSL 元模型"></p>
+<p>包含推荐系统的创建方法、数据划分方法、评价方法等，以下为实例</p>
+<p><img src="https://github.com/Olive-2019/Lam-Blog-resource/blob/master/images/AutoGenRS4LCDP/DSL.jpg?raw=true" alt="DSL example" title="DSL实例"></p>
+<h4 id="数据准备-step3"><a href="#数据准备-step3" class="headerlink" title="数据准备(step3)"></a>数据准备(step3)</h4><p><img src="https://github.com/Olive-2019/Lam-Blog-resource/blob/master/images/AutoGenRS4LCDP/%E6%95%B0%E6%8D%AE%E9%A2%84%E5%A4%84%E7%90%86.jpg?raw=true" alt="数据预处理" title="数据预处理"></p>
+<p>数据准备步骤：</p>
+<ol>
+<li>获取模型</li>
+<li>数据预处理（模型提取）</li>
+<li>生成user-item矩阵和item-feature矩阵</li>
+</ol>
+<p><img src="https://github.com/Olive-2019/Lam-Blog-resource/blob/master/images/AutoGenRS4LCDP/%E6%95%B0%E6%8D%AE%E9%A2%84%E5%A4%84%E7%90%86%E4%BE%8B%E5%AD%90.jpg?raw=true" alt="数据预处理实例" title="数据预处理实例"></p>
+<ol>
+<li>原始数据（模型）</li>
+<li>提取user（各个类）</li>
+<li>提取item（各个属性）</li>
+<li>提取item的feature（各属性的名字和类型）</li>
+<li>生成user-item矩阵</li>
+<li>生成item-feature矩阵</li>
+</ol>
+<h4 id="推荐系统引擎-step3-4"><a href="#推荐系统引擎-step3-4" class="headerlink" title="推荐系统引擎(step3-4)"></a>推荐系统引擎(step3-4)</h4><p><img src="https://github.com/Olive-2019/Lam-Blog-resource/blob/master/images/AutoGenRS4LCDP/RS%E5%BC%95%E6%93%8E.jpg?raw=true" alt="推荐系统引擎" title="推荐系统引擎"></p>
+<h5 id="数据集划分-2"><a href="#数据集划分-2" class="headerlink" title="数据集划分(2)"></a>数据集划分(2)</h5><p>根据DSL指定的比例划分训练集和测试集</p>
+<h5 id="训练"><a href="#训练" class="headerlink" title="训练"></a>训练</h5><p>根据DSL配置(3)，使用训练集数据(4)训练推荐系统。</p>
+<p>根据配置信息，训练的推荐系统可能有多个</p>
+<h5 id="测试-5-7"><a href="#测试-5-7" class="headerlink" title="测试(5)(7)"></a>测试(5)(7)</h5><p>每一个备选推荐系统都在测试数据集上进行测试，得出一系列分数</p>
+<h2 id="结果"><a href="#结果" class="headerlink" title="结果"></a>结果</h2><h3 id="有效性测试"><a href="#有效性测试" class="headerlink" title="有效性测试"></a>有效性测试</h3><p>概述20年文章的有效性测试，21年只是换了数据集，差别不大</p>
+<h4 id="数据集"><a href="#数据集" class="headerlink" title="数据集"></a>数据集</h4><p><img src="https://github.com/Olive-2019/Lam-Blog-resource/blob/master/images/AutoGenRS4LCDP/%E6%95%B0%E6%8D%AE%E9%9B%86.jpg?raw=true" alt="数据集" title="数据集"><br>数据集有三个：</p>
+<p>第一个是将互联网上找到的类图使用EMF转化为模型库中的标准模型，</p>
+<p>第二个是第一个模型的扩展版，将第一个模型中的一些名词同义替代</p>
+<p>第三个数据集是元模型（元模型也类似于类图）</p>
+<h4 id="实验条件设置"><a href="#实验条件设置" class="headerlink" title="实验条件设置"></a>实验条件设置</h4><h5 id="推荐系统配置"><a href="#推荐系统配置" class="headerlink" title="推荐系统配置"></a>推荐系统配置</h5><p>前两个数据集与前面的DSL实例配置一样。由于第三个数据集是元模型，user和item略有不同，但大体类似</p>
+<h5 id="数据集划分"><a href="#数据集划分" class="headerlink" title="数据集划分"></a>数据集划分</h5><p>训练集：测试集&#x3D;8：2</p>
+<h5 id="训练过程"><a href="#训练过程" class="headerlink" title="训练过程"></a>训练过程</h5><p>十折交叉验证，求结果均值</p>
+<h5 id="推荐系统方法"><a href="#推荐系统方法" class="headerlink" title="推荐系统方法"></a>推荐系统方法</h5><h6 id="协同过滤-collaborative-filtering"><a href="#协同过滤-collaborative-filtering" class="headerlink" title="协同过滤(collaborative filtering)"></a>协同过滤(collaborative filtering)</h6><p>基线方法：pop</p>
+<p>基于user的：cfubk(k表示k近邻，例如k&#x3D;3时是cfub3)</p>
+<p>基于item的：cfibk(同上)</p>
+<h6 id="基于内容-content-based"><a href="#基于内容-content-based" class="headerlink" title="基于内容(content-based)"></a>基于内容(content-based)</h6><p>简写cb</p>
+<h6 id="混合"><a href="#混合" class="headerlink" title="混合"></a>混合</h6><p>cbubk(同上)</p>
+<h5 id="指标"><a href="#指标" class="headerlink" title="指标"></a>指标</h5><h6 id="精度precision"><a href="#精度precision" class="headerlink" title="精度precision"></a>精度precision</h6><p>推荐列表里相关的项目占比</p>
+<h6 id="召回率recall"><a href="#召回率recall" class="headerlink" title="召回率recall"></a>召回率recall</h6><p>相关项目在推荐列表里的占比</p>
+<h6 id="F1"><a href="#F1" class="headerlink" title="F1"></a>F1</h6><p>前两个指标的调和平均</p>
+<h6 id="用户覆盖率USC"><a href="#用户覆盖率USC" class="headerlink" title="用户覆盖率USC"></a>用户覆盖率USC</h6><p>推荐系统可以服务的用户比例</p>
+<h6 id="项目覆盖率ISC"><a href="#项目覆盖率ISC" class="headerlink" title="项目覆盖率ISC"></a>项目覆盖率ISC</h6><p>推荐系统可以推荐的项目占比</p>
+<h6 id="归一化折损累计增益nDCG-Normalized-Discounted-Cumulative-Gain"><a href="#归一化折损累计增益nDCG-Normalized-Discounted-Cumulative-Gain" class="headerlink" title="归一化折损累计增益nDCG(Normalized Discounted Cumulative Gain)"></a>归一化折损累计增益nDCG(Normalized Discounted Cumulative Gain)</h6><p>衡量最相关的项目是否在推荐列表顶端</p>
+<h4 id="实验结果"><a href="#实验结果" class="headerlink" title="实验结果"></a>实验结果</h4><p><img src="https://github.com/Olive-2019/Lam-Blog-resource/blob/master/images/AutoGenRS4LCDP/%E5%AE%9E%E9%AA%8C%E7%BB%93%E6%9E%9C.jpg?raw=true" alt="实验结果" title="实验结果"><br>可以看到，在AtlanEcore数据集上的表现更好，也许是因为该数据集规模较大（AtlanEcore数据集有300个模型，其它数据集只有29&#x2F;58个模型）</p>
+<h5 id="研究目标"><a href="#研究目标" class="headerlink" title="研究目标"></a>研究目标</h5><h6 id="推荐系统可以帮助建模吗？"><a href="#推荐系统可以帮助建模吗？" class="headerlink" title="推荐系统可以帮助建模吗？"></a>推荐系统可以帮助建模吗？</h6><p>可以，AtlanEcore数据集在cfub2方法下F1达到了0.289，效果较好</p>
+<h6 id="哪些推荐方法有最好的效果？"><a href="#哪些推荐方法有最好的效果？" class="headerlink" title="哪些推荐方法有最好的效果？"></a>哪些推荐方法有最好的效果？</h6><p>Synthetic数据集上，cbib方法最好（混合方法）</p>
+<p>SyntheticExtended和AtlanEcore数据集上，cfub2方法最好（协同过滤）</p>
+<h6 id="混合方法会更好吗？"><a href="#混合方法会更好吗？" class="headerlink" title="混合方法会更好吗？"></a>混合方法会更好吗？</h6><p>Synthetic数据集上混合方法表现更好，但是该数据集较小，不确定是否有关。</p>
+<h6 id="在考虑到用户覆盖率和项目覆盖率时，什么方法更好？"><a href="#在考虑到用户覆盖率和项目覆盖率时，什么方法更好？" class="headerlink" title="在考虑到用户覆盖率和项目覆盖率时，什么方法更好？"></a>在考虑到用户覆盖率和项目覆盖率时，什么方法更好？</h6><p>通常来说，高用户覆盖率与低项目覆盖率并行，用户覆盖率较高的方法意味着较低的项目覆盖率</p>
+<p>pop和cb方法的用户覆盖率高，而协同过滤方法的项目覆盖率较高</p>
+<h3 id="平台集成测试：chatbot"><a href="#平台集成测试：chatbot" class="headerlink" title="平台集成测试：chatbot"></a>平台集成测试：chatbot</h3><p>这个测试在21年的论文中才有，主要目的是看RS集成到其它较复杂的平台时的困难<br><img src="https://github.com/Olive-2019/Lam-Blog-resource/blob/master/images/AutoGenRS4LCDP/architecture%20of%20integration.jpg?raw=true" alt="集成架构" title="集成架构"><br>前端包含推荐系统命令和交互平台，后端包括推荐系统handler和转换器</p>
+<h4 id="效果图"><a href="#效果图" class="headerlink" title="效果图"></a>效果图</h4><p><img src="https://github.com/Olive-2019/Lam-Blog-resource/blob/master/images/AutoGenRS4LCDP/%E6%95%88%E6%9E%9C%E5%9B%BE.jpg?raw=true" alt="效果图" title="效果图"></p>
+<p><img src="https://github.com/Olive-2019/Lam-Blog-resource/blob/master/images/AutoGenRS4LCDP/%E6%95%88%E6%9E%9C%E5%9B%BE2.jpg?raw=true" alt="效果图" title="效果图"></p>
+<h4 id="代码量"><a href="#代码量" class="headerlink" title="代码量"></a>代码量</h4><p><img src="https://github.com/Olive-2019/Lam-Blog-resource/blob/master/images/AutoGenRS4LCDP/LOC.jpg?raw=true" alt="LOC" title="LOC"></p>
+<p>可以看到代码主要集中在前端，且代码量都不大</p>
+<h2 id="论文优势"><a href="#论文优势" class="headerlink" title="论文优势"></a>论文优势</h2><p>架构较为清晰</p>
+<p>实验设置明确，可复现性高</p>
+<h2 id="论文局限性"><a href="#论文局限性" class="headerlink" title="论文局限性"></a>论文局限性</h2><p>无落地实例，甚至实验都是一个小的模块</p>
+<p>所谓的NLP颇有挂羊头卖狗肉嫌疑，目前虽然有集成到chatbot里的例子，但只是在生成类的时候使用到了自然语言，如果想要使用推荐系统，还是需要使用命令和选项交互的形式。</p>
+<h2 id="启发"><a href="#启发" class="headerlink" title="启发"></a>启发</h2><h3 id="在DWF中的使用"><a href="#在DWF中的使用" class="headerlink" title="在DWF中的使用"></a>在DWF中的使用</h3><p>定制表单模型或者应用模型时，可以给出一定的建议</p>
+<h3 id="构建难度"><a href="#构建难度" class="headerlink" title="构建难度"></a>构建难度</h3><h4 id="开发难度"><a href="#开发难度" class="headerlink" title="开发难度"></a>开发难度</h4><p>文章给的架构比较清晰，代码量应该不大</p>
+<h4 id="数据困境"><a href="#数据困境" class="headerlink" title="数据困境"></a>数据困境</h4><p>首先是用户，由于DWF是面向企业的，用户量相对较小，且用户之间的关联度较低</p>
+<p>其次是数据量，与上一个原因类似，对于某一个用户来说真正有效的可能只有自己的历史数据，而这个数据量并不大，故训练起推荐系统来可能较为困难</p>
+<h4 id="应用困境"><a href="#应用困境" class="headerlink" title="应用困境"></a>应用困境</h4><p>目前不知道推荐系统对于DWF模型这种数据集是否有效，如果要开发应用的话，最好先做在数据集上推荐系统的裸实验。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/Olivia_Lam.github.io/tags/RS/" rel="tag"># RS</a>
+              <a href="/Olivia_Lam.github.io/tags/MDE/" rel="tag"># MDE</a>
+              <a href="/Olivia_Lam.github.io/tags/lowcomote/" rel="tag"># lowcomote</a>
+              <a href="/Olivia_Lam.github.io/tags/chatbot/" rel="tag"># chatbot</a>
+              <a href="/Olivia_Lam.github.io/tags/NLP/" rel="tag"># NLP</a>
+              <a href="/Olivia_Lam.github.io/tags/LCDP/" rel="tag"># LCDP</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/Olivia_Lam.github.io/2022/10/13/tool/" rel="prev" title="一些小工具">
+                  <i class="fa fa-chevron-left"></i> 一些小工具
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Olivia Lam</span>
+</div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+      <span>站点总字数：</span>
+    <span title="站点总字数">8k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span>站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">7 分钟</span>
+  </span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/Olivia_Lam.github.io/js/comments.js"></script><script src="/Olivia_Lam.github.io/js/utils.js"></script><script src="/Olivia_Lam.github.io/js/motion.js"></script><script src="/Olivia_Lam.github.io/js/next-boot.js"></script>
+
+  
+<script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.0/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="/Olivia_Lam.github.io/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+</body>
+</html>
