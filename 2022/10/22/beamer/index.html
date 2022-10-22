@@ -20,15 +20,15 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"olive-2019.github.io","root":"/Olivia_Lam.github.io/","images":"/Olivia_Lam.github.io/images","scheme":"Gemini","darkmode":false,"version":"8.13.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/Olivia_Lam.github.io/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/Olivia_Lam.github.io/js/config.js"></script>
 
-    <meta name="description" content="为什么要用Beamer我们第一次做PPT的时候总是想去尝试不同的动画效果，但是逐渐地，我们开始回归自然，追求简洁美，更专注内容。这时放弃PowerPoint选择Beamer将会是一个非常好的选择。以下给出几条使用理由，只要踩中了一条，欢迎使用本教程。  对数学公式的完美支持（LaTeX对公式的支持不必多说） 关注内容，不必关注排版 自动的目录索引和跳转 配合GitHub使用，实现版本管理 不费力气">
+    <meta name="description" content="一个LaTeX的文档类型，可替代PowerPoint">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Beamer食用指南">
 <meta property="og:url" content="https://olive-2019.github.io/Olivia_Lam.github.io/2022/10/22/beamer/index.html">
 <meta property="og:site_name" content="Lam&#39;s Blog">
-<meta property="og:description" content="为什么要用Beamer我们第一次做PPT的时候总是想去尝试不同的动画效果，但是逐渐地，我们开始回归自然，追求简洁美，更专注内容。这时放弃PowerPoint选择Beamer将会是一个非常好的选择。以下给出几条使用理由，只要踩中了一条，欢迎使用本教程。  对数学公式的完美支持（LaTeX对公式的支持不必多说） 关注内容，不必关注排版 自动的目录索引和跳转 配合GitHub使用，实现版本管理 不费力气">
+<meta property="og:description" content="一个LaTeX的文档类型，可替代PowerPoint">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-10-22T04:59:15.000Z">
-<meta property="article:modified_time" content="2022-10-22T06:14:03.661Z">
+<meta property="article:modified_time" content="2022-10-22T06:50:14.986Z">
 <meta property="article:author" content="Olivia Lam">
 <meta property="article:tag" content="LaTeX">
 <meta property="article:tag" content="slide">
@@ -146,7 +146,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E7%94%A8Beamer"><span class="nav-number">1.</span> <span class="nav-text">为什么要用Beamer</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9C%AC%E6%95%99%E7%A8%8B%E8%A6%81%E6%B1%82%E7%9A%84%E7%94%A8%E6%88%B7%E5%9F%BA%E7%A1%80"><span class="nav-number">2.</span> <span class="nav-text">本教程要求的用户基础</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9%E6%A8%A1%E6%9D%BF%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%EF%BC%8C%E5%AE%9A%E5%88%B6%E4%B8%93%E5%B1%9EBeamer"><span class="nav-number">3.</span> <span class="nav-text">修改模板配置文件，定制专属Beamer</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%BB%E9%A2%98%E9%A2%9C%E8%89%B2"><span class="nav-number">3.1.</span> <span class="nav-text">主题颜色</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89%E9%A2%9C%E8%89%B2"><span class="nav-number">3.1.1.</span> <span class="nav-text">定义颜色</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9%E8%83%8C%E6%99%AF%E9%A2%9C%E8%89%B2"><span class="nav-number">3.1.2.</span> <span class="nav-text">修改背景颜色</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%BE%E6%A0%87"><span class="nav-number">3.2.</span> <span class="nav-text">图标</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9%E5%AD%97%E4%BD%93"><span class="nav-number">3.3.</span> <span class="nav-text">修改字体</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BB%8E0%E5%BC%80%E5%A7%8B%E6%8B%A5%E6%9C%89Beamer"><span class="nav-number">4.</span> <span class="nav-text">从0开始拥有Beamer</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#LaTeX%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8"><span class="nav-number">4.1.</span> <span class="nav-text">LaTeX安装与使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Beamer%E5%9F%BA%E6%9C%ACLaTeX%E7%BB%93%E6%9E%84"><span class="nav-number">4.2.</span> <span class="nav-text">Beamer基本LaTeX结构</span></a></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E7%94%A8Beamer"><span class="nav-number">1.</span> <span class="nav-text">为什么要用Beamer</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9C%AC%E6%95%99%E7%A8%8B%E8%A6%81%E6%B1%82%E7%9A%84%E7%94%A8%E6%88%B7%E5%9F%BA%E7%A1%80"><span class="nav-number">2.</span> <span class="nav-text">本教程要求的用户基础</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BB%8E0%E5%BC%80%E5%A7%8B%E6%8B%A5%E6%9C%89Beamer"><span class="nav-number">3.</span> <span class="nav-text">从0开始拥有Beamer</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#LaTeX%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8"><span class="nav-number">3.1.</span> <span class="nav-text">LaTeX安装与使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Beamer%E5%9F%BA%E6%9C%ACLaTeX%E7%BB%93%E6%9E%84"><span class="nav-number">3.2.</span> <span class="nav-text">Beamer基本LaTeX结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%86%E6%AE%B5"><span class="nav-number">3.3.</span> <span class="nav-text">分段</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B9%BB%E7%81%AF%E7%89%87%E5%86%85%E5%AE%B9"><span class="nav-number">3.4.</span> <span class="nav-text">幻灯片内容</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E7%BB%93%E6%9E%84"><span class="nav-number">3.4.1.</span> <span class="nav-text">基本结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B8%B8%E7%94%A8%E7%BB%93%E6%9E%84"><span class="nav-number">3.4.2.</span> <span class="nav-text">常用结构</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%97%E8%A1%A8"><span class="nav-number">3.4.2.1.</span> <span class="nav-text">列表</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%97%A0%E5%BA%8F%E5%88%97%E8%A1%A8"><span class="nav-number">3.4.2.1.1.</span> <span class="nav-text">无序列表</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%9C%89%E5%BA%8F%E5%88%97%E8%A1%A8"><span class="nav-number">3.4.2.1.2.</span> <span class="nav-text">有序列表</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8F%92%E5%85%A5%E5%9B%BE%E7%89%87"><span class="nav-number">3.4.2.2.</span> <span class="nav-text">插入图片</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%8D%95%E5%BC%A0"><span class="nav-number">3.4.2.2.1.</span> <span class="nav-text">单张</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%B9%B6%E5%88%97"><span class="nav-number">3.4.2.2.2.</span> <span class="nav-text">并列</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9%E6%A8%A1%E6%9D%BF%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%EF%BC%8C%E5%AE%9A%E5%88%B6%E4%B8%93%E5%B1%9EBeamer"><span class="nav-number">4.</span> <span class="nav-text">修改模板配置文件，定制专属Beamer</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%BB%E9%A2%98%E9%A2%9C%E8%89%B2"><span class="nav-number">4.1.</span> <span class="nav-text">主题颜色</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89%E9%A2%9C%E8%89%B2"><span class="nav-number">4.1.1.</span> <span class="nav-text">定义颜色</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9%E8%83%8C%E6%99%AF%E9%A2%9C%E8%89%B2"><span class="nav-number">4.1.2.</span> <span class="nav-text">修改背景颜色</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%BE%E6%A0%87"><span class="nav-number">4.2.</span> <span class="nav-text">图标</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9%E5%AD%97%E4%BD%93"><span class="nav-number">4.3.</span> <span class="nav-text">修改字体</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -244,7 +244,7 @@
       <span class="post-meta-item-text">发表于</span>
       
 
-      <time title="创建时间：2022-10-22 12:59:15 / 修改时间：14:14:03" itemprop="dateCreated datePublished" datetime="2022-10-22T12:59:15+08:00">2022-10-22</time>
+      <time title="创建时间：2022-10-22 12:59:15 / 修改时间：14:50:14" itemprop="dateCreated datePublished" datetime="2022-10-22T12:59:15+08:00">2022-10-22</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -270,14 +270,14 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>2k</span>
+      <span>3.7k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>2 分钟</span>
+      <span>3 分钟</span>
     </span>
 </div>
 
@@ -289,7 +289,10 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <h1 id="为什么要用Beamer"><a href="#为什么要用Beamer" class="headerlink" title="为什么要用Beamer"></a>为什么要用Beamer</h1><p>我们第一次做PPT的时候总是想去尝试不同的动画效果，但是逐渐地，我们开始回归自然，追求简洁美，更专注内容。这时放弃PowerPoint选择Beamer将会是一个非常好的选择。以下给出几条使用理由，只要踩中了一条，欢迎使用本教程。</p>
+        <p>一个LaTeX的文档类型，可替代PowerPoint</p>
+<span id="more"></span>
+
+<h1 id="为什么要用Beamer"><a href="#为什么要用Beamer" class="headerlink" title="为什么要用Beamer"></a>为什么要用Beamer</h1><p>我们第一次做PPT的时候总是想去尝试不同的动画效果，但是逐渐地，我们开始回归自然，追求简洁美，更专注内容。这时放弃PowerPoint选择Beamer将会是一个非常好的选择。以下给出几条使用理由，只要踩中了一条，欢迎使用本教程。</p>
 <ul>
 <li>对数学公式的完美支持（LaTeX对公式的支持不必多说）</li>
 <li>关注内容，不必关注排版</li>
@@ -303,6 +306,35 @@
 <li>对幻灯片动画有高度追求：beamer相对来说走的是简洁风</li>
 </ul>
 <h1 id="本教程要求的用户基础"><a href="#本教程要求的用户基础" class="headerlink" title="本教程要求的用户基础"></a>本教程要求的用户基础</h1><p>本教程面向两种人群，前者是有LaTeX基础的人群，主要介绍如何修改模板配置文件使之成为自己想要的样子；后者是完全没有LaTeX基础的人群，主要介绍如何从0开始使用Beamer。</p>
+<h1 id="从0开始拥有Beamer"><a href="#从0开始拥有Beamer" class="headerlink" title="从0开始拥有Beamer"></a>从0开始拥有Beamer</h1><p>已有LaTeX基础人群请跳过本段</p>
+<h2 id="LaTeX安装与使用"><a href="#LaTeX安装与使用" class="headerlink" title="LaTeX安装与使用"></a>LaTeX安装与使用</h2><p>LaTeX的安装教程网上比较多，此处不再赘述，随便找一个教程跟着走下来就行了</p>
+<p>使用方面推荐搭配VSCode和相关插件使用，原生的编辑器实在是过于原始了</p>
+<h2 id="Beamer基本LaTeX结构"><a href="#Beamer基本LaTeX结构" class="headerlink" title="Beamer基本LaTeX结构"></a>Beamer基本LaTeX结构</h2><p>LaTeX的语法跟HTML挺神似的，应该都能看懂</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">\documentclass&#123;beamer&#125;</span><br><span class="line">\usepackage&#123;包的名称&#125;</span><br><span class="line">\usetheme&#123;主题名称&#125;</span><br><span class="line">\usecolortheme&#123;颜色主题名称&#125;</span><br><span class="line">\usefonttheme&#123;字体主题名称&#125;</span><br><span class="line"></span><br><span class="line">\begin&#123;document&#125;</span><br><span class="line">标题、作者、单位和日期等信息</span><br><span class="line">\begin&#123;frame&#125; </span><br><span class="line">幻灯片内容</span><br><span class="line">\end&#123;frame&#125;</span><br><span class="line">......</span><br><span class="line">\begin&#123;frame&#125; </span><br><span class="line">幻灯片内容</span><br><span class="line">\end&#123;frame&#125;</span><br><span class="line">\end&#123;document&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="分段"><a href="#分段" class="headerlink" title="分段"></a>分段</h2><p>当想要给幻灯片做分段的时候，可以使用下列代码做多级标题</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">\section&#123;一级标题&#125;</span><br><span class="line">\subsection&#123;二级标题&#125;</span><br><span class="line">\subsubsection&#123;三级标题&#125;</span><br></pre></td></tr></table></figure>
+
+<p>例如</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">\section&#123;摸鱼学导论第一章&#125;</span><br><span class="line">\subsection&#123;第一节：什么是摸鱼&#125;</span><br><span class="line">\subsubsection&#123;第一小节：摸鱼的快乐&#125;</span><br><span class="line">\begin&#123;frame&#125; </span><br><span class="line">幻灯片内容</span><br><span class="line">\end&#123;frame&#125;</span><br><span class="line">\subsection&#123;第二节：如何摸鱼&#125;</span><br><span class="line">\begin&#123;frame&#125; </span><br><span class="line">幻灯片内容</span><br><span class="line">\end&#123;frame&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="幻灯片内容"><a href="#幻灯片内容" class="headerlink" title="幻灯片内容"></a>幻灯片内容</h2><h3 id="基本结构"><a href="#基本结构" class="headerlink" title="基本结构"></a>基本结构</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">\begin&#123;frame&#125;&#123;标题&#125;</span><br><span class="line">幻灯片内容</span><br><span class="line">\end&#123;frame&#125;</span><br></pre></td></tr></table></figure>
+
+<p>例如：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">\begin&#123;frame&#125;&#123;快乐摸鱼&#125;</span><br><span class="line">如何让自己的摸鱼更快乐呢？</span><br><span class="line">第一个级别是接受摸鱼。第二个级别是享受摸鱼。第三个级别是高水平摸鱼，成为一名摸鱼大师。</span><br><span class="line">\end&#123;frame&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="常用结构"><a href="#常用结构" class="headerlink" title="常用结构"></a>常用结构</h3><h4 id="列表"><a href="#列表" class="headerlink" title="列表"></a>列表</h4><h5 id="无序列表"><a href="#无序列表" class="headerlink" title="无序列表"></a>无序列表</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">\begin&#123;itemize&#125;</span><br><span class="line">    \item 项</span><br><span class="line">    \item 项</span><br><span class="line">\end&#123;itemize&#125;</span><br></pre></td></tr></table></figure>
+<p>例如，可以是这样的：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">\begin&#123;frame&#125;&#123;快乐摸鱼&#125;</span><br><span class="line">    如何让自己的摸鱼更快乐呢？</span><br><span class="line">    \begin&#123;itemize&#125;</span><br><span class="line">        \item 第一个级别是接受摸鱼</span><br><span class="line">        \item 第二个级别是享受摸鱼</span><br><span class="line">        \item 第三个级别是高水平摸鱼，成为一名摸鱼大师</span><br><span class="line">    \end&#123;itemize&#125;</span><br><span class="line">\end&#123;frame&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h5 id="有序列表"><a href="#有序列表" class="headerlink" title="有序列表"></a>有序列表</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">\begin&#123;enumerate&#125;</span><br><span class="line">    \item 项</span><br><span class="line">    \item 项</span><br><span class="line">\end&#123;enumerate&#125;</span><br></pre></td></tr></table></figure>
+<p>例如，可以是这样的：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">\begin&#123;frame&#125;&#123;快乐摸鱼&#125;</span><br><span class="line">    如何让自己的摸鱼更快乐呢？</span><br><span class="line">    \begin&#123;enumerate&#125;</span><br><span class="line">        \item 接受摸鱼</span><br><span class="line">        \item 享受摸鱼</span><br><span class="line">        \item 高水平摸鱼，成为一名摸鱼大师</span><br><span class="line">    \end&#123;enumerate&#125;</span><br><span class="line">\end&#123;frame&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="插入图片"><a href="#插入图片" class="headerlink" title="插入图片"></a>插入图片</h4><h5 id="单张"><a href="#单张" class="headerlink" title="单张"></a>单张</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">\begin&#123;figure&#125;</span><br><span class="line">    \centering</span><br><span class="line">    \includegraphics[width=0.8\linewidth]&#123;图片路径&#125; % width处可修改图片大小</span><br><span class="line">    \caption&#123;图注&#125;</span><br><span class="line">\end&#123;figure&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="并列"><a href="#并列" class="headerlink" title="并列"></a>并列</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">\begin&#123;figure&#125;[htbp]</span><br><span class="line">    \centering</span><br><span class="line">    \begin&#123;minipage&#125;&#123;0.49\linewidth&#125; % 修改这里调整每行图片的数量</span><br><span class="line">        \centering</span><br><span class="line">        \includegraphics[width=0.6\linewidth]&#123;图片1路径&#125;</span><br><span class="line">        \caption&#123;图注1&#125;</span><br><span class="line">    \end&#123;minipage&#125;</span><br><span class="line">    %\qquad</span><br><span class="line">    \begin&#123;minipage&#125;&#123;0.49\linewidth&#125;</span><br><span class="line">        \centering</span><br><span class="line">        \includegraphics[width=0.6\linewidth]&#123;图片2路径&#125;</span><br><span class="line">        \caption&#123;图注2&#125;</span><br><span class="line">    \end&#123;minipage&#125;</span><br><span class="line">\end&#123;figure&#125;</span><br></pre></td></tr></table></figure>
+
+
+
 <h1 id="修改模板配置文件，定制专属Beamer"><a href="#修改模板配置文件，定制专属Beamer" class="headerlink" title="修改模板配置文件，定制专属Beamer"></a>修改模板配置文件，定制专属Beamer</h1><p>本文基于<a target="_blank" rel="noopener" href="https://github.com/tuna/THU-Beamer-Theme">清华开源Beamer模板</a>，对如何修改其配置文件使之适配自己需求进行介绍。具体修改实例见<a target="_blank" rel="noopener" href="https://github.com/Olive-2019/JLU-THU-Beamer-Theme">该仓库</a>。</p>
 <h2 id="主题颜色"><a href="#主题颜色" class="headerlink" title="主题颜色"></a>主题颜色</h2><p>主题颜色的修改在<a target="_blank" rel="noopener" href="https://github.com/Olive-2019/JLU-THU-Beamer-Theme/blob/master/Tsinghua.sty">Tsinghua.sty</a>文件中，推荐使用VSCode打开修改，具有高亮等功能。当然，如果你想用记事本也没事，只是稍微有点难看而已。</p>
 <h3 id="定义颜色"><a href="#定义颜色" class="headerlink" title="定义颜色"></a>定义颜色</h3><p>定义清华紫的颜色是这一行</p>
@@ -320,11 +352,6 @@
 
 <h2 id="修改字体"><a href="#修改字体" class="headerlink" title="修改字体"></a>修改字体</h2><p>如果想要使用更为学术的中文宋体英文times new roman风格，可以加上该配置</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">\usepackage&#123;amsmath, fontspec&#125;</span><br><span class="line">\usefonttheme&#123;serif&#125;</span><br></pre></td></tr></table></figure>
-
-<h1 id="从0开始拥有Beamer"><a href="#从0开始拥有Beamer" class="headerlink" title="从0开始拥有Beamer"></a>从0开始拥有Beamer</h1><h2 id="LaTeX安装与使用"><a href="#LaTeX安装与使用" class="headerlink" title="LaTeX安装与使用"></a>LaTeX安装与使用</h2><p>LaTeX的安装教程网上比较多，此处不再赘述，随便找一个教程跟着走下来就行了</p>
-<p>使用方面推荐搭配VSCode和相关插件使用，原生的编辑器实在是过于原始了</p>
-<h2 id="Beamer基本LaTeX结构"><a href="#Beamer基本LaTeX结构" class="headerlink" title="Beamer基本LaTeX结构"></a>Beamer基本LaTeX结构</h2><p>LaTeX的语法跟HTML挺神似的，应该都能看懂</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">\documentclass&#123;beamer&#125;</span><br><span class="line">\usepackage&#123;包的名称&#125;</span><br><span class="line">\usetheme&#123;主题名称&#125;</span><br><span class="line">\usecolortheme&#123;颜色主题名称&#125;</span><br><span class="line">\usefonttheme&#123;字体主题名称&#125;</span><br><span class="line"></span><br><span class="line">\begin&#123;document&#125;</span><br><span class="line">标题、作者、单位和日期等信息</span><br><span class="line">\begin&#123;frame&#125; </span><br><span class="line">幻灯片内容</span><br><span class="line">\end&#123;frame&#125;</span><br><span class="line">......</span><br><span class="line">\begin&#123;frame&#125; </span><br><span class="line">幻灯片内容</span><br><span class="line">\end&#123;frame&#125;</span><br><span class="line">\end&#123;document&#125;</span><br></pre></td></tr></table></figure>
 
     </div>
 
@@ -379,14 +406,14 @@
       <i class="fa fa-chart-line"></i>
     </span>
       <span>站点总字数：</span>
-    <span title="站点总字数">10k</span>
+    <span title="站点总字数">11k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span>站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">9 分钟</span>
+    <span title="站点阅读时长">10 分钟</span>
   </span>
 </div>
 <div class="busuanzi-count">
