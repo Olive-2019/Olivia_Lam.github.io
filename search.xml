@@ -1,6 +1,205 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>lowcomote</title>
+    <url>/Olivia_Lam.github.io/2022/10/11/lowcomote/</url>
+    <content><![CDATA[<p>低代码开发的一个基金项目，15个方向探查笔记</p>
+<span id="more"></span>
+
+<h1 id="ESR-1-Scaling-Up-Citizen-Development-with-Recommender-Chatbots（使用推荐系统提高低代码开发人员体验）"><a href="#ESR-1-Scaling-Up-Citizen-Development-with-Recommender-Chatbots（使用推荐系统提高低代码开发人员体验）" class="headerlink" title="ESR 1: Scaling Up Citizen Development with Recommender Chatbots（使用推荐系统提高低代码开发人员体验）"></a>ESR 1: Scaling Up Citizen Development with Recommender Chatbots（使用推荐系统提高低代码开发人员体验）</h1><p>为了提高LCDP用户开发效率以及开发体验，在LCDP平台嵌入集成了推荐系统的聊天机器人，给开发者推荐下一步需要的项目。</p>
+<p>看了挂出来的三篇文章，一篇是自动生成RS、一篇是RS应用在MDE、一篇是RS在MDE中作用的综述。第一篇讲的是通过DSL配置RS并生成、评估的过程，第二篇讲的是RS在LCDP中应用的架构，第三篇讲了一下RS在MDE中的作用，没细看。</p>
+<blockquote>
+<p>自动生成RS：<a href="https://olive-2019.github.io/Olivia_Lam.github.io/2022/10/01/RS/#more" title="自动生成RS">Automating the Synthesis of Recommender Systems for Modelling Languages</a></p>
+<p>RS应用在MDE：<a href="https://olive-2019.github.io/Olivia_Lam.github.io/2022/10/08/RS3/">Towards automating the construction of recommender systems for low-code development platforms</a></p>
+<p>RS在MDE中的综述：<a href="https://olive-2019.github.io/Olivia_Lam.github.io/2022/10/05/Engineering/#more">Recommender Systems in Model-Driven Engineering</a></p>
+</blockquote>
+<h1 id="ESR-2-Scalable-Cloud-Based-Heterogeneous-Modelling（基于云的可拓展异构）"><a href="#ESR-2-Scalable-Cloud-Based-Heterogeneous-Modelling（基于云的可拓展异构）" class="headerlink" title="ESR 2: Scalable Cloud-Based Heterogeneous Modelling（基于云的可拓展异构）"></a>ESR 2: Scalable Cloud-Based Heterogeneous Modelling（基于云的可拓展异构）</h1><p>目前没找到其它资料（没有具体的工作），只看了一下介绍，应该是优化LCDP编辑器的搭建。之前用的JavaScript技术过于底层，开发不友好。目标是建立基于工程语言原理（其实没读懂这个是啥？）的界面开发，大概就是配置一下就能生成界面的意思吧。</p>
+<h1 id="ESR-3-Deploying-and-Scaling-Knowledge-Models-in-Data-Science"><a href="#ESR-3-Deploying-and-Scaling-Knowledge-Models-in-Data-Science" class="headerlink" title="ESR 3: Deploying and Scaling Knowledge Models in Data Science"></a>ESR 3: Deploying and Scaling Knowledge Models in Data Science</h1>]]></content>
+      <categories>
+        <category>基金项目</category>
+      </categories>
+      <tags>
+        <tag>lowcomote</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Towards a low-code solution for monitoring machine learning model performance</title>
+    <url>/Olivia_Lam.github.io/2022/10/23/MonitoringMLPerformance/</url>
+    <content><![CDATA[<p>机器学习模型部署后的漂移问题以及检测漂移的工具，并概述了低代码开发平台解决该问题的研究计划</p>
+<span id="more"></span>
+
+<h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><p>ML模型由专家开发以后需要部署到生产环境中，部署的时候需要自动化工具。本文的目标是提出一个低代码架构，使专家可以监控ML模型性能。</p>
+<p>文章对机器学习的工作流进行了综述以后，介绍了模型部署后可能发生的数据漂移和概念漂移。然后提出了低代码开发实现监控程序的三个研究方向，并说明了评价方法。最后介绍了一些机器学习自动化的工具。</p>
+<h1 id="机器学习-工作流（workflow）"><a href="#机器学习-工作流（workflow）" class="headerlink" title="机器学习 工作流（workflow）"></a>机器学习 工作流（workflow）</h1><p>MLwork.jpg</p>
+<!-- ![机器学习 工作流](https://github.com/Olive-2019/Lam-s-Blog-source/blob/master/RS3/1665227277118.png?raw=true) -->
+
+<h2 id="数据准备-Data-Preparation"><a href="#数据准备-Data-Preparation" class="headerlink" title="数据准备 Data Preparation"></a>数据准备 Data Preparation</h2><p>检测输入是否符合规范（数据格式）</p>
+<h2 id="模型构建-Model-Creation"><a href="#模型构建-Model-Creation" class="headerlink" title="模型构建 Model Creation"></a>模型构建 Model Creation</h2><p>记录不同的算法参数组合的结果，这部分讲的有点偏ML调参了，不过可以应用在RS的构建里。<br>另外，这里提到的openML可以用来做模型构建的工作。<a href="https://www.openml.org/">OpenML链接</a></p>
+<blockquote>
+<p>OpenML is an open platform for sharing datasets, algorithms, and experiments to learn how to learn better, together.</p>
+</blockquote>
+<h2 id="模型构建后动作-Post-Creation-Activities"><a href="#模型构建后动作-Post-Creation-Activities" class="headerlink" title="模型构建后动作 Post-Creation Activities"></a>模型构建后动作 Post-Creation Activities</h2><p>由于采样数据可能存在的误差和环境动态变化，模型部署后要进行性能监控。</p>
+<h1 id="模型监控"><a href="#模型监控" class="headerlink" title="模型监控"></a>模型监控</h1><h2 id="数据漂移"><a href="#数据漂移" class="headerlink" title="数据漂移"></a>数据漂移</h2><p>数据漂移，也叫采样漂移，指部署后数据概率分布与学习集不同了。</p>
+<h3 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h3><p>可能原因的是采样机制、环境中未知因素随时间变化改变。</p>
+<h3 id="后果"><a href="#后果" class="headerlink" title="后果"></a>后果</h3><p>数据偏移不一定导致输出错误，没有数据偏移也不一定能保证输出正确</p>
+<h3 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h3><p>可以直接通过检查输入来检测数据漂移，故可以用作模型表现下降的非间接指标</p>
+<h2 id="概念漂移"><a href="#概念漂移" class="headerlink" title="概念漂移"></a>概念漂移</h2><p>概念漂移，指输入-输出的映射发生了改变。</p>
+<h3 id="类型"><a href="#类型" class="headerlink" title="类型"></a>类型</h3><p>可以是真实的也可能是虚拟的<br>真实：映射由于未知因素（隐藏上下文）发生了改变<br>虚拟：在受检测领域中没有任何改变，只是由于其它原因观测到了这一现象（如有偏采样）</p>
+<h3 id="解决方法-1"><a href="#解决方法-1" class="headerlink" title="解决方法"></a>解决方法</h3><p>概念偏移不能只依靠检测模型输出检测，需要更多的信息去检测每个输入的输出是否正确</p>
+<h2 id="具体例子"><a href="#具体例子" class="headerlink" title="具体例子"></a>具体例子</h2><p>特征：等待持续时长，实际服务时长</p>
+<p>输出：电话中心的客服表现（positive or negative）</p>
+<p>假设上述特征均~N(10,3)</p>
+<p>原始分布.jpg<br>模型：总时长小于20则为positive</p>
+<p>模型部署后可能存在四种场景</p>
+<h3 id="无漂移"><a href="#无漂移" class="headerlink" title="无漂移"></a>无漂移</h3><p>理想状态，输入的数据分布不改变，模型也一直符合现实状况</p>
+<h3 id="数据漂移-1"><a href="#数据漂移-1" class="headerlink" title="数据漂移"></a>数据漂移</h3><p>数据漂移.jpg</p>
+<p>例如某个客服没上班，等待时长变长，但是用户并不会因此愿意等待更长时间。<br>这种数据漂移并没有导致输出错误</p>
+<h3 id="概念漂移-1"><a href="#概念漂移-1" class="headerlink" title="概念漂移"></a>概念漂移</h3><p>概念漂移.jpg</p>
+<p>模型不再符合现实情况，但是数据分布不发生改变，输出存在错误。如用户愿意等的更长，则现实模型划分线应该上移。<br>这种情况下，模型需要重新学习新数据。</p>
+<h3 id="两种漂移并存"><a href="#两种漂移并存" class="headerlink" title="两种漂移并存"></a>两种漂移并存</h3><p>有偏采样.jpg</p>
+<p>两种漂移.jpg</p>
+<p>有偏采样发生时，输入数据的分布自然与学习集不同了。同时，由于学习集的分布与真实输入不同，训练出来的模型自然不能用于真实输入。但是我们会以为观察到数据漂移和真实概念漂移。目前区分真实和虚假的概念漂移仍是一个挑战。</p>
+<h1 id="研究方向"><a href="#研究方向" class="headerlink" title="研究方向"></a>研究方向</h1><p>希望开发一个低代码的解决方案将现代计算架构带来的复杂性抽象化，包括DSL和参考实现。允许用户只需要配置模型监控方案，不必关注具体细节。将模型监控的任务分成三大类，分别是，数据捕捉、算法执行、响应漂移。</p>
+<h2 id="数据捕捉"><a href="#数据捕捉" class="headerlink" title="数据捕捉"></a>数据捕捉</h2><p>为了检测概念漂移，需要存储模型输出并与反馈进行对比。</p>
+<p>在客服中心的例子中，为了获取并存储这些数据，建立了反向代理服务器（reverse proxy server）。反向代理服务器可以接收所有的推理请求并转发到模型服务架构中，获取模型输出并返回到客户端。另外，反向代理服务器可以将这些数据和必须的元数据持久化到数据库当中。</p>
+<p>数据捕捉.jpg<br>反向代理服务器的优点：</p>
+<ul>
+<li>模型服务器不必发生改变</li>
+<li>适用于各种模型服务器。</li>
+</ul>
+<p>为了标记不同的交互，需要有唯一ID。<br>在这个任务中建立低代码开发平台的两个重要的机制：</p>
+<ul>
+<li>收集模型的输入输出</li>
+<li>收集反馈</li>
+</ul>
+<p>收集反馈的困难在于收集方式取决于模型，例如推荐系统的反馈收集只需要记录一下是否点击，而图片分类器的反馈收集必须要人工介入。</p>
+<h2 id="算法执行"><a href="#算法执行" class="headerlink" title="算法执行"></a>算法执行</h2><p>检测算法的性能是非常重要的<br>希望能使用DSL来描述漂移检测算法，然后生成适用于不同框架的算法</p>
+<h2 id="响应漂移"><a href="#响应漂移" class="headerlink" title="响应漂移"></a>响应漂移</h2><p>简单但重要，方法是多样的，可以包含以下两种</p>
+<ul>
+<li>检测到漂移时简单地发送email</li>
+<li>自动触发重新训练模型的流程<br>前者多用于数据漂移，后者多用于概念漂移。</li>
+</ul>
+<h2 id="评价计划"><a href="#评价计划" class="headerlink" title="评价计划"></a>评价计划</h2><p>需要通过参考实施评估提出的方案。</p>
+<ul>
+<li>参考实施需要满足的需求：</li>
+<li>和不同模型服务器之间兼容的能力</li>
+<li>截取模型输入输出时不会有太大的性能损失</li>
+<li>计算和存储大数据的能力</li>
+<li>足够灵活，允许学者配置不同检测算法</li>
+<li>整合不同的反馈方式</li>
+</ul>
+<h1 id="相关工具"><a href="#相关工具" class="headerlink" title="相关工具"></a>相关工具</h1><p>现在有很多可以简化ML workflow的工具，但是大都私用，以下介绍公开可用的几个</p>
+<h2 id="MLflow"><a href="#MLflow" class="headerlink" title="MLflow"></a>MLflow</h2><h3 id="作用"><a href="#作用" class="headerlink" title="作用"></a>作用</h3><ul>
+<li>元数据追踪</li>
+<li>提高实验可复现性</li>
+</ul>
+<h3 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h3><ul>
+<li>容易和流行的机器学习框架结合使用</li>
+<li>有直观的UI。</li>
+</ul>
+<h3 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h3><ul>
+<li>不是一个端到端的工具，并没有覆盖所有的workflow，还有数据准备和模型监控没有覆盖</li>
+</ul>
+<h2 id="Tensorflow-extended"><a href="#Tensorflow-extended" class="headerlink" title="Tensorflow extended"></a>Tensorflow extended</h2><p>TFX是一个Google开发的端到端的工具。</p>
+<h3 id="优点-1"><a href="#优点-1" class="headerlink" title="优点"></a>优点</h3><p>支持TF的生态系统、一个任务的输出就是下一个任务的输入，减少了人工工作。</p>
+<h3 id="缺点-1"><a href="#缺点-1" class="headerlink" title="缺点"></a>缺点</h3><ul>
+<li>仅支持tf core为模型训练步骤使用的框架</li>
+<li>模型监控方面只支持检测数据漂移，仅针对分类特征，只提供一种距离度量</li>
+</ul>
+<h2 id="alibi-detect"><a href="#alibi-detect" class="headerlink" title="alibi-detect"></a>alibi-detect</h2><p>开源</p>
+<p>提供的检测算法</p>
+<ul>
+<li>数据漂移</li>
+<li>异常值</li>
+<li>对抗样本</li>
+</ul>
+]]></content>
+      <categories>
+        <category>论文</category>
+      </categories>
+      <tags>
+        <tag>lowcomote</tag>
+        <tag>ML</tag>
+        <tag>monitoring</tag>
+        <tag>data draft</tag>
+        <tag>concept draft</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Beamer食用指南</title>
+    <url>/Olivia_Lam.github.io/2022/10/22/beamer/</url>
+    <content><![CDATA[<p>一个LaTeX的文档类型，可替代PowerPoint</p>
+<span id="more"></span>
+
+<h1 id="为什么要用Beamer"><a href="#为什么要用Beamer" class="headerlink" title="为什么要用Beamer"></a>为什么要用Beamer</h1><p>我们第一次做PPT的时候总是想去尝试不同的动画效果，但是逐渐地，我们开始回归自然，追求简洁美，更专注内容。这时放弃PowerPoint选择Beamer将会是一个非常好的选择。以下给出几条使用理由，只要踩中了一条，欢迎使用本教程。</p>
+<ul>
+<li>对数学公式的完美支持（LaTeX对公式的支持不必多说）</li>
+<li>关注内容，不必关注排版</li>
+<li>自动的目录索引和跳转</li>
+<li>配合GitHub使用，实现版本管理</li>
+<li>不费力气地做出看起来更学术，更专业的幻灯片</li>
+</ul>
+<p>但是如果你具有以下特征，beamer可能也不是那么适合你</p>
+<ul>
+<li>极端厌恶代码：beamer还是有点代码，不过其实挺少的，有点像HTML</li>
+<li>对幻灯片动画有高度追求：beamer相对来说走的是简洁风</li>
+</ul>
+<h1 id="本教程要求的用户基础"><a href="#本教程要求的用户基础" class="headerlink" title="本教程要求的用户基础"></a>本教程要求的用户基础</h1><p>本教程面向两种人群，前者是有LaTeX基础的人群，主要介绍如何修改模板配置文件使之成为自己想要的样子；后者是完全没有LaTeX基础的人群，主要介绍如何从0开始使用Beamer。</p>
+<h1 id="从0开始拥有Beamer"><a href="#从0开始拥有Beamer" class="headerlink" title="从0开始拥有Beamer"></a>从0开始拥有Beamer</h1><p>已有LaTeX基础人群请跳过本段</p>
+<h2 id="LaTeX安装与使用"><a href="#LaTeX安装与使用" class="headerlink" title="LaTeX安装与使用"></a>LaTeX安装与使用</h2><p>LaTeX的安装教程网上比较多，此处不再赘述，随便找一个教程跟着走下来就行了</p>
+<p>使用方面推荐搭配VSCode和相关插件使用，原生的编辑器实在是过于原始了</p>
+<h2 id="Beamer基本LaTeX结构"><a href="#Beamer基本LaTeX结构" class="headerlink" title="Beamer基本LaTeX结构"></a>Beamer基本LaTeX结构</h2><p>LaTeX的语法跟HTML挺神似的，应该都能看懂</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">\documentclass&#123;beamer&#125;</span><br><span class="line">\usepackage&#123;包的名称&#125;</span><br><span class="line">\usetheme&#123;主题名称&#125;</span><br><span class="line">\usecolortheme&#123;颜色主题名称&#125;</span><br><span class="line">\usefonttheme&#123;字体主题名称&#125;</span><br><span class="line"></span><br><span class="line">\begin&#123;document&#125;</span><br><span class="line">标题、作者、单位和日期等信息</span><br><span class="line">\begin&#123;frame&#125; </span><br><span class="line">幻灯片内容</span><br><span class="line">\end&#123;frame&#125;</span><br><span class="line">......</span><br><span class="line">\begin&#123;frame&#125; </span><br><span class="line">幻灯片内容</span><br><span class="line">\end&#123;frame&#125;</span><br><span class="line">\end&#123;document&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="分段"><a href="#分段" class="headerlink" title="分段"></a>分段</h2><p>当想要给幻灯片做分段的时候，可以使用下列代码做多级标题</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">\section&#123;一级标题&#125;</span><br><span class="line">\subsection&#123;二级标题&#125;</span><br><span class="line">\subsubsection&#123;三级标题&#125;</span><br></pre></td></tr></table></figure>
+
+<p>例如</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">\section&#123;摸鱼学导论第一章&#125;</span><br><span class="line">\subsection&#123;第一节：什么是摸鱼&#125;</span><br><span class="line">\subsubsection&#123;第一小节：摸鱼的快乐&#125;</span><br><span class="line">\begin&#123;frame&#125; </span><br><span class="line">幻灯片内容</span><br><span class="line">\end&#123;frame&#125;</span><br><span class="line">\subsection&#123;第二节：如何摸鱼&#125;</span><br><span class="line">\begin&#123;frame&#125; </span><br><span class="line">幻灯片内容</span><br><span class="line">\end&#123;frame&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="幻灯片内容"><a href="#幻灯片内容" class="headerlink" title="幻灯片内容"></a>幻灯片内容</h2><h3 id="基本结构"><a href="#基本结构" class="headerlink" title="基本结构"></a>基本结构</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">\begin&#123;frame&#125;&#123;标题&#125;</span><br><span class="line">幻灯片内容</span><br><span class="line">\end&#123;frame&#125;</span><br></pre></td></tr></table></figure>
+
+<p>例如：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">\begin&#123;frame&#125;&#123;快乐摸鱼&#125;</span><br><span class="line">如何让自己的摸鱼更快乐呢？</span><br><span class="line">第一个级别是接受摸鱼。第二个级别是享受摸鱼。第三个级别是高水平摸鱼，成为一名摸鱼大师。</span><br><span class="line">\end&#123;frame&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="常用结构"><a href="#常用结构" class="headerlink" title="常用结构"></a>常用结构</h3><h4 id="列表"><a href="#列表" class="headerlink" title="列表"></a>列表</h4><h5 id="无序列表"><a href="#无序列表" class="headerlink" title="无序列表"></a>无序列表</h5><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">\begin&#123;itemize&#125;</span><br><span class="line">    \item 项</span><br><span class="line">    \item 项</span><br><span class="line">\end&#123;itemize&#125;</span><br></pre></td></tr></table></figure>
+<p>例如，可以是这样的：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">\begin&#123;frame&#125;&#123;快乐摸鱼&#125;</span><br><span class="line">    如何让自己的摸鱼更快乐呢？</span><br><span class="line">    \begin&#123;itemize&#125;</span><br><span class="line">        \item 第一个级别是接受摸鱼</span><br><span class="line">        \item 第二个级别是享受摸鱼</span><br><span class="line">        \item 第三个级别是高水平摸鱼，成为一名摸鱼大师</span><br><span class="line">    \end&#123;itemize&#125;</span><br><span class="line">\end&#123;frame&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h5 id="有序列表"><a href="#有序列表" class="headerlink" title="有序列表"></a>有序列表</h5><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">\begin&#123;enumerate&#125;</span><br><span class="line">    \item 项</span><br><span class="line">    \item 项</span><br><span class="line">\end&#123;enumerate&#125;</span><br></pre></td></tr></table></figure>
+<p>例如，可以是这样的：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">\begin&#123;frame&#125;&#123;快乐摸鱼&#125;</span><br><span class="line">    如何让自己的摸鱼更快乐呢？</span><br><span class="line">    \begin&#123;enumerate&#125;</span><br><span class="line">        \item 接受摸鱼</span><br><span class="line">        \item 享受摸鱼</span><br><span class="line">        \item 高水平摸鱼，成为一名摸鱼大师</span><br><span class="line">    \end&#123;enumerate&#125;</span><br><span class="line">\end&#123;frame&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="插入图片"><a href="#插入图片" class="headerlink" title="插入图片"></a>插入图片</h4><h5 id="单张"><a href="#单张" class="headerlink" title="单张"></a>单张</h5><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">\begin&#123;figure&#125;</span><br><span class="line">    \centering</span><br><span class="line">    \includegraphics[width=0.8\linewidth]&#123;图片路径&#125; % width处可修改图片大小</span><br><span class="line">    \caption&#123;图注&#125;</span><br><span class="line">\end&#123;figure&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="并列"><a href="#并列" class="headerlink" title="并列"></a>并列</h5><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">\begin&#123;figure&#125;[htbp]</span><br><span class="line">    \centering</span><br><span class="line">    \begin&#123;minipage&#125;&#123;0.49\linewidth&#125; % 修改这里调整每行图片的数量</span><br><span class="line">        \centering</span><br><span class="line">        \includegraphics[width=0.6\linewidth]&#123;图片1路径&#125;</span><br><span class="line">        \caption&#123;图注1&#125;</span><br><span class="line">    \end&#123;minipage&#125;</span><br><span class="line">    %\qquad</span><br><span class="line">    \begin&#123;minipage&#125;&#123;0.49\linewidth&#125;</span><br><span class="line">        \centering</span><br><span class="line">        \includegraphics[width=0.6\linewidth]&#123;图片2路径&#125;</span><br><span class="line">        \caption&#123;图注2&#125;</span><br><span class="line">    \end&#123;minipage&#125;</span><br><span class="line">\end&#123;figure&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="使用过程中新手容易踩的坑"><a href="#使用过程中新手容易踩的坑" class="headerlink" title="使用过程中新手容易踩的坑"></a>使用过程中新手容易踩的坑</h2><h3 id="关键字"><a href="#关键字" class="headerlink" title="关键字"></a>关键字</h3><p>如果编译不通过报错看不懂，而且定位在一些比较奇怪的地方，那么大概率是触发关键字了，包括但不限于”&amp;“等。可以二分检查一下报错的这一大段哪里出了问题，大概率能定位到某个你不知道它是关键字的关键字。</p>
+<h3 id="引用需要多次编译"><a href="#引用需要多次编译" class="headerlink" title="引用需要多次编译"></a>引用需要多次编译</h3><p>这个问题不止在beamer里会出现，属于LaTeX通用问题了。如果发现图注数目、页数、目录或者引用失效了，请多编译几遍。猜测LaTeX的编译机制是一趟的，缺失的数据就瞎填或者用上次的，但是这次编译过程中会刷新数据，下次编译渲染出来的页面内容自然就是正确的了。</p>
+<h1 id="修改模板配置文件，定制专属Beamer"><a href="#修改模板配置文件，定制专属Beamer" class="headerlink" title="修改模板配置文件，定制专属Beamer"></a>修改模板配置文件，定制专属Beamer</h1><p>本文基于<a href="https://github.com/tuna/THU-Beamer-Theme">清华开源Beamer模板</a>，对如何修改其配置文件使之适配自己需求进行介绍。具体修改实例见<a href="https://github.com/Olive-2019/JLU-THU-Beamer-Theme">该仓库</a>。</p>
+<h2 id="主题颜色"><a href="#主题颜色" class="headerlink" title="主题颜色"></a>主题颜色</h2><p>主题颜色的修改在<a href="https://github.com/Olive-2019/JLU-THU-Beamer-Theme/blob/master/Tsinghua.sty">Tsinghua.sty</a>文件中，推荐使用VSCode打开修改，具有高亮等功能。当然，如果你想用记事本也没事，只是稍微有点难看而已。</p>
+<h3 id="定义颜色"><a href="#定义颜色" class="headerlink" title="定义颜色"></a>定义颜色</h3><p>定义清华紫的颜色是这一行</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">\xdefinecolor&#123;tsinghua&#125;&#123;rgb&#125;&#123;0.455,0.204,0.506&#125;  %RGB#82318E</span><br></pre></td></tr></table></figure>
+
+<p>仿照清华紫，我们可以定义吉大蓝，获取吉大蓝的方式是对校徽使用Windows自带的画图工具取色，获得其RGB值，然后得出定义：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">\xdefinecolor&#123;jlu&#125;&#123;RGB&#125;&#123;20,71,166&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="修改背景颜色"><a href="#修改背景颜色" class="headerlink" title="修改背景颜色"></a>修改背景颜色</h3><p>简单粗暴一些，将Tsinghua.sty文件中，除了定义以外的所有tsinghua都替换成你定义的颜色名字，如实例中的jlu</p>
+<h2 id="图标"><a href="#图标" class="headerlink" title="图标"></a>图标</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">% 首页</span><br><span class="line">\kaishu</span><br><span class="line">\begin&#123;frame&#125;</span><br><span class="line">    \titlepage</span><br><span class="line">    \begin&#123;figure&#125;[htpb]</span><br><span class="line">        \begin&#123;center&#125;</span><br><span class="line">            \includegraphics[width=0.2\linewidth]&#123;pic/Tsinghua_University_Logo.eps&#125;</span><br><span class="line">        \end&#123;center&#125;</span><br><span class="line">    \end&#123;figure&#125;</span><br><span class="line">\end&#123;frame&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在首页处将插入的图片换成自己想放的图（如自己学校校徽）</p>
+<p>例如：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">\kaishu</span><br><span class="line">\begin&#123;frame&#125;</span><br><span class="line">    \titlepage</span><br><span class="line">    \begin&#123;figure&#125;[htpb]</span><br><span class="line">        \begin&#123;center&#125;</span><br><span class="line">            \includegraphics[width=0.2\linewidth]&#123;pic/jlu_logo.eps&#125;</span><br><span class="line">        \end&#123;center&#125;</span><br><span class="line">    \end&#123;figure&#125;</span><br><span class="line">\end&#123;frame&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="修改字体"><a href="#修改字体" class="headerlink" title="修改字体"></a>修改字体</h2><p>如果想要使用更为学术的中文宋体英文times new roman风格，可以加上该配置</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">\usepackage&#123;amsmath, fontspec&#125;</span><br><span class="line">\usefonttheme&#123;serif&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>工具</category>
+      </categories>
+      <tags>
+        <tag>LaTeX</tag>
+        <tag>slide</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>AutoGenRS4LCDP</title>
     <url>/Olivia_Lam.github.io/2022/10/19/AutoGenRS4LCDP/</url>
     <content><![CDATA[<p>自动生成服务于LCDP的推荐系统</p>
@@ -94,11 +293,51 @@
       </categories>
       <tags>
         <tag>RS</tag>
-        <tag>MDE</tag>
         <tag>lowcomote</tag>
+        <tag>MDE</tag>
         <tag>chatbot</tag>
         <tag>NLP</tag>
         <tag>LCDP</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>一些小工具</title>
+    <url>/Olivia_Lam.github.io/2022/10/13/tool/</url>
+    <content><![CDATA[<p>实用小工具</p>
+<span id="more"></span>
+
+<h1 id="吉大邮箱"><a href="#吉大邮箱" class="headerlink" title="吉大邮箱"></a>吉大邮箱</h1><p>吉大邮箱没有提供提醒工具，时时查网页版邮箱不太方便，此处提供两种提醒解决方案。</p>
+<h2 id="自动转发"><a href="#自动转发" class="headerlink" title="自动转发"></a>自动转发</h2><p>QQ邮箱的提醒非常好用，包括但不限于QQ（电脑端登录QQ有弹窗）和微信（手机端巨好使）的提醒，所以可以将吉大邮箱的邮件转发到QQ邮箱。同理，可以转发到任意你觉得好用的邮箱中。</p>
+<p>设置路径如下：</p>
+<p>设置-&gt;邮件收发-&gt;自动转发-&gt;选择自动转发-&gt;“转发到邮箱”中填写QQ邮箱</p>
+<h2 id="Windows版邮件"><a href="#Windows版邮件" class="headerlink" title="Windows版邮件"></a>Windows版邮件</h2><p>直接绑定就好了，感觉速度比转发的提醒慢一点。电脑端的提醒弹窗比QQ的好看一点，而且任务栏里会有提醒。</p>
+<h1 id="GitHub"><a href="#GitHub" class="headerlink" title="GitHub"></a>GitHub</h1><h2 id="SwitchHosts"><a href="#SwitchHosts" class="headerlink" title="SwitchHosts"></a>SwitchHosts</h2><p>众所周知，GitHub在国内无法长期稳定有效地访问，原因是DNS污染，GitHub服务器IP在国内并未封禁，故可通过改host文件的方式访问GitHub。但长期手动修改hosts太麻烦了，购买梯子又太贵了（价格敏感性消费者.jpg），所以找到了这个自动修改hosts的神器。</p>
+<h3 id="使用指南"><a href="#使用指南" class="headerlink" title="使用指南"></a>使用指南</h3><h4 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h4><p><a href="https://github.com/oldj/SwitchHosts/releases">下载地址（release版）</a>选择自己OS对应的版本，如Windows选择<a href="https://github.com/oldj/SwitchHosts/releases/download/v4.1.2/SwitchHosts_windows_installer_4.1.2.6086.exe">SwitchHosts_windows_installer_4.1.2.6086.exe</a>。</p>
+<h4 id="连接远程hosts"><a href="#连接远程hosts" class="headerlink" title="连接远程hosts"></a>连接远程hosts</h4><ol>
+<li>点击加号添加hosts</li>
+<li>选择远程hosts类型</li>
+<li>标题随意取</li>
+<li>URL填 <strong><a href="https://raw.hellogithub.com/hosts">https://raw.hellogithub.com/hosts</a></strong></li>
+<li>设置自动刷新频率（建议1h）</li>
+<li>点击确定</li>
+</ol>
+<h4 id="修改hosts文件属性"><a href="#修改hosts文件属性" class="headerlink" title="修改hosts文件属性"></a>修改hosts文件属性</h4><p>好了，现在大概率会发现无法写入host文件，解决方案如下：</p>
+<ol>
+<li>找到hosts文件，Windows下路径C:\Windows\System32\drivers\etc\</li>
+<li>右键，选择属性，取消“只读”选项</li>
+<li>在属性中选中“安全”tab</li>
+<li>选中User</li>
+<li>点击编辑</li>
+<li>选中“写入”“修改”等权限</li>
+<li>保存</li>
+</ol>
+<h3 id="使用评价"><a href="#使用评价" class="headerlink" title="使用评价"></a>使用评价</h3><p>目前GitHub访问体验完全无痛，不用再担心push的时候老半天push不上去。而且比梯子强的是，这玩意只在访问GitHub的时候重定向了IP地址，访问国内其它网站不会发生绕来绕去过慢的现象。</p>
+]]></content>
+      <categories>
+        <category>工具</category>
+      </categories>
+      <tags>
+        <tag>软件</tag>
       </tags>
   </entry>
   <entry>
@@ -157,64 +396,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Recommender Systems in Model-Driven Engineering</title>
-    <url>/Olivia_Lam.github.io/2022/10/05/Engineering/</url>
-    <content><![CDATA[<p>推荐系统在软件建模中的作用的综述，应该不是我们关注的重点</p>
-<span id="more"></span>
-
-<h1 id="三个问题"><a href="#三个问题" class="headerlink" title="三个问题"></a>三个问题</h1><ol>
-<li>推荐系统在软件建模中起什么作用？<br>通常用于完成和修复工件。<br>通常是独立于语言的，特定的一般针对UML或过程建模符号</li>
-<li>哪些推荐技术用于支持软件建模？评价方法？<br>基于内容&gt;基于知识<br>评价方法：离线</li>
-<li>推荐系统还有什么可做的？<br>几乎没有用于模型转化或代码生成的推荐系统，很少推荐系统用于创建、重用、查找工件。此外，还有有效的软件建模的工件库、协同过滤利用群体知识、基于用户的推荐系统评估、与低代码平台的有效寄成机制</li>
-</ol>
-]]></content>
-      <categories>
-        <category>论文</category>
-      </categories>
-      <tags>
-        <tag>RS</tag>
-        <tag>lowcomote</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Automating the Synthesis of Recommender Systems for Modelling Languages</title>
-    <url>/Olivia_Lam.github.io/2022/10/01/RS/</url>
-    <content><![CDATA[<p>低代码开发推荐系统</p>
-<span id="more"></span>
-
-<h1 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h1><p>希望能使用推荐系统建模，但是推荐系统的开发存在需要难以考虑的问题和专业知识，所以提出了一个针对软件模型的<strong>推荐系统自动生成工具</strong>。为评估该系统，实验测试了一个生成的推荐系统和聊天程序建模。</p>
-<h1 id="RS-推荐系统"><a href="#RS-推荐系统" class="headerlink" title="RS 推荐系统"></a>RS 推荐系统</h1><p>推荐系统的目标用户是生成的且偏好是有特殊含义的。例如，用户可能是一个未完成的类，需要被推荐方法和成员变量。</p>
-<p>推荐系统的两种信息源：<strong>基于内容</strong>（Content-based CB）、<strong>协同过滤</strong>（collaborative filtering CF）。基于内容评估用户历史数据，协同过滤评估用户相似性。此外，协同过滤可以评估用户或项目之间的相似性。典型的混合策略是使用CB的相似性代替CF的评级。</p>
-<p>推荐系统评价方法：<strong>在线</strong>、<strong>离线</strong>。在线方法使用在线A&#x2F;B测试实时获取影响，离线方法使用历史数据，分为训练集和测试集。</p>
-<p>常用评价指标：<strong>精度</strong>、（precision）、<strong>召回率</strong>（recall）、<strong>F1</strong>、<strong>平均精度</strong>（MAP）、<strong>归一化累积好处</strong>（nDCG，评估最有用的项目是否出现在推荐列表的顶部位置）</p>
-<p>补充评价指标：<strong>用户空间覆盖</strong>（USC，评估覆盖了多少用户）、<strong>项目空间覆盖</strong>（ISC，评估覆盖了多少项目）</p>
-<p>提出的自动生成推荐系统允许配置这几个方面的参数：<strong>推荐方法、目标用户、项目、离线评价方法和指标</strong></p>
-<h1 id="提出的方法"><a href="#提出的方法" class="headerlink" title="提出的方法"></a>提出的方法</h1><p><img src="https://github.com/Olive-2019/Lam-s-Blog-source/blob/master/RS/1665226282989.png?raw=true" alt="1665226282989"></p>
-<p><strong>流程：</strong></p>
-<ol>
-<li>选择推荐系统需要推荐的元素，如类的属性，过程的任务。指定推荐方法、训练数据集、推荐系统指标</li>
-<li>推荐系统训练过程</li>
-<li>选择推荐方法，系统自动生成可以集成到不同建模工具里的推荐系统</li>
-</ol>
-<h1 id="Droid-DSL（一种领域特定语言）"><a href="#Droid-DSL（一种领域特定语言）" class="headerlink" title="Droid DSL（一种领域特定语言）"></a>Droid DSL（一种领域特定语言）</h1><p>用来描述提出的自动生成推荐系统的一种语言</p>
-<h1 id="架构与支撑工具"><a href="#架构与支撑工具" class="headerlink" title="架构与支撑工具"></a>架构与支撑工具</h1><h2 id="架构"><a href="#架构" class="headerlink" title="架构"></a>架构</h2><p>该系统的架构由三个模块组成，分别是配置器、服务、客户。</p>
-<p>第一个模块是<strong>配置器</strong>，该模块提供了配置、评估、生成推荐系统的功能。同时也提供了一个eclipse编辑器用于指定推荐系统内容（1）。该内容作为推荐系统评价系统的输入。推荐系统评价系统依赖于RankSys和RiVal，其中RankSys是实现推荐系统的框架，RiVal是一个数据划分和推荐系统评价的工具集。每一个指标都会显示在Eclipse的视图里（3）。根据得到的指标，推荐系统设计人员可以选择一种推荐方法并生成一系列配置文件。</p>
-<p>第二个模块是DROID<strong>服务</strong>，该模块使用了第一个模块生成的配置文件。通过4模块生成不同的配置文件可以适配不同的建模语言。</p>
-<p>第三个模块是<strong>客户</strong>，这个系统允许客户使用基于JSON的模型表示发送请求。</p>
-<h2 id="支撑工具"><a href="#支撑工具" class="headerlink" title="支撑工具"></a>支撑工具</h2><p>配置器部分的工具是eclipse的一个插件，支持使用DSL配置、查看指标结果。</p>
-<p>服务方面采用方式是，客户端提交JSON格式的请求，服务端处理并返回推荐系统名字和JSON格式的推荐系统。服务主要包含三个模块，推荐器（用于处理客户端请求）、内容解析（用于解析JSON文件）、推荐系统生成器</p>
-<h1 id="自己的一点碎碎念"><a href="#自己的一点碎碎念" class="headerlink" title="自己的一点碎碎念"></a>自己的一点碎碎念</h1><p>其实就是一个支持用户定制推荐系统的低代码开发平台，但是跟清华数为的项目有些差异。这里还需要使用一些类似yml的DSL书写配置，不是完全的图形化界面。</p>
-<p>从文章看来，工具应该是已经开发完可以用的了，文章中也给了链接，但是还没真正安装试试。</p>
-]]></content>
-      <categories>
-        <category>论文</category>
-      </categories>
-      <tags>
-        <tag>RS</tag>
-        <tag>lowcomote</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Towards automating the construction of recommender systems for low-code development platforms</title>
     <url>/Olivia_Lam.github.io/2022/10/08/RS3/</url>
     <content><![CDATA[<p>用于低代码开发平台的推荐系统</p>
@@ -270,139 +451,61 @@
       </tags>
   </entry>
   <entry>
-    <title>Beamer食用指南</title>
-    <url>/Olivia_Lam.github.io/2022/10/22/beamer/</url>
-    <content><![CDATA[<p>一个LaTeX的文档类型，可替代PowerPoint</p>
+    <title>Recommender Systems in Model-Driven Engineering</title>
+    <url>/Olivia_Lam.github.io/2022/10/05/Engineering/</url>
+    <content><![CDATA[<p>推荐系统在软件建模中的作用的综述，应该不是我们关注的重点</p>
 <span id="more"></span>
 
-<h1 id="为什么要用Beamer"><a href="#为什么要用Beamer" class="headerlink" title="为什么要用Beamer"></a>为什么要用Beamer</h1><p>我们第一次做PPT的时候总是想去尝试不同的动画效果，但是逐渐地，我们开始回归自然，追求简洁美，更专注内容。这时放弃PowerPoint选择Beamer将会是一个非常好的选择。以下给出几条使用理由，只要踩中了一条，欢迎使用本教程。</p>
-<ul>
-<li>对数学公式的完美支持（LaTeX对公式的支持不必多说）</li>
-<li>关注内容，不必关注排版</li>
-<li>自动的目录索引和跳转</li>
-<li>配合GitHub使用，实现版本管理</li>
-<li>不费力气地做出看起来更学术，更专业的幻灯片</li>
-</ul>
-<p>但是如果你具有以下特征，beamer可能也不是那么适合你</p>
-<ul>
-<li>极端厌恶代码：beamer还是有点代码，不过其实挺少的，有点像HTML</li>
-<li>对幻灯片动画有高度追求：beamer相对来说走的是简洁风</li>
-</ul>
-<h1 id="本教程要求的用户基础"><a href="#本教程要求的用户基础" class="headerlink" title="本教程要求的用户基础"></a>本教程要求的用户基础</h1><p>本教程面向两种人群，前者是有LaTeX基础的人群，主要介绍如何修改模板配置文件使之成为自己想要的样子；后者是完全没有LaTeX基础的人群，主要介绍如何从0开始使用Beamer。</p>
-<h1 id="从0开始拥有Beamer"><a href="#从0开始拥有Beamer" class="headerlink" title="从0开始拥有Beamer"></a>从0开始拥有Beamer</h1><p>已有LaTeX基础人群请跳过本段</p>
-<h2 id="LaTeX安装与使用"><a href="#LaTeX安装与使用" class="headerlink" title="LaTeX安装与使用"></a>LaTeX安装与使用</h2><p>LaTeX的安装教程网上比较多，此处不再赘述，随便找一个教程跟着走下来就行了</p>
-<p>使用方面推荐搭配VSCode和相关插件使用，原生的编辑器实在是过于原始了</p>
-<h2 id="Beamer基本LaTeX结构"><a href="#Beamer基本LaTeX结构" class="headerlink" title="Beamer基本LaTeX结构"></a>Beamer基本LaTeX结构</h2><p>LaTeX的语法跟HTML挺神似的，应该都能看懂</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">\documentclass&#123;beamer&#125;</span><br><span class="line">\usepackage&#123;包的名称&#125;</span><br><span class="line">\usetheme&#123;主题名称&#125;</span><br><span class="line">\usecolortheme&#123;颜色主题名称&#125;</span><br><span class="line">\usefonttheme&#123;字体主题名称&#125;</span><br><span class="line"></span><br><span class="line">\begin&#123;document&#125;</span><br><span class="line">标题、作者、单位和日期等信息</span><br><span class="line">\begin&#123;frame&#125; </span><br><span class="line">幻灯片内容</span><br><span class="line">\end&#123;frame&#125;</span><br><span class="line">......</span><br><span class="line">\begin&#123;frame&#125; </span><br><span class="line">幻灯片内容</span><br><span class="line">\end&#123;frame&#125;</span><br><span class="line">\end&#123;document&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="分段"><a href="#分段" class="headerlink" title="分段"></a>分段</h2><p>当想要给幻灯片做分段的时候，可以使用下列代码做多级标题</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">\section&#123;一级标题&#125;</span><br><span class="line">\subsection&#123;二级标题&#125;</span><br><span class="line">\subsubsection&#123;三级标题&#125;</span><br></pre></td></tr></table></figure>
-
-<p>例如</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">\section&#123;摸鱼学导论第一章&#125;</span><br><span class="line">\subsection&#123;第一节：什么是摸鱼&#125;</span><br><span class="line">\subsubsection&#123;第一小节：摸鱼的快乐&#125;</span><br><span class="line">\begin&#123;frame&#125; </span><br><span class="line">幻灯片内容</span><br><span class="line">\end&#123;frame&#125;</span><br><span class="line">\subsection&#123;第二节：如何摸鱼&#125;</span><br><span class="line">\begin&#123;frame&#125; </span><br><span class="line">幻灯片内容</span><br><span class="line">\end&#123;frame&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="幻灯片内容"><a href="#幻灯片内容" class="headerlink" title="幻灯片内容"></a>幻灯片内容</h2><h3 id="基本结构"><a href="#基本结构" class="headerlink" title="基本结构"></a>基本结构</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">\begin&#123;frame&#125;&#123;标题&#125;</span><br><span class="line">幻灯片内容</span><br><span class="line">\end&#123;frame&#125;</span><br></pre></td></tr></table></figure>
-
-<p>例如：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">\begin&#123;frame&#125;&#123;快乐摸鱼&#125;</span><br><span class="line">如何让自己的摸鱼更快乐呢？</span><br><span class="line">第一个级别是接受摸鱼。第二个级别是享受摸鱼。第三个级别是高水平摸鱼，成为一名摸鱼大师。</span><br><span class="line">\end&#123;frame&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="常用结构"><a href="#常用结构" class="headerlink" title="常用结构"></a>常用结构</h3><h4 id="列表"><a href="#列表" class="headerlink" title="列表"></a>列表</h4><h5 id="无序列表"><a href="#无序列表" class="headerlink" title="无序列表"></a>无序列表</h5><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">\begin&#123;itemize&#125;</span><br><span class="line">    \item 项</span><br><span class="line">    \item 项</span><br><span class="line">\end&#123;itemize&#125;</span><br></pre></td></tr></table></figure>
-<p>例如，可以是这样的：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">\begin&#123;frame&#125;&#123;快乐摸鱼&#125;</span><br><span class="line">    如何让自己的摸鱼更快乐呢？</span><br><span class="line">    \begin&#123;itemize&#125;</span><br><span class="line">        \item 第一个级别是接受摸鱼</span><br><span class="line">        \item 第二个级别是享受摸鱼</span><br><span class="line">        \item 第三个级别是高水平摸鱼，成为一名摸鱼大师</span><br><span class="line">    \end&#123;itemize&#125;</span><br><span class="line">\end&#123;frame&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h5 id="有序列表"><a href="#有序列表" class="headerlink" title="有序列表"></a>有序列表</h5><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">\begin&#123;enumerate&#125;</span><br><span class="line">    \item 项</span><br><span class="line">    \item 项</span><br><span class="line">\end&#123;enumerate&#125;</span><br></pre></td></tr></table></figure>
-<p>例如，可以是这样的：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">\begin&#123;frame&#125;&#123;快乐摸鱼&#125;</span><br><span class="line">    如何让自己的摸鱼更快乐呢？</span><br><span class="line">    \begin&#123;enumerate&#125;</span><br><span class="line">        \item 接受摸鱼</span><br><span class="line">        \item 享受摸鱼</span><br><span class="line">        \item 高水平摸鱼，成为一名摸鱼大师</span><br><span class="line">    \end&#123;enumerate&#125;</span><br><span class="line">\end&#123;frame&#125;</span><br></pre></td></tr></table></figure>
-<h4 id="插入图片"><a href="#插入图片" class="headerlink" title="插入图片"></a>插入图片</h4><h5 id="单张"><a href="#单张" class="headerlink" title="单张"></a>单张</h5><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">\begin&#123;figure&#125;</span><br><span class="line">    \centering</span><br><span class="line">    \includegraphics[width=0.8\linewidth]&#123;图片路径&#125; % width处可修改图片大小</span><br><span class="line">    \caption&#123;图注&#125;</span><br><span class="line">\end&#123;figure&#125;</span><br></pre></td></tr></table></figure>
-<h5 id="并列"><a href="#并列" class="headerlink" title="并列"></a>并列</h5><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">\begin&#123;figure&#125;[htbp]</span><br><span class="line">    \centering</span><br><span class="line">    \begin&#123;minipage&#125;&#123;0.49\linewidth&#125; % 修改这里调整每行图片的数量</span><br><span class="line">        \centering</span><br><span class="line">        \includegraphics[width=0.6\linewidth]&#123;图片1路径&#125;</span><br><span class="line">        \caption&#123;图注1&#125;</span><br><span class="line">    \end&#123;minipage&#125;</span><br><span class="line">    %\qquad</span><br><span class="line">    \begin&#123;minipage&#125;&#123;0.49\linewidth&#125;</span><br><span class="line">        \centering</span><br><span class="line">        \includegraphics[width=0.6\linewidth]&#123;图片2路径&#125;</span><br><span class="line">        \caption&#123;图注2&#125;</span><br><span class="line">    \end&#123;minipage&#125;</span><br><span class="line">\end&#123;figure&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="使用过程中新手容易踩的坑"><a href="#使用过程中新手容易踩的坑" class="headerlink" title="使用过程中新手容易踩的坑"></a>使用过程中新手容易踩的坑</h2><h3 id="关键字"><a href="#关键字" class="headerlink" title="关键字"></a>关键字</h3><p>如果编译不通过报错看不懂，而且定位在一些比较奇怪的地方，那么大概率是触发关键字了，包括但不限于”&amp;“等。可以二分检查一下报错的这一大段哪里出了问题，大概率能定位到某个你不知道它是关键字的关键字。</p>
-<h3 id="引用需要多次编译"><a href="#引用需要多次编译" class="headerlink" title="引用需要多次编译"></a>引用需要多次编译</h3><p>这个问题不止在beamer里会出现，属于LaTeX通用问题了。如果发现图注数目、页数、目录或者引用失效了，请多编译几遍。猜测LaTeX的编译机制是一趟的，缺失的数据就瞎填或者用上次的，但是这次编译过程中会刷新数据，下次编译渲染出来的页面内容自然就是正确的了。</p>
-<h1 id="修改模板配置文件，定制专属Beamer"><a href="#修改模板配置文件，定制专属Beamer" class="headerlink" title="修改模板配置文件，定制专属Beamer"></a>修改模板配置文件，定制专属Beamer</h1><p>本文基于<a href="https://github.com/tuna/THU-Beamer-Theme">清华开源Beamer模板</a>，对如何修改其配置文件使之适配自己需求进行介绍。具体修改实例见<a href="https://github.com/Olive-2019/JLU-THU-Beamer-Theme">该仓库</a>。</p>
-<h2 id="主题颜色"><a href="#主题颜色" class="headerlink" title="主题颜色"></a>主题颜色</h2><p>主题颜色的修改在<a href="https://github.com/Olive-2019/JLU-THU-Beamer-Theme/blob/master/Tsinghua.sty">Tsinghua.sty</a>文件中，推荐使用VSCode打开修改，具有高亮等功能。当然，如果你想用记事本也没事，只是稍微有点难看而已。</p>
-<h3 id="定义颜色"><a href="#定义颜色" class="headerlink" title="定义颜色"></a>定义颜色</h3><p>定义清华紫的颜色是这一行</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">\xdefinecolor&#123;tsinghua&#125;&#123;rgb&#125;&#123;0.455,0.204,0.506&#125;  %RGB#82318E</span><br></pre></td></tr></table></figure>
-
-<p>仿照清华紫，我们可以定义吉大蓝，获取吉大蓝的方式是对校徽使用Windows自带的画图工具取色，获得其RGB值，然后得出定义：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">\xdefinecolor&#123;jlu&#125;&#123;RGB&#125;&#123;20,71,166&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="修改背景颜色"><a href="#修改背景颜色" class="headerlink" title="修改背景颜色"></a>修改背景颜色</h3><p>简单粗暴一些，将Tsinghua.sty文件中，除了定义以外的所有tsinghua都替换成你定义的颜色名字，如实例中的jlu</p>
-<h2 id="图标"><a href="#图标" class="headerlink" title="图标"></a>图标</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">% 首页</span><br><span class="line">\kaishu</span><br><span class="line">\begin&#123;frame&#125;</span><br><span class="line">    \titlepage</span><br><span class="line">    \begin&#123;figure&#125;[htpb]</span><br><span class="line">        \begin&#123;center&#125;</span><br><span class="line">            \includegraphics[width=0.2\linewidth]&#123;pic/Tsinghua_University_Logo.eps&#125;</span><br><span class="line">        \end&#123;center&#125;</span><br><span class="line">    \end&#123;figure&#125;</span><br><span class="line">\end&#123;frame&#125;</span><br></pre></td></tr></table></figure>
-
-<p>在首页处将插入的图片换成自己想放的图（如自己学校校徽）</p>
-<p>例如：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">\kaishu</span><br><span class="line">\begin&#123;frame&#125;</span><br><span class="line">    \titlepage</span><br><span class="line">    \begin&#123;figure&#125;[htpb]</span><br><span class="line">        \begin&#123;center&#125;</span><br><span class="line">            \includegraphics[width=0.2\linewidth]&#123;pic/jlu_logo.eps&#125;</span><br><span class="line">        \end&#123;center&#125;</span><br><span class="line">    \end&#123;figure&#125;</span><br><span class="line">\end&#123;frame&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="修改字体"><a href="#修改字体" class="headerlink" title="修改字体"></a>修改字体</h2><p>如果想要使用更为学术的中文宋体英文times new roman风格，可以加上该配置</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">\usepackage&#123;amsmath, fontspec&#125;</span><br><span class="line">\usefonttheme&#123;serif&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="三个问题"><a href="#三个问题" class="headerlink" title="三个问题"></a>三个问题</h1><ol>
+<li>推荐系统在软件建模中起什么作用？<br>通常用于完成和修复工件。<br>通常是独立于语言的，特定的一般针对UML或过程建模符号</li>
+<li>哪些推荐技术用于支持软件建模？评价方法？<br>基于内容&gt;基于知识<br>评价方法：离线</li>
+<li>推荐系统还有什么可做的？<br>几乎没有用于模型转化或代码生成的推荐系统，很少推荐系统用于创建、重用、查找工件。此外，还有有效的软件建模的工件库、协同过滤利用群体知识、基于用户的推荐系统评估、与低代码平台的有效寄成机制</li>
+</ol>
 ]]></content>
       <categories>
-        <category>工具</category>
+        <category>论文</category>
       </categories>
       <tags>
-        <tag>LaTeX</tag>
-        <tag>slide</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>lowcomote</title>
-    <url>/Olivia_Lam.github.io/2022/10/11/lowcomote/</url>
-    <content><![CDATA[<p>低代码开发的一个基金项目，15个方向探查笔记</p>
-<span id="more"></span>
-
-<h1 id="ESR-1-Scaling-Up-Citizen-Development-with-Recommender-Chatbots（使用推荐系统提高低代码开发人员体验）"><a href="#ESR-1-Scaling-Up-Citizen-Development-with-Recommender-Chatbots（使用推荐系统提高低代码开发人员体验）" class="headerlink" title="ESR 1: Scaling Up Citizen Development with Recommender Chatbots（使用推荐系统提高低代码开发人员体验）"></a>ESR 1: Scaling Up Citizen Development with Recommender Chatbots（使用推荐系统提高低代码开发人员体验）</h1><p>为了提高LCDP用户开发效率以及开发体验，在LCDP平台嵌入集成了推荐系统的聊天机器人，给开发者推荐下一步需要的项目。</p>
-<p>看了挂出来的三篇文章，一篇是自动生成RS、一篇是RS应用在MDE、一篇是RS在MDE中作用的综述。第一篇讲的是通过DSL配置RS并生成、评估的过程，第二篇讲的是RS在LCDP中应用的架构，第三篇讲了一下RS在MDE中的作用，没细看。</p>
-<blockquote>
-<p>自动生成RS：<a href="https://olive-2019.github.io/Olivia_Lam.github.io/2022/10/01/RS/#more" title="自动生成RS">Automating the Synthesis of Recommender Systems for Modelling Languages</a></p>
-<p>RS应用在MDE：<a href="https://olive-2019.github.io/Olivia_Lam.github.io/2022/10/08/RS3/">Towards automating the construction of recommender systems for low-code development platforms</a></p>
-<p>RS在MDE中的综述：<a href="https://olive-2019.github.io/Olivia_Lam.github.io/2022/10/05/Engineering/#more">Recommender Systems in Model-Driven Engineering</a></p>
-</blockquote>
-<h1 id="ESR-2-Scalable-Cloud-Based-Heterogeneous-Modelling（基于云的可拓展异构）"><a href="#ESR-2-Scalable-Cloud-Based-Heterogeneous-Modelling（基于云的可拓展异构）" class="headerlink" title="ESR 2: Scalable Cloud-Based Heterogeneous Modelling（基于云的可拓展异构）"></a>ESR 2: Scalable Cloud-Based Heterogeneous Modelling（基于云的可拓展异构）</h1><p>目前没找到其它资料（没有具体的工作），只看了一下介绍，应该是优化LCDP编辑器的搭建。之前用的JavaScript技术过于底层，开发不友好。目标是建立基于工程语言原理（其实没读懂这个是啥？）的界面开发，大概就是配置一下就能生成界面的意思吧。</p>
-<h1 id="ESR-3-Deploying-and-Scaling-Knowledge-Models-in-Data-Science"><a href="#ESR-3-Deploying-and-Scaling-Knowledge-Models-in-Data-Science" class="headerlink" title="ESR 3: Deploying and Scaling Knowledge Models in Data Science"></a>ESR 3: Deploying and Scaling Knowledge Models in Data Science</h1>]]></content>
-      <categories>
-        <category>基金项目</category>
-      </categories>
-      <tags>
+        <tag>RS</tag>
         <tag>lowcomote</tag>
       </tags>
   </entry>
   <entry>
-    <title>一些小工具</title>
-    <url>/Olivia_Lam.github.io/2022/10/13/tool/</url>
-    <content><![CDATA[<p>实用小工具</p>
+    <title>Automating the Synthesis of Recommender Systems for Modelling Languages</title>
+    <url>/Olivia_Lam.github.io/2022/10/01/RS/</url>
+    <content><![CDATA[<p>低代码开发推荐系统</p>
 <span id="more"></span>
 
-<h1 id="吉大邮箱"><a href="#吉大邮箱" class="headerlink" title="吉大邮箱"></a>吉大邮箱</h1><p>吉大邮箱没有提供提醒工具，时时查网页版邮箱不太方便，此处提供两种提醒解决方案。</p>
-<h2 id="自动转发"><a href="#自动转发" class="headerlink" title="自动转发"></a>自动转发</h2><p>QQ邮箱的提醒非常好用，包括但不限于QQ（电脑端登录QQ有弹窗）和微信（手机端巨好使）的提醒，所以可以将吉大邮箱的邮件转发到QQ邮箱。同理，可以转发到任意你觉得好用的邮箱中。</p>
-<p>设置路径如下：</p>
-<p>设置-&gt;邮件收发-&gt;自动转发-&gt;选择自动转发-&gt;“转发到邮箱”中填写QQ邮箱</p>
-<h2 id="Windows版邮件"><a href="#Windows版邮件" class="headerlink" title="Windows版邮件"></a>Windows版邮件</h2><p>直接绑定就好了，感觉速度比转发的提醒慢一点。电脑端的提醒弹窗比QQ的好看一点，而且任务栏里会有提醒。</p>
-<h1 id="GitHub"><a href="#GitHub" class="headerlink" title="GitHub"></a>GitHub</h1><h2 id="SwitchHosts"><a href="#SwitchHosts" class="headerlink" title="SwitchHosts"></a>SwitchHosts</h2><p>众所周知，GitHub在国内无法长期稳定有效地访问，原因是DNS污染，GitHub服务器IP在国内并未封禁，故可通过改host文件的方式访问GitHub。但长期手动修改hosts太麻烦了，购买梯子又太贵了（价格敏感性消费者.jpg），所以找到了这个自动修改hosts的神器。</p>
-<h3 id="使用指南"><a href="#使用指南" class="headerlink" title="使用指南"></a>使用指南</h3><h4 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h4><p><a href="https://github.com/oldj/SwitchHosts/releases">下载地址（release版）</a>选择自己OS对应的版本，如Windows选择<a href="https://github.com/oldj/SwitchHosts/releases/download/v4.1.2/SwitchHosts_windows_installer_4.1.2.6086.exe">SwitchHosts_windows_installer_4.1.2.6086.exe</a>。</p>
-<h4 id="连接远程hosts"><a href="#连接远程hosts" class="headerlink" title="连接远程hosts"></a>连接远程hosts</h4><ol>
-<li>点击加号添加hosts</li>
-<li>选择远程hosts类型</li>
-<li>标题随意取</li>
-<li>URL填 <strong><a href="https://raw.hellogithub.com/hosts">https://raw.hellogithub.com/hosts</a></strong></li>
-<li>设置自动刷新频率（建议1h）</li>
-<li>点击确定</li>
-</ol>
-<h4 id="修改hosts文件属性"><a href="#修改hosts文件属性" class="headerlink" title="修改hosts文件属性"></a>修改hosts文件属性</h4><p>好了，现在大概率会发现无法写入host文件，解决方案如下：</p>
+<h1 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h1><p>希望能使用推荐系统建模，但是推荐系统的开发存在需要难以考虑的问题和专业知识，所以提出了一个针对软件模型的<strong>推荐系统自动生成工具</strong>。为评估该系统，实验测试了一个生成的推荐系统和聊天程序建模。</p>
+<h1 id="RS-推荐系统"><a href="#RS-推荐系统" class="headerlink" title="RS 推荐系统"></a>RS 推荐系统</h1><p>推荐系统的目标用户是生成的且偏好是有特殊含义的。例如，用户可能是一个未完成的类，需要被推荐方法和成员变量。</p>
+<p>推荐系统的两种信息源：<strong>基于内容</strong>（Content-based CB）、<strong>协同过滤</strong>（collaborative filtering CF）。基于内容评估用户历史数据，协同过滤评估用户相似性。此外，协同过滤可以评估用户或项目之间的相似性。典型的混合策略是使用CB的相似性代替CF的评级。</p>
+<p>推荐系统评价方法：<strong>在线</strong>、<strong>离线</strong>。在线方法使用在线A&#x2F;B测试实时获取影响，离线方法使用历史数据，分为训练集和测试集。</p>
+<p>常用评价指标：<strong>精度</strong>、（precision）、<strong>召回率</strong>（recall）、<strong>F1</strong>、<strong>平均精度</strong>（MAP）、<strong>归一化累积好处</strong>（nDCG，评估最有用的项目是否出现在推荐列表的顶部位置）</p>
+<p>补充评价指标：<strong>用户空间覆盖</strong>（USC，评估覆盖了多少用户）、<strong>项目空间覆盖</strong>（ISC，评估覆盖了多少项目）</p>
+<p>提出的自动生成推荐系统允许配置这几个方面的参数：<strong>推荐方法、目标用户、项目、离线评价方法和指标</strong></p>
+<h1 id="提出的方法"><a href="#提出的方法" class="headerlink" title="提出的方法"></a>提出的方法</h1><p><img src="https://github.com/Olive-2019/Lam-s-Blog-source/blob/master/RS/1665226282989.png?raw=true" alt="1665226282989"></p>
+<p><strong>流程：</strong></p>
 <ol>
-<li>找到hosts文件，Windows下路径C:\Windows\System32\drivers\etc\</li>
-<li>右键，选择属性，取消“只读”选项</li>
-<li>在属性中选中“安全”tab</li>
-<li>选中User</li>
-<li>点击编辑</li>
-<li>选中“写入”“修改”等权限</li>
-<li>保存</li>
+<li>选择推荐系统需要推荐的元素，如类的属性，过程的任务。指定推荐方法、训练数据集、推荐系统指标</li>
+<li>推荐系统训练过程</li>
+<li>选择推荐方法，系统自动生成可以集成到不同建模工具里的推荐系统</li>
 </ol>
-<h3 id="使用评价"><a href="#使用评价" class="headerlink" title="使用评价"></a>使用评价</h3><p>目前GitHub访问体验完全无痛，不用再担心push的时候老半天push不上去。而且比梯子强的是，这玩意只在访问GitHub的时候重定向了IP地址，访问国内其它网站不会发生绕来绕去过慢的现象。</p>
+<h1 id="Droid-DSL（一种领域特定语言）"><a href="#Droid-DSL（一种领域特定语言）" class="headerlink" title="Droid DSL（一种领域特定语言）"></a>Droid DSL（一种领域特定语言）</h1><p>用来描述提出的自动生成推荐系统的一种语言</p>
+<h1 id="架构与支撑工具"><a href="#架构与支撑工具" class="headerlink" title="架构与支撑工具"></a>架构与支撑工具</h1><h2 id="架构"><a href="#架构" class="headerlink" title="架构"></a>架构</h2><p>该系统的架构由三个模块组成，分别是配置器、服务、客户。</p>
+<p>第一个模块是<strong>配置器</strong>，该模块提供了配置、评估、生成推荐系统的功能。同时也提供了一个eclipse编辑器用于指定推荐系统内容（1）。该内容作为推荐系统评价系统的输入。推荐系统评价系统依赖于RankSys和RiVal，其中RankSys是实现推荐系统的框架，RiVal是一个数据划分和推荐系统评价的工具集。每一个指标都会显示在Eclipse的视图里（3）。根据得到的指标，推荐系统设计人员可以选择一种推荐方法并生成一系列配置文件。</p>
+<p>第二个模块是DROID<strong>服务</strong>，该模块使用了第一个模块生成的配置文件。通过4模块生成不同的配置文件可以适配不同的建模语言。</p>
+<p>第三个模块是<strong>客户</strong>，这个系统允许客户使用基于JSON的模型表示发送请求。</p>
+<h2 id="支撑工具"><a href="#支撑工具" class="headerlink" title="支撑工具"></a>支撑工具</h2><p>配置器部分的工具是eclipse的一个插件，支持使用DSL配置、查看指标结果。</p>
+<p>服务方面采用方式是，客户端提交JSON格式的请求，服务端处理并返回推荐系统名字和JSON格式的推荐系统。服务主要包含三个模块，推荐器（用于处理客户端请求）、内容解析（用于解析JSON文件）、推荐系统生成器</p>
+<h1 id="自己的一点碎碎念"><a href="#自己的一点碎碎念" class="headerlink" title="自己的一点碎碎念"></a>自己的一点碎碎念</h1><p>其实就是一个支持用户定制推荐系统的低代码开发平台，但是跟清华数为的项目有些差异。这里还需要使用一些类似yml的DSL书写配置，不是完全的图形化界面。</p>
+<p>从文章看来，工具应该是已经开发完可以用的了，文章中也给了链接，但是还没真正安装试试。</p>
 ]]></content>
       <categories>
-        <category>工具</category>
+        <category>论文</category>
       </categories>
       <tags>
-        <tag>软件</tag>
+        <tag>RS</tag>
+        <tag>lowcomote</tag>
       </tags>
   </entry>
 </search>
