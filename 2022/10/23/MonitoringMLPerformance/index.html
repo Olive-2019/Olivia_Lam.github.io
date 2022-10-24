@@ -27,8 +27,15 @@
 <meta property="og:site_name" content="Lam&#39;s Blog">
 <meta property="og:description" content="机器学习模型部署后的漂移问题以及检测漂移的工具，并概述了低代码开发平台解决该问题的研究计划">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://github.com/Olive-2019/Lam-Blog-resource/blob/master/images/MDEforMLMonitor/MLworkflow.jpg?raw=true">
+<meta property="og:image" content="https://github.com/Olive-2019/Lam-Blog-resource/blob/master/images/MDEforMLMonitor/%E5%8E%9F%E5%A7%8B%E5%88%86%E5%B8%83.jpg?raw=true">
+<meta property="og:image" content="https://github.com/Olive-2019/Lam-Blog-resource/blob/master/images/MDEforMLMonitor/%E6%95%B0%E6%8D%AE%E6%BC%82%E7%A7%BB.jpg?raw=true">
+<meta property="og:image" content="https://github.com/Olive-2019/Lam-Blog-resource/blob/master/images/MDEforMLMonitor/%E6%A6%82%E5%BF%B5%E6%BC%82%E7%A7%BB.jpg?raw=true">
+<meta property="og:image" content="https://github.com/Olive-2019/Lam-Blog-resource/blob/master/images/MDEforMLMonitor/%E6%9C%89%E5%81%8F%E9%87%87%E6%A0%B7.jpg?raw=true">
+<meta property="og:image" content="https://github.com/Olive-2019/Lam-Blog-resource/blob/master/images/MDEforMLMonitor/%E4%B8%A4%E7%A7%8D%E6%BC%82%E7%A7%BB%E5%B9%B6%E5%AD%98.jpg?raw=true">
+<meta property="og:image" content="https://github.com/Olive-2019/Lam-Blog-resource/blob/master/images/MDEforMLMonitor/%E6%95%B0%E6%8D%AE%E6%8D%95%E6%8D%89.jpg?raw=true">
 <meta property="article:published_time" content="2022-10-23T15:07:08.000Z">
-<meta property="article:modified_time" content="2022-10-23T17:15:45.729Z">
+<meta property="article:modified_time" content="2022-10-24T06:17:56.842Z">
 <meta property="article:author" content="Olivia Lam">
 <meta property="article:tag" content="lowcomote">
 <meta property="article:tag" content="ML">
@@ -36,6 +43,7 @@
 <meta property="article:tag" content="data draft">
 <meta property="article:tag" content="concept draft">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://github.com/Olive-2019/Lam-Blog-resource/blob/master/images/MDEforMLMonitor/MLworkflow.jpg?raw=true">
 
 
 <link rel="canonical" href="https://olive-2019.github.io/Olivia_Lam.github.io/2022/10/23/MonitoringMLPerformance/">
@@ -253,7 +261,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2022-10-24 01:15:45" itemprop="dateModified" datetime="2022-10-24T01:15:45+08:00">2022-10-24</time>
+      <time title="修改时间：2022-10-24 14:17:56" itemprop="dateModified" datetime="2022-10-24T14:17:56+08:00">2022-10-24</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -279,7 +287,7 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>2.2k</span>
+      <span>2.1k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
@@ -303,9 +311,7 @@
 
 <h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><p>ML模型由专家开发以后需要部署到生产环境中，部署的时候需要自动化工具。本文的目标是提出一个低代码架构，使专家可以监控ML模型性能。</p>
 <p>文章对机器学习的工作流进行了综述以后，介绍了模型部署后可能发生的数据漂移和概念漂移。然后提出了低代码开发实现监控程序的三个研究方向，并说明了评价方法。最后介绍了一些机器学习自动化的工具。</p>
-<h1 id="机器学习-工作流（workflow）"><a href="#机器学习-工作流（workflow）" class="headerlink" title="机器学习 工作流（workflow）"></a>机器学习 工作流（workflow）</h1><p>MLwork.jpg</p>
-<!-- ![机器学习 工作流](https://github.com/Olive-2019/Lam-s-Blog-source/blob/master/RS3/1665227277118.png?raw=true) -->
-
+<h1 id="机器学习-工作流（workflow）"><a href="#机器学习-工作流（workflow）" class="headerlink" title="机器学习 工作流（workflow）"></a>机器学习 工作流（workflow）</h1><p><img src="https://github.com/Olive-2019/Lam-Blog-resource/blob/master/images/MDEforMLMonitor/MLworkflow.jpg?raw=true" alt="机器学习 工作流"></p>
 <h2 id="数据准备-Data-Preparation"><a href="#数据准备-Data-Preparation" class="headerlink" title="数据准备 Data Preparation"></a>数据准备 Data Preparation</h2><p>检测输入是否符合规范（数据格式）</p>
 <h2 id="模型构建-Model-Creation"><a href="#模型构建-Model-Creation" class="headerlink" title="模型构建 Model Creation"></a>模型构建 Model Creation</h2><p>记录不同的算法参数组合的结果，这部分讲的有点偏ML调参了，不过可以应用在RS的构建里。<br>另外，这里提到的openML可以用来做模型构建的工作。<a target="_blank" rel="noopener" href="https://www.openml.org/">OpenML链接</a></p>
 <blockquote>
@@ -322,20 +328,32 @@
 <h2 id="具体例子"><a href="#具体例子" class="headerlink" title="具体例子"></a>具体例子</h2><p>特征：等待持续时长，实际服务时长</p>
 <p>输出：电话中心的客服表现（positive or negative）</p>
 <p>假设上述特征均~N(10,3)</p>
-<p>原始分布.jpg<br>模型：总时长小于20则为positive</p>
+<!-- 原始分布.jpg -->
+<p><img src="https://github.com/Olive-2019/Lam-Blog-resource/blob/master/images/MDEforMLMonitor/%E5%8E%9F%E5%A7%8B%E5%88%86%E5%B8%83.jpg?raw=true" alt="原始分布"></p>
+<p>模型：总时长小于20则为positive</p>
 <p>模型部署后可能存在四种场景</p>
 <h3 id="无漂移"><a href="#无漂移" class="headerlink" title="无漂移"></a>无漂移</h3><p>理想状态，输入的数据分布不改变，模型也一直符合现实状况</p>
-<h3 id="数据漂移-1"><a href="#数据漂移-1" class="headerlink" title="数据漂移"></a>数据漂移</h3><p>数据漂移.jpg</p>
+<h3 id="数据漂移-1"><a href="#数据漂移-1" class="headerlink" title="数据漂移"></a>数据漂移</h3><!-- 数据漂移.jpg -->
+<p><img src="https://github.com/Olive-2019/Lam-Blog-resource/blob/master/images/MDEforMLMonitor/%E6%95%B0%E6%8D%AE%E6%BC%82%E7%A7%BB.jpg?raw=true" alt="数据漂移"></p>
 <p>例如某个客服没上班，等待时长变长，但是用户并不会因此愿意等待更长时间。<br>这种数据漂移并没有导致输出错误</p>
-<h3 id="概念漂移-1"><a href="#概念漂移-1" class="headerlink" title="概念漂移"></a>概念漂移</h3><p>概念漂移.jpg</p>
+<h3 id="概念漂移-1"><a href="#概念漂移-1" class="headerlink" title="概念漂移"></a>概念漂移</h3><!-- 概念漂移.jpg -->
+
+<p><img src="https://github.com/Olive-2019/Lam-Blog-resource/blob/master/images/MDEforMLMonitor/%E6%A6%82%E5%BF%B5%E6%BC%82%E7%A7%BB.jpg?raw=true" alt="概念漂移"></p>
 <p>模型不再符合现实情况，但是数据分布不发生改变，输出存在错误。如用户愿意等的更长，则现实模型划分线应该上移。<br>这种情况下，模型需要重新学习新数据。</p>
-<h3 id="两种漂移并存"><a href="#两种漂移并存" class="headerlink" title="两种漂移并存"></a>两种漂移并存</h3><p>有偏采样.jpg</p>
-<p>两种漂移.jpg</p>
+<h3 id="两种漂移并存"><a href="#两种漂移并存" class="headerlink" title="两种漂移并存"></a>两种漂移并存</h3><!-- 有偏采样.jpg -->
+
+<p><img src="https://github.com/Olive-2019/Lam-Blog-resource/blob/master/images/MDEforMLMonitor/%E6%9C%89%E5%81%8F%E9%87%87%E6%A0%B7.jpg?raw=true" alt="有偏采样"></p>
+<!-- 两种漂移.jpg -->
+
+<p><img src="https://github.com/Olive-2019/Lam-Blog-resource/blob/master/images/MDEforMLMonitor/%E4%B8%A4%E7%A7%8D%E6%BC%82%E7%A7%BB%E5%B9%B6%E5%AD%98.jpg?raw=true" alt="两种漂移"></p>
 <p>有偏采样发生时，输入数据的分布自然与学习集不同了。同时，由于学习集的分布与真实输入不同，训练出来的模型自然不能用于真实输入。但是我们会以为观察到数据漂移和真实概念漂移。目前区分真实和虚假的概念漂移仍是一个挑战。</p>
 <h1 id="研究方向"><a href="#研究方向" class="headerlink" title="研究方向"></a>研究方向</h1><p>希望开发一个低代码的解决方案将现代计算架构带来的复杂性抽象化，包括DSL和参考实现。允许用户只需要配置模型监控方案，不必关注具体细节。将模型监控的任务分成三大类，分别是，数据捕捉、算法执行、响应漂移。</p>
 <h2 id="数据捕捉"><a href="#数据捕捉" class="headerlink" title="数据捕捉"></a>数据捕捉</h2><p>为了检测概念漂移，需要存储模型输出并与反馈进行对比。</p>
 <p>在客服中心的例子中，为了获取并存储这些数据，建立了反向代理服务器（reverse proxy server）。反向代理服务器可以接收所有的推理请求并转发到模型服务架构中，获取模型输出并返回到客户端。另外，反向代理服务器可以将这些数据和必须的元数据持久化到数据库当中。</p>
-<p>数据捕捉.jpg<br>反向代理服务器的优点：</p>
+<!-- 数据捕捉.jpg -->
+
+<p><img src="https://github.com/Olive-2019/Lam-Blog-resource/blob/master/images/MDEforMLMonitor/%E6%95%B0%E6%8D%AE%E6%8D%95%E6%8D%89.jpg?raw=true" alt="数据捕捉"></p>
+<p>反向代理服务器的优点：</p>
 <ul>
 <li>模型服务器不必发生改变</li>
 <li>适用于各种模型服务器。</li>
@@ -450,7 +468,7 @@
       <i class="fa fa-coffee"></i>
     </span>
       <span>站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">13 分钟</span>
+    <span title="站点阅读时长">12 分钟</span>
   </span>
 </div>
 <div class="busuanzi-count">
