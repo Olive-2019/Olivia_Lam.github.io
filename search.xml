@@ -303,8 +303,8 @@
       </categories>
       <tags>
         <tag>RS</tag>
-        <tag>MDE</tag>
         <tag>lowcomote</tag>
+        <tag>MDE</tag>
         <tag>chatbot</tag>
         <tag>NLP</tag>
         <tag>LCDP</tag>
@@ -354,30 +354,99 @@
     <title>A Model-Driven Engineering Approach for Monitoring Machine Learning Models</title>
     <url>/Olivia_Lam.github.io/2022/10/11/MDEforMLMonitor/</url>
     <content><![CDATA[<p>机器学习监控的软件工程方法</p>
+<p>机器学习模型部署后需要监控，但是机器学习领域专家缺乏相关知识去完成一个健壮且可扩展的监控解决方案。本文基于MDE提出了一个用于检测和响应影响ML模型性能变化的方案，允许ML专家在计算集群上调度漂移检测算法，并通过email接收通知</p>
 <span id="more"></span>
 
-<h1 id="机器学习监控领域介绍"><a href="#机器学习监控领域介绍" class="headerlink" title="机器学习监控领域介绍"></a>机器学习监控领域介绍</h1><p>有监督学习假设输入输出遵循某联合概率分布，但是现实世界是一个复杂的非稳定环境。随着时间的推移，联合概率分布会发生变化。该情况已经得到了很多研究，如概念漂移&#x2F;偏移、协变量&#x2F;采样移位、先验概率移位以及更一般的数据集移位。</p>
-<p>对于这种现象，已经有很多的解决方法，如使用测试集输入的边缘概率分布调整训练模型等。</p>
-<p>另一种方法是在线学习，即不断学习输入。当环境随时间变化时，这种方法比较好，但是需要稳定的标记输入。</p>
-<p>也有混合的方法，就是一批一批地训练和调整。</p>
-<h1 id="元模型"><a href="#元模型" class="headerlink" title="元模型"></a>元模型</h1><p><img src="https://github.com/Olive-2019/Lam-s-Blog-source/blob/master/MDEforMLMonitor/structure.jpg?raw=true" alt="模型结构" title="元模型"></p>
-<h2 id="Deployment类"><a href="#Deployment类" class="headerlink" title="Deployment类"></a>Deployment类</h2><p>模型类和偏移检测类的父类，系统中只有一个模型子类和多个偏移检测子类</p>
-<h2 id="Model类"><a href="#Model类" class="headerlink" title="Model类"></a>Model类</h2><p>被监测的模型，有多个特征输入和一个输出。属性包含模型名字、模型序列化的URL、创建模型的框架（如tensorflow）。</p>
-<h2 id="IO类"><a href="#IO类" class="headerlink" title="IO类"></a>IO类</h2><p>属性包括输入输出的名字和属性</p>
-<h2 id="DriftDetector类"><a href="#DriftDetector类" class="headerlink" title="DriftDetector类"></a>DriftDetector类</h2><p>漂移检测类用于定期执行检测，确定是否需要纠正。属性包括检测器名字、执行频率、当漂移发生时需要发送消息的email地址。</p>
-<h3 id="DataDriftDetector类"><a href="#DataDriftDetector类" class="headerlink" title="DataDriftDetector类"></a>DataDriftDetector类</h3><p>接收无标记的数据</p>
-<h3 id="ConceptDriftDetector类"><a href="#ConceptDriftDetector类" class="headerlink" title="ConceptDriftDetector类"></a>ConceptDriftDetector类</h3><p>需要一组预测的标签，随后获得实际标签</p>
-<h1 id="生成的工件"><a href="#生成的工件" class="headerlink" title="生成的工件"></a>生成的工件</h1><p>系统具体采用Kubernetes技术。M2T（model to text）生成Kubernetes清单，包含了预分配资源和需要在集群上执行的容器化应用程序。系统的某些组件使用开源的自定义Kubernetes资源，其它部分使用在容器注册表中开发和编制所以的容器化应用程序。</p>
-<p><img src="https://github.com/Olive-2019/Lam-s-Blog-source/blob/master/MDEforMLMonitor/generatedArtifact.jpg?raw=true" alt="generatedArtifact"></p>
-<h2 id="Inference-Service-推理服务"><a href="#Inference-Service-推理服务" class="headerlink" title="Inference Service 推理服务"></a>Inference Service 推理服务</h2><h3 id="Model-Server模型服务器"><a href="#Model-Server模型服务器" class="headerlink" title="Model Server模型服务器"></a>Model Server模型服务器</h3><p>提供推理服务</p>
-<h3 id="Logger-记录者"><a href="#Logger-记录者" class="headerlink" title="Logger 记录者"></a>Logger 记录者</h3><p>记录模型服务器的请求和响应信息</p>
-<h2 id="Message-Queue-消息队列"><a href="#Message-Queue-消息队列" class="headerlink" title="Message Queue 消息队列"></a>Message Queue 消息队列</h2><p>从Logger接收消息，路由至Database Writer</p>
-<h2 id="Database-Writer-数据库写者"><a href="#Database-Writer-数据库写者" class="headerlink" title="Database Writer 数据库写者"></a>Database Writer 数据库写者</h2><p>两个数据来源，第一个是推理服务器的事件，第二个是ML模型的性能</p>
-<h2 id="Database-数据库"><a href="#Database-数据库" class="headerlink" title="Database 数据库"></a>Database 数据库</h2><p>Mysql</p>
-<h2 id="Drift-Detection-Execution-偏移检测执行器"><a href="#Drift-Detection-Execution-偏移检测执行器" class="headerlink" title="Drift Detection Execution 偏移检测执行器"></a>Drift Detection Execution 偏移检测执行器</h2><p>定期执行漂移检测算法。专家课自行编写算法，只需包含检测算法，不必包含警告等。</p>
-<h2 id="Configuration-配置"><a href="#Configuration-配置" class="headerlink" title="Configuration 配置"></a>Configuration 配置</h2><p>需求写在配置文件中，容器内运行的应用程序可以读取配置文件并调整行为。</p>
-<h2 id="Proxy-代理"><a href="#Proxy-代理" class="headerlink" title="Proxy 代理"></a>Proxy 代理</h2><p>转发请求至database writer或model server，分流</p>
-<h1 id="平台"><a href="#平台" class="headerlink" title="平台"></a>平台</h1><p>为了操作便利性，提供了Web应用程序。</p>
+<h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><p>文章主要做了两件事：</p>
+<ul>
+<li>提出针对ML模型监测的MDE方法</li>
+<li>评估这种方法怎么降低ML专家设计ML监测系统时技术障碍</li>
+</ul>
+<h1 id="机器学习监控领域介绍"><a href="#机器学习监控领域介绍" class="headerlink" title="机器学习监控领域介绍"></a>机器学习监控领域介绍</h1><p>有监督学习中的X，Y通常被视为服从联合概率分布P(X, Y)的随机变量。由于真实世界情况复杂且不稳定，概率分布会发生变化，即概念漂移、采样漂移、先验概率漂移或更一般的数据集漂移。</p>
+<p>在非稳定情况下进行机器学习的方法：</p>
+<ol>
+<li>测试集中X的边缘概率分布调整模型</li>
+<li>因果模型中，根据测试集中样本标签是否可知，存在大量的对抗漂移的技术</li>
+<li>在线学习。算法不预先假设分布，接收样本的时候持续训练<br>适用场景：预计环境会随时间推移而改变<br>缺点：需要恒定的带标记数据流</li>
+<li>混合方法。模型使用初始数据集训练也会在一批带标记数据可用时重新调整<br>例如，使用模型集对抗漂移，最新的被标记数据集可用时，将会训练一个新的模型，并加入到模型集中。然后算法将会检车模型集的性能是否一致，根据结果对模型集中的权重进行调整</li>
+</ol>
+<h1 id="元模型"><a href="#元模型" class="headerlink" title="元模型"></a>元模型</h1><h2 id="为什么需要元模型"><a href="#为什么需要元模型" class="headerlink" title="为什么需要元模型"></a>为什么需要元模型</h2><p>即使已经有很多解决非稳定环境中的机器学习困境的方法，机器学习模型部署仍然需要满足非功能需求，如延迟、计算存储资源、和现有配置的兼容性等。同时，ML模型设计人和系统设计人不一定是同一个人，对于部署模型来说也是一大难题。故需要使用MDE方法解决这个问题。</p>
+<h2 id="DSL"><a href="#DSL" class="headerlink" title="DSL"></a>DSL</h2><p>使用MDE实现和部署ML模型的一个重要组成部分是DSL。DSL能在负责ML算法专家和负责具体系统的软件工程师之间建立标准化的通信层。<br>我们对DSL的期望是</p>
+<ul>
+<li>尽可能多地表达不同类型的ML监控方法</li>
+<li>尽可能少地约束底层技术</li>
+</ul>
+<h2 id="ML模型部署环境假设"><a href="#ML模型部署环境假设" class="headerlink" title="ML模型部署环境假设"></a>ML模型部署环境假设</h2><ul>
+<li>ML模型持续接收未标记的样本（推理请求），并需要返回一个预测结果（推理响应）</li>
+<li>未标记样本可能在未知时长后接收到真实标签</li>
+<li>定期根据ML模型接收到的最新数据决定是否修正模型</li>
+<li>由领域专家定义不同种类的漂移响应策略</li>
+</ul>
+<h2 id="元模型组成部件"><a href="#元模型组成部件" class="headerlink" title="元模型组成部件"></a>元模型组成部件</h2><p>考虑到上述假设，提出的元模型需要有这些组成部件。</p>
+<ul>
+<li>指定想要监控哪一个ML模型的机制</li>
+<li>指定哪些推理请求和推理响应字段需要被捕捉。（这也是在命名被捕捉字段的方法。命名可以方便其它实体单独引用它。）</li>
+<li>定义周期性漂移检测执行机制</li>
+<li>定义检测到漂移时，需要采取的措施</li>
+</ul>
+<h2 id="设计"><a href="#设计" class="headerlink" title="设计"></a>设计</h2><p>虽然希望元模型和具体底层技术完全分离，但为尽快从算法专家处得到反馈，这个版本的元模型做了一些妥协。下文将会提及这些妥协。</p>
+<p><img src="https://github.com/Olive-2019/Lam-Blog-resource/blob/master/images/MDEforMLMonitor/domain_meta-model.jpg?raw=true" alt="domain_meta-model"></p>
+<h3 id="Deployment类"><a href="#Deployment类" class="headerlink" title="Deployment类"></a>Deployment类</h3><p>deployment抽象类包括了ML监控方法的所有方面。在系统中，通常有一个Model子类的实例和任意数量的DriftDetector子类的实例。</p>
+<h3 id="Model类"><a href="#Model类" class="headerlink" title="Model类"></a>Model类</h3><p>Model类包含了名称、序列化ML模型的URL、创建它的框架名称、多个输入的IO实例和一个输出的IO实例。</p>
+<p><strong>妥协</strong>：为了简化展示，ML模型将会被部署到web端点。因此需要序列化ML模型的URL、创建它的框架名称这两个属性，这两个属性并不需要被包含进来，因为部署过程可能是单独执行的。</p>
+<h3 id="IO类"><a href="#IO类" class="headerlink" title="IO类"></a>IO类</h3><p>模型的输入输出，包含输入&#x2F;输出的名字和数据类型的枚举属性。</p>
+<h3 id="DriftDetector类"><a href="#DriftDetector类" class="headerlink" title="DriftDetector类"></a>DriftDetector类</h3><p>周期性地执行漂移检测算法，属性包含名字、频率、email、定制容器。</p>
+<p>执行的算法可以有以下两种可能</p>
+<ul>
+<li>底层平台包含的算法中选择一种</li>
+<li>自定义算法</li>
+</ul>
+<p><strong>妥协</strong>：区分两种漂移检测器。区分是为了简化底层技术实现。<br><strong>妥协</strong>：属性中包含了email，检测到模型漂移的行为只能是发送email了。（可以抽象化成一个超类）</p>
+<h4 id="DataDriftDetector类"><a href="#DataDriftDetector类" class="headerlink" title="DataDriftDetector类"></a>DataDriftDetector类</h4><p>数据漂移检测器需要一组带标签的训练数据和一组不带标签的数据。</p>
+<h4 id="ConceptDriftDetector类"><a href="#ConceptDriftDetector类" class="headerlink" title="ConceptDriftDetector类"></a>ConceptDriftDetector类</h4><p>概念漂移检测器需要不带标签数据的预测数据。</p>
+<h1 id="生成的工件"><a href="#生成的工件" class="headerlink" title="生成的工件"></a>生成的工件</h1><p>使用M2T转化语言，生成一个Kubernetes清单，清单包含需要预分配的资源和需要在集群上运行的容器化应用程序。</p>
+<p>组件包含两种类型</p>
+<ul>
+<li>开源的定制的Kubernetes资源</li>
+<li>容器注册表中著猜测的容器化的应用。</li>
+</ul>
+<p>优点</p>
+<ul>
+<li>没有生成过程代码</li>
+</ul>
+<p>生成工件如下所述：</p>
+<p><img src="https://github.com/Olive-2019/Lam-Blog-resource/blob/master/images/MDEforMLMonitor/generated_artifacts.jpg?raw=true" alt="生成的工件"></p>
+<h2 id="Inference-Service-推理服务"><a href="#Inference-Service-推理服务" class="headerlink" title="Inference Service 推理服务"></a>Inference Service 推理服务</h2><h3 id="功能"><a href="#功能" class="headerlink" title="功能"></a>功能</h3><p>该组件包括两个功能，分别是Model Server和Logger。</p>
+<h4 id="Model-Server模型服务器"><a href="#Model-Server模型服务器" class="headerlink" title="Model Server模型服务器"></a>Model Server模型服务器</h4><p>负责响应各种应用程序发送的推理请求</p>
+<h4 id="Logger-记录者"><a href="#Logger-记录者" class="headerlink" title="Logger 记录者"></a>Logger 记录者</h4><p>负责记录请求和响应事件</p>
+<h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><p>由Kubeflow开源项目的Inference Service定制生成。</p>
+<h2 id="Message-Queue-消息队列"><a href="#Message-Queue-消息队列" class="headerlink" title="Message Queue 消息队列"></a>Message Queue 消息队列</h2><h3 id="功能-1"><a href="#功能-1" class="headerlink" title="功能"></a>功能</h3><p>从Logger接收消息，路由至Database Writer</p>
+<h3 id="实现-1"><a href="#实现-1" class="headerlink" title="实现"></a>实现</h3><p>Knative开源项目的Broker和Trigger定制生成</p>
+<h2 id="Database-Writer-数据库写者"><a href="#Database-Writer-数据库写者" class="headerlink" title="Database Writer 数据库写者"></a>Database Writer 数据库写者</h2><h3 id="功能-2"><a href="#功能-2" class="headerlink" title="功能"></a>功能</h3><ul>
+<li>根据算法专家提供的消息初始化数据库</li>
+<li>将捕获到的数据存储到数据库中</li>
+</ul>
+<p>捕获的数据来源</p>
+<ul>
+<li>logger记录的事件。由于格式是已知的，可以根据算法专家的说明提取特征值</li>
+<li>ML模型性能反馈。指之前推理请求数据的真实标签</li>
+</ul>
+<h3 id="实现-2"><a href="#实现-2" class="headerlink" title="实现"></a>实现</h3><p>Knative开源项目中的Service定制生成。</p>
+<h2 id="Database-数据库"><a href="#Database-数据库" class="headerlink" title="Database 数据库"></a>Database 数据库</h2><p>该组件使用MySQL数据库，由Kubernete的基础API和MySQL官方容器映像提供的Deployment、Service、PersistentVolumeClaim实现。</p>
+<h2 id="Drift-Detection-Execution-漂移检测执行器"><a href="#Drift-Detection-Execution-漂移检测执行器" class="headerlink" title="Drift Detection Execution 漂移检测执行器"></a>Drift Detection Execution 漂移检测执行器</h2><h3 id="功能-3"><a href="#功能-3" class="headerlink" title="功能"></a>功能</h3><p>该组件周期性执行算法专家指定的漂移检测算法。</p>
+<p>算法专家可以只实现漂移检测算法，并指定实现这个算法的容器映像，不必实现数据检索和通知发送的部分。</p>
+<h3 id="实现-3"><a href="#实现-3" class="headerlink" title="实现"></a>实现</h3><p>由Kubernete基础API提供的CronJob资源提供服务。</p>
+<p>在该实现中，应用程序的功能包括</p>
+<ul>
+<li>获取数据。从数据库中获取测试集数据，从云存储库中获取训练集数据</li>
+<li>检测。传递给实现漂移检测算法的函数，并获取返回</li>
+<li>警报。根据返回决定是否要发送警报</li>
+</ul>
+<h2 id="Configuration-配置"><a href="#Configuration-配置" class="headerlink" title="Configuration 配置"></a>Configuration 配置</h2><h3 id="功能-4"><a href="#功能-4" class="headerlink" title="功能"></a>功能</h3><p>通过使用配置文件，容器化应用程序根据算法专家规定的需求调整自己的功能。</p>
+<h3 id="实现-4"><a href="#实现-4" class="headerlink" title="实现"></a>实现</h3><p>使用Kubernete的基础API的ConfigMaps实现。</p>
+<h2 id="Proxy-代理"><a href="#Proxy-代理" class="headerlink" title="Proxy 代理"></a>Proxy 代理</h2><h3 id="功能-5"><a href="#功能-5" class="headerlink" title="功能"></a>功能</h3><p>需要用同一个主机名接收推理请求和反馈数据，所以需要使用代理来进行转发。代理接收请求后根据请求路径转发到inference service或database writer。</p>
+<h3 id="实现-5"><a href="#实现-5" class="headerlink" title="实现"></a>实现</h3><p>使用Istio开源项目的VirtualService定制</p>
+<h1 id="平台"><a href="#平台" class="headerlink" title="平台"></a>平台</h1><p>为了最大程度地降低算法专家的使用门槛，建立了web应用</p>
 <h2 id="主要功能"><a href="#主要功能" class="headerlink" title="主要功能"></a>主要功能</h2><p>创作和提交MDE模型</p>
 <ol>
 <li>用户填写表单，包含元模型各个类的属性</li>
@@ -392,10 +461,20 @@
 <li>提供表单，将数据集上传到云端</li>
 <li>用户可以Python函数形式自定义漂移检测算法。用户自定义的代码将与漂移检测器的基本模板结合，构建容器映像，并注册到注册表上。</li>
 </ul>
-<h1 id="拓展工作"><a href="#拓展工作" class="headerlink" title="拓展工作"></a>拓展工作</h1><p>漂移检测的时机：目前定时，可以定量</p>
-<p>足够抽象的漂移检测算法类：目前是两个类</p>
-<p>漂移发生时的行为：目前是发邮件</p>
-<p>差分部署：希望修改某些部分的时候不必完全重新部署</p>
+<h1 id="Future-Works-拓展工作"><a href="#Future-Works-拓展工作" class="headerlink" title="Future Works 拓展工作"></a>Future Works 拓展工作</h1><h2 id="工作方向"><a href="#工作方向" class="headerlink" title="工作方向"></a>工作方向</h2><ul>
+<li><p>漂移检测的时机：目前定时，将来可以定量</p>
+</li>
+<li><p>足够抽象的漂移检测算法类：目前为了方便底层实现，分成了DataDraft和ConceptDraft两个类</p>
+</li>
+<li><p>漂移发生时的行为：目前是发邮件，可以在元模型中抽象成超类</p>
+</li>
+<li><p>差分部署：希望修改某些部分的时候不必完全重新部署</p>
+</li>
+</ul>
+<h2 id="评估"><a href="#评估" class="headerlink" title="评估"></a>评估</h2><ul>
+<li>是否足够通用</li>
+<li>是否减轻了ML模型监控所需的工作</li>
+</ul>
 ]]></content>
       <categories>
         <category>论文</category>
