@@ -23,9 +23,50 @@
       </tags>
   </entry>
   <entry>
+    <title>Software Engineering for Machine Learning:A Case Study</title>
+    <url>/Olivia_Lam.github.io/2022/10/28/SE4ML-a-case-study/</url>
+    <content><![CDATA[<p>微软发的一篇关于ML中的软工问题的文章。主要提出了ML的9阶段工作流、最佳实践、ML工程成熟度。介绍了ML和传统软工之间的主要差别。</p>
+<span id="more"></span>
+
+<h1 id="人员"><a href="#人员" class="headerlink" title="人员"></a>人员</h1><p>软工流程中需要加入数据科学家。随着数据科学规模越来越大，数据科学家被细分为领域专家（关注业务问题）、建模者（建立预测模型）、平台搭建者（创建基于云的设施）。</p>
+<h1 id="工作流-workflow"><a href="#工作流-workflow" class="headerlink" title="工作流 workflow"></a>工作流 workflow</h1><p>机器学习工作流是高度非线性的，包含多个反馈循环。</p>
+<h1 id="最佳实践"><a href="#最佳实践" class="headerlink" title="最佳实践"></a>最佳实践</h1><h2 id="End-to-end-pipeline-support"><a href="#End-to-end-pipeline-support" class="headerlink" title="End-to-end pipeline support"></a>End-to-end pipeline support</h2><p>实现一个端到端的自动化技术支持，尽可能做到无缝，尤其是数据传入传出部分，尽可能让算法工程师调参更方便</p>
+<h2 id="Data-availability-collection-cleaning-and-management"><a href="#Data-availability-collection-cleaning-and-management" class="headerlink" title="Data availability, collection, cleaning, and management"></a>Data availability, collection, cleaning, and management</h2><p>数据要尽可能复用，减少冗余工作<br>将数据管理工具和ML框架混合在一起，避免数据和模型管理工作碎片化</p>
+<p>数据管理原因：数据源快速变化<br>快速变化原因：工程师自己的操作，传入新数据</p>
+<h2 id="Education-and-Training"><a href="#Education-and-Training" class="headerlink" title="Education and Training"></a>Education and Training</h2><p>传统软工背景的工程师需要学习最新的ML知识。<br>（大概就是讲了一下微软怎么培训的）</p>
+<h2 id="Model-Debugging-and-Interpretability"><a href="#Model-Debugging-and-Interpretability" class="headerlink" title="Model Debugging and Interpretability"></a>Model Debugging and Interpretability</h2><p>模型调试和可解释性<br>调试的点不止于编程错误，还有模型错误和不确定性<br>这块内容我们不必关注</p>
+<h2 id="Model-Evolution-Evaluation-and-Deployment"><a href="#Model-Evolution-Evaluation-and-Deployment" class="headerlink" title="Model Evolution, Evaluation, and Deployment"></a>Model Evolution, Evaluation, and Deployment</h2><p>以ML为中心的软件 模型更改、参数调整、数据更新引起的修订会更频繁。快节奏的模型迭代需要更频繁的部署。<br>自动化的训练和部署不够，仍需要将模型构建和其它软件集成，使用同一个版本控制库</p>
+<h2 id="Compliance"><a href="#Compliance" class="headerlink" title="Compliance"></a>Compliance</h2><p>遵守原则</p>
+<h2 id="Varied-Perceptions"><a href="#Varied-Perceptions" class="headerlink" title="Varied Perceptions"></a>Varied Perceptions</h2><p>经验不同的人会有不同的看法<br>缺乏经验的人更认为培训重要<br>经验越丰富的人越认为工具、端到端的自动化支持、规范重要</p>
+<h1 id="成熟度"><a href="#成熟度" class="headerlink" title="成熟度"></a>成熟度</h1><p>通过以下六个维度分别评分（1-5），取均值为AMI（活动成熟度指数）</p>
+<ol>
+<li>has defined goals 有明确的目标</li>
+<li>is consistently implemented 一致的实现</li>
+<li>documented 有文档的</li>
+<li>automated 自动化的</li>
+<li>measured and tracked 被评估和最终的</li>
+<li>continuously improved 持续改进的</li>
+</ol>
+<h1 id="和传统软工的差异"><a href="#和传统软工的差异" class="headerlink" title="和传统软工的差异"></a>和传统软工的差异</h1><h2 id="数据查找和管理"><a href="#数据查找和管理" class="headerlink" title="数据查找和管理"></a>数据查找和管理</h2><h2 id="定制和复用"><a href="#定制和复用" class="headerlink" title="定制和复用"></a>定制和复用</h2><p>定制和复用ML模型需要的工作更多，模型的一部分是算法，另一部分是参数。通常需要重新训练，甚至需要替换成其它模型</p>
+<h2 id="模块化"><a href="#模块化" class="headerlink" title="模块化"></a>模块化</h2><p>ML模型难以保持边界原因：</p>
+<ul>
+<li>ML模型不容易扩展功能</li>
+<li>ML模型之间的相互作用并不明显</li>
+</ul>
+]]></content>
+      <categories>
+        <category>论文</category>
+      </categories>
+      <tags>
+        <tag>ML</tag>
+        <tag>SE</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Towards a low-code solution for monitoring machine learning model performance</title>
     <url>/Olivia_Lam.github.io/2022/10/23/MonitoringMLPerformance/</url>
-    <content><![CDATA[<p>机器学习模型部署后的漂移问题以及检测漂移的工具，并概述了低代码开发平台解决该问题的研究计划</p>
+    <content><![CDATA[<p>机器学习模型部署后的漂移问题以及检测漂移的工具，并概述了低代码开发平台解决该问题的研究计划。</p>
+<p>这篇文章确实有点像做机器学习的专家误入低代码开发领域了，几乎通篇都在讲ML和ML遇到的问题。</p>
 <span id="more"></span>
 
 <h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><p>ML模型由专家开发以后需要部署到生产环境中，部署的时候需要自动化工具。本文的目标是提出一个低代码架构，使专家可以监控ML模型性能。</p>
@@ -48,11 +89,13 @@
 <p>输出：电话中心的客服表现（positive or negative）</p>
 <p>假设上述特征均~N(10,3)</p>
 <!-- 原始分布.jpg -->
+
 <p><img src="https://github.com/Olive-2019/Lam-Blog-resource/blob/master/images/MDEforMLMonitor/%E5%8E%9F%E5%A7%8B%E5%88%86%E5%B8%83.jpg?raw=true" alt="原始分布"></p>
 <p>模型：总时长小于20则为positive</p>
 <p>模型部署后可能存在四种场景</p>
 <h3 id="无漂移"><a href="#无漂移" class="headerlink" title="无漂移"></a>无漂移</h3><p>理想状态，输入的数据分布不改变，模型也一直符合现实状况</p>
 <h3 id="数据漂移-1"><a href="#数据漂移-1" class="headerlink" title="数据漂移"></a>数据漂移</h3><!-- 数据漂移.jpg -->
+
 <p><img src="https://github.com/Olive-2019/Lam-Blog-resource/blob/master/images/MDEforMLMonitor/%E6%95%B0%E6%8D%AE%E6%BC%82%E7%A7%BB.jpg?raw=true" alt="数据漂移"></p>
 <p>例如某个客服没上班，等待时长变长，但是用户并不会因此愿意等待更长时间。<br>这种数据漂移并没有导致输出错误</p>
 <h3 id="概念漂移-1"><a href="#概念漂移-1" class="headerlink" title="概念漂移"></a>概念漂移</h3><!-- 概念漂移.jpg -->

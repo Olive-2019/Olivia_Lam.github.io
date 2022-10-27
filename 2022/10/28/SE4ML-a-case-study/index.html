@@ -20,28 +20,29 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"olive-2019.github.io","root":"/Olivia_Lam.github.io/","images":"/Olivia_Lam.github.io/images","scheme":"Gemini","darkmode":false,"version":"8.13.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/Olivia_Lam.github.io/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/Olivia_Lam.github.io/js/config.js"></script>
 
-    <meta name="description" content="低代码开发的一个基金项目，15个方向探查笔记">
+    <meta name="description" content="微软发的一篇关于ML中的软工问题的文章。主要提出了ML的9阶段工作流、最佳实践、ML工程成熟度。介绍了ML和传统软工之间的主要差别。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="lowcomote">
-<meta property="og:url" content="https://olive-2019.github.io/Olivia_Lam.github.io/2022/10/11/lowcomote/index.html">
+<meta property="og:title" content="Software Engineering for Machine Learning:A Case Study">
+<meta property="og:url" content="https://olive-2019.github.io/Olivia_Lam.github.io/2022/10/28/SE4ML-a-case-study/index.html">
 <meta property="og:site_name" content="Lam&#39;s Blog">
-<meta property="og:description" content="低代码开发的一个基金项目，15个方向探查笔记">
+<meta property="og:description" content="微软发的一篇关于ML中的软工问题的文章。主要提出了ML的9阶段工作流、最佳实践、ML工程成熟度。介绍了ML和传统软工之间的主要差别。">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2022-10-11T06:52:18.000Z">
-<meta property="article:modified_time" content="2022-10-12T07:56:22.839Z">
+<meta property="article:published_time" content="2022-10-27T16:05:15.000Z">
+<meta property="article:modified_time" content="2022-10-27T16:28:29.424Z">
 <meta property="article:author" content="Olivia Lam">
-<meta property="article:tag" content="lowcomote">
+<meta property="article:tag" content="ML">
+<meta property="article:tag" content="SE">
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="https://olive-2019.github.io/Olivia_Lam.github.io/2022/10/11/lowcomote/">
+<link rel="canonical" href="https://olive-2019.github.io/Olivia_Lam.github.io/2022/10/28/SE4ML-a-case-study/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://olive-2019.github.io/Olivia_Lam.github.io/2022/10/11/lowcomote/","path":"2022/10/11/lowcomote/","title":"lowcomote"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://olive-2019.github.io/Olivia_Lam.github.io/2022/10/28/SE4ML-a-case-study/","path":"2022/10/28/SE4ML-a-case-study/","title":"Software Engineering for Machine Learning:A Case Study"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>lowcomote | Lam's Blog</title>
+<title>Software Engineering for Machine Learning:A Case Study | Lam's Blog</title>
   
 
 
@@ -145,7 +146,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#ESR-1-Scaling-Up-Citizen-Development-with-Recommender-Chatbots%EF%BC%88%E4%BD%BF%E7%94%A8%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F%E6%8F%90%E9%AB%98%E4%BD%8E%E4%BB%A3%E7%A0%81%E5%BC%80%E5%8F%91%E4%BA%BA%E5%91%98%E4%BD%93%E9%AA%8C%EF%BC%89"><span class="nav-number">1.</span> <span class="nav-text">ESR 1: Scaling Up Citizen Development with Recommender Chatbots（使用推荐系统提高低代码开发人员体验）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ESR-2-Scalable-Cloud-Based-Heterogeneous-Modelling%EF%BC%88%E5%9F%BA%E4%BA%8E%E4%BA%91%E7%9A%84%E5%8F%AF%E6%8B%93%E5%B1%95%E5%BC%82%E6%9E%84%EF%BC%89"><span class="nav-number">2.</span> <span class="nav-text">ESR 2: Scalable Cloud-Based Heterogeneous Modelling（基于云的可拓展异构）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ESR-3-Deploying-and-Scaling-Knowledge-Models-in-Data-Science"><span class="nav-number">3.</span> <span class="nav-text">ESR 3: Deploying and Scaling Knowledge Models in Data Science</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%BA%E5%91%98"><span class="nav-number">1.</span> <span class="nav-text">人员</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%B7%A5%E4%BD%9C%E6%B5%81-workflow"><span class="nav-number">2.</span> <span class="nav-text">工作流 workflow</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5"><span class="nav-number">3.</span> <span class="nav-text">最佳实践</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#End-to-end-pipeline-support"><span class="nav-number">3.1.</span> <span class="nav-text">End-to-end pipeline support</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Data-availability-collection-cleaning-and-management"><span class="nav-number">3.2.</span> <span class="nav-text">Data availability, collection, cleaning, and management</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Education-and-Training"><span class="nav-number">3.3.</span> <span class="nav-text">Education and Training</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Model-Debugging-and-Interpretability"><span class="nav-number">3.4.</span> <span class="nav-text">Model Debugging and Interpretability</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Model-Evolution-Evaluation-and-Deployment"><span class="nav-number">3.5.</span> <span class="nav-text">Model Evolution, Evaluation, and Deployment</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Compliance"><span class="nav-number">3.6.</span> <span class="nav-text">Compliance</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Varied-Perceptions"><span class="nav-number">3.7.</span> <span class="nav-text">Varied Perceptions</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%88%90%E7%86%9F%E5%BA%A6"><span class="nav-number">4.</span> <span class="nav-text">成熟度</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%92%8C%E4%BC%A0%E7%BB%9F%E8%BD%AF%E5%B7%A5%E7%9A%84%E5%B7%AE%E5%BC%82"><span class="nav-number">5.</span> <span class="nav-text">和传统软工的差异</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E6%9F%A5%E6%89%BE%E5%92%8C%E7%AE%A1%E7%90%86"><span class="nav-number">5.1.</span> <span class="nav-text">数据查找和管理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9A%E5%88%B6%E5%92%8C%E5%A4%8D%E7%94%A8"><span class="nav-number">5.2.</span> <span class="nav-text">定制和复用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A8%A1%E5%9D%97%E5%8C%96"><span class="nav-number">5.3.</span> <span class="nav-text">模块化</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -213,7 +214,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://olive-2019.github.io/Olivia_Lam.github.io/2022/10/11/lowcomote/">
+    <link itemprop="mainEntityOfPage" href="https://olive-2019.github.io/Olivia_Lam.github.io/2022/10/28/SE4ML-a-case-study/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/Olivia_Lam.github.io/images/avatar.gif">
@@ -226,12 +227,12 @@
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="lowcomote | Lam's Blog">
+      <meta itemprop="name" content="Software Engineering for Machine Learning:A Case Study | Lam's Blog">
       <meta itemprop="description" content="">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          lowcomote
+          Software Engineering for Machine Learning:A Case Study
         </h1>
 
         <div class="post-meta-container">
@@ -241,15 +242,9 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
+      
 
-      <time title="创建时间：2022-10-11 14:52:18" itemprop="dateCreated datePublished" datetime="2022-10-11T14:52:18+08:00">2022-10-11</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2022-10-12 15:56:22" itemprop="dateModified" datetime="2022-10-12T15:56:22+08:00">2022-10-12</time>
+      <time title="创建时间：2022-10-28 00:05:15 / 修改时间：00:28:29" itemprop="dateCreated datePublished" datetime="2022-10-28T00:05:15+08:00">2022-10-28</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -257,7 +252,7 @@
       </span>
       <span class="post-meta-item-text">分类于</span>
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/Olivia_Lam.github.io/categories/%E5%9F%BA%E9%87%91%E9%A1%B9%E7%9B%AE/" itemprop="url" rel="index"><span itemprop="name">基金项目</span></a>
+          <a href="/Olivia_Lam.github.io/categories/%E8%AE%BA%E6%96%87/" itemprop="url" rel="index"><span itemprop="name">论文</span></a>
         </span>
     </span>
 
@@ -275,7 +270,7 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>716</span>
+      <span>1k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
@@ -287,10 +282,6 @@
 </div>
 
           
-            <i class="fa fa-thumb-tack"></i>
-            <font color=7D26CD>置顶</font>
-            <span class="post-meta-divider">|</span>
-          
         </div>
       </header>
 
@@ -298,18 +289,35 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <p>低代码开发的一个基金项目，15个方向探查笔记</p>
+        <p>微软发的一篇关于ML中的软工问题的文章。主要提出了ML的9阶段工作流、最佳实践、ML工程成熟度。介绍了ML和传统软工之间的主要差别。</p>
 <span id="more"></span>
 
-<h1 id="ESR-1-Scaling-Up-Citizen-Development-with-Recommender-Chatbots（使用推荐系统提高低代码开发人员体验）"><a href="#ESR-1-Scaling-Up-Citizen-Development-with-Recommender-Chatbots（使用推荐系统提高低代码开发人员体验）" class="headerlink" title="ESR 1: Scaling Up Citizen Development with Recommender Chatbots（使用推荐系统提高低代码开发人员体验）"></a>ESR 1: Scaling Up Citizen Development with Recommender Chatbots（使用推荐系统提高低代码开发人员体验）</h1><p>为了提高LCDP用户开发效率以及开发体验，在LCDP平台嵌入集成了推荐系统的聊天机器人，给开发者推荐下一步需要的项目。</p>
-<p>看了挂出来的三篇文章，一篇是自动生成RS、一篇是RS应用在MDE、一篇是RS在MDE中作用的综述。第一篇讲的是通过DSL配置RS并生成、评估的过程，第二篇讲的是RS在LCDP中应用的架构，第三篇讲了一下RS在MDE中的作用，没细看。</p>
-<blockquote>
-<p>自动生成RS：<a href="https://olive-2019.github.io/Olivia_Lam.github.io/2022/10/01/RS/#more" title="自动生成RS">Automating the Synthesis of Recommender Systems for Modelling Languages</a></p>
-<p>RS应用在MDE：<a href="https://olive-2019.github.io/Olivia_Lam.github.io/2022/10/08/RS3/">Towards automating the construction of recommender systems for low-code development platforms</a></p>
-<p>RS在MDE中的综述：<a href="https://olive-2019.github.io/Olivia_Lam.github.io/2022/10/05/Engineering/#more">Recommender Systems in Model-Driven Engineering</a></p>
-</blockquote>
-<h1 id="ESR-2-Scalable-Cloud-Based-Heterogeneous-Modelling（基于云的可拓展异构）"><a href="#ESR-2-Scalable-Cloud-Based-Heterogeneous-Modelling（基于云的可拓展异构）" class="headerlink" title="ESR 2: Scalable Cloud-Based Heterogeneous Modelling（基于云的可拓展异构）"></a>ESR 2: Scalable Cloud-Based Heterogeneous Modelling（基于云的可拓展异构）</h1><p>目前没找到其它资料（没有具体的工作），只看了一下介绍，应该是优化LCDP编辑器的搭建。之前用的JavaScript技术过于底层，开发不友好。目标是建立基于工程语言原理（其实没读懂这个是啥？）的界面开发，大概就是配置一下就能生成界面的意思吧。</p>
-<h1 id="ESR-3-Deploying-and-Scaling-Knowledge-Models-in-Data-Science"><a href="#ESR-3-Deploying-and-Scaling-Knowledge-Models-in-Data-Science" class="headerlink" title="ESR 3: Deploying and Scaling Knowledge Models in Data Science"></a>ESR 3: Deploying and Scaling Knowledge Models in Data Science</h1>
+<h1 id="人员"><a href="#人员" class="headerlink" title="人员"></a>人员</h1><p>软工流程中需要加入数据科学家。随着数据科学规模越来越大，数据科学家被细分为领域专家（关注业务问题）、建模者（建立预测模型）、平台搭建者（创建基于云的设施）。</p>
+<h1 id="工作流-workflow"><a href="#工作流-workflow" class="headerlink" title="工作流 workflow"></a>工作流 workflow</h1><p>机器学习工作流是高度非线性的，包含多个反馈循环。</p>
+<h1 id="最佳实践"><a href="#最佳实践" class="headerlink" title="最佳实践"></a>最佳实践</h1><h2 id="End-to-end-pipeline-support"><a href="#End-to-end-pipeline-support" class="headerlink" title="End-to-end pipeline support"></a>End-to-end pipeline support</h2><p>实现一个端到端的自动化技术支持，尽可能做到无缝，尤其是数据传入传出部分，尽可能让算法工程师调参更方便</p>
+<h2 id="Data-availability-collection-cleaning-and-management"><a href="#Data-availability-collection-cleaning-and-management" class="headerlink" title="Data availability, collection, cleaning, and management"></a>Data availability, collection, cleaning, and management</h2><p>数据要尽可能复用，减少冗余工作<br>将数据管理工具和ML框架混合在一起，避免数据和模型管理工作碎片化</p>
+<p>数据管理原因：数据源快速变化<br>快速变化原因：工程师自己的操作，传入新数据</p>
+<h2 id="Education-and-Training"><a href="#Education-and-Training" class="headerlink" title="Education and Training"></a>Education and Training</h2><p>传统软工背景的工程师需要学习最新的ML知识。<br>（大概就是讲了一下微软怎么培训的）</p>
+<h2 id="Model-Debugging-and-Interpretability"><a href="#Model-Debugging-and-Interpretability" class="headerlink" title="Model Debugging and Interpretability"></a>Model Debugging and Interpretability</h2><p>模型调试和可解释性<br>调试的点不止于编程错误，还有模型错误和不确定性<br>这块内容我们不必关注</p>
+<h2 id="Model-Evolution-Evaluation-and-Deployment"><a href="#Model-Evolution-Evaluation-and-Deployment" class="headerlink" title="Model Evolution, Evaluation, and Deployment"></a>Model Evolution, Evaluation, and Deployment</h2><p>以ML为中心的软件 模型更改、参数调整、数据更新引起的修订会更频繁。快节奏的模型迭代需要更频繁的部署。<br>自动化的训练和部署不够，仍需要将模型构建和其它软件集成，使用同一个版本控制库</p>
+<h2 id="Compliance"><a href="#Compliance" class="headerlink" title="Compliance"></a>Compliance</h2><p>遵守原则</p>
+<h2 id="Varied-Perceptions"><a href="#Varied-Perceptions" class="headerlink" title="Varied Perceptions"></a>Varied Perceptions</h2><p>经验不同的人会有不同的看法<br>缺乏经验的人更认为培训重要<br>经验越丰富的人越认为工具、端到端的自动化支持、规范重要</p>
+<h1 id="成熟度"><a href="#成熟度" class="headerlink" title="成熟度"></a>成熟度</h1><p>通过以下六个维度分别评分（1-5），取均值为AMI（活动成熟度指数）</p>
+<ol>
+<li>has defined goals 有明确的目标</li>
+<li>is consistently implemented 一致的实现</li>
+<li>documented 有文档的</li>
+<li>automated 自动化的</li>
+<li>measured and tracked 被评估和最终的</li>
+<li>continuously improved 持续改进的</li>
+</ol>
+<h1 id="和传统软工的差异"><a href="#和传统软工的差异" class="headerlink" title="和传统软工的差异"></a>和传统软工的差异</h1><h2 id="数据查找和管理"><a href="#数据查找和管理" class="headerlink" title="数据查找和管理"></a>数据查找和管理</h2><h2 id="定制和复用"><a href="#定制和复用" class="headerlink" title="定制和复用"></a>定制和复用</h2><p>定制和复用ML模型需要的工作更多，模型的一部分是算法，另一部分是参数。通常需要重新训练，甚至需要替换成其它模型</p>
+<h2 id="模块化"><a href="#模块化" class="headerlink" title="模块化"></a>模块化</h2><p>ML模型难以保持边界原因：</p>
+<ul>
+<li>ML模型不容易扩展功能</li>
+<li>ML模型之间的相互作用并不明显</li>
+</ul>
+
     </div>
 
     
@@ -318,21 +326,19 @@
 
     <footer class="post-footer">
           <div class="post-tags">
-              <a href="/Olivia_Lam.github.io/tags/lowcomote/" rel="tag"># lowcomote</a>
+              <a href="/Olivia_Lam.github.io/tags/ML/" rel="tag"># ML</a>
+              <a href="/Olivia_Lam.github.io/tags/SE/" rel="tag"># SE</a>
           </div>
 
         
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/Olivia_Lam.github.io/2022/10/08/RS3/" rel="prev" title="Towards automating the construction of recommender systems for low-code development platforms">
-                  <i class="fa fa-chevron-left"></i> Towards automating the construction of recommender systems for low-code development platforms
+                <a href="/Olivia_Lam.github.io/2022/10/23/MonitoringMLPerformance/" rel="prev" title="Towards a low-code solution for monitoring machine learning model performance">
+                  <i class="fa fa-chevron-left"></i> Towards a low-code solution for monitoring machine learning model performance
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/Olivia_Lam.github.io/2022/10/11/MDEforMLMonitor/" rel="next" title="A Model-Driven Engineering Approach for Monitoring Machine Learning Models">
-                  A Model-Driven Engineering Approach for Monitoring Machine Learning Models <i class="fa fa-chevron-right"></i>
-                </a>
             </div>
           </div>
     </footer>
