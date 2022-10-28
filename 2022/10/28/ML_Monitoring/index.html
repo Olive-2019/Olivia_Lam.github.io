@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/Olivia_Lam.github.io/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/Olivia_Lam.github.io/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/Olivia_Lam.github.io/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/Olivia_Lam.github.io/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/Olivia_Lam.github.io/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha256-AbA177XfpSnFEvgpYu1jMygiLabzPCJCRIBtR5jGc0k=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"olive-2019.github.io","root":"/Olivia_Lam.github.io/","images":"/Olivia_Lam.github.io/images","scheme":"Gemini","darkmode":false,"version":"8.13.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/Olivia_Lam.github.io/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/Olivia_Lam.github.io/js/config.js"></script>
+
+    <meta name="description" content="低代码开发机器学习监控系统">
+<meta property="og:type" content="article">
+<meta property="og:title" content="机器学习监控">
+<meta property="og:url" content="https://olive-2019.github.io/Olivia_Lam.github.io/2022/10/28/ML_Monitoring/index.html">
+<meta property="og:site_name" content="Lam&#39;s Blog">
+<meta property="og:description" content="低代码开发机器学习监控系统">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://github.com/Olive-2019/Lam-Blog-resource/blob/master/images/MDEforMLMonitor/MLworkflow.jpg?raw=true">
+<meta property="og:image" content="https://github.com/Olive-2019/Lam-Blog-resource/blob/master/images/MDEforMLMonitor/domain_meta-model.jpg?raw=true">
+<meta property="article:published_time" content="2022-10-28T04:23:34.000Z">
+<meta property="article:modified_time" content="2022-10-28T10:07:36.668Z">
+<meta property="article:author" content="Olivia Lam">
+<meta property="article:tag" content="ML">
+<meta property="article:tag" content="Monitor">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://github.com/Olive-2019/Lam-Blog-resource/blob/master/images/MDEforMLMonitor/MLworkflow.jpg?raw=true">
+
+
+<link rel="canonical" href="https://olive-2019.github.io/Olivia_Lam.github.io/2022/10/28/ML_Monitoring/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://olive-2019.github.io/Olivia_Lam.github.io/2022/10/28/ML_Monitoring/","path":"2022/10/28/ML_Monitoring/","title":"机器学习监控"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>机器学习监控 | Lam's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/Olivia_Lam.github.io/css/noscript.css">
+  </noscript>
+  <meta name="referrer" content="no-referrer"/>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/Olivia_Lam.github.io/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Lam's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/Olivia_Lam.github.io/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/Olivia_Lam.github.io/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/Olivia_Lam.github.io/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/Olivia_Lam.github.io/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AE%80%E5%8C%96%E7%89%88%E6%91%98%E8%A6%81"><span class="nav-number">1.</span> <span class="nav-text">简化版摘要</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%97%B6%E9%97%B4%E7%BA%BF"><span class="nav-number">2.</span> <span class="nav-text">时间线</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%BA%E7%89%A9%E3%80%81%E6%9C%BA%E6%9E%84"><span class="nav-number">3.</span> <span class="nav-text">人物、机构</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%B8%8C%E6%9C%9B%E8%A7%A3%E5%86%B3%E7%9A%84%E9%97%AE%E9%A2%98"><span class="nav-number">4.</span> <span class="nav-text">希望解决的问题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%83%8C%E6%99%AF"><span class="nav-number">4.1.</span> <span class="nav-text">背景</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B7%A5%E4%BD%9C%E6%B5%81"><span class="nav-number">4.1.1.</span> <span class="nav-text">工作流</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%83%A8%E7%BD%B2%E5%90%8E%E6%BC%82%E7%A7%BB%E9%97%AE%E9%A2%98"><span class="nav-number">4.1.2.</span> <span class="nav-text">部署后漂移问题</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E6%BC%82%E7%A7%BB"><span class="nav-number">4.1.2.1.</span> <span class="nav-text">数据漂移</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%A6%82%E5%BF%B5%E6%BC%82%E7%A7%BB"><span class="nav-number">4.1.2.2.</span> <span class="nav-text">概念漂移</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%9E%E4%BE%8B"><span class="nav-number">4.1.2.3.</span> <span class="nav-text">实例</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A0%94%E7%A9%B6%E6%96%B9%E5%90%91"><span class="nav-number">4.2.</span> <span class="nav-text">研究方向</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E6%8D%95%E6%8D%89"><span class="nav-number">4.2.1.</span> <span class="nav-text">数据捕捉</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AE%97%E6%B3%95%E6%89%A7%E8%A1%8C"><span class="nav-number">4.2.2.</span> <span class="nav-text">算法执行</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%93%8D%E5%BA%94%E6%BC%82%E7%A7%BB"><span class="nav-number">4.2.3.</span> <span class="nav-text">响应漂移</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%9E%E6%96%BD%E6%96%B9%E6%A1%88%E6%8A%80%E6%9C%AF%E8%B7%AF%E7%BA%BF"><span class="nav-number">5.</span> <span class="nav-text">实施方案技术路线</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%83%A8%E7%BD%B2%E7%8E%AF%E5%A2%83%E5%81%87%E8%AE%BE"><span class="nav-number">5.1.</span> <span class="nav-text">部署环境假设</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%83%E6%A8%A1%E5%9E%8B%E7%BB%84%E4%BB%B6"><span class="nav-number">5.2.</span> <span class="nav-text">元模型组件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%83%E6%A8%A1%E5%9E%8B%E8%AE%BE%E8%AE%A1"><span class="nav-number">5.3.</span> <span class="nav-text">元模型设计</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%83%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%A6%A5%E5%8D%8F"><span class="nav-number">5.4.</span> <span class="nav-text">元模型的妥协</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9C%89%E6%84%8F%E4%B9%89%E7%9A%84%E7%BB%93%E6%9E%9C"><span class="nav-number">6.</span> <span class="nav-text">有意义的结果</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AF%B9%E8%AE%BA%E6%96%87%E7%9A%84%E4%BC%98%E5%8A%BF%E5%92%8C%E5%B1%80%E9%99%90%E6%80%A7%E7%9A%84%E8%AF%84%E4%BB%B7"><span class="nav-number">7.</span> <span class="nav-text">对论文的优势和局限性的评价</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AF%B9%E6%88%91%E4%BB%AC%E7%8E%B0%E5%9C%A8%E7%9A%84%E5%B7%A5%E4%BD%9C%E6%9C%89%E4%BB%80%E4%B9%88%E5%90%AF%E5%8F%91"><span class="nav-number">8.</span> <span class="nav-text">对我们现在的工作有什么启发</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Olivia Lam</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/Olivia_Lam.github.io/archives/">
+          <span class="site-state-item-count">11</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/Olivia_Lam.github.io/categories/">
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/Olivia_Lam.github.io/tags/">
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Olive-2019" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Olive-2019" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://olive-2019.github.io/Olivia_Lam.github.io/2022/10/28/ML_Monitoring/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/Olivia_Lam.github.io/images/avatar.gif">
+      <meta itemprop="name" content="Olivia Lam">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lam's Blog">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="机器学习监控 | Lam's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          机器学习监控
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2022-10-28 12:23:34 / 修改时间：18:07:36" itemprop="dateCreated datePublished" datetime="2022-10-28T12:23:34+08:00">2022-10-28</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/Olivia_Lam.github.io/categories/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">论文阅读笔记</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>2.8k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>3 分钟</span>
+    </span>
+</div>
+
+          
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>低代码开发机器学习监控系统</p>
+<span id="more"></span>
+
+<h1 id="简化版摘要"><a href="#简化版摘要" class="headerlink" title="简化版摘要"></a>简化版摘要</h1><p>根据2019年微软提出的ML工作流，Panagiotis Kourouklidis关注ML模型部署后的监控问题，在2020年在这个领域发了一篇survey并提出了一些研究方向，2021年提出了一个元模型试图解决自动生成ML模型监控程序的问题。同时也给出了该元模型基于Kubernete生成系统的一个例子。</p>
+<p>其中比较有意义的就是这个元模型以及提及的一些工具。跟DWF目前的工作关系不大，但是可能对未来的工作有比较重要的意义。</p>
+<p>引文中大多为ML领域的文章，对我们来说比较有意义的可能是微软2019年发的机器学习中的软工。引用这两篇的文章大多为review，并没有对这项工作做出什么拓展。</p>
+<h1 id="时间线"><a href="#时间线" class="headerlink" title="时间线"></a>时间线</h1><p>2019年微软发的一篇关于ML中的软工的文章中提到了机器学习工作流的九个阶段，其中包括了Model Monitoring。</p>
+<blockquote>
+<p><em>Software Engineering for Machine Learning: A Case Study</em></p>
+</blockquote>
+<p>2020年Panagiotis Kourouklidis发表了第一篇关于自动生成监控系统的文章，主要是说了一下目前ML模型部署后面临的问题以及他的研究计划</p>
+<blockquote>
+<p><em>Towards a low-code solution for monitoring machine learning model performance</em></p>
+</blockquote>
+<p>2021年由同一作者发表了第二篇相关文章，提出了一个原始的元模型，并基于Kubernete给出了实现。</p>
+<blockquote>
+<p><em>A Model-Driven Engineering Approach for Monitoring Machine Learning Models</em></p>
+</blockquote>
+<p>至此，该作者没有更新的研究成果，在引文中也没找到更新的研究。此外，也搜索了一下LCDP和ML Monitoring，也没有人做这个。</p>
+<h1 id="人物、机构"><a href="#人物、机构" class="headerlink" title="人物、机构"></a>人物、机构</h1><p>一作是来自University of York和British Telecom的Panagiotis Kourouklidis，目前只有这两篇文章，猜测不是专职做研究的人员。</p>
+<p>合作作者是University of York或British Telecom的研究人员</p>
+<h1 id="希望解决的问题"><a href="#希望解决的问题" class="headerlink" title="希望解决的问题"></a>希望解决的问题</h1><p>实现<strong>自动生成</strong>一个<strong>机器学习模型的监控</strong>系统</p>
+<h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><h3 id="工作流"><a href="#工作流" class="headerlink" title="工作流"></a>工作流</h3><p><img src="https://github.com/Olive-2019/Lam-Blog-resource/blob/master/images/MDEforMLMonitor/MLworkflow.jpg?raw=true" alt="工作流"></p>
+<h3 id="部署后漂移问题"><a href="#部署后漂移问题" class="headerlink" title="部署后漂移问题"></a>部署后漂移问题</h3><p>有监督学习中的X，Y通常被视为服从联合概率分布P(X, Y)的随机变量。由于真实世界情况复杂且不稳定，概率分布会发生变化，即概念漂移、采样漂移、先验概率漂移或更一般的数据集漂移。</p>
+<p>此处主要讨论数据漂移和概念漂移两种。</p>
+<h4 id="数据漂移"><a href="#数据漂移" class="headerlink" title="数据漂移"></a>数据漂移</h4><p>数据漂移可能是由采样机制，环境中的未知因素随时间变化引起，数据漂移不一定导致输出错误，没有数据漂移也不一定能保证输出正确。目前可以通过检查数据输入来检测数据漂移。</p>
+<h4 id="概念漂移"><a href="#概念漂移" class="headerlink" title="概念漂移"></a>概念漂移</h4><p>概念漂移指输入-输出映射发生变化。概念漂移可能是真实的，也可能是虚拟的。真实的指的是由于某些未知因素发生改变，导致映射发生改变；虚拟的指的是映射实际并没有发生改变，只是由于其它原因观测到这个现象（比如有偏采样）。</p>
+<h4 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h4><p>客服中心的服务对象的反馈：使用等待时长和服务时长拟合反馈</p>
+<p>目前模型是总时长小于20则为positive</p>
+<p>模型部署后可能存在四种状态，无漂移、数据漂移、概念漂移、两种漂移并存。</p>
+<p>无漂移。理想状态，即输入的数据分布不改变，模型也一直符合现实状况</p>
+<p>数据漂移。例如某个客服没上班，等待时长变长，但是用户并不会因此愿意等待更长时间。这种数据漂移并没有导致输出错误</p>
+<p>概念漂移。模型不再符合现实情况，但是数据分布不发生改变，输出存在错误。如用户愿意等的更长，则现实模型划分线应该上移。<br>这种情况下，模型需要重新学习新数据。</p>
+<p>两种漂移并存。有偏采样发生时，输入数据的分布自然与学习集不同了。同时，由于学习集的分布与真实输入不同，训练出来的模型自然不能用于真实输入。但是我们会以为观察到数据漂移和真实概念漂移。目前区分真实和虚假的概念漂移仍困难。</p>
+<h2 id="研究方向"><a href="#研究方向" class="headerlink" title="研究方向"></a>研究方向</h2><p>希望开发一个抽象化的低代码的解决方案，包括DSL和参考实现。允许用户只需要配置模型监控方案，不必关注具体细节。将模型监控的任务分成三大类，分别是，数据捕捉、算法执行、响应漂移。</p>
+<h3 id="数据捕捉"><a href="#数据捕捉" class="headerlink" title="数据捕捉"></a>数据捕捉</h3><p>为了检测概念漂移，需要存储模型输出并与反馈进行对比。在前面提到的实例中，可以建立反向代理服务器转发请求和响应，并将事件写到数据库中。</p>
+<p>收集数据的两个重要来源：</p>
+<ul>
+<li>模型的输入输出</li>
+<li>反馈</li>
+</ul>
+<p>收集反馈的困难在于收集方式取决于模型，例如推荐系统的反馈收集只需要记录一下是否点击，而图片分类器的反馈收集必须要人工介入。</p>
+<h3 id="算法执行"><a href="#算法执行" class="headerlink" title="算法执行"></a>算法执行</h3><p>检测算法的性能是非常重要的<br>希望能使用DSL来描述漂移检测算法，然后生成适用于不同框架的算法</p>
+<h3 id="响应漂移"><a href="#响应漂移" class="headerlink" title="响应漂移"></a>响应漂移</h3><p>方法是多样的，可以包含以下两种</p>
+<ul>
+<li>检测到漂移时简单地发送email</li>
+<li>自动触发重新训练模型的流程</li>
+</ul>
+<p>前者多用于数据漂移，后者多用于概念漂移。</p>
+<h1 id="实施方案技术路线"><a href="#实施方案技术路线" class="headerlink" title="实施方案技术路线"></a>实施方案技术路线</h1><h2 id="部署环境假设"><a href="#部署环境假设" class="headerlink" title="部署环境假设"></a>部署环境假设</h2><ul>
+<li>ML模型持续接收未标记的样本（推理请求），并需要返回一个预测结果（推理响应）</li>
+<li>未标记样本可能在未知时长后接收到真实标签</li>
+<li>定期根据ML模型接收到的最新数据决定是否修正模型</li>
+<li>由领域专家定义不同种类的漂移响应策略</li>
+</ul>
+<h2 id="元模型组件"><a href="#元模型组件" class="headerlink" title="元模型组件"></a>元模型组件</h2><ul>
+<li>指定想要监控哪一个ML模型的机制</li>
+<li>指定哪些推理请求和推理响应字段需要被捕捉。（这也是在命名被捕捉字段的方法。命名可以方便其它实体单独引用它。）</li>
+<li>定义周期性漂移检测执行机制</li>
+<li>定义检测到漂移时，需要采取的措施</li>
+</ul>
+<h2 id="元模型设计"><a href="#元模型设计" class="headerlink" title="元模型设计"></a>元模型设计</h2><p>虽然希望元模型和具体底层技术完全分离，但为尽快从算法专家处得到反馈，这个版本的元模型做了一些妥协。下文将会提及这些妥协。</p>
+<p><img src="https://github.com/Olive-2019/Lam-Blog-resource/blob/master/images/MDEforMLMonitor/domain_meta-model.jpg?raw=true" alt="元模型设计"></p>
+<p>deployment抽象类包括了ML监控方法的所有方面。在系统中，通常有一个Model子类的实例和任意数量的DriftDetector子类的实例。</p>
+<p>Model类包含了名称、序列化ML模型的URL、创建它的框架名称、多个输入的IO实例和一个输出的IO实例。</p>
+<p>IO类是模型的输入输出，包含输入&#x2F;输出的名字和数据类型的枚举属性。</p>
+<p>DriftDetector类周期性地执行漂移检测算法，属性包含名字、频率、email、定制容器。执行的算法可能是底层平台包含的算法也可能是自定义的算法。DataDriftDetector需要训练数据和现有数据。ConceptDriftDetector需要真实数据的预测标签。</p>
+<h2 id="元模型的妥协"><a href="#元模型的妥协" class="headerlink" title="元模型的妥协"></a>元模型的妥协</h2><ul>
+<li>为了简化展示，ML模型将会被部署到web端点。因此Model类中需要序列化ML模型的URL、创建它的框架名称这两个属性，这两个属性并不需要被包含进来，因为部署过程可能是单独执行的。</li>
+<li>区分两种漂移检测器。区分是为了简化底层技术实现。</li>
+<li>DriftDetector属性中包含了email，检测到模型漂移的行为只能是发送email了。（可以抽象化成一个超类）</li>
+</ul>
+<h1 id="有意义的结果"><a href="#有意义的结果" class="headerlink" title="有意义的结果"></a>有意义的结果</h1><h1 id="对论文的优势和局限性的评价"><a href="#对论文的优势和局限性的评价" class="headerlink" title="对论文的优势和局限性的评价"></a>对论文的优势和局限性的评价</h1><h1 id="对我们现在的工作有什么启发"><a href="#对我们现在的工作有什么启发" class="headerlink" title="对我们现在的工作有什么启发"></a>对我们现在的工作有什么启发</h1><p>这个作者做的东西有点偏离了LCDP，是自动生成的ML Model监控程序的工作。对我们目前的工作并没有什么帮助，但是假如我们要做RS嵌入LCDP平台实现智能推荐的话，对RS系统的监控也是一个值得思考的工作。另外，</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/Olivia_Lam.github.io/tags/ML/" rel="tag"># ML</a>
+              <a href="/Olivia_Lam.github.io/tags/Monitor/" rel="tag"># Monitor</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/Olivia_Lam.github.io/2022/10/28/SE4ML-a-case-study/" rel="prev" title="Software Engineering for Machine Learning:A Case Study">
+                  <i class="fa fa-chevron-left"></i> Software Engineering for Machine Learning:A Case Study
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Olivia Lam</span>
+</div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+      <span>站点总字数：</span>
+    <span title="站点总字数">19k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span>站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">18 分钟</span>
+  </span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/Olivia_Lam.github.io/js/comments.js"></script><script src="/Olivia_Lam.github.io/js/utils.js"></script><script src="/Olivia_Lam.github.io/js/motion.js"></script><script src="/Olivia_Lam.github.io/js/next-boot.js"></script>
+
+  
+<script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.0/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="/Olivia_Lam.github.io/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+</body>
+</html>
