@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/Olivia_Lam.github.io/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/Olivia_Lam.github.io/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/Olivia_Lam.github.io/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/Olivia_Lam.github.io/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/Olivia_Lam.github.io/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha256-AbA177XfpSnFEvgpYu1jMygiLabzPCJCRIBtR5jGc0k=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"olive-2019.github.io","root":"/Olivia_Lam.github.io/","images":"/Olivia_Lam.github.io/images","scheme":"Gemini","darkmode":false,"version":"8.13.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/Olivia_Lam.github.io/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/Olivia_Lam.github.io/js/config.js"></script>
+
+    <meta name="description" content="推荐系统在软件建模中的作用的综述">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Recommender Systems in Model-Driven Engineering">
+<meta property="og:url" content="https://olive-2019.github.io/Olivia_Lam.github.io/2022/10/05/RSinMDE/index.html">
+<meta property="og:site_name" content="Lam&#39;s Blog">
+<meta property="og:description" content="推荐系统在软件建模中的作用的综述">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://github.com/Olive-2019/Lam-Blog-resource/blob/master/images/RSinMDE/4dimensions.jpg?raw=true">
+<meta property="og:image" content="https://github.com/Olive-2019/Lam-Blog-resource/blob/master/images/RSinMDE/domain.jpg?raw=true">
+<meta property="og:image" content="https://github.com/Olive-2019/Lam-Blog-resource/blob/master/images/RSinMDE/tooling.jpg?raw=true">
+<meta property="og:image" content="https://github.com/Olive-2019/Lam-Blog-resource/blob/master/images/RSinMDE/recommendation.jpg?raw=true">
+<meta property="og:image" content="https://github.com/Olive-2019/Lam-Blog-resource/blob/master/images/RSinMDE/evaluation.jpg?raw=true">
+<meta property="article:published_time" content="2022-10-05T07:31:50.000Z">
+<meta property="article:modified_time" content="2022-11-01T09:15:30.564Z">
+<meta property="article:author" content="Olivia Lam">
+<meta property="article:tag" content="lowcomote">
+<meta property="article:tag" content="RS">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://github.com/Olive-2019/Lam-Blog-resource/blob/master/images/RSinMDE/4dimensions.jpg?raw=true">
+
+
+<link rel="canonical" href="https://olive-2019.github.io/Olivia_Lam.github.io/2022/10/05/RSinMDE/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://olive-2019.github.io/Olivia_Lam.github.io/2022/10/05/RSinMDE/","path":"2022/10/05/RSinMDE/","title":"Recommender Systems in Model-Driven Engineering"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Recommender Systems in Model-Driven Engineering | Lam's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/Olivia_Lam.github.io/css/noscript.css">
+  </noscript>
+  <meta name="referrer" content="no-referrer"/>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/Olivia_Lam.github.io/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Lam's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/Olivia_Lam.github.io/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/Olivia_Lam.github.io/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/Olivia_Lam.github.io/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/Olivia_Lam.github.io/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%89%E4%B8%AA%E9%97%AE%E9%A2%98"><span class="nav-number">1.</span> <span class="nav-text">三个问题</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#RS-in-MDE-%E6%A8%A1%E5%9E%8B%E9%A9%B1%E5%8A%A8%E5%B7%A5%E7%A8%8B%E4%B8%AD%E7%9A%84%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F"><span class="nav-number">2.</span> <span class="nav-text">RS in MDE 模型驱动工程中的推荐系统</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Domain-%E9%A2%86%E5%9F%9F"><span class="nav-number">3.</span> <span class="nav-text">Domain 领域</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Complete-%E5%AE%8C%E6%88%90%E6%A8%A1%E5%9E%8B"><span class="nav-number">3.1.</span> <span class="nav-text">Complete 完成模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Create-%E5%88%9B%E5%BB%BA%E6%A8%A1%E5%9E%8B"><span class="nav-number">3.2.</span> <span class="nav-text">Create 创建模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Find-%E6%9F%A5%E6%89%BE%E5%B7%A5%E4%BB%B6"><span class="nav-number">3.3.</span> <span class="nav-text">Find 查找工件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Repair-%E4%BF%AE%E5%A4%8D%E5%B7%A5%E4%BB%B6"><span class="nav-number">3.4.</span> <span class="nav-text">Repair 修复工件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Reuse-%E5%A4%8D%E7%94%A8"><span class="nav-number">3.5.</span> <span class="nav-text">Reuse 复用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Other-purpose-%E5%85%B6%E5%AE%83%E7%9B%AE%E7%9A%84"><span class="nav-number">3.6.</span> <span class="nav-text">Other purpose 其它目的</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Tooling-%E5%B7%A5%E5%85%B7"><span class="nav-number">4.</span> <span class="nav-text">Tooling 工具</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Maturity-%E6%88%90%E7%86%9F%E5%BA%A6"><span class="nav-number">4.1.</span> <span class="nav-text">Maturity 成熟度</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Tool-Independence-%E5%B7%A5%E5%85%B7%E7%8B%AC%E7%AB%8B%E6%80%A7"><span class="nav-number">4.2.</span> <span class="nav-text">Tool Independence 工具独立性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#trigger-recommendations-%E8%A7%A6%E5%8F%91%E6%96%B9%E5%BC%8F"><span class="nav-number">4.3.</span> <span class="nav-text">trigger recommendations 触发方式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Recommendation-enactment-%E5%88%B6%E5%AE%9A%E5%BB%BA%E8%AE%AE%E6%96%B9%E5%BC%8F"><span class="nav-number">4.4.</span> <span class="nav-text">Recommendation enactment 制定建议方式</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Recommendation-%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F"><span class="nav-number">5.</span> <span class="nav-text">Recommendation 推荐系统</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Recommendation-Method-%E6%8E%A8%E8%8D%90%E6%96%B9%E6%B3%95"><span class="nav-number">5.0.1.</span> <span class="nav-text">Recommendation Method 推荐方法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#User-Preference-%E7%94%A8%E6%88%B7%E5%81%8F%E5%A5%BD"><span class="nav-number">5.1.</span> <span class="nav-text">User Preference 用户偏好</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Recommendation-Item-%E6%8E%A8%E8%8D%90%E7%9A%84%E9%A1%B9%E7%9B%AE"><span class="nav-number">5.2.</span> <span class="nav-text">Recommendation Item 推荐的项目</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Recommendation-Degree-%E6%8E%A8%E8%8D%90%E5%BA%A6"><span class="nav-number">5.3.</span> <span class="nav-text">Recommendation Degree 推荐度</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Evalution-%E8%AF%84%E4%BB%B7"><span class="nav-number">6.</span> <span class="nav-text">Evalution 评价</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Method-%E6%96%B9%E6%B3%95"><span class="nav-number">6.1.</span> <span class="nav-text">Method 方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Offline-Experiment-%E7%A6%BB%E7%BA%BF%E5%AE%9E%E9%AA%8C"><span class="nav-number">6.1.1.</span> <span class="nav-text">Offline Experiment 离线实验</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Online-Experiment-%E5%9C%A8%E7%BA%BF%E5%AE%9E%E9%AA%8C"><span class="nav-number">6.1.2.</span> <span class="nav-text">Online Experiment 在线实验</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#User-Study-%E7%94%A8%E6%88%B7%E7%A0%94%E7%A9%B6"><span class="nav-number">6.1.3.</span> <span class="nav-text">User Study 用户研究</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Metrics-%E6%8C%87%E6%A0%87"><span class="nav-number">6.2.</span> <span class="nav-text">Metrics 指标</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Olivia Lam</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/Olivia_Lam.github.io/archives/">
+          <span class="site-state-item-count">11</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/Olivia_Lam.github.io/categories/">
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/Olivia_Lam.github.io/tags/">
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Olive-2019" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Olive-2019" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://olive-2019.github.io/Olivia_Lam.github.io/2022/10/05/RSinMDE/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/Olivia_Lam.github.io/images/avatar.gif">
+      <meta itemprop="name" content="Olivia Lam">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lam's Blog">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Recommender Systems in Model-Driven Engineering | Lam's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Recommender Systems in Model-Driven Engineering
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2022-10-05 15:31:50" itemprop="dateCreated datePublished" datetime="2022-10-05T15:31:50+08:00">2022-10-05</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2022-11-01 17:15:30" itemprop="dateModified" datetime="2022-11-01T17:15:30+08:00">2022-11-01</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/Olivia_Lam.github.io/categories/%E8%AE%BA%E6%96%87/" itemprop="url" rel="index"><span itemprop="name">论文</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>5.7k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>5 分钟</span>
+    </span>
+</div>
+
+          
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>推荐系统在软件建模中的作用的综述</p>
+<span id="more"></span>
+
+<h1 id="三个问题"><a href="#三个问题" class="headerlink" title="三个问题"></a>三个问题</h1><ol>
+<li>推荐系统在软件建模中起什么作用？<br>通常用于完成和修复工件。<br>通常是独立于语言的，特定的一般针对UML或过程建模符号</li>
+<li>哪些推荐技术用于支持软件建模？评价方法？<br>基于内容&gt;基于知识<br>评价方法：离线</li>
+<li>推荐系统还有什么可做的？<br>几乎没有用于模型转化或代码生成的推荐系统，很少推荐系统用于创建、重用、查找工件。此外，还有有效的软件建模的工件库、协同过滤利用群体知识、基于用户的推荐系统评估、与低代码平台的有效寄成机制</li>
+</ol>
+<h1 id="RS-in-MDE-模型驱动工程中的推荐系统"><a href="#RS-in-MDE-模型驱动工程中的推荐系统" class="headerlink" title="RS in MDE 模型驱动工程中的推荐系统"></a>RS in MDE 模型驱动工程中的推荐系统</h1><p>文章分了四个维度来叙述模型驱动工程中的推荐系统，分别是推荐系统在什么领域解决什么问题、提出的工具有什么特点、使用到了什么样的推荐系统以及怎么评价这个推荐系统。</p>
+<p><img src="https://github.com/Olive-2019/Lam-Blog-resource/blob/master/images/RSinMDE/4dimensions.jpg?raw=true" alt="四个维度"></p>
+<h1 id="Domain-领域"><a href="#Domain-领域" class="headerlink" title="Domain 领域"></a>Domain 领域</h1><p><img src="https://github.com/Olive-2019/Lam-Blog-resource/blob/master/images/RSinMDE/domain.jpg?raw=true" alt="领域"><br>领域部分将RS能解决的问题正交地分为了三个维度，分别是artifacts，即能针对什么工件、LanguageIndependent，即是否语言独立的、Purpose，即RS针对的是什么什么目的。</p>
+<p>针对工件和目标，又正交地分成了24个维度，将多个方法分别分到了这些维度上。</p>
+<h2 id="Complete-完成模型"><a href="#Complete-完成模型" class="headerlink" title="Complete 完成模型"></a>Complete 完成模型</h2><p>第一种是使用搜索技术扩展部分模型形成完整模型。<br>使用搜索技术DIA GEN 基于超图语法规律（hyper-graph grammar rules）生成可能的工件，具有高计算复杂度，DIG MDE 发现时间复杂度过高后，会建议手动修改模型保证模型补全完成。<br>第二种是给出一个模型逐步完成的建议。这种建议来自模型库中已有的模型碎片。</p>
+<h2 id="Create-创建模型"><a href="#Create-创建模型" class="headerlink" title="Create 创建模型"></a>Create 创建模型</h2><p>创建模型的相对较少，只有两个，一个是针对元模型的，另一个是针对模型的。<br>针对元模型的是DSL-maps，用思维导图表达DSL需求，DSL-maps推荐元模型模式，用户选择以后可以再改进。<br>针对模型的是用例图的建模助手（UC-check）。创建用例图时，向导会推荐合适的参与者和用例。</p>
+<h2 id="Find-查找工件"><a href="#Find-查找工件" class="headerlink" title="Find 查找工件"></a>Find 查找工件</h2><p>查找模型工件。从（异构）库中查找并根据用户适用性排序。</p>
+<h2 id="Repair-修复工件"><a href="#Repair-修复工件" class="headerlink" title="Repair 修复工件"></a>Repair 修复工件</h2><p>修复工件。感觉跟推荐系统关系并不是很大的样子</p>
+<h2 id="Reuse-复用"><a href="#Reuse-复用" class="headerlink" title="Reuse 复用"></a>Reuse 复用</h2><p>不只是查找，在新的上下文中提供复用工件的帮助。</p>
+<h2 id="Other-purpose-其它目的"><a href="#Other-purpose-其它目的" class="headerlink" title="Other purpose 其它目的"></a>Other purpose 其它目的</h2><p>一些比较特殊的需求，没太看懂。</p>
+<h1 id="Tooling-工具"><a href="#Tooling-工具" class="headerlink" title="Tooling 工具"></a>Tooling 工具</h1><p><img src="https://github.com/Olive-2019/Lam-Blog-resource/blob/master/images/RSinMDE/tooling.jpg?raw=true" alt="工具"></p>
+<p>工具部分介绍了工具的成熟度、工具的独立性、工具中推荐系统的触发方式、推荐系统的互动方式</p>
+<h2 id="Maturity-成熟度"><a href="#Maturity-成熟度" class="headerlink" title="Maturity 成熟度"></a>Maturity 成熟度</h2><p>三个级别的成熟度，没有实现的提议，有概念的原型，完整实现（包含框架、插件、MDE）。</p>
+<div id="echarts4016" style="width: 85%;height: 400px;margin: 0 auto"></div>
+<script src="https://cdn.bootcss.com/echarts/3.8.0/echarts.common.min.js"></script>
+<script type="text/javascript">
+        // 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById('echarts4016'));
+        // 指定图表的配置项和数据
+        var option = option = {
+  title: {
+    text: '成熟度',
+    subtext: '51个方法',
+    left: 'center'
+  },
+  tooltip: {
+    trigger: 'item'
+  },
+  legend: {
+    orient: 'vertical',
+    left: 'left'
+  },
+  series: [
+    {
+      name: '方法成熟度',
+      type: 'pie',
+      radius: '60%',
+      data: [
+        { value: 4, name: 'Proposals 建议' },
+        { value: 19, name: 'Prototype 原型' },
+        { value: 28, name: 'Full implement 完整实现' }
+      ],
+      emphasis: {
+        itemStyle: {
+          shadowBlur: 10,
+          shadowOffsetX: 0,
+          shadowColor: 'rgba(0, 0, 0, 0.5)'
+        }
+      }
+    }
+  ]
+};
+        // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option);
+</script>
+
+<p>绝大部分提供了完整实现，下面为完整实现的28个方法中的分类。</p>
+<div id="echarts6076" style="width: 85%;height: 400px;margin: 0 auto"></div>
+<script src="https://cdn.bootcss.com/echarts/3.8.0/echarts.common.min.js"></script>
+<script type="text/javascript">
+        // 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById('echarts6076'));
+        // 指定图表的配置项和数据
+        var option = option = {
+  title: {
+    text: '完整实现',
+    subtext: '28个方法',
+    left: 'center'
+  },
+  tooltip: {
+    trigger: 'item'
+  },
+  legend: {
+    orient: 'vertical',
+    left: 'left'
+  },
+  series: [
+    {
+      name: '完整实现',
+      type: 'pie',
+      radius: '60%',
+      data: [
+
+    { value: 13, name: 'plug-in 插件' },
+        { value: 13, name: 'systems/extensions of systems 系统/系统扩展' },
+        { value: 3, name: 'Framework 框架' }
+      ],
+      emphasis: {
+        itemStyle: {
+          shadowBlur: 10,
+          shadowOffsetX: 0,
+          shadowColor: 'rgba(0, 0, 0, 0.5)'
+        }
+      }
+    }
+  ]
+};
+        // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option);
+</script>
+
+<h2 id="Tool-Independence-工具独立性"><a href="#Tool-Independence-工具独立性" class="headerlink" title="Tool Independence 工具独立性"></a>Tool Independence 工具独立性</h2><p>工具独立性只能在原型和完整实现中讨论，建议不在讨论范围中。根据是否可以集成到其它MDE工具中判断是否具有工具独立性。</p>
+<div id="echarts6757" style="width: 85%;height: 400px;margin: 0 auto"></div>
+<script src="https://cdn.bootcss.com/echarts/3.8.0/echarts.common.min.js"></script>
+<script type="text/javascript">
+        // 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById('echarts6757'));
+        // 指定图表的配置项和数据
+        var option = option = {
+  title: {
+    text: '工具独立性',
+    subtext: '',
+    left: 'center'
+  },
+  tooltip: {
+    trigger: 'item'
+  },
+  legend: {
+    orient: 'vertical',
+    left: 'left'
+  },
+  series: [
+    {
+      name: '工具独立性',
+      type: 'pie',
+      radius: '60%',
+      data: [
+
+    { value: 40, name: 'tool-dependent 非独立工具' },
+        { value: 4, name: '提供了显式的方法促进与其它工具的集成' },
+        { value: 1, name: '真正与平台无关' }
+      ],
+      emphasis: {
+        itemStyle: {
+          shadowBlur: 10,
+          shadowOffsetX: 0,
+          shadowColor: 'rgba(0, 0, 0, 0.5)'
+        }
+      }
+    }
+  ]
+};
+        // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option);
+</script>
+
+<h2 id="trigger-recommendations-触发方式"><a href="#trigger-recommendations-触发方式" class="headerlink" title="trigger recommendations 触发方式"></a>trigger recommendations 触发方式</h2><p>触发建议的方式：按需、主动。前者，用户需要主动触发建议；后者，系统主动提建议</p>
+<div id="echarts8132" style="width: 85%;height: 400px;margin: 0 auto"></div>
+<script src="https://cdn.bootcss.com/echarts/3.8.0/echarts.common.min.js"></script>
+<script type="text/javascript">
+        // 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById('echarts8132'));
+        // 指定图表的配置项和数据
+        var option = option = {
+  title: {
+    text: '触发方式',
+    subtext: 'trigger recommendations',
+    left: 'center'
+  },
+  tooltip: {
+    trigger: 'item'
+  },
+  legend: {
+    orient: 'vertical',
+    left: 'left'
+  },
+  series: [
+    {
+      name: '触发方式',
+      type: 'pie',
+      radius: '60%',
+      data: [
+
+    { value: 41, name: 'user demand 用户主动' },
+        { value: 12, name: 'proactively 被动' }
+      ],
+      emphasis: {
+        itemStyle: {
+          shadowBlur: 10,
+          shadowOffsetX: 0,
+          shadowColor: 'rgba(0, 0, 0, 0.5)'
+        }
+      }
+    }
+  ]
+};
+        // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option);
+</script>
+
+<h2 id="Recommendation-enactment-制定建议方式"><a href="#Recommendation-enactment-制定建议方式" class="headerlink" title="Recommendation enactment 制定建议方式"></a>Recommendation enactment 制定建议方式</h2><p>制定建议的方式：<br>手动：给出一个序列，用户决定使用方式<br>交互式：推荐系统允许用户选择项目，然后应用到某个上下文中<br>自动：用户不参与<br>半自动：自动的过程中用户给出一点操作</p>
+<div id="echarts6210" style="width: 85%;height: 400px;margin: 0 auto"></div>
+<script src="https://cdn.bootcss.com/echarts/3.8.0/echarts.common.min.js"></script>
+<script type="text/javascript">
+        // 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById('echarts6210'));
+        // 指定图表的配置项和数据
+        var option = option = {
+  title: {
+    text: '制定建议方式',
+    subtext: 'Recommendation enactment',
+    left: 'center'
+  },
+  tooltip: {
+    trigger: 'item'
+  },
+  legend: {
+    orient: 'vertical',
+    left: 'left'
+  },
+  series: [
+    {
+      name: '制定建议方式',
+      type: 'pie',
+      radius: '60%',
+      data: [
+
+    { value: 16, name: 'manually 用户手动' },
+        { value: 25, name: 'interactively 交互式' },
+
+{ value: 3, name: 'semiautomated 半自动的' },
+
+{ value: 2, name: 'automated 自动的' }
+      ],
+      emphasis: {
+        itemStyle: {
+          shadowBlur: 10,
+          shadowOffsetX: 0,
+          shadowColor: 'rgba(0, 0, 0, 0.5)'
+        }
+      }
+    }
+  ]
+};
+        // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option);
+</script>
+
+<h1 id="Recommendation-推荐系统"><a href="#Recommendation-推荐系统" class="headerlink" title="Recommendation 推荐系统"></a>Recommendation 推荐系统</h1><p><img src="https://github.com/Olive-2019/Lam-Blog-resource/blob/master/images/RSinMDE/recommendation.jpg?raw=true" alt="推荐系统"></p>
+<p>推荐系统方面介绍了推荐方法、用户偏好收集、推荐的项目以及推荐度。</p>
+<h3 id="Recommendation-Method-推荐方法"><a href="#Recommendation-Method-推荐方法" class="headerlink" title="Recommendation Method 推荐方法"></a>Recommendation Method 推荐方法</h3><p><strong>基于内容</strong>的方法使用不同内容编码和相似性来表示</p>
+<p><strong>协同过滤</strong>利用了用户的历史选择信息</p>
+<p><strong>基于知识</strong>的方法可以分为<strong>基于约束</strong>和<strong>基于案例</strong>的。基于约束是指寻找一组满足领域相关规则的项目，基于案例是指搜索类似案例的过往解决方案来解决。</p>
+<p><strong>混合</strong>方法是指将前面三种方法混合。</p>
+<p>还有一些其它的，使用静态分析或搜索的方法。</p>
+<p>Hermes框架适用度比较广。</p>
+<h2 id="User-Preference-用户偏好"><a href="#User-Preference-用户偏好" class="headerlink" title="User Preference 用户偏好"></a>User Preference 用户偏好</h2><p>获取方式包括显式和隐式。隐式是监控用户动作；显式是直接收集用户信息，如调查问卷等。绝大多数都是隐式收集用户偏好<br>另外，收集的用户偏好可以是长期的也可以是短期的。90%的算法收集的都是短期偏好。</p>
+<h2 id="Recommendation-Item-推荐的项目"><a href="#Recommendation-Item-推荐的项目" class="headerlink" title="Recommendation Item 推荐的项目"></a>Recommendation Item 推荐的项目</h2><p>项目可能是工件（碎片或完整工件）、建模活动中的建议、修复过程中的编辑动作。</p>
+<h2 id="Recommendation-Degree-推荐度"><a href="#Recommendation-Degree-推荐度" class="headerlink" title="Recommendation Degree 推荐度"></a>Recommendation Degree 推荐度</h2><p>推荐度分为两个维度，分别是基数和排序。基数指建议的总数；排序指建议是否被排序。</p>
+<div id="echarts9515" style="width: 85%;height: 400px;margin: 0 auto"></div>
+<script src="https://cdn.bootcss.com/echarts/3.8.0/echarts.common.min.js"></script>
+<script type="text/javascript">
+        // 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById('echarts9515'));
+        // 指定图表的配置项和数据
+        var option = option = {
+  title: {
+    text: '推荐度',
+    subtext: '推荐基数',
+    left: 'center'
+  },
+  tooltip: {
+    trigger: 'item'
+  },
+  legend: {
+    orient: 'vertical',
+    left: 'left'
+  },
+  series: [
+    {
+      name: '推荐方法',
+      type: 'pie',
+      radius: '60%',
+      data: [
+         { value: 53, name: 'All' },
+         { value: 4, name: 'one' },
+         { value: 39, name: 'top N' }
+    ],
+      emphasis: {
+        itemStyle: {
+          shadowBlur: 10,
+          shadowOffsetX: 0,
+          shadowColor: 'rgba(0, 0, 0, 0.5)'
+        }
+      }
+    }
+  ]
+};
+        // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option);
+</script>
+
+<p>排序的指标包括相似性、修复更多的错误、更少的修改、根据一个预训练的机器学习模型计算。</p>
+<h1 id="Evalution-评价"><a href="#Evalution-评价" class="headerlink" title="Evalution 评价"></a>Evalution 评价</h1><p><img src="https://github.com/Olive-2019/Lam-Blog-resource/blob/master/images/RSinMDE/evaluation.jpg?raw=true" alt="评价方法"></p>
+<h2 id="Method-方法"><a href="#Method-方法" class="headerlink" title="Method 方法"></a>Method 方法</h2><div id="echarts6103" style="width: 85%;height: 400px;margin: 0 auto"></div>
+<script src="https://cdn.bootcss.com/echarts/3.8.0/echarts.common.min.js"></script>
+<script type="text/javascript">
+        // 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById('echarts6103'));
+        // 指定图表的配置项和数据
+        var option = option = {
+  title: {
+    text: '评价方法',
+    subtext: 'Method',
+    left: 'center'
+  },
+  tooltip: {
+    trigger: 'item'
+  },
+  legend: {
+    orient: 'vertical',
+    left: 'left'
+  },
+  series: [
+    {
+      name: '评价方法',
+      type: 'pie',
+      radius: '60%',
+      data: [
+         { value: 21, name: 'offline' },
+         { value: 2, name: 'online' },
+         { value: 12, name: 'User study' }
+    ],
+      emphasis: {
+        itemStyle: {
+          shadowBlur: 10,
+          shadowOffsetX: 0,
+          shadowColor: 'rgba(0, 0, 0, 0.5)'
+        }
+      }
+    }
+  ]
+};
+        // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option);
+</script>
+
+<h3 id="Offline-Experiment-离线实验"><a href="#Offline-Experiment-离线实验" class="headerlink" title="Offline Experiment 离线实验"></a>Offline Experiment 离线实验</h3><p>使用过往的数据集模拟现实情况。通常面临的问题是数据集难以获取。</p>
+<p>数据集通常有四种来源：</p>
+<ol>
+<li>生成数据</li>
+<li>从现成的库中获取数据</li>
+<li>从现有文章中获取实例</li>
+<li>从公司获取现实世界的数据</li>
+</ol>
+<h3 id="Online-Experiment-在线实验"><a href="#Online-Experiment-在线实验" class="headerlink" title="Online Experiment 在线实验"></a>Online Experiment 在线实验</h3><p>应该就是A&#x2F;B测试，两组用户分别使用和不使用RS进行测试，对结果进行分析评估。不是很懂跟用户调查之间的差别。</p>
+<h3 id="User-Study-用户研究"><a href="#User-Study-用户研究" class="headerlink" title="User Study 用户研究"></a>User Study 用户研究</h3><p>通常会涉及到一组用户，通过使用和不使用RS去完成一些任务再分析可行性，并通过问卷收集信息。</p>
+<p>用户研究通常有三种类型。</p>
+<ol>
+<li>使用RS来完成任务</li>
+<li>用户在A&#x2F;B测试中使用RS</li>
+<li>将推荐的项目和专家推荐的对比</li>
+</ol>
+<h2 id="Metrics-指标"><a href="#Metrics-指标" class="headerlink" title="Metrics 指标"></a>Metrics 指标</h2>
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/Olivia_Lam.github.io/tags/lowcomote/" rel="tag"># lowcomote</a>
+              <a href="/Olivia_Lam.github.io/tags/RS/" rel="tag"># RS</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/Olivia_Lam.github.io/2022/10/01/RS/" rel="prev" title="Automating the Synthesis of Recommender Systems for Modelling Languages">
+                  <i class="fa fa-chevron-left"></i> Automating the Synthesis of Recommender Systems for Modelling Languages
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/Olivia_Lam.github.io/2022/10/08/RS3/" rel="next" title="Towards automating the construction of recommender systems for low-code development platforms">
+                  Towards automating the construction of recommender systems for low-code development platforms <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Olivia Lam</span>
+</div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+      <span>站点总字数：</span>
+    <span title="站点总字数">26k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span>站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">24 分钟</span>
+  </span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/Olivia_Lam.github.io/js/comments.js"></script><script src="/Olivia_Lam.github.io/js/utils.js"></script><script src="/Olivia_Lam.github.io/js/motion.js"></script><script src="/Olivia_Lam.github.io/js/next-boot.js"></script>
+
+  
+<script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.0/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="/Olivia_Lam.github.io/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+</body>
+</html>
