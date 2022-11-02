@@ -33,7 +33,7 @@
 <meta property="og:image" content="https://github.com/Olive-2019/Lam-Blog-resource/blob/master/images/RSinMDE/recommendation.jpg?raw=true">
 <meta property="og:image" content="https://github.com/Olive-2019/Lam-Blog-resource/blob/master/images/RSinMDE/evaluation.jpg?raw=true">
 <meta property="article:published_time" content="2022-10-05T07:31:50.000Z">
-<meta property="article:modified_time" content="2022-11-01T09:15:30.564Z">
+<meta property="article:modified_time" content="2022-11-01T16:07:13.158Z">
 <meta property="article:author" content="Olivia Lam">
 <meta property="article:tag" content="lowcomote">
 <meta property="article:tag" content="RS">
@@ -152,7 +152,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%89%E4%B8%AA%E9%97%AE%E9%A2%98"><span class="nav-number">1.</span> <span class="nav-text">三个问题</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#RS-in-MDE-%E6%A8%A1%E5%9E%8B%E9%A9%B1%E5%8A%A8%E5%B7%A5%E7%A8%8B%E4%B8%AD%E7%9A%84%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F"><span class="nav-number">2.</span> <span class="nav-text">RS in MDE 模型驱动工程中的推荐系统</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Domain-%E9%A2%86%E5%9F%9F"><span class="nav-number">3.</span> <span class="nav-text">Domain 领域</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Complete-%E5%AE%8C%E6%88%90%E6%A8%A1%E5%9E%8B"><span class="nav-number">3.1.</span> <span class="nav-text">Complete 完成模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Create-%E5%88%9B%E5%BB%BA%E6%A8%A1%E5%9E%8B"><span class="nav-number">3.2.</span> <span class="nav-text">Create 创建模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Find-%E6%9F%A5%E6%89%BE%E5%B7%A5%E4%BB%B6"><span class="nav-number">3.3.</span> <span class="nav-text">Find 查找工件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Repair-%E4%BF%AE%E5%A4%8D%E5%B7%A5%E4%BB%B6"><span class="nav-number">3.4.</span> <span class="nav-text">Repair 修复工件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Reuse-%E5%A4%8D%E7%94%A8"><span class="nav-number">3.5.</span> <span class="nav-text">Reuse 复用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Other-purpose-%E5%85%B6%E5%AE%83%E7%9B%AE%E7%9A%84"><span class="nav-number">3.6.</span> <span class="nav-text">Other purpose 其它目的</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Tooling-%E5%B7%A5%E5%85%B7"><span class="nav-number">4.</span> <span class="nav-text">Tooling 工具</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Maturity-%E6%88%90%E7%86%9F%E5%BA%A6"><span class="nav-number">4.1.</span> <span class="nav-text">Maturity 成熟度</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Tool-Independence-%E5%B7%A5%E5%85%B7%E7%8B%AC%E7%AB%8B%E6%80%A7"><span class="nav-number">4.2.</span> <span class="nav-text">Tool Independence 工具独立性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#trigger-recommendations-%E8%A7%A6%E5%8F%91%E6%96%B9%E5%BC%8F"><span class="nav-number">4.3.</span> <span class="nav-text">trigger recommendations 触发方式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Recommendation-enactment-%E5%88%B6%E5%AE%9A%E5%BB%BA%E8%AE%AE%E6%96%B9%E5%BC%8F"><span class="nav-number">4.4.</span> <span class="nav-text">Recommendation enactment 制定建议方式</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Recommendation-%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F"><span class="nav-number">5.</span> <span class="nav-text">Recommendation 推荐系统</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Recommendation-Method-%E6%8E%A8%E8%8D%90%E6%96%B9%E6%B3%95"><span class="nav-number">5.0.1.</span> <span class="nav-text">Recommendation Method 推荐方法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#User-Preference-%E7%94%A8%E6%88%B7%E5%81%8F%E5%A5%BD"><span class="nav-number">5.1.</span> <span class="nav-text">User Preference 用户偏好</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Recommendation-Item-%E6%8E%A8%E8%8D%90%E7%9A%84%E9%A1%B9%E7%9B%AE"><span class="nav-number">5.2.</span> <span class="nav-text">Recommendation Item 推荐的项目</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Recommendation-Degree-%E6%8E%A8%E8%8D%90%E5%BA%A6"><span class="nav-number">5.3.</span> <span class="nav-text">Recommendation Degree 推荐度</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Evalution-%E8%AF%84%E4%BB%B7"><span class="nav-number">6.</span> <span class="nav-text">Evalution 评价</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Method-%E6%96%B9%E6%B3%95"><span class="nav-number">6.1.</span> <span class="nav-text">Method 方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Offline-Experiment-%E7%A6%BB%E7%BA%BF%E5%AE%9E%E9%AA%8C"><span class="nav-number">6.1.1.</span> <span class="nav-text">Offline Experiment 离线实验</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Online-Experiment-%E5%9C%A8%E7%BA%BF%E5%AE%9E%E9%AA%8C"><span class="nav-number">6.1.2.</span> <span class="nav-text">Online Experiment 在线实验</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#User-Study-%E7%94%A8%E6%88%B7%E7%A0%94%E7%A9%B6"><span class="nav-number">6.1.3.</span> <span class="nav-text">User Study 用户研究</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Metrics-%E6%8C%87%E6%A0%87"><span class="nav-number">6.2.</span> <span class="nav-text">Metrics 指标</span></a></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%89%E4%B8%AA%E9%97%AE%E9%A2%98"><span class="nav-number">1.</span> <span class="nav-text">三个问题</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#RS-in-MDE-%E6%A8%A1%E5%9E%8B%E9%A9%B1%E5%8A%A8%E5%B7%A5%E7%A8%8B%E4%B8%AD%E7%9A%84%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F"><span class="nav-number">2.</span> <span class="nav-text">RS in MDE 模型驱动工程中的推荐系统</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Domain-%E9%A2%86%E5%9F%9F"><span class="nav-number">3.</span> <span class="nav-text">Domain 领域</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Complete-%E5%AE%8C%E6%88%90%E6%A8%A1%E5%9E%8B"><span class="nav-number">3.1.</span> <span class="nav-text">Complete 完成模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Create-%E5%88%9B%E5%BB%BA%E6%A8%A1%E5%9E%8B"><span class="nav-number">3.2.</span> <span class="nav-text">Create 创建模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Find-%E6%9F%A5%E6%89%BE%E5%B7%A5%E4%BB%B6"><span class="nav-number">3.3.</span> <span class="nav-text">Find 查找工件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Repair-%E4%BF%AE%E5%A4%8D%E5%B7%A5%E4%BB%B6"><span class="nav-number">3.4.</span> <span class="nav-text">Repair 修复工件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Reuse-%E5%A4%8D%E7%94%A8"><span class="nav-number">3.5.</span> <span class="nav-text">Reuse 复用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Other-purpose-%E5%85%B6%E5%AE%83%E7%9B%AE%E7%9A%84"><span class="nav-number">3.6.</span> <span class="nav-text">Other purpose 其它目的</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Tooling-%E5%B7%A5%E5%85%B7"><span class="nav-number">4.</span> <span class="nav-text">Tooling 工具</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Maturity-%E6%88%90%E7%86%9F%E5%BA%A6"><span class="nav-number">4.1.</span> <span class="nav-text">Maturity 成熟度</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Tool-Independence-%E5%B7%A5%E5%85%B7%E7%8B%AC%E7%AB%8B%E6%80%A7"><span class="nav-number">4.2.</span> <span class="nav-text">Tool Independence 工具独立性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#trigger-recommendations-%E8%A7%A6%E5%8F%91%E6%96%B9%E5%BC%8F"><span class="nav-number">4.3.</span> <span class="nav-text">trigger recommendations 触发方式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Recommendation-enactment-%E5%88%B6%E5%AE%9A%E5%BB%BA%E8%AE%AE%E6%96%B9%E5%BC%8F"><span class="nav-number">4.4.</span> <span class="nav-text">Recommendation enactment 制定建议方式</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Recommendation-%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F"><span class="nav-number">5.</span> <span class="nav-text">Recommendation 推荐系统</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Recommendation-Method-%E6%8E%A8%E8%8D%90%E6%96%B9%E6%B3%95"><span class="nav-number">5.0.1.</span> <span class="nav-text">Recommendation Method 推荐方法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#User-Preference-%E7%94%A8%E6%88%B7%E5%81%8F%E5%A5%BD"><span class="nav-number">5.1.</span> <span class="nav-text">User Preference 用户偏好</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Recommendation-Item-%E6%8E%A8%E8%8D%90%E7%9A%84%E9%A1%B9%E7%9B%AE"><span class="nav-number">5.2.</span> <span class="nav-text">Recommendation Item 推荐的项目</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Recommendation-Degree-%E6%8E%A8%E8%8D%90%E5%BA%A6"><span class="nav-number">5.3.</span> <span class="nav-text">Recommendation Degree 推荐度</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Evalution-%E8%AF%84%E4%BB%B7"><span class="nav-number">6.</span> <span class="nav-text">Evalution 评价</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Method-%E6%96%B9%E6%B3%95"><span class="nav-number">6.1.</span> <span class="nav-text">Method 方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Offline-Experiment-%E7%A6%BB%E7%BA%BF%E5%AE%9E%E9%AA%8C"><span class="nav-number">6.1.1.</span> <span class="nav-text">Offline Experiment 离线实验</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Online-Experiment-%E5%9C%A8%E7%BA%BF%E5%AE%9E%E9%AA%8C"><span class="nav-number">6.1.2.</span> <span class="nav-text">Online Experiment 在线实验</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#User-Study-%E7%94%A8%E6%88%B7%E7%A0%94%E7%A9%B6"><span class="nav-number">6.1.3.</span> <span class="nav-text">User Study 用户研究</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Metrics-%E6%8C%87%E6%A0%87"><span class="nav-number">6.2.</span> <span class="nav-text">Metrics 指标</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Application-independent-metrics-%E5%BA%94%E7%94%A8%E7%8B%AC%E7%AB%8B%E7%9A%84%E6%8C%87%E6%A0%87"><span class="nav-number">6.2.1.</span> <span class="nav-text">Application-independent metrics 应用独立的指标</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Application-dependent-metrics-%E4%BE%9D%E8%B5%96%E4%BA%8E%E5%BA%94%E7%94%A8%E7%9A%84%E6%8C%87%E6%A0%87"><span class="nav-number">6.2.2.</span> <span class="nav-text">Application-dependent metrics 依赖于应用的指标</span></a></li></ol></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -256,7 +256,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2022-11-01 17:15:30" itemprop="dateModified" datetime="2022-11-01T17:15:30+08:00">2022-11-01</time>
+      <time title="修改时间：2022-11-02 00:07:13" itemprop="dateModified" datetime="2022-11-02T00:07:13+08:00">2022-11-02</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -282,7 +282,7 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>5.7k</span>
+      <span>5.8k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
@@ -322,11 +322,11 @@
 <h1 id="Tooling-工具"><a href="#Tooling-工具" class="headerlink" title="Tooling 工具"></a>Tooling 工具</h1><p><img src="https://github.com/Olive-2019/Lam-Blog-resource/blob/master/images/RSinMDE/tooling.jpg?raw=true" alt="工具"></p>
 <p>工具部分介绍了工具的成熟度、工具的独立性、工具中推荐系统的触发方式、推荐系统的互动方式</p>
 <h2 id="Maturity-成熟度"><a href="#Maturity-成熟度" class="headerlink" title="Maturity 成熟度"></a>Maturity 成熟度</h2><p>三个级别的成熟度，没有实现的提议，有概念的原型，完整实现（包含框架、插件、MDE）。</p>
-<div id="echarts4016" style="width: 85%;height: 400px;margin: 0 auto"></div>
+<div id="echarts6299" style="width: 85%;height: 400px;margin: 0 auto"></div>
 <script src="https://cdn.bootcss.com/echarts/3.8.0/echarts.common.min.js"></script>
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts4016'));
+        var myChart = echarts.init(document.getElementById('echarts6299'));
         // 指定图表的配置项和数据
         var option = option = {
   title: {
@@ -366,11 +366,11 @@
 </script>
 
 <p>绝大部分提供了完整实现，下面为完整实现的28个方法中的分类。</p>
-<div id="echarts6076" style="width: 85%;height: 400px;margin: 0 auto"></div>
+<div id="echarts1796" style="width: 85%;height: 400px;margin: 0 auto"></div>
 <script src="https://cdn.bootcss.com/echarts/3.8.0/echarts.common.min.js"></script>
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts6076'));
+        var myChart = echarts.init(document.getElementById('echarts1796'));
         // 指定图表的配置项和数据
         var option = option = {
   title: {
@@ -411,11 +411,11 @@
 </script>
 
 <h2 id="Tool-Independence-工具独立性"><a href="#Tool-Independence-工具独立性" class="headerlink" title="Tool Independence 工具独立性"></a>Tool Independence 工具独立性</h2><p>工具独立性只能在原型和完整实现中讨论，建议不在讨论范围中。根据是否可以集成到其它MDE工具中判断是否具有工具独立性。</p>
-<div id="echarts6757" style="width: 85%;height: 400px;margin: 0 auto"></div>
+<div id="echarts7891" style="width: 85%;height: 400px;margin: 0 auto"></div>
 <script src="https://cdn.bootcss.com/echarts/3.8.0/echarts.common.min.js"></script>
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts6757'));
+        var myChart = echarts.init(document.getElementById('echarts7891'));
         // 指定图表的配置项和数据
         var option = option = {
   title: {
@@ -456,11 +456,11 @@
 </script>
 
 <h2 id="trigger-recommendations-触发方式"><a href="#trigger-recommendations-触发方式" class="headerlink" title="trigger recommendations 触发方式"></a>trigger recommendations 触发方式</h2><p>触发建议的方式：按需、主动。前者，用户需要主动触发建议；后者，系统主动提建议</p>
-<div id="echarts8132" style="width: 85%;height: 400px;margin: 0 auto"></div>
+<div id="echarts8424" style="width: 85%;height: 400px;margin: 0 auto"></div>
 <script src="https://cdn.bootcss.com/echarts/3.8.0/echarts.common.min.js"></script>
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts8132'));
+        var myChart = echarts.init(document.getElementById('echarts8424'));
         // 指定图表的配置项和数据
         var option = option = {
   title: {
@@ -500,11 +500,11 @@
 </script>
 
 <h2 id="Recommendation-enactment-制定建议方式"><a href="#Recommendation-enactment-制定建议方式" class="headerlink" title="Recommendation enactment 制定建议方式"></a>Recommendation enactment 制定建议方式</h2><p>制定建议的方式：<br>手动：给出一个序列，用户决定使用方式<br>交互式：推荐系统允许用户选择项目，然后应用到某个上下文中<br>自动：用户不参与<br>半自动：自动的过程中用户给出一点操作</p>
-<div id="echarts6210" style="width: 85%;height: 400px;margin: 0 auto"></div>
+<div id="echarts3984" style="width: 85%;height: 400px;margin: 0 auto"></div>
 <script src="https://cdn.bootcss.com/echarts/3.8.0/echarts.common.min.js"></script>
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts6210'));
+        var myChart = echarts.init(document.getElementById('echarts3984'));
         // 指定图表的配置项和数据
         var option = option = {
   title: {
@@ -558,11 +558,11 @@
 <h2 id="User-Preference-用户偏好"><a href="#User-Preference-用户偏好" class="headerlink" title="User Preference 用户偏好"></a>User Preference 用户偏好</h2><p>获取方式包括显式和隐式。隐式是监控用户动作；显式是直接收集用户信息，如调查问卷等。绝大多数都是隐式收集用户偏好<br>另外，收集的用户偏好可以是长期的也可以是短期的。90%的算法收集的都是短期偏好。</p>
 <h2 id="Recommendation-Item-推荐的项目"><a href="#Recommendation-Item-推荐的项目" class="headerlink" title="Recommendation Item 推荐的项目"></a>Recommendation Item 推荐的项目</h2><p>项目可能是工件（碎片或完整工件）、建模活动中的建议、修复过程中的编辑动作。</p>
 <h2 id="Recommendation-Degree-推荐度"><a href="#Recommendation-Degree-推荐度" class="headerlink" title="Recommendation Degree 推荐度"></a>Recommendation Degree 推荐度</h2><p>推荐度分为两个维度，分别是基数和排序。基数指建议的总数；排序指建议是否被排序。</p>
-<div id="echarts9515" style="width: 85%;height: 400px;margin: 0 auto"></div>
+<div id="echarts6026" style="width: 85%;height: 400px;margin: 0 auto"></div>
 <script src="https://cdn.bootcss.com/echarts/3.8.0/echarts.common.min.js"></script>
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts9515'));
+        var myChart = echarts.init(document.getElementById('echarts6026'));
         // 指定图表的配置项和数据
         var option = option = {
   title: {
@@ -603,11 +603,11 @@
 
 <p>排序的指标包括相似性、修复更多的错误、更少的修改、根据一个预训练的机器学习模型计算。</p>
 <h1 id="Evalution-评价"><a href="#Evalution-评价" class="headerlink" title="Evalution 评价"></a>Evalution 评价</h1><p><img src="https://github.com/Olive-2019/Lam-Blog-resource/blob/master/images/RSinMDE/evaluation.jpg?raw=true" alt="评价方法"></p>
-<h2 id="Method-方法"><a href="#Method-方法" class="headerlink" title="Method 方法"></a>Method 方法</h2><div id="echarts6103" style="width: 85%;height: 400px;margin: 0 auto"></div>
+<h2 id="Method-方法"><a href="#Method-方法" class="headerlink" title="Method 方法"></a>Method 方法</h2><div id="echarts8093" style="width: 85%;height: 400px;margin: 0 auto"></div>
 <script src="https://cdn.bootcss.com/echarts/3.8.0/echarts.common.min.js"></script>
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts6103'));
+        var myChart = echarts.init(document.getElementById('echarts8093'));
         // 指定图表的配置项和数据
         var option = option = {
   title: {
@@ -654,7 +654,7 @@
 <li>从现有文章中获取实例</li>
 <li>从公司获取现实世界的数据</li>
 </ol>
-<h3 id="Online-Experiment-在线实验"><a href="#Online-Experiment-在线实验" class="headerlink" title="Online Experiment 在线实验"></a>Online Experiment 在线实验</h3><p>应该就是A&#x2F;B测试，两组用户分别使用和不使用RS进行测试，对结果进行分析评估。不是很懂跟用户调查之间的差别。</p>
+<h3 id="Online-Experiment-在线实验"><a href="#Online-Experiment-在线实验" class="headerlink" title="Online Experiment 在线实验"></a>Online Experiment 在线实验</h3><p>应该就是A&#x2F;B测试，两组用户分别使用和不使用RS进行测试，对结果进行分析评估。不是很懂跟用户调查之间的差别，感觉可能是更注重实时性。</p>
 <h3 id="User-Study-用户研究"><a href="#User-Study-用户研究" class="headerlink" title="User Study 用户研究"></a>User Study 用户研究</h3><p>通常会涉及到一组用户，通过使用和不使用RS去完成一些任务再分析可行性，并通过问卷收集信息。</p>
 <p>用户研究通常有三种类型。</p>
 <ol>
@@ -662,7 +662,8 @@
 <li>用户在A&#x2F;B测试中使用RS</li>
 <li>将推荐的项目和专家推荐的对比</li>
 </ol>
-<h2 id="Metrics-指标"><a href="#Metrics-指标" class="headerlink" title="Metrics 指标"></a>Metrics 指标</h2>
+<h2 id="Metrics-指标"><a href="#Metrics-指标" class="headerlink" title="Metrics 指标"></a>Metrics 指标</h2><h3 id="Application-independent-metrics-应用独立的指标"><a href="#Application-independent-metrics-应用独立的指标" class="headerlink" title="Application-independent metrics 应用独立的指标"></a>Application-independent metrics 应用独立的指标</h3><p>最常用的是基于排序的precision、recall、F-Score</p>
+<h3 id="Application-dependent-metrics-依赖于应用的指标"><a href="#Application-dependent-metrics-依赖于应用的指标" class="headerlink" title="Application-dependent metrics 依赖于应用的指标"></a>Application-dependent metrics 依赖于应用的指标</h3>
     </div>
 
     
@@ -719,7 +720,7 @@
       <i class="fa fa-chart-line"></i>
     </span>
       <span>站点总字数：</span>
-    <span title="站点总字数">26k</span>
+    <span title="站点总字数">27k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">

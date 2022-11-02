@@ -135,151 +135,6 @@
       </tags>
   </entry>
   <entry>
-    <title>机器学习监控</title>
-    <url>/Olivia_Lam.github.io/2022/10/28/ML_Monitoring/</url>
-    <content><![CDATA[<p>低代码开发机器学习监控系统</p>
-<span id="more"></span>
-
-<h1 id="简化版摘要"><a href="#简化版摘要" class="headerlink" title="简化版摘要"></a>简化版摘要</h1><p>根据2019年微软提出的ML工作流，Panagiotis Kourouklidis关注ML模型部署后的监控问题，在2020年在这个领域发了一篇survey并提出了一些研究方向，2021年提出了一个元模型试图解决自动生成ML模型监控程序的问题。同时也给出了该元模型基于Kubernete生成系统的一个例子。</p>
-<p>其中比较有意义的就是这个元模型以及提及的一些工具。跟DWF目前的工作关系不大，但是可能对未来的工作有比较重要的意义。</p>
-<p>引文中大多为ML领域的文章，对我们来说比较有意义的可能是微软2019年发的机器学习中的软工。引用这两篇的文章大多为review，并没有对这项工作做出什么拓展。</p>
-<p>文章提到的对于ML流程自动化的工具对我们来说相对较为有用。</p>
-<h1 id="时间线"><a href="#时间线" class="headerlink" title="时间线"></a>时间线</h1><p>2019年微软发的一篇关于ML中的软工的文章中提到了机器学习工作流的九个阶段，其中包括了Model Monitoring。</p>
-<blockquote>
-<p><em>Software Engineering for Machine Learning: A Case Study</em></p>
-</blockquote>
-<p>2020年Panagiotis Kourouklidis发表了第一篇关于自动生成监控系统的文章，主要是说了一下目前ML模型部署后面临的问题以及他的研究计划</p>
-<blockquote>
-<p><em>Towards a low-code solution for monitoring machine learning model performance</em></p>
-</blockquote>
-<p>2021年由同一作者发表了第二篇相关文章，提出了一个原始的元模型，并基于Kubernete给出了实现。</p>
-<blockquote>
-<p><em>A Model-Driven Engineering Approach for Monitoring Machine Learning Models</em></p>
-</blockquote>
-<p>至此，该作者没有更新的研究成果，在引文中也没找到更新的研究。此外，也搜索了一下LCDP和ML Monitoring，也没有人做这个。</p>
-<h1 id="人物、机构"><a href="#人物、机构" class="headerlink" title="人物、机构"></a>人物、机构</h1><p>一作是来自University of York和British Telecom的Panagiotis Kourouklidis，目前只有这两篇文章，猜测不是专职做研究的人员。</p>
-<p>合作作者是University of York或British Telecom的研究人员</p>
-<h1 id="希望解决的问题"><a href="#希望解决的问题" class="headerlink" title="希望解决的问题"></a>希望解决的问题</h1><p>实现<strong>自动生成</strong>一个<strong>机器学习模型的监控</strong>系统</p>
-<h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><h3 id="工作流"><a href="#工作流" class="headerlink" title="工作流"></a>工作流</h3><p><img src="https://github.com/Olive-2019/Lam-Blog-resource/blob/master/images/MDEforMLMonitor/MLworkflow.jpg?raw=true" alt="工作流"></p>
-<h3 id="部署后漂移问题"><a href="#部署后漂移问题" class="headerlink" title="部署后漂移问题"></a>部署后漂移问题</h3><p>有监督学习中的X，Y通常被视为服从联合概率分布P(X, Y)的随机变量。由于真实世界情况复杂且不稳定，概率分布会发生变化，即概念漂移、采样漂移、先验概率漂移或更一般的数据集漂移。</p>
-<p>此处主要讨论数据漂移和概念漂移两种。</p>
-<h4 id="数据漂移"><a href="#数据漂移" class="headerlink" title="数据漂移"></a>数据漂移</h4><p>数据漂移可能是由采样机制，环境中的未知因素随时间变化引起，数据漂移不一定导致输出错误，没有数据漂移也不一定能保证输出正确。目前可以通过检查数据输入来检测数据漂移。</p>
-<h4 id="概念漂移"><a href="#概念漂移" class="headerlink" title="概念漂移"></a>概念漂移</h4><p>概念漂移指输入-输出映射发生变化。概念漂移可能是真实的，也可能是虚拟的。真实的指的是由于某些未知因素发生改变，导致映射发生改变；虚拟的指的是映射实际并没有发生改变，只是由于其它原因观测到这个现象（比如有偏采样）。</p>
-<h4 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h4><p>客服中心的服务对象的反馈：使用等待时长和服务时长拟合反馈</p>
-<p>目前模型是总时长小于20则为positive</p>
-<p>模型部署后可能存在四种状态，无漂移、数据漂移、概念漂移、两种漂移并存。</p>
-<p>无漂移。理想状态，即输入的数据分布不改变，模型也一直符合现实状况</p>
-<p>数据漂移。例如某个客服没上班，等待时长变长，但是用户并不会因此愿意等待更长时间。这种数据漂移并没有导致输出错误</p>
-<p>概念漂移。模型不再符合现实情况，但是数据分布不发生改变，输出存在错误。如用户愿意等的更长，则现实模型划分线应该上移。<br>这种情况下，模型需要重新学习新数据。</p>
-<p>两种漂移并存。有偏采样发生时，输入数据的分布自然与学习集不同了。同时，由于学习集的分布与真实输入不同，训练出来的模型自然不能用于真实输入。但是我们会以为观察到数据漂移和真实概念漂移。目前区分真实和虚假的概念漂移仍困难。</p>
-<h2 id="研究方向"><a href="#研究方向" class="headerlink" title="研究方向"></a>研究方向</h2><p>希望开发一个抽象化的低代码的解决方案，包括DSL和参考实现。允许用户只需要配置模型监控方案，不必关注具体细节。将模型监控的任务分成三大类，分别是，数据捕捉、算法执行、响应漂移。</p>
-<h3 id="数据捕捉"><a href="#数据捕捉" class="headerlink" title="数据捕捉"></a>数据捕捉</h3><p>为了检测概念漂移，需要存储模型输出并与反馈进行对比。在前面提到的实例中，可以建立反向代理服务器转发请求和响应，并将事件写到数据库中。</p>
-<p>收集数据的两个重要来源：</p>
-<ul>
-<li>模型的输入输出</li>
-<li>反馈</li>
-</ul>
-<p>收集反馈的困难在于收集方式取决于模型，例如推荐系统的反馈收集只需要记录一下是否点击，而图片分类器的反馈收集必须要人工介入。</p>
-<h3 id="算法执行"><a href="#算法执行" class="headerlink" title="算法执行"></a>算法执行</h3><p>检测算法的性能是非常重要的<br>希望能使用DSL来描述漂移检测算法，然后生成适用于不同框架的算法</p>
-<h3 id="响应漂移"><a href="#响应漂移" class="headerlink" title="响应漂移"></a>响应漂移</h3><p>方法是多样的，可以包含以下两种</p>
-<ul>
-<li>检测到漂移时简单地发送email</li>
-<li>自动触发重新训练模型的流程</li>
-</ul>
-<p>前者多用于数据漂移，后者多用于概念漂移。</p>
-<h1 id="实施方案技术路线"><a href="#实施方案技术路线" class="headerlink" title="实施方案技术路线"></a>实施方案技术路线</h1><h2 id="部署环境假设"><a href="#部署环境假设" class="headerlink" title="部署环境假设"></a>部署环境假设</h2><ul>
-<li>ML模型持续接收未标记的样本（推理请求），并需要返回一个预测结果（推理响应）</li>
-<li>未标记样本可能在未知时长后接收到真实标签</li>
-<li>定期根据ML模型接收到的最新数据决定是否修正模型</li>
-<li>由领域专家定义不同种类的漂移响应策略</li>
-</ul>
-<h2 id="元模型组件"><a href="#元模型组件" class="headerlink" title="元模型组件"></a>元模型组件</h2><ul>
-<li>指定想要监控哪一个ML模型的机制</li>
-<li>指定哪些推理请求和推理响应字段需要被捕捉。（这也是在命名被捕捉字段的方法。命名可以方便其它实体单独引用它。）</li>
-<li>定义周期性漂移检测执行机制</li>
-<li>定义检测到漂移时，需要采取的措施</li>
-</ul>
-<h2 id="元模型设计"><a href="#元模型设计" class="headerlink" title="元模型设计"></a>元模型设计</h2><p>虽然希望元模型和具体底层技术完全分离，但为尽快从算法专家处得到反馈，这个版本的元模型做了一些妥协。下文将会提及这些妥协。</p>
-<p><img src="https://github.com/Olive-2019/Lam-Blog-resource/blob/master/images/MDEforMLMonitor/domain_meta-model.jpg?raw=true" alt="元模型设计"></p>
-<p>deployment抽象类包括了ML监控方法的所有方面。在系统中，通常有一个Model子类的实例和任意数量的DriftDetector子类的实例。</p>
-<p>Model类包含了名称、序列化ML模型的URL、创建它的框架名称、多个输入的IO实例和一个输出的IO实例。</p>
-<p>IO类是模型的输入输出，包含输入&#x2F;输出的名字和数据类型的枚举属性。</p>
-<p>DriftDetector类周期性地执行漂移检测算法，属性包含名字、频率、email、定制容器。执行的算法可能是底层平台包含的算法也可能是自定义的算法。DataDriftDetector需要训练数据和现有数据。ConceptDriftDetector需要真实数据的预测标签。</p>
-<h2 id="元模型的妥协"><a href="#元模型的妥协" class="headerlink" title="元模型的妥协"></a>元模型的妥协</h2><ul>
-<li>为了简化展示，ML模型将会被部署到web端点。因此Model类中需要序列化ML模型的URL、创建它的框架名称这两个属性，这两个属性并不需要被包含进来，因为部署过程可能是单独执行的。</li>
-<li>区分两种漂移检测器。区分是为了简化底层技术实现。</li>
-<li>DriftDetector属性中包含了email，检测到模型漂移的行为只能是发送email了。（可以抽象化成一个超类）</li>
-</ul>
-<h2 id="系统生成"><a href="#系统生成" class="headerlink" title="系统生成"></a>系统生成</h2><p>使用M2T转化语言，基于Kubernetes生成了一个具体的ML监控系统。这个方法的优点是没有生成过程代码。生成的组件包括两种类型，一种是开源的定制的Kubernete资源，另一种是容器注册表中注册的容器化应用。</p>
-<h3 id="工件"><a href="#工件" class="headerlink" title="工件"></a>工件</h3><p><img src="https://github.com/Olive-2019/Lam-Blog-resource/blob/master/images/MDEforMLMonitor/generated_artifacts.jpg?raw=true" alt="生成的工件"></p>
-<p>包含了Inference Service（推理服务）、Message Queue、Database Writer、Database、Proxy（代理）、Configuration和 Drift Detection Execution等组件。</p>
-<p>Inference Service组件包括两个功能，分别是Model Server和Logger。Model Server负责响应各种应用程序发送的推理请求，Logger负责记录请求和响应事件。</p>
-<p>Message Queue从Logger接收消息，路由至Database Writer。</p>
-<p>Database Writer主要功能有两个，其一是根据算法专家提供的消息初始化数据库，其二是将捕获到的数据存储到数据库中，捕获的数据来源包括logger记录的事件和ML模型的性能反馈。</p>
-<p>Database组件使用MySQL数据库。</p>
-<p>Drift Detection Execution组件周期性执行算法专家指定的漂移检测算法。算法专家可以只实现漂移检测算法，并指定实现这个算法的容器映像，不必实现数据检索和通知发送的部分。</p>
-<p>Configuration通过使用配置文件，容器化应用程序根据算法专家规定的需求调整自己的功能。</p>
-<p>Proxy需要用同一个主机名接收推理请求和反馈数据，所以需要使用代理来进行转发。代理接收请求后根据请求路径转发到inference service或database writer。</p>
-<h3 id="平台"><a href="#平台" class="headerlink" title="平台"></a>平台</h3><p>为了最大程度地降低算法专家的使用门槛，建立了web应用。主要功能包括创建和提交MDE模型。辅助功能包括查询、管理当前所有的ML模型、数据集，注册漂移检测算法。</p>
-<h1 id="有意义的结果"><a href="#有意义的结果" class="headerlink" title="有意义的结果"></a>有意义的结果</h1><p>上文提及的元模型，以及对ML的SE流程认知。</p>
-<h1 id="对论文的优势和局限性的评价"><a href="#对论文的优势和局限性的评价" class="headerlink" title="对论文的优势和局限性的评价"></a>对论文的优势和局限性的评价</h1><p>20年的文章有点过于水了？只讲了ML模型部署后的问题，以及监控过程中需要研究的方向。</p>
-<p>21年的文章提出了一个元模型，起码算是做了一点工作，但也只是一个不太成熟的元模型。</p>
-<h1 id="对我们现在的工作有什么启发"><a href="#对我们现在的工作有什么启发" class="headerlink" title="对我们现在的工作有什么启发"></a>对我们现在的工作有什么启发</h1><p>这个作者做的东西有点偏离了LCDP，是自动生成的ML Model监控程序的工作。对我们目前的工作并没有什么帮助，但是假如我们要做RS嵌入LCDP平台实现智能推荐的话，对RS系统的监控也是一个值得思考的工作。</p>
-<h1 id="有意思的相关文章"><a href="#有意思的相关文章" class="headerlink" title="有意思的相关文章"></a>有意思的相关文章</h1><p>其中一篇引文：Amershi S, Begel A, Bird C, et al. Software engineering for machine learning: A case study[C]&#x2F;&#x2F;2019 IEEE&#x2F;ACM 41st International Conference on Software Engineering: Software Engineering in Practice (ICSE-SEIP). IEEE, 2019: 291-300.</p>
-<p>其它引文大多是纯数据科学领域的，没啥意思。</p>
-<p>引用这两篇文献的文章跟这项工作的关系也不大。</p>
-<h1 id="有价值的相关工具"><a href="#有价值的相关工具" class="headerlink" title="有价值的相关工具"></a>有价值的相关工具</h1><p>文章里提到了一些ML流程自动化的工具。</p>
-<h2 id="MLflow"><a href="#MLflow" class="headerlink" title="MLflow"></a>MLflow</h2><p>做元数据追踪，提高实验可复现性。很容易和现有机器学习框架结合使用，且有直观的UI。但非端到端全自动的工具，仍有数据准备和模型监控未覆盖。</p>
-<h2 id="Tensorflow-extended"><a href="#Tensorflow-extended" class="headerlink" title="Tensorflow extended"></a>Tensorflow extended</h2><p>端到端全自动。但仅支持tf core，模型监控方面做得比较单调，只支持针对分类特征的数据漂移检测，且只提供一种距离度量。</p>
-<h2 id="alibi-detect"><a href="#alibi-detect" class="headerlink" title="alibi-detect"></a>alibi-detect</h2><p>开源的检测库，提供数据漂移、异常值、对抗样本等检测支持。</p>
-]]></content>
-      <categories>
-        <category>论文阅读笔记</category>
-      </categories>
-      <tags>
-        <tag>ML</tag>
-        <tag>Monitor</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Automating the Synthesis of Recommender Systems for Modelling Languages</title>
-    <url>/Olivia_Lam.github.io/2022/10/01/RS/</url>
-    <content><![CDATA[<p>低代码开发推荐系统</p>
-<span id="more"></span>
-
-<h1 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h1><p>希望能使用推荐系统建模，但是推荐系统的开发存在需要难以考虑的问题和专业知识，所以提出了一个针对软件模型的<strong>推荐系统自动生成工具</strong>。为评估该系统，实验测试了一个生成的推荐系统和聊天程序建模。</p>
-<h1 id="RS-推荐系统"><a href="#RS-推荐系统" class="headerlink" title="RS 推荐系统"></a>RS 推荐系统</h1><p>推荐系统的目标用户是生成的且偏好是有特殊含义的。例如，用户可能是一个未完成的类，需要被推荐方法和成员变量。</p>
-<p>推荐系统的两种信息源：<strong>基于内容</strong>（Content-based CB）、<strong>协同过滤</strong>（collaborative filtering CF）。基于内容评估用户历史数据，协同过滤评估用户相似性。此外，协同过滤可以评估用户或项目之间的相似性。典型的混合策略是使用CB的相似性代替CF的评级。</p>
-<p>推荐系统评价方法：<strong>在线</strong>、<strong>离线</strong>。在线方法使用在线A&#x2F;B测试实时获取影响，离线方法使用历史数据，分为训练集和测试集。</p>
-<p>常用评价指标：<strong>精度</strong>、（precision）、<strong>召回率</strong>（recall）、<strong>F1</strong>、<strong>平均精度</strong>（MAP）、<strong>归一化累积好处</strong>（nDCG，评估最有用的项目是否出现在推荐列表的顶部位置）</p>
-<p>补充评价指标：<strong>用户空间覆盖</strong>（USC，评估覆盖了多少用户）、<strong>项目空间覆盖</strong>（ISC，评估覆盖了多少项目）</p>
-<p>提出的自动生成推荐系统允许配置这几个方面的参数：<strong>推荐方法、目标用户、项目、离线评价方法和指标</strong></p>
-<h1 id="提出的方法"><a href="#提出的方法" class="headerlink" title="提出的方法"></a>提出的方法</h1><p><img src="https://github.com/Olive-2019/Lam-s-Blog-source/blob/master/RS/1665226282989.png?raw=true" alt="1665226282989"></p>
-<p><strong>流程：</strong></p>
-<ol>
-<li>选择推荐系统需要推荐的元素，如类的属性，过程的任务。指定推荐方法、训练数据集、推荐系统指标</li>
-<li>推荐系统训练过程</li>
-<li>选择推荐方法，系统自动生成可以集成到不同建模工具里的推荐系统</li>
-</ol>
-<h1 id="Droid-DSL（一种领域特定语言）"><a href="#Droid-DSL（一种领域特定语言）" class="headerlink" title="Droid DSL（一种领域特定语言）"></a>Droid DSL（一种领域特定语言）</h1><p>用来描述提出的自动生成推荐系统的一种语言</p>
-<h1 id="架构与支撑工具"><a href="#架构与支撑工具" class="headerlink" title="架构与支撑工具"></a>架构与支撑工具</h1><h2 id="架构"><a href="#架构" class="headerlink" title="架构"></a>架构</h2><p>该系统的架构由三个模块组成，分别是配置器、服务、客户。</p>
-<p>第一个模块是<strong>配置器</strong>，该模块提供了配置、评估、生成推荐系统的功能。同时也提供了一个eclipse编辑器用于指定推荐系统内容（1）。该内容作为推荐系统评价系统的输入。推荐系统评价系统依赖于RankSys和RiVal，其中RankSys是实现推荐系统的框架，RiVal是一个数据划分和推荐系统评价的工具集。每一个指标都会显示在Eclipse的视图里（3）。根据得到的指标，推荐系统设计人员可以选择一种推荐方法并生成一系列配置文件。</p>
-<p>第二个模块是DROID<strong>服务</strong>，该模块使用了第一个模块生成的配置文件。通过4模块生成不同的配置文件可以适配不同的建模语言。</p>
-<p>第三个模块是<strong>客户</strong>，这个系统允许客户使用基于JSON的模型表示发送请求。</p>
-<h2 id="支撑工具"><a href="#支撑工具" class="headerlink" title="支撑工具"></a>支撑工具</h2><p>配置器部分的工具是eclipse的一个插件，支持使用DSL配置、查看指标结果。</p>
-<p>服务方面采用方式是，客户端提交JSON格式的请求，服务端处理并返回推荐系统名字和JSON格式的推荐系统。服务主要包含三个模块，推荐器（用于处理客户端请求）、内容解析（用于解析JSON文件）、推荐系统生成器</p>
-<h1 id="自己的一点碎碎念"><a href="#自己的一点碎碎念" class="headerlink" title="自己的一点碎碎念"></a>自己的一点碎碎念</h1><p>其实就是一个支持用户定制推荐系统的低代码开发平台，但是跟清华数为的项目有些差异。这里还需要使用一些类似yml的DSL书写配置，不是完全的图形化界面。</p>
-<p>从文章看来，工具应该是已经开发完可以用的了，文章中也给了链接，但是还没真正安装试试。</p>
-]]></content>
-      <categories>
-        <category>论文</category>
-      </categories>
-      <tags>
-        <tag>lowcomote</tag>
-        <tag>RS</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Towards a low-code solution for monitoring machine learning model performance</title>
     <url>/Olivia_Lam.github.io/2022/10/23/MonitoringMLPerformance/</url>
     <content><![CDATA[<p>机器学习模型部署后的漂移问题以及检测漂移的工具，并概述了低代码开发平台解决该问题的研究计划。</p>
@@ -396,6 +251,44 @@
       </tags>
   </entry>
   <entry>
+    <title>Automating the Synthesis of Recommender Systems for Modelling Languages</title>
+    <url>/Olivia_Lam.github.io/2022/10/01/RS/</url>
+    <content><![CDATA[<p>低代码开发推荐系统</p>
+<span id="more"></span>
+
+<h1 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h1><p>希望能使用推荐系统建模，但是推荐系统的开发存在需要难以考虑的问题和专业知识，所以提出了一个针对软件模型的<strong>推荐系统自动生成工具</strong>。为评估该系统，实验测试了一个生成的推荐系统和聊天程序建模。</p>
+<h1 id="RS-推荐系统"><a href="#RS-推荐系统" class="headerlink" title="RS 推荐系统"></a>RS 推荐系统</h1><p>推荐系统的目标用户是生成的且偏好是有特殊含义的。例如，用户可能是一个未完成的类，需要被推荐方法和成员变量。</p>
+<p>推荐系统的两种信息源：<strong>基于内容</strong>（Content-based CB）、<strong>协同过滤</strong>（collaborative filtering CF）。基于内容评估用户历史数据，协同过滤评估用户相似性。此外，协同过滤可以评估用户或项目之间的相似性。典型的混合策略是使用CB的相似性代替CF的评级。</p>
+<p>推荐系统评价方法：<strong>在线</strong>、<strong>离线</strong>。在线方法使用在线A&#x2F;B测试实时获取影响，离线方法使用历史数据，分为训练集和测试集。</p>
+<p>常用评价指标：<strong>精度</strong>、（precision）、<strong>召回率</strong>（recall）、<strong>F1</strong>、<strong>平均精度</strong>（MAP）、<strong>归一化累积好处</strong>（nDCG，评估最有用的项目是否出现在推荐列表的顶部位置）</p>
+<p>补充评价指标：<strong>用户空间覆盖</strong>（USC，评估覆盖了多少用户）、<strong>项目空间覆盖</strong>（ISC，评估覆盖了多少项目）</p>
+<p>提出的自动生成推荐系统允许配置这几个方面的参数：<strong>推荐方法、目标用户、项目、离线评价方法和指标</strong></p>
+<h1 id="提出的方法"><a href="#提出的方法" class="headerlink" title="提出的方法"></a>提出的方法</h1><p><img src="https://github.com/Olive-2019/Lam-s-Blog-source/blob/master/RS/1665226282989.png?raw=true" alt="1665226282989"></p>
+<p><strong>流程：</strong></p>
+<ol>
+<li>选择推荐系统需要推荐的元素，如类的属性，过程的任务。指定推荐方法、训练数据集、推荐系统指标</li>
+<li>推荐系统训练过程</li>
+<li>选择推荐方法，系统自动生成可以集成到不同建模工具里的推荐系统</li>
+</ol>
+<h1 id="Droid-DSL（一种领域特定语言）"><a href="#Droid-DSL（一种领域特定语言）" class="headerlink" title="Droid DSL（一种领域特定语言）"></a>Droid DSL（一种领域特定语言）</h1><p>用来描述提出的自动生成推荐系统的一种语言</p>
+<h1 id="架构与支撑工具"><a href="#架构与支撑工具" class="headerlink" title="架构与支撑工具"></a>架构与支撑工具</h1><h2 id="架构"><a href="#架构" class="headerlink" title="架构"></a>架构</h2><p>该系统的架构由三个模块组成，分别是配置器、服务、客户。</p>
+<p>第一个模块是<strong>配置器</strong>，该模块提供了配置、评估、生成推荐系统的功能。同时也提供了一个eclipse编辑器用于指定推荐系统内容（1）。该内容作为推荐系统评价系统的输入。推荐系统评价系统依赖于RankSys和RiVal，其中RankSys是实现推荐系统的框架，RiVal是一个数据划分和推荐系统评价的工具集。每一个指标都会显示在Eclipse的视图里（3）。根据得到的指标，推荐系统设计人员可以选择一种推荐方法并生成一系列配置文件。</p>
+<p>第二个模块是DROID<strong>服务</strong>，该模块使用了第一个模块生成的配置文件。通过4模块生成不同的配置文件可以适配不同的建模语言。</p>
+<p>第三个模块是<strong>客户</strong>，这个系统允许客户使用基于JSON的模型表示发送请求。</p>
+<h2 id="支撑工具"><a href="#支撑工具" class="headerlink" title="支撑工具"></a>支撑工具</h2><p>配置器部分的工具是eclipse的一个插件，支持使用DSL配置、查看指标结果。</p>
+<p>服务方面采用方式是，客户端提交JSON格式的请求，服务端处理并返回推荐系统名字和JSON格式的推荐系统。服务主要包含三个模块，推荐器（用于处理客户端请求）、内容解析（用于解析JSON文件）、推荐系统生成器</p>
+<h1 id="自己的一点碎碎念"><a href="#自己的一点碎碎念" class="headerlink" title="自己的一点碎碎念"></a>自己的一点碎碎念</h1><p>其实就是一个支持用户定制推荐系统的低代码开发平台，但是跟清华数为的项目有些差异。这里还需要使用一些类似yml的DSL书写配置，不是完全的图形化界面。</p>
+<p>从文章看来，工具应该是已经开发完可以用的了，文章中也给了链接，但是还没真正安装试试。</p>
+]]></content>
+      <categories>
+        <category>论文</category>
+      </categories>
+      <tags>
+        <tag>lowcomote</tag>
+        <tag>RS</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Towards automating the construction of recommender systems for low-code development platforms</title>
     <url>/Olivia_Lam.github.io/2022/10/08/RS3/</url>
     <content><![CDATA[<p>用于低代码开发平台的推荐系统</p>
@@ -442,379 +335,6 @@
 <h2 id="实验结果有效性的威胁"><a href="#实验结果有效性的威胁" class="headerlink" title="实验结果有效性的威胁"></a>实验结果有效性的威胁</h2><h3 id="内部威胁"><a href="#内部威胁" class="headerlink" title="内部威胁"></a>内部威胁</h3><p>研究和结论之间的相关性。由于数据集是人工创建的，而且数据量小，可能存在引入误差的问题。所以存在AtlanEcore数据集。</p>
 <h3 id="外部威胁"><a href="#外部威胁" class="headerlink" title="外部威胁"></a>外部威胁</h3><p>模型的推广性。实验是面向具体任务和语言的，将来可能用于其它任务、以及其它数据集。</p>
 ]]></content>
-      <categories>
-        <category>论文</category>
-      </categories>
-      <tags>
-        <tag>lowcomote</tag>
-        <tag>RS</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Recommender Systems in Model-Driven Engineering</title>
-    <url>/Olivia_Lam.github.io/2022/10/05/RSinMDE/</url>
-    <content><![CDATA[<p>推荐系统在软件建模中的作用的综述</p>
-<span id="more"></span>
-
-<h1 id="三个问题"><a href="#三个问题" class="headerlink" title="三个问题"></a>三个问题</h1><ol>
-<li>推荐系统在软件建模中起什么作用？<br>通常用于完成和修复工件。<br>通常是独立于语言的，特定的一般针对UML或过程建模符号</li>
-<li>哪些推荐技术用于支持软件建模？评价方法？<br>基于内容&gt;基于知识<br>评价方法：离线</li>
-<li>推荐系统还有什么可做的？<br>几乎没有用于模型转化或代码生成的推荐系统，很少推荐系统用于创建、重用、查找工件。此外，还有有效的软件建模的工件库、协同过滤利用群体知识、基于用户的推荐系统评估、与低代码平台的有效寄成机制</li>
-</ol>
-<h1 id="RS-in-MDE-模型驱动工程中的推荐系统"><a href="#RS-in-MDE-模型驱动工程中的推荐系统" class="headerlink" title="RS in MDE 模型驱动工程中的推荐系统"></a>RS in MDE 模型驱动工程中的推荐系统</h1><p>文章分了四个维度来叙述模型驱动工程中的推荐系统，分别是推荐系统在什么领域解决什么问题、提出的工具有什么特点、使用到了什么样的推荐系统以及怎么评价这个推荐系统。</p>
-<p><img src="https://github.com/Olive-2019/Lam-Blog-resource/blob/master/images/RSinMDE/4dimensions.jpg?raw=true" alt="四个维度"></p>
-<h1 id="Domain-领域"><a href="#Domain-领域" class="headerlink" title="Domain 领域"></a>Domain 领域</h1><p><img src="https://github.com/Olive-2019/Lam-Blog-resource/blob/master/images/RSinMDE/domain.jpg?raw=true" alt="领域"><br>领域部分将RS能解决的问题正交地分为了三个维度，分别是artifacts，即能针对什么工件、LanguageIndependent，即是否语言独立的、Purpose，即RS针对的是什么什么目的。</p>
-<p>针对工件和目标，又正交地分成了24个维度，将多个方法分别分到了这些维度上。</p>
-<h2 id="Complete-完成模型"><a href="#Complete-完成模型" class="headerlink" title="Complete 完成模型"></a>Complete 完成模型</h2><p>第一种是使用搜索技术扩展部分模型形成完整模型。<br>使用搜索技术DIA GEN 基于超图语法规律（hyper-graph grammar rules）生成可能的工件，具有高计算复杂度，DIG MDE 发现时间复杂度过高后，会建议手动修改模型保证模型补全完成。<br>第二种是给出一个模型逐步完成的建议。这种建议来自模型库中已有的模型碎片。</p>
-<h2 id="Create-创建模型"><a href="#Create-创建模型" class="headerlink" title="Create 创建模型"></a>Create 创建模型</h2><p>创建模型的相对较少，只有两个，一个是针对元模型的，另一个是针对模型的。<br>针对元模型的是DSL-maps，用思维导图表达DSL需求，DSL-maps推荐元模型模式，用户选择以后可以再改进。<br>针对模型的是用例图的建模助手（UC-check）。创建用例图时，向导会推荐合适的参与者和用例。</p>
-<h2 id="Find-查找工件"><a href="#Find-查找工件" class="headerlink" title="Find 查找工件"></a>Find 查找工件</h2><p>查找模型工件。从（异构）库中查找并根据用户适用性排序。</p>
-<h2 id="Repair-修复工件"><a href="#Repair-修复工件" class="headerlink" title="Repair 修复工件"></a>Repair 修复工件</h2><p>修复工件。感觉跟推荐系统关系并不是很大的样子</p>
-<h2 id="Reuse-复用"><a href="#Reuse-复用" class="headerlink" title="Reuse 复用"></a>Reuse 复用</h2><p>不只是查找，在新的上下文中提供复用工件的帮助。</p>
-<h2 id="Other-purpose-其它目的"><a href="#Other-purpose-其它目的" class="headerlink" title="Other purpose 其它目的"></a>Other purpose 其它目的</h2><p>一些比较特殊的需求，没太看懂。</p>
-<h1 id="Tooling-工具"><a href="#Tooling-工具" class="headerlink" title="Tooling 工具"></a>Tooling 工具</h1><p><img src="https://github.com/Olive-2019/Lam-Blog-resource/blob/master/images/RSinMDE/tooling.jpg?raw=true" alt="工具"></p>
-<p>工具部分介绍了工具的成熟度、工具的独立性、工具中推荐系统的触发方式、推荐系统的互动方式</p>
-<h2 id="Maturity-成熟度"><a href="#Maturity-成熟度" class="headerlink" title="Maturity 成熟度"></a>Maturity 成熟度</h2><p>三个级别的成熟度，没有实现的提议，有概念的原型，完整实现（包含框架、插件、MDE）。</p>
-<div id="echarts4016" style="width: 85%;height: 400px;margin: 0 auto"></div>
-<script src="https://cdn.bootcss.com/echarts/3.8.0/echarts.common.min.js"></script>
-<script type="text/javascript">
-        // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts4016'));
-        // 指定图表的配置项和数据
-        var option = option = {
-  title: {
-    text: '成熟度',
-    subtext: '51个方法',
-    left: 'center'
-  },
-  tooltip: {
-    trigger: 'item'
-  },
-  legend: {
-    orient: 'vertical',
-    left: 'left'
-  },
-  series: [
-    {
-      name: '方法成熟度',
-      type: 'pie',
-      radius: '60%',
-      data: [
-        { value: 4, name: 'Proposals 建议' },
-        { value: 19, name: 'Prototype 原型' },
-        { value: 28, name: 'Full implement 完整实现' }
-      ],
-      emphasis: {
-        itemStyle: {
-          shadowBlur: 10,
-          shadowOffsetX: 0,
-          shadowColor: 'rgba(0, 0, 0, 0.5)'
-        }
-      }
-    }
-  ]
-};
-        // 使用刚指定的配置项和数据显示图表。
-        myChart.setOption(option);
-</script>
-
-<p>绝大部分提供了完整实现，下面为完整实现的28个方法中的分类。</p>
-<div id="echarts6076" style="width: 85%;height: 400px;margin: 0 auto"></div>
-<script src="https://cdn.bootcss.com/echarts/3.8.0/echarts.common.min.js"></script>
-<script type="text/javascript">
-        // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts6076'));
-        // 指定图表的配置项和数据
-        var option = option = {
-  title: {
-    text: '完整实现',
-    subtext: '28个方法',
-    left: 'center'
-  },
-  tooltip: {
-    trigger: 'item'
-  },
-  legend: {
-    orient: 'vertical',
-    left: 'left'
-  },
-  series: [
-    {
-      name: '完整实现',
-      type: 'pie',
-      radius: '60%',
-      data: [
-
-    { value: 13, name: 'plug-in 插件' },
-        { value: 13, name: 'systems/extensions of systems 系统/系统扩展' },
-        { value: 3, name: 'Framework 框架' }
-      ],
-      emphasis: {
-        itemStyle: {
-          shadowBlur: 10,
-          shadowOffsetX: 0,
-          shadowColor: 'rgba(0, 0, 0, 0.5)'
-        }
-      }
-    }
-  ]
-};
-        // 使用刚指定的配置项和数据显示图表。
-        myChart.setOption(option);
-</script>
-
-<h2 id="Tool-Independence-工具独立性"><a href="#Tool-Independence-工具独立性" class="headerlink" title="Tool Independence 工具独立性"></a>Tool Independence 工具独立性</h2><p>工具独立性只能在原型和完整实现中讨论，建议不在讨论范围中。根据是否可以集成到其它MDE工具中判断是否具有工具独立性。</p>
-<div id="echarts6757" style="width: 85%;height: 400px;margin: 0 auto"></div>
-<script src="https://cdn.bootcss.com/echarts/3.8.0/echarts.common.min.js"></script>
-<script type="text/javascript">
-        // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts6757'));
-        // 指定图表的配置项和数据
-        var option = option = {
-  title: {
-    text: '工具独立性',
-    subtext: '',
-    left: 'center'
-  },
-  tooltip: {
-    trigger: 'item'
-  },
-  legend: {
-    orient: 'vertical',
-    left: 'left'
-  },
-  series: [
-    {
-      name: '工具独立性',
-      type: 'pie',
-      radius: '60%',
-      data: [
-
-    { value: 40, name: 'tool-dependent 非独立工具' },
-        { value: 4, name: '提供了显式的方法促进与其它工具的集成' },
-        { value: 1, name: '真正与平台无关' }
-      ],
-      emphasis: {
-        itemStyle: {
-          shadowBlur: 10,
-          shadowOffsetX: 0,
-          shadowColor: 'rgba(0, 0, 0, 0.5)'
-        }
-      }
-    }
-  ]
-};
-        // 使用刚指定的配置项和数据显示图表。
-        myChart.setOption(option);
-</script>
-
-<h2 id="trigger-recommendations-触发方式"><a href="#trigger-recommendations-触发方式" class="headerlink" title="trigger recommendations 触发方式"></a>trigger recommendations 触发方式</h2><p>触发建议的方式：按需、主动。前者，用户需要主动触发建议；后者，系统主动提建议</p>
-<div id="echarts8132" style="width: 85%;height: 400px;margin: 0 auto"></div>
-<script src="https://cdn.bootcss.com/echarts/3.8.0/echarts.common.min.js"></script>
-<script type="text/javascript">
-        // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts8132'));
-        // 指定图表的配置项和数据
-        var option = option = {
-  title: {
-    text: '触发方式',
-    subtext: 'trigger recommendations',
-    left: 'center'
-  },
-  tooltip: {
-    trigger: 'item'
-  },
-  legend: {
-    orient: 'vertical',
-    left: 'left'
-  },
-  series: [
-    {
-      name: '触发方式',
-      type: 'pie',
-      radius: '60%',
-      data: [
-
-    { value: 41, name: 'user demand 用户主动' },
-        { value: 12, name: 'proactively 被动' }
-      ],
-      emphasis: {
-        itemStyle: {
-          shadowBlur: 10,
-          shadowOffsetX: 0,
-          shadowColor: 'rgba(0, 0, 0, 0.5)'
-        }
-      }
-    }
-  ]
-};
-        // 使用刚指定的配置项和数据显示图表。
-        myChart.setOption(option);
-</script>
-
-<h2 id="Recommendation-enactment-制定建议方式"><a href="#Recommendation-enactment-制定建议方式" class="headerlink" title="Recommendation enactment 制定建议方式"></a>Recommendation enactment 制定建议方式</h2><p>制定建议的方式：<br>手动：给出一个序列，用户决定使用方式<br>交互式：推荐系统允许用户选择项目，然后应用到某个上下文中<br>自动：用户不参与<br>半自动：自动的过程中用户给出一点操作</p>
-<div id="echarts6210" style="width: 85%;height: 400px;margin: 0 auto"></div>
-<script src="https://cdn.bootcss.com/echarts/3.8.0/echarts.common.min.js"></script>
-<script type="text/javascript">
-        // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts6210'));
-        // 指定图表的配置项和数据
-        var option = option = {
-  title: {
-    text: '制定建议方式',
-    subtext: 'Recommendation enactment',
-    left: 'center'
-  },
-  tooltip: {
-    trigger: 'item'
-  },
-  legend: {
-    orient: 'vertical',
-    left: 'left'
-  },
-  series: [
-    {
-      name: '制定建议方式',
-      type: 'pie',
-      radius: '60%',
-      data: [
-
-    { value: 16, name: 'manually 用户手动' },
-        { value: 25, name: 'interactively 交互式' },
-
-{ value: 3, name: 'semiautomated 半自动的' },
-
-{ value: 2, name: 'automated 自动的' }
-      ],
-      emphasis: {
-        itemStyle: {
-          shadowBlur: 10,
-          shadowOffsetX: 0,
-          shadowColor: 'rgba(0, 0, 0, 0.5)'
-        }
-      }
-    }
-  ]
-};
-        // 使用刚指定的配置项和数据显示图表。
-        myChart.setOption(option);
-</script>
-
-<h1 id="Recommendation-推荐系统"><a href="#Recommendation-推荐系统" class="headerlink" title="Recommendation 推荐系统"></a>Recommendation 推荐系统</h1><p><img src="https://github.com/Olive-2019/Lam-Blog-resource/blob/master/images/RSinMDE/recommendation.jpg?raw=true" alt="推荐系统"></p>
-<p>推荐系统方面介绍了推荐方法、用户偏好收集、推荐的项目以及推荐度。</p>
-<h3 id="Recommendation-Method-推荐方法"><a href="#Recommendation-Method-推荐方法" class="headerlink" title="Recommendation Method 推荐方法"></a>Recommendation Method 推荐方法</h3><p><strong>基于内容</strong>的方法使用不同内容编码和相似性来表示</p>
-<p><strong>协同过滤</strong>利用了用户的历史选择信息</p>
-<p><strong>基于知识</strong>的方法可以分为<strong>基于约束</strong>和<strong>基于案例</strong>的。基于约束是指寻找一组满足领域相关规则的项目，基于案例是指搜索类似案例的过往解决方案来解决。</p>
-<p><strong>混合</strong>方法是指将前面三种方法混合。</p>
-<p>还有一些其它的，使用静态分析或搜索的方法。</p>
-<p>Hermes框架适用度比较广。</p>
-<h2 id="User-Preference-用户偏好"><a href="#User-Preference-用户偏好" class="headerlink" title="User Preference 用户偏好"></a>User Preference 用户偏好</h2><p>获取方式包括显式和隐式。隐式是监控用户动作；显式是直接收集用户信息，如调查问卷等。绝大多数都是隐式收集用户偏好<br>另外，收集的用户偏好可以是长期的也可以是短期的。90%的算法收集的都是短期偏好。</p>
-<h2 id="Recommendation-Item-推荐的项目"><a href="#Recommendation-Item-推荐的项目" class="headerlink" title="Recommendation Item 推荐的项目"></a>Recommendation Item 推荐的项目</h2><p>项目可能是工件（碎片或完整工件）、建模活动中的建议、修复过程中的编辑动作。</p>
-<h2 id="Recommendation-Degree-推荐度"><a href="#Recommendation-Degree-推荐度" class="headerlink" title="Recommendation Degree 推荐度"></a>Recommendation Degree 推荐度</h2><p>推荐度分为两个维度，分别是基数和排序。基数指建议的总数；排序指建议是否被排序。</p>
-<div id="echarts9515" style="width: 85%;height: 400px;margin: 0 auto"></div>
-<script src="https://cdn.bootcss.com/echarts/3.8.0/echarts.common.min.js"></script>
-<script type="text/javascript">
-        // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts9515'));
-        // 指定图表的配置项和数据
-        var option = option = {
-  title: {
-    text: '推荐度',
-    subtext: '推荐基数',
-    left: 'center'
-  },
-  tooltip: {
-    trigger: 'item'
-  },
-  legend: {
-    orient: 'vertical',
-    left: 'left'
-  },
-  series: [
-    {
-      name: '推荐方法',
-      type: 'pie',
-      radius: '60%',
-      data: [
-         { value: 53, name: 'All' },
-         { value: 4, name: 'one' },
-         { value: 39, name: 'top N' }
-    ],
-      emphasis: {
-        itemStyle: {
-          shadowBlur: 10,
-          shadowOffsetX: 0,
-          shadowColor: 'rgba(0, 0, 0, 0.5)'
-        }
-      }
-    }
-  ]
-};
-        // 使用刚指定的配置项和数据显示图表。
-        myChart.setOption(option);
-</script>
-
-<p>排序的指标包括相似性、修复更多的错误、更少的修改、根据一个预训练的机器学习模型计算。</p>
-<h1 id="Evalution-评价"><a href="#Evalution-评价" class="headerlink" title="Evalution 评价"></a>Evalution 评价</h1><p><img src="https://github.com/Olive-2019/Lam-Blog-resource/blob/master/images/RSinMDE/evaluation.jpg?raw=true" alt="评价方法"></p>
-<h2 id="Method-方法"><a href="#Method-方法" class="headerlink" title="Method 方法"></a>Method 方法</h2><div id="echarts6103" style="width: 85%;height: 400px;margin: 0 auto"></div>
-<script src="https://cdn.bootcss.com/echarts/3.8.0/echarts.common.min.js"></script>
-<script type="text/javascript">
-        // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts6103'));
-        // 指定图表的配置项和数据
-        var option = option = {
-  title: {
-    text: '评价方法',
-    subtext: 'Method',
-    left: 'center'
-  },
-  tooltip: {
-    trigger: 'item'
-  },
-  legend: {
-    orient: 'vertical',
-    left: 'left'
-  },
-  series: [
-    {
-      name: '评价方法',
-      type: 'pie',
-      radius: '60%',
-      data: [
-         { value: 21, name: 'offline' },
-         { value: 2, name: 'online' },
-         { value: 12, name: 'User study' }
-    ],
-      emphasis: {
-        itemStyle: {
-          shadowBlur: 10,
-          shadowOffsetX: 0,
-          shadowColor: 'rgba(0, 0, 0, 0.5)'
-        }
-      }
-    }
-  ]
-};
-        // 使用刚指定的配置项和数据显示图表。
-        myChart.setOption(option);
-</script>
-
-<h3 id="Offline-Experiment-离线实验"><a href="#Offline-Experiment-离线实验" class="headerlink" title="Offline Experiment 离线实验"></a>Offline Experiment 离线实验</h3><p>使用过往的数据集模拟现实情况。通常面临的问题是数据集难以获取。</p>
-<p>数据集通常有四种来源：</p>
-<ol>
-<li>生成数据</li>
-<li>从现成的库中获取数据</li>
-<li>从现有文章中获取实例</li>
-<li>从公司获取现实世界的数据</li>
-</ol>
-<h3 id="Online-Experiment-在线实验"><a href="#Online-Experiment-在线实验" class="headerlink" title="Online Experiment 在线实验"></a>Online Experiment 在线实验</h3><p>应该就是A&#x2F;B测试，两组用户分别使用和不使用RS进行测试，对结果进行分析评估。不是很懂跟用户调查之间的差别。</p>
-<h3 id="User-Study-用户研究"><a href="#User-Study-用户研究" class="headerlink" title="User Study 用户研究"></a>User Study 用户研究</h3><p>通常会涉及到一组用户，通过使用和不使用RS去完成一些任务再分析可行性，并通过问卷收集信息。</p>
-<p>用户研究通常有三种类型。</p>
-<ol>
-<li>使用RS来完成任务</li>
-<li>用户在A&#x2F;B测试中使用RS</li>
-<li>将推荐的项目和专家推荐的对比</li>
-</ol>
-<h2 id="Metrics-指标"><a href="#Metrics-指标" class="headerlink" title="Metrics 指标"></a>Metrics 指标</h2>]]></content>
       <categories>
         <category>论文</category>
       </categories>
@@ -898,43 +418,484 @@
       </tags>
   </entry>
   <entry>
-    <title>Software Engineering for Machine Learning:A Case Study</title>
-    <url>/Olivia_Lam.github.io/2022/10/28/SE4ML-a-case-study/</url>
-    <content><![CDATA[<p>微软发的一篇关于ML中的软工问题的文章。主要提出了ML的9阶段工作流、最佳实践、ML工程成熟度。介绍了ML和传统软工之间的主要差别。</p>
+    <title>机器学习监控</title>
+    <url>/Olivia_Lam.github.io/2022/10/28/ML_Monitoring/</url>
+    <content><![CDATA[<p>低代码开发机器学习监控系统</p>
 <span id="more"></span>
 
-<h1 id="人员"><a href="#人员" class="headerlink" title="人员"></a>人员</h1><p>软工流程中需要加入数据科学家。随着数据科学规模越来越大，数据科学家被细分为领域专家（关注业务问题）、建模者（建立预测模型）、平台搭建者（创建基于云的设施）。</p>
-<h1 id="工作流-workflow"><a href="#工作流-workflow" class="headerlink" title="工作流 workflow"></a>工作流 workflow</h1><p>机器学习工作流是高度非线性的，包含多个反馈循环。</p>
-<h1 id="最佳实践"><a href="#最佳实践" class="headerlink" title="最佳实践"></a>最佳实践</h1><h2 id="End-to-end-pipeline-support"><a href="#End-to-end-pipeline-support" class="headerlink" title="End-to-end pipeline support"></a>End-to-end pipeline support</h2><p>实现一个端到端的自动化技术支持，尽可能做到无缝，尤其是数据传入传出部分，尽可能让算法工程师调参更方便</p>
-<h2 id="Data-availability-collection-cleaning-and-management"><a href="#Data-availability-collection-cleaning-and-management" class="headerlink" title="Data availability, collection, cleaning, and management"></a>Data availability, collection, cleaning, and management</h2><p>数据要尽可能复用，减少冗余工作<br>将数据管理工具和ML框架混合在一起，避免数据和模型管理工作碎片化</p>
-<p>数据管理原因：数据源快速变化<br>快速变化原因：工程师自己的操作，传入新数据</p>
-<h2 id="Education-and-Training"><a href="#Education-and-Training" class="headerlink" title="Education and Training"></a>Education and Training</h2><p>传统软工背景的工程师需要学习最新的ML知识。<br>（大概就是讲了一下微软怎么培训的）</p>
-<h2 id="Model-Debugging-and-Interpretability"><a href="#Model-Debugging-and-Interpretability" class="headerlink" title="Model Debugging and Interpretability"></a>Model Debugging and Interpretability</h2><p>模型调试和可解释性<br>调试的点不止于编程错误，还有模型错误和不确定性<br>这块内容我们不必关注</p>
-<h2 id="Model-Evolution-Evaluation-and-Deployment"><a href="#Model-Evolution-Evaluation-and-Deployment" class="headerlink" title="Model Evolution, Evaluation, and Deployment"></a>Model Evolution, Evaluation, and Deployment</h2><p>以ML为中心的软件 模型更改、参数调整、数据更新引起的修订会更频繁。快节奏的模型迭代需要更频繁的部署。<br>自动化的训练和部署不够，仍需要将模型构建和其它软件集成，使用同一个版本控制库</p>
-<h2 id="Compliance"><a href="#Compliance" class="headerlink" title="Compliance"></a>Compliance</h2><p>遵守原则</p>
-<h2 id="Varied-Perceptions"><a href="#Varied-Perceptions" class="headerlink" title="Varied Perceptions"></a>Varied Perceptions</h2><p>经验不同的人会有不同的看法<br>缺乏经验的人更认为培训重要<br>经验越丰富的人越认为工具、端到端的自动化支持、规范重要</p>
-<h1 id="成熟度"><a href="#成熟度" class="headerlink" title="成熟度"></a>成熟度</h1><p>通过以下六个维度分别评分（1-5），取均值为AMI（活动成熟度指数）</p>
-<ol>
-<li>has defined goals 有明确的目标</li>
-<li>is consistently implemented 一致的实现</li>
-<li>documented 有文档的</li>
-<li>automated 自动化的</li>
-<li>measured and tracked 被评估和最终的</li>
-<li>continuously improved 持续改进的</li>
-</ol>
-<h1 id="和传统软工的差异"><a href="#和传统软工的差异" class="headerlink" title="和传统软工的差异"></a>和传统软工的差异</h1><h2 id="数据查找和管理"><a href="#数据查找和管理" class="headerlink" title="数据查找和管理"></a>数据查找和管理</h2><h2 id="定制和复用"><a href="#定制和复用" class="headerlink" title="定制和复用"></a>定制和复用</h2><p>定制和复用ML模型需要的工作更多，模型的一部分是算法，另一部分是参数。通常需要重新训练，甚至需要替换成其它模型</p>
-<h2 id="模块化"><a href="#模块化" class="headerlink" title="模块化"></a>模块化</h2><p>ML模型难以保持边界原因：</p>
+<h1 id="简化版摘要"><a href="#简化版摘要" class="headerlink" title="简化版摘要"></a>简化版摘要</h1><p>根据2019年微软提出的ML工作流，Panagiotis Kourouklidis关注ML模型部署后的监控问题，在2020年在这个领域发了一篇survey并提出了一些研究方向，2021年提出了一个元模型试图解决自动生成ML模型监控程序的问题。同时也给出了该元模型基于Kubernete生成系统的一个例子。</p>
+<p>其中比较有意义的就是这个元模型以及提及的一些工具。跟DWF目前的工作关系不大，但是可能对未来的工作有比较重要的意义。</p>
+<p>引文中大多为ML领域的文章，对我们来说比较有意义的可能是微软2019年发的机器学习中的软工。引用这两篇的文章大多为review，并没有对这项工作做出什么拓展。</p>
+<p>文章提到的对于ML流程自动化的工具对我们来说相对较为有用。</p>
+<h1 id="时间线"><a href="#时间线" class="headerlink" title="时间线"></a>时间线</h1><p>2019年微软发的一篇关于ML中的软工的文章中提到了机器学习工作流的九个阶段，其中包括了Model Monitoring。</p>
+<blockquote>
+<p><em>Software Engineering for Machine Learning: A Case Study</em></p>
+</blockquote>
+<p>2020年Panagiotis Kourouklidis发表了第一篇关于自动生成监控系统的文章，主要是说了一下目前ML模型部署后面临的问题以及他的研究计划</p>
+<blockquote>
+<p><em>Towards a low-code solution for monitoring machine learning model performance</em></p>
+</blockquote>
+<p>2021年由同一作者发表了第二篇相关文章，提出了一个原始的元模型，并基于Kubernete给出了实现。</p>
+<blockquote>
+<p><em>A Model-Driven Engineering Approach for Monitoring Machine Learning Models</em></p>
+</blockquote>
+<p>至此，该作者没有更新的研究成果，在引文中也没找到更新的研究。此外，也搜索了一下LCDP和ML Monitoring，也没有人做这个。</p>
+<h1 id="人物、机构"><a href="#人物、机构" class="headerlink" title="人物、机构"></a>人物、机构</h1><p>一作是来自University of York和British Telecom的Panagiotis Kourouklidis，目前只有这两篇文章，猜测不是专职做研究的人员。</p>
+<p>合作作者是University of York或British Telecom的研究人员</p>
+<h1 id="希望解决的问题"><a href="#希望解决的问题" class="headerlink" title="希望解决的问题"></a>希望解决的问题</h1><p>实现<strong>自动生成</strong>一个<strong>机器学习模型的监控</strong>系统</p>
+<h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><h3 id="工作流"><a href="#工作流" class="headerlink" title="工作流"></a>工作流</h3><p><img src="https://github.com/Olive-2019/Lam-Blog-resource/blob/master/images/MDEforMLMonitor/MLworkflow.jpg?raw=true" alt="工作流"></p>
+<h3 id="部署后漂移问题"><a href="#部署后漂移问题" class="headerlink" title="部署后漂移问题"></a>部署后漂移问题</h3><p>有监督学习中的X，Y通常被视为服从联合概率分布P(X, Y)的随机变量。由于真实世界情况复杂且不稳定，概率分布会发生变化，即概念漂移、采样漂移、先验概率漂移或更一般的数据集漂移。</p>
+<p>此处主要讨论数据漂移和概念漂移两种。</p>
+<h4 id="数据漂移"><a href="#数据漂移" class="headerlink" title="数据漂移"></a>数据漂移</h4><p>数据漂移可能是由采样机制，环境中的未知因素随时间变化引起，数据漂移不一定导致输出错误，没有数据漂移也不一定能保证输出正确。目前可以通过检查数据输入来检测数据漂移。</p>
+<h4 id="概念漂移"><a href="#概念漂移" class="headerlink" title="概念漂移"></a>概念漂移</h4><p>概念漂移指输入-输出映射发生变化。概念漂移可能是真实的，也可能是虚拟的。真实的指的是由于某些未知因素发生改变，导致映射发生改变；虚拟的指的是映射实际并没有发生改变，只是由于其它原因观测到这个现象（比如有偏采样）。</p>
+<h4 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h4><p>客服中心的服务对象的反馈：使用等待时长和服务时长拟合反馈</p>
+<p>目前模型是总时长小于20则为positive</p>
+<p>模型部署后可能存在四种状态，无漂移、数据漂移、概念漂移、两种漂移并存。</p>
+<p>无漂移。理想状态，即输入的数据分布不改变，模型也一直符合现实状况</p>
+<p>数据漂移。例如某个客服没上班，等待时长变长，但是用户并不会因此愿意等待更长时间。这种数据漂移并没有导致输出错误</p>
+<p>概念漂移。模型不再符合现实情况，但是数据分布不发生改变，输出存在错误。如用户愿意等的更长，则现实模型划分线应该上移。<br>这种情况下，模型需要重新学习新数据。</p>
+<p>两种漂移并存。有偏采样发生时，输入数据的分布自然与学习集不同了。同时，由于学习集的分布与真实输入不同，训练出来的模型自然不能用于真实输入。但是我们会以为观察到数据漂移和真实概念漂移。目前区分真实和虚假的概念漂移仍困难。</p>
+<h2 id="研究方向"><a href="#研究方向" class="headerlink" title="研究方向"></a>研究方向</h2><p>希望开发一个抽象化的低代码的解决方案，包括DSL和参考实现。允许用户只需要配置模型监控方案，不必关注具体细节。将模型监控的任务分成三大类，分别是，数据捕捉、算法执行、响应漂移。</p>
+<h3 id="数据捕捉"><a href="#数据捕捉" class="headerlink" title="数据捕捉"></a>数据捕捉</h3><p>为了检测概念漂移，需要存储模型输出并与反馈进行对比。在前面提到的实例中，可以建立反向代理服务器转发请求和响应，并将事件写到数据库中。</p>
+<p>收集数据的两个重要来源：</p>
 <ul>
-<li>ML模型不容易扩展功能</li>
-<li>ML模型之间的相互作用并不明显</li>
+<li>模型的输入输出</li>
+<li>反馈</li>
 </ul>
+<p>收集反馈的困难在于收集方式取决于模型，例如推荐系统的反馈收集只需要记录一下是否点击，而图片分类器的反馈收集必须要人工介入。</p>
+<h3 id="算法执行"><a href="#算法执行" class="headerlink" title="算法执行"></a>算法执行</h3><p>检测算法的性能是非常重要的<br>希望能使用DSL来描述漂移检测算法，然后生成适用于不同框架的算法</p>
+<h3 id="响应漂移"><a href="#响应漂移" class="headerlink" title="响应漂移"></a>响应漂移</h3><p>方法是多样的，可以包含以下两种</p>
+<ul>
+<li>检测到漂移时简单地发送email</li>
+<li>自动触发重新训练模型的流程</li>
+</ul>
+<p>前者多用于数据漂移，后者多用于概念漂移。</p>
+<h1 id="实施方案技术路线"><a href="#实施方案技术路线" class="headerlink" title="实施方案技术路线"></a>实施方案技术路线</h1><h2 id="部署环境假设"><a href="#部署环境假设" class="headerlink" title="部署环境假设"></a>部署环境假设</h2><ul>
+<li>ML模型持续接收未标记的样本（推理请求），并需要返回一个预测结果（推理响应）</li>
+<li>未标记样本可能在未知时长后接收到真实标签</li>
+<li>定期根据ML模型接收到的最新数据决定是否修正模型</li>
+<li>由领域专家定义不同种类的漂移响应策略</li>
+</ul>
+<h2 id="元模型组件"><a href="#元模型组件" class="headerlink" title="元模型组件"></a>元模型组件</h2><ul>
+<li>指定想要监控哪一个ML模型的机制</li>
+<li>指定哪些推理请求和推理响应字段需要被捕捉。（这也是在命名被捕捉字段的方法。命名可以方便其它实体单独引用它。）</li>
+<li>定义周期性漂移检测执行机制</li>
+<li>定义检测到漂移时，需要采取的措施</li>
+</ul>
+<h2 id="元模型设计"><a href="#元模型设计" class="headerlink" title="元模型设计"></a>元模型设计</h2><p>虽然希望元模型和具体底层技术完全分离，但为尽快从算法专家处得到反馈，这个版本的元模型做了一些妥协。下文将会提及这些妥协。</p>
+<p><img src="https://github.com/Olive-2019/Lam-Blog-resource/blob/master/images/MDEforMLMonitor/domain_meta-model.jpg?raw=true" alt="元模型设计"></p>
+<p>deployment抽象类包括了ML监控方法的所有方面。在系统中，通常有一个Model子类的实例和任意数量的DriftDetector子类的实例。</p>
+<p>Model类包含了名称、序列化ML模型的URL、创建它的框架名称、多个输入的IO实例和一个输出的IO实例。</p>
+<p>IO类是模型的输入输出，包含输入&#x2F;输出的名字和数据类型的枚举属性。</p>
+<p>DriftDetector类周期性地执行漂移检测算法，属性包含名字、频率、email、定制容器。执行的算法可能是底层平台包含的算法也可能是自定义的算法。DataDriftDetector需要训练数据和现有数据。ConceptDriftDetector需要真实数据的预测标签。</p>
+<h2 id="元模型的妥协"><a href="#元模型的妥协" class="headerlink" title="元模型的妥协"></a>元模型的妥协</h2><ul>
+<li>为了简化展示，ML模型将会被部署到web端点。因此Model类中需要序列化ML模型的URL、创建它的框架名称这两个属性，这两个属性并不需要被包含进来，因为部署过程可能是单独执行的。</li>
+<li>区分两种漂移检测器。区分是为了简化底层技术实现。</li>
+<li>DriftDetector属性中包含了email，检测到模型漂移的行为只能是发送email了。（可以抽象化成一个超类）</li>
+</ul>
+<h2 id="系统生成"><a href="#系统生成" class="headerlink" title="系统生成"></a>系统生成</h2><p>使用M2T转化语言，基于Kubernetes生成了一个具体的ML监控系统。这个方法的优点是没有生成过程代码。生成的组件包括两种类型，一种是开源的定制的Kubernete资源，另一种是容器注册表中注册的容器化应用。</p>
+<h3 id="工件"><a href="#工件" class="headerlink" title="工件"></a>工件</h3><p><img src="https://github.com/Olive-2019/Lam-Blog-resource/blob/master/images/MDEforMLMonitor/generated_artifacts.jpg?raw=true" alt="生成的工件"></p>
+<p>包含了Inference Service（推理服务）、Message Queue、Database Writer、Database、Proxy（代理）、Configuration和 Drift Detection Execution等组件。</p>
+<p>Inference Service组件包括两个功能，分别是Model Server和Logger。Model Server负责响应各种应用程序发送的推理请求，Logger负责记录请求和响应事件。</p>
+<p>Message Queue从Logger接收消息，路由至Database Writer。</p>
+<p>Database Writer主要功能有两个，其一是根据算法专家提供的消息初始化数据库，其二是将捕获到的数据存储到数据库中，捕获的数据来源包括logger记录的事件和ML模型的性能反馈。</p>
+<p>Database组件使用MySQL数据库。</p>
+<p>Drift Detection Execution组件周期性执行算法专家指定的漂移检测算法。算法专家可以只实现漂移检测算法，并指定实现这个算法的容器映像，不必实现数据检索和通知发送的部分。</p>
+<p>Configuration通过使用配置文件，容器化应用程序根据算法专家规定的需求调整自己的功能。</p>
+<p>Proxy需要用同一个主机名接收推理请求和反馈数据，所以需要使用代理来进行转发。代理接收请求后根据请求路径转发到inference service或database writer。</p>
+<h3 id="平台"><a href="#平台" class="headerlink" title="平台"></a>平台</h3><p>为了最大程度地降低算法专家的使用门槛，建立了web应用。主要功能包括创建和提交MDE模型。辅助功能包括查询、管理当前所有的ML模型、数据集，注册漂移检测算法。</p>
+<h1 id="有意义的结果"><a href="#有意义的结果" class="headerlink" title="有意义的结果"></a>有意义的结果</h1><p>上文提及的元模型，以及对ML的SE流程认知。</p>
+<h1 id="对论文的优势和局限性的评价"><a href="#对论文的优势和局限性的评价" class="headerlink" title="对论文的优势和局限性的评价"></a>对论文的优势和局限性的评价</h1><p>20年的文章有点过于水了？只讲了ML模型部署后的问题，以及监控过程中需要研究的方向。</p>
+<p>21年的文章提出了一个元模型，起码算是做了一点工作，但也只是一个不太成熟的元模型。</p>
+<h1 id="对我们现在的工作有什么启发"><a href="#对我们现在的工作有什么启发" class="headerlink" title="对我们现在的工作有什么启发"></a>对我们现在的工作有什么启发</h1><p>这个作者做的东西有点偏离了LCDP，是自动生成的ML Model监控程序的工作。对我们目前的工作并没有什么帮助，但是假如我们要做RS嵌入LCDP平台实现智能推荐的话，对RS系统的监控也是一个值得思考的工作。</p>
+<h1 id="有意思的相关文章"><a href="#有意思的相关文章" class="headerlink" title="有意思的相关文章"></a>有意思的相关文章</h1><p>其中一篇引文：Amershi S, Begel A, Bird C, et al. Software engineering for machine learning: A case study[C]&#x2F;&#x2F;2019 IEEE&#x2F;ACM 41st International Conference on Software Engineering: Software Engineering in Practice (ICSE-SEIP). IEEE, 2019: 291-300.</p>
+<p>其它引文大多是纯数据科学领域的，没啥意思。</p>
+<p>引用这两篇文献的文章跟这项工作的关系也不大。</p>
+<h1 id="有价值的相关工具"><a href="#有价值的相关工具" class="headerlink" title="有价值的相关工具"></a>有价值的相关工具</h1><p>文章里提到了一些ML流程自动化的工具。</p>
+<h2 id="MLflow"><a href="#MLflow" class="headerlink" title="MLflow"></a>MLflow</h2><p>做元数据追踪，提高实验可复现性。很容易和现有机器学习框架结合使用，且有直观的UI。但非端到端全自动的工具，仍有数据准备和模型监控未覆盖。</p>
+<h2 id="Tensorflow-extended"><a href="#Tensorflow-extended" class="headerlink" title="Tensorflow extended"></a>Tensorflow extended</h2><p>端到端全自动。但仅支持tf core，模型监控方面做得比较单调，只支持针对分类特征的数据漂移检测，且只提供一种距离度量。</p>
+<h2 id="alibi-detect"><a href="#alibi-detect" class="headerlink" title="alibi-detect"></a>alibi-detect</h2><p>开源的检测库，提供数据漂移、异常值、对抗样本等检测支持。</p>
 ]]></content>
+      <categories>
+        <category>论文阅读笔记</category>
+      </categories>
+      <tags>
+        <tag>ML</tag>
+        <tag>Monitor</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Recommender Systems in Model-Driven Engineering</title>
+    <url>/Olivia_Lam.github.io/2022/10/05/RSinMDE/</url>
+    <content><![CDATA[<p>推荐系统在软件建模中的作用的综述</p>
+<span id="more"></span>
+
+<h1 id="三个问题"><a href="#三个问题" class="headerlink" title="三个问题"></a>三个问题</h1><ol>
+<li>推荐系统在软件建模中起什么作用？<br>通常用于完成和修复工件。<br>通常是独立于语言的，特定的一般针对UML或过程建模符号</li>
+<li>哪些推荐技术用于支持软件建模？评价方法？<br>基于内容&gt;基于知识<br>评价方法：离线</li>
+<li>推荐系统还有什么可做的？<br>几乎没有用于模型转化或代码生成的推荐系统，很少推荐系统用于创建、重用、查找工件。此外，还有有效的软件建模的工件库、协同过滤利用群体知识、基于用户的推荐系统评估、与低代码平台的有效寄成机制</li>
+</ol>
+<h1 id="RS-in-MDE-模型驱动工程中的推荐系统"><a href="#RS-in-MDE-模型驱动工程中的推荐系统" class="headerlink" title="RS in MDE 模型驱动工程中的推荐系统"></a>RS in MDE 模型驱动工程中的推荐系统</h1><p>文章分了四个维度来叙述模型驱动工程中的推荐系统，分别是推荐系统在什么领域解决什么问题、提出的工具有什么特点、使用到了什么样的推荐系统以及怎么评价这个推荐系统。</p>
+<p><img src="https://github.com/Olive-2019/Lam-Blog-resource/blob/master/images/RSinMDE/4dimensions.jpg?raw=true" alt="四个维度"></p>
+<h1 id="Domain-领域"><a href="#Domain-领域" class="headerlink" title="Domain 领域"></a>Domain 领域</h1><p><img src="https://github.com/Olive-2019/Lam-Blog-resource/blob/master/images/RSinMDE/domain.jpg?raw=true" alt="领域"><br>领域部分将RS能解决的问题正交地分为了三个维度，分别是artifacts，即能针对什么工件、LanguageIndependent，即是否语言独立的、Purpose，即RS针对的是什么什么目的。</p>
+<p>针对工件和目标，又正交地分成了24个维度，将多个方法分别分到了这些维度上。</p>
+<h2 id="Complete-完成模型"><a href="#Complete-完成模型" class="headerlink" title="Complete 完成模型"></a>Complete 完成模型</h2><p>第一种是使用搜索技术扩展部分模型形成完整模型。<br>使用搜索技术DIA GEN 基于超图语法规律（hyper-graph grammar rules）生成可能的工件，具有高计算复杂度，DIG MDE 发现时间复杂度过高后，会建议手动修改模型保证模型补全完成。<br>第二种是给出一个模型逐步完成的建议。这种建议来自模型库中已有的模型碎片。</p>
+<h2 id="Create-创建模型"><a href="#Create-创建模型" class="headerlink" title="Create 创建模型"></a>Create 创建模型</h2><p>创建模型的相对较少，只有两个，一个是针对元模型的，另一个是针对模型的。<br>针对元模型的是DSL-maps，用思维导图表达DSL需求，DSL-maps推荐元模型模式，用户选择以后可以再改进。<br>针对模型的是用例图的建模助手（UC-check）。创建用例图时，向导会推荐合适的参与者和用例。</p>
+<h2 id="Find-查找工件"><a href="#Find-查找工件" class="headerlink" title="Find 查找工件"></a>Find 查找工件</h2><p>查找模型工件。从（异构）库中查找并根据用户适用性排序。</p>
+<h2 id="Repair-修复工件"><a href="#Repair-修复工件" class="headerlink" title="Repair 修复工件"></a>Repair 修复工件</h2><p>修复工件。感觉跟推荐系统关系并不是很大的样子</p>
+<h2 id="Reuse-复用"><a href="#Reuse-复用" class="headerlink" title="Reuse 复用"></a>Reuse 复用</h2><p>不只是查找，在新的上下文中提供复用工件的帮助。</p>
+<h2 id="Other-purpose-其它目的"><a href="#Other-purpose-其它目的" class="headerlink" title="Other purpose 其它目的"></a>Other purpose 其它目的</h2><p>一些比较特殊的需求，没太看懂。</p>
+<h1 id="Tooling-工具"><a href="#Tooling-工具" class="headerlink" title="Tooling 工具"></a>Tooling 工具</h1><p><img src="https://github.com/Olive-2019/Lam-Blog-resource/blob/master/images/RSinMDE/tooling.jpg?raw=true" alt="工具"></p>
+<p>工具部分介绍了工具的成熟度、工具的独立性、工具中推荐系统的触发方式、推荐系统的互动方式</p>
+<h2 id="Maturity-成熟度"><a href="#Maturity-成熟度" class="headerlink" title="Maturity 成熟度"></a>Maturity 成熟度</h2><p>三个级别的成熟度，没有实现的提议，有概念的原型，完整实现（包含框架、插件、MDE）。</p>
+<div id="echarts6299" style="width: 85%;height: 400px;margin: 0 auto"></div>
+<script src="https://cdn.bootcss.com/echarts/3.8.0/echarts.common.min.js"></script>
+<script type="text/javascript">
+        // 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById('echarts6299'));
+        // 指定图表的配置项和数据
+        var option = option = {
+  title: {
+    text: '成熟度',
+    subtext: '51个方法',
+    left: 'center'
+  },
+  tooltip: {
+    trigger: 'item'
+  },
+  legend: {
+    orient: 'vertical',
+    left: 'left'
+  },
+  series: [
+    {
+      name: '方法成熟度',
+      type: 'pie',
+      radius: '60%',
+      data: [
+        { value: 4, name: 'Proposals 建议' },
+        { value: 19, name: 'Prototype 原型' },
+        { value: 28, name: 'Full implement 完整实现' }
+      ],
+      emphasis: {
+        itemStyle: {
+          shadowBlur: 10,
+          shadowOffsetX: 0,
+          shadowColor: 'rgba(0, 0, 0, 0.5)'
+        }
+      }
+    }
+  ]
+};
+        // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option);
+</script>
+
+<p>绝大部分提供了完整实现，下面为完整实现的28个方法中的分类。</p>
+<div id="echarts1796" style="width: 85%;height: 400px;margin: 0 auto"></div>
+<script src="https://cdn.bootcss.com/echarts/3.8.0/echarts.common.min.js"></script>
+<script type="text/javascript">
+        // 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById('echarts1796'));
+        // 指定图表的配置项和数据
+        var option = option = {
+  title: {
+    text: '完整实现',
+    subtext: '28个方法',
+    left: 'center'
+  },
+  tooltip: {
+    trigger: 'item'
+  },
+  legend: {
+    orient: 'vertical',
+    left: 'left'
+  },
+  series: [
+    {
+      name: '完整实现',
+      type: 'pie',
+      radius: '60%',
+      data: [
+
+    { value: 13, name: 'plug-in 插件' },
+        { value: 13, name: 'systems/extensions of systems 系统/系统扩展' },
+        { value: 3, name: 'Framework 框架' }
+      ],
+      emphasis: {
+        itemStyle: {
+          shadowBlur: 10,
+          shadowOffsetX: 0,
+          shadowColor: 'rgba(0, 0, 0, 0.5)'
+        }
+      }
+    }
+  ]
+};
+        // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option);
+</script>
+
+<h2 id="Tool-Independence-工具独立性"><a href="#Tool-Independence-工具独立性" class="headerlink" title="Tool Independence 工具独立性"></a>Tool Independence 工具独立性</h2><p>工具独立性只能在原型和完整实现中讨论，建议不在讨论范围中。根据是否可以集成到其它MDE工具中判断是否具有工具独立性。</p>
+<div id="echarts7891" style="width: 85%;height: 400px;margin: 0 auto"></div>
+<script src="https://cdn.bootcss.com/echarts/3.8.0/echarts.common.min.js"></script>
+<script type="text/javascript">
+        // 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById('echarts7891'));
+        // 指定图表的配置项和数据
+        var option = option = {
+  title: {
+    text: '工具独立性',
+    subtext: '',
+    left: 'center'
+  },
+  tooltip: {
+    trigger: 'item'
+  },
+  legend: {
+    orient: 'vertical',
+    left: 'left'
+  },
+  series: [
+    {
+      name: '工具独立性',
+      type: 'pie',
+      radius: '60%',
+      data: [
+
+    { value: 40, name: 'tool-dependent 非独立工具' },
+        { value: 4, name: '提供了显式的方法促进与其它工具的集成' },
+        { value: 1, name: '真正与平台无关' }
+      ],
+      emphasis: {
+        itemStyle: {
+          shadowBlur: 10,
+          shadowOffsetX: 0,
+          shadowColor: 'rgba(0, 0, 0, 0.5)'
+        }
+      }
+    }
+  ]
+};
+        // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option);
+</script>
+
+<h2 id="trigger-recommendations-触发方式"><a href="#trigger-recommendations-触发方式" class="headerlink" title="trigger recommendations 触发方式"></a>trigger recommendations 触发方式</h2><p>触发建议的方式：按需、主动。前者，用户需要主动触发建议；后者，系统主动提建议</p>
+<div id="echarts8424" style="width: 85%;height: 400px;margin: 0 auto"></div>
+<script src="https://cdn.bootcss.com/echarts/3.8.0/echarts.common.min.js"></script>
+<script type="text/javascript">
+        // 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById('echarts8424'));
+        // 指定图表的配置项和数据
+        var option = option = {
+  title: {
+    text: '触发方式',
+    subtext: 'trigger recommendations',
+    left: 'center'
+  },
+  tooltip: {
+    trigger: 'item'
+  },
+  legend: {
+    orient: 'vertical',
+    left: 'left'
+  },
+  series: [
+    {
+      name: '触发方式',
+      type: 'pie',
+      radius: '60%',
+      data: [
+
+    { value: 41, name: 'user demand 用户主动' },
+        { value: 12, name: 'proactively 被动' }
+      ],
+      emphasis: {
+        itemStyle: {
+          shadowBlur: 10,
+          shadowOffsetX: 0,
+          shadowColor: 'rgba(0, 0, 0, 0.5)'
+        }
+      }
+    }
+  ]
+};
+        // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option);
+</script>
+
+<h2 id="Recommendation-enactment-制定建议方式"><a href="#Recommendation-enactment-制定建议方式" class="headerlink" title="Recommendation enactment 制定建议方式"></a>Recommendation enactment 制定建议方式</h2><p>制定建议的方式：<br>手动：给出一个序列，用户决定使用方式<br>交互式：推荐系统允许用户选择项目，然后应用到某个上下文中<br>自动：用户不参与<br>半自动：自动的过程中用户给出一点操作</p>
+<div id="echarts3984" style="width: 85%;height: 400px;margin: 0 auto"></div>
+<script src="https://cdn.bootcss.com/echarts/3.8.0/echarts.common.min.js"></script>
+<script type="text/javascript">
+        // 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById('echarts3984'));
+        // 指定图表的配置项和数据
+        var option = option = {
+  title: {
+    text: '制定建议方式',
+    subtext: 'Recommendation enactment',
+    left: 'center'
+  },
+  tooltip: {
+    trigger: 'item'
+  },
+  legend: {
+    orient: 'vertical',
+    left: 'left'
+  },
+  series: [
+    {
+      name: '制定建议方式',
+      type: 'pie',
+      radius: '60%',
+      data: [
+
+    { value: 16, name: 'manually 用户手动' },
+        { value: 25, name: 'interactively 交互式' },
+
+{ value: 3, name: 'semiautomated 半自动的' },
+
+{ value: 2, name: 'automated 自动的' }
+      ],
+      emphasis: {
+        itemStyle: {
+          shadowBlur: 10,
+          shadowOffsetX: 0,
+          shadowColor: 'rgba(0, 0, 0, 0.5)'
+        }
+      }
+    }
+  ]
+};
+        // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option);
+</script>
+
+<h1 id="Recommendation-推荐系统"><a href="#Recommendation-推荐系统" class="headerlink" title="Recommendation 推荐系统"></a>Recommendation 推荐系统</h1><p><img src="https://github.com/Olive-2019/Lam-Blog-resource/blob/master/images/RSinMDE/recommendation.jpg?raw=true" alt="推荐系统"></p>
+<p>推荐系统方面介绍了推荐方法、用户偏好收集、推荐的项目以及推荐度。</p>
+<h3 id="Recommendation-Method-推荐方法"><a href="#Recommendation-Method-推荐方法" class="headerlink" title="Recommendation Method 推荐方法"></a>Recommendation Method 推荐方法</h3><p><strong>基于内容</strong>的方法使用不同内容编码和相似性来表示</p>
+<p><strong>协同过滤</strong>利用了用户的历史选择信息</p>
+<p><strong>基于知识</strong>的方法可以分为<strong>基于约束</strong>和<strong>基于案例</strong>的。基于约束是指寻找一组满足领域相关规则的项目，基于案例是指搜索类似案例的过往解决方案来解决。</p>
+<p><strong>混合</strong>方法是指将前面三种方法混合。</p>
+<p>还有一些其它的，使用静态分析或搜索的方法。</p>
+<p>Hermes框架适用度比较广。</p>
+<h2 id="User-Preference-用户偏好"><a href="#User-Preference-用户偏好" class="headerlink" title="User Preference 用户偏好"></a>User Preference 用户偏好</h2><p>获取方式包括显式和隐式。隐式是监控用户动作；显式是直接收集用户信息，如调查问卷等。绝大多数都是隐式收集用户偏好<br>另外，收集的用户偏好可以是长期的也可以是短期的。90%的算法收集的都是短期偏好。</p>
+<h2 id="Recommendation-Item-推荐的项目"><a href="#Recommendation-Item-推荐的项目" class="headerlink" title="Recommendation Item 推荐的项目"></a>Recommendation Item 推荐的项目</h2><p>项目可能是工件（碎片或完整工件）、建模活动中的建议、修复过程中的编辑动作。</p>
+<h2 id="Recommendation-Degree-推荐度"><a href="#Recommendation-Degree-推荐度" class="headerlink" title="Recommendation Degree 推荐度"></a>Recommendation Degree 推荐度</h2><p>推荐度分为两个维度，分别是基数和排序。基数指建议的总数；排序指建议是否被排序。</p>
+<div id="echarts6026" style="width: 85%;height: 400px;margin: 0 auto"></div>
+<script src="https://cdn.bootcss.com/echarts/3.8.0/echarts.common.min.js"></script>
+<script type="text/javascript">
+        // 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById('echarts6026'));
+        // 指定图表的配置项和数据
+        var option = option = {
+  title: {
+    text: '推荐度',
+    subtext: '推荐基数',
+    left: 'center'
+  },
+  tooltip: {
+    trigger: 'item'
+  },
+  legend: {
+    orient: 'vertical',
+    left: 'left'
+  },
+  series: [
+    {
+      name: '推荐方法',
+      type: 'pie',
+      radius: '60%',
+      data: [
+         { value: 53, name: 'All' },
+         { value: 4, name: 'one' },
+         { value: 39, name: 'top N' }
+    ],
+      emphasis: {
+        itemStyle: {
+          shadowBlur: 10,
+          shadowOffsetX: 0,
+          shadowColor: 'rgba(0, 0, 0, 0.5)'
+        }
+      }
+    }
+  ]
+};
+        // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option);
+</script>
+
+<p>排序的指标包括相似性、修复更多的错误、更少的修改、根据一个预训练的机器学习模型计算。</p>
+<h1 id="Evalution-评价"><a href="#Evalution-评价" class="headerlink" title="Evalution 评价"></a>Evalution 评价</h1><p><img src="https://github.com/Olive-2019/Lam-Blog-resource/blob/master/images/RSinMDE/evaluation.jpg?raw=true" alt="评价方法"></p>
+<h2 id="Method-方法"><a href="#Method-方法" class="headerlink" title="Method 方法"></a>Method 方法</h2><div id="echarts8093" style="width: 85%;height: 400px;margin: 0 auto"></div>
+<script src="https://cdn.bootcss.com/echarts/3.8.0/echarts.common.min.js"></script>
+<script type="text/javascript">
+        // 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById('echarts8093'));
+        // 指定图表的配置项和数据
+        var option = option = {
+  title: {
+    text: '评价方法',
+    subtext: 'Method',
+    left: 'center'
+  },
+  tooltip: {
+    trigger: 'item'
+  },
+  legend: {
+    orient: 'vertical',
+    left: 'left'
+  },
+  series: [
+    {
+      name: '评价方法',
+      type: 'pie',
+      radius: '60%',
+      data: [
+         { value: 21, name: 'offline' },
+         { value: 2, name: 'online' },
+         { value: 12, name: 'User study' }
+    ],
+      emphasis: {
+        itemStyle: {
+          shadowBlur: 10,
+          shadowOffsetX: 0,
+          shadowColor: 'rgba(0, 0, 0, 0.5)'
+        }
+      }
+    }
+  ]
+};
+        // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option);
+</script>
+
+<h3 id="Offline-Experiment-离线实验"><a href="#Offline-Experiment-离线实验" class="headerlink" title="Offline Experiment 离线实验"></a>Offline Experiment 离线实验</h3><p>使用过往的数据集模拟现实情况。通常面临的问题是数据集难以获取。</p>
+<p>数据集通常有四种来源：</p>
+<ol>
+<li>生成数据</li>
+<li>从现成的库中获取数据</li>
+<li>从现有文章中获取实例</li>
+<li>从公司获取现实世界的数据</li>
+</ol>
+<h3 id="Online-Experiment-在线实验"><a href="#Online-Experiment-在线实验" class="headerlink" title="Online Experiment 在线实验"></a>Online Experiment 在线实验</h3><p>应该就是A&#x2F;B测试，两组用户分别使用和不使用RS进行测试，对结果进行分析评估。不是很懂跟用户调查之间的差别，感觉可能是更注重实时性。</p>
+<h3 id="User-Study-用户研究"><a href="#User-Study-用户研究" class="headerlink" title="User Study 用户研究"></a>User Study 用户研究</h3><p>通常会涉及到一组用户，通过使用和不使用RS去完成一些任务再分析可行性，并通过问卷收集信息。</p>
+<p>用户研究通常有三种类型。</p>
+<ol>
+<li>使用RS来完成任务</li>
+<li>用户在A&#x2F;B测试中使用RS</li>
+<li>将推荐的项目和专家推荐的对比</li>
+</ol>
+<h2 id="Metrics-指标"><a href="#Metrics-指标" class="headerlink" title="Metrics 指标"></a>Metrics 指标</h2><h3 id="Application-independent-metrics-应用独立的指标"><a href="#Application-independent-metrics-应用独立的指标" class="headerlink" title="Application-independent metrics 应用独立的指标"></a>Application-independent metrics 应用独立的指标</h3><p>最常用的是基于排序的precision、recall、F-Score</p>
+<h3 id="Application-dependent-metrics-依赖于应用的指标"><a href="#Application-dependent-metrics-依赖于应用的指标" class="headerlink" title="Application-dependent metrics 依赖于应用的指标"></a>Application-dependent metrics 依赖于应用的指标</h3>]]></content>
       <categories>
         <category>论文</category>
       </categories>
       <tags>
-        <tag>ML</tag>
-        <tag>SE</tag>
+        <tag>lowcomote</tag>
+        <tag>RS</tag>
       </tags>
   </entry>
   <entry>
@@ -957,46 +918,6 @@
       </categories>
       <tags>
         <tag>lowcomote</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>一些小工具</title>
-    <url>/Olivia_Lam.github.io/2022/10/13/tool/</url>
-    <content><![CDATA[<p>实用小工具</p>
-<span id="more"></span>
-
-<h1 id="吉大邮箱"><a href="#吉大邮箱" class="headerlink" title="吉大邮箱"></a>吉大邮箱</h1><p>吉大邮箱没有提供提醒工具，时时查网页版邮箱不太方便，此处提供两种提醒解决方案。</p>
-<h2 id="自动转发"><a href="#自动转发" class="headerlink" title="自动转发"></a>自动转发</h2><p>QQ邮箱的提醒非常好用，包括但不限于QQ（电脑端登录QQ有弹窗）和微信（手机端巨好使）的提醒，所以可以将吉大邮箱的邮件转发到QQ邮箱。同理，可以转发到任意你觉得好用的邮箱中。</p>
-<p>设置路径如下：</p>
-<p>设置-&gt;邮件收发-&gt;自动转发-&gt;选择自动转发-&gt;“转发到邮箱”中填写QQ邮箱</p>
-<h2 id="Windows版邮件"><a href="#Windows版邮件" class="headerlink" title="Windows版邮件"></a>Windows版邮件</h2><p>直接绑定就好了，感觉速度比转发的提醒慢一点。电脑端的提醒弹窗比QQ的好看一点，而且任务栏里会有提醒。</p>
-<h1 id="GitHub"><a href="#GitHub" class="headerlink" title="GitHub"></a>GitHub</h1><h2 id="SwitchHosts"><a href="#SwitchHosts" class="headerlink" title="SwitchHosts"></a>SwitchHosts</h2><p>众所周知，GitHub在国内无法长期稳定有效地访问，原因是DNS污染，GitHub服务器IP在国内并未封禁，故可通过改host文件的方式访问GitHub。但长期手动修改hosts太麻烦了，购买梯子又太贵了（价格敏感性消费者.jpg），所以找到了这个自动修改hosts的神器。</p>
-<h3 id="使用指南"><a href="#使用指南" class="headerlink" title="使用指南"></a>使用指南</h3><h4 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h4><p><a href="https://github.com/oldj/SwitchHosts/releases">下载地址（release版）</a>选择自己OS对应的版本，如Windows选择<a href="https://github.com/oldj/SwitchHosts/releases/download/v4.1.2/SwitchHosts_windows_installer_4.1.2.6086.exe">SwitchHosts_windows_installer_4.1.2.6086.exe</a>。</p>
-<h4 id="连接远程hosts"><a href="#连接远程hosts" class="headerlink" title="连接远程hosts"></a>连接远程hosts</h4><ol>
-<li>点击加号添加hosts</li>
-<li>选择远程hosts类型</li>
-<li>标题随意取</li>
-<li>URL填 <strong><a href="https://raw.hellogithub.com/hosts">https://raw.hellogithub.com/hosts</a></strong></li>
-<li>设置自动刷新频率（建议1h）</li>
-<li>点击确定</li>
-</ol>
-<h4 id="修改hosts文件属性"><a href="#修改hosts文件属性" class="headerlink" title="修改hosts文件属性"></a>修改hosts文件属性</h4><p>好了，现在大概率会发现无法写入host文件，解决方案如下：</p>
-<ol>
-<li>找到hosts文件，Windows下路径C:\Windows\System32\drivers\etc\</li>
-<li>右键，选择属性，取消“只读”选项</li>
-<li>在属性中选中“安全”tab</li>
-<li>选中User</li>
-<li>点击编辑</li>
-<li>选中“写入”“修改”等权限</li>
-<li>保存</li>
-</ol>
-<h3 id="使用评价"><a href="#使用评价" class="headerlink" title="使用评价"></a>使用评价</h3><p>目前GitHub访问体验完全无痛，不用再担心push的时候老半天push不上去。而且比梯子强的是，这玩意只在访问GitHub的时候重定向了IP地址，访问国内其它网站不会发生绕来绕去过慢的现象。</p>
-]]></content>
-      <categories>
-        <category>工具</category>
-      </categories>
-      <tags>
-        <tag>软件</tag>
       </tags>
   </entry>
   <entry>
@@ -1105,6 +1026,86 @@
         <tag>chatbot</tag>
         <tag>NLP</tag>
         <tag>LCDP</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Software Engineering for Machine Learning:A Case Study</title>
+    <url>/Olivia_Lam.github.io/2022/10/28/SE4ML-a-case-study/</url>
+    <content><![CDATA[<p>微软发的一篇关于ML中的软工问题的文章。主要提出了ML的9阶段工作流、最佳实践、ML工程成熟度。介绍了ML和传统软工之间的主要差别。</p>
+<span id="more"></span>
+
+<h1 id="人员"><a href="#人员" class="headerlink" title="人员"></a>人员</h1><p>软工流程中需要加入数据科学家。随着数据科学规模越来越大，数据科学家被细分为领域专家（关注业务问题）、建模者（建立预测模型）、平台搭建者（创建基于云的设施）。</p>
+<h1 id="工作流-workflow"><a href="#工作流-workflow" class="headerlink" title="工作流 workflow"></a>工作流 workflow</h1><p>机器学习工作流是高度非线性的，包含多个反馈循环。</p>
+<h1 id="最佳实践"><a href="#最佳实践" class="headerlink" title="最佳实践"></a>最佳实践</h1><h2 id="End-to-end-pipeline-support"><a href="#End-to-end-pipeline-support" class="headerlink" title="End-to-end pipeline support"></a>End-to-end pipeline support</h2><p>实现一个端到端的自动化技术支持，尽可能做到无缝，尤其是数据传入传出部分，尽可能让算法工程师调参更方便</p>
+<h2 id="Data-availability-collection-cleaning-and-management"><a href="#Data-availability-collection-cleaning-and-management" class="headerlink" title="Data availability, collection, cleaning, and management"></a>Data availability, collection, cleaning, and management</h2><p>数据要尽可能复用，减少冗余工作<br>将数据管理工具和ML框架混合在一起，避免数据和模型管理工作碎片化</p>
+<p>数据管理原因：数据源快速变化<br>快速变化原因：工程师自己的操作，传入新数据</p>
+<h2 id="Education-and-Training"><a href="#Education-and-Training" class="headerlink" title="Education and Training"></a>Education and Training</h2><p>传统软工背景的工程师需要学习最新的ML知识。<br>（大概就是讲了一下微软怎么培训的）</p>
+<h2 id="Model-Debugging-and-Interpretability"><a href="#Model-Debugging-and-Interpretability" class="headerlink" title="Model Debugging and Interpretability"></a>Model Debugging and Interpretability</h2><p>模型调试和可解释性<br>调试的点不止于编程错误，还有模型错误和不确定性<br>这块内容我们不必关注</p>
+<h2 id="Model-Evolution-Evaluation-and-Deployment"><a href="#Model-Evolution-Evaluation-and-Deployment" class="headerlink" title="Model Evolution, Evaluation, and Deployment"></a>Model Evolution, Evaluation, and Deployment</h2><p>以ML为中心的软件 模型更改、参数调整、数据更新引起的修订会更频繁。快节奏的模型迭代需要更频繁的部署。<br>自动化的训练和部署不够，仍需要将模型构建和其它软件集成，使用同一个版本控制库</p>
+<h2 id="Compliance"><a href="#Compliance" class="headerlink" title="Compliance"></a>Compliance</h2><p>遵守原则</p>
+<h2 id="Varied-Perceptions"><a href="#Varied-Perceptions" class="headerlink" title="Varied Perceptions"></a>Varied Perceptions</h2><p>经验不同的人会有不同的看法<br>缺乏经验的人更认为培训重要<br>经验越丰富的人越认为工具、端到端的自动化支持、规范重要</p>
+<h1 id="成熟度"><a href="#成熟度" class="headerlink" title="成熟度"></a>成熟度</h1><p>通过以下六个维度分别评分（1-5），取均值为AMI（活动成熟度指数）</p>
+<ol>
+<li>has defined goals 有明确的目标</li>
+<li>is consistently implemented 一致的实现</li>
+<li>documented 有文档的</li>
+<li>automated 自动化的</li>
+<li>measured and tracked 被评估和最终的</li>
+<li>continuously improved 持续改进的</li>
+</ol>
+<h1 id="和传统软工的差异"><a href="#和传统软工的差异" class="headerlink" title="和传统软工的差异"></a>和传统软工的差异</h1><h2 id="数据查找和管理"><a href="#数据查找和管理" class="headerlink" title="数据查找和管理"></a>数据查找和管理</h2><h2 id="定制和复用"><a href="#定制和复用" class="headerlink" title="定制和复用"></a>定制和复用</h2><p>定制和复用ML模型需要的工作更多，模型的一部分是算法，另一部分是参数。通常需要重新训练，甚至需要替换成其它模型</p>
+<h2 id="模块化"><a href="#模块化" class="headerlink" title="模块化"></a>模块化</h2><p>ML模型难以保持边界原因：</p>
+<ul>
+<li>ML模型不容易扩展功能</li>
+<li>ML模型之间的相互作用并不明显</li>
+</ul>
+]]></content>
+      <categories>
+        <category>论文</category>
+      </categories>
+      <tags>
+        <tag>ML</tag>
+        <tag>SE</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>一些小工具</title>
+    <url>/Olivia_Lam.github.io/2022/10/13/tool/</url>
+    <content><![CDATA[<p>实用小工具</p>
+<span id="more"></span>
+
+<h1 id="吉大邮箱"><a href="#吉大邮箱" class="headerlink" title="吉大邮箱"></a>吉大邮箱</h1><p>吉大邮箱没有提供提醒工具，时时查网页版邮箱不太方便，此处提供两种提醒解决方案。</p>
+<h2 id="自动转发"><a href="#自动转发" class="headerlink" title="自动转发"></a>自动转发</h2><p>QQ邮箱的提醒非常好用，包括但不限于QQ（电脑端登录QQ有弹窗）和微信（手机端巨好使）的提醒，所以可以将吉大邮箱的邮件转发到QQ邮箱。同理，可以转发到任意你觉得好用的邮箱中。</p>
+<p>设置路径如下：</p>
+<p>设置-&gt;邮件收发-&gt;自动转发-&gt;选择自动转发-&gt;“转发到邮箱”中填写QQ邮箱</p>
+<h2 id="Windows版邮件"><a href="#Windows版邮件" class="headerlink" title="Windows版邮件"></a>Windows版邮件</h2><p>直接绑定就好了，感觉速度比转发的提醒慢一点。电脑端的提醒弹窗比QQ的好看一点，而且任务栏里会有提醒。</p>
+<h1 id="GitHub"><a href="#GitHub" class="headerlink" title="GitHub"></a>GitHub</h1><h2 id="SwitchHosts"><a href="#SwitchHosts" class="headerlink" title="SwitchHosts"></a>SwitchHosts</h2><p>众所周知，GitHub在国内无法长期稳定有效地访问，原因是DNS污染，GitHub服务器IP在国内并未封禁，故可通过改host文件的方式访问GitHub。但长期手动修改hosts太麻烦了，购买梯子又太贵了（价格敏感性消费者.jpg），所以找到了这个自动修改hosts的神器。</p>
+<h3 id="使用指南"><a href="#使用指南" class="headerlink" title="使用指南"></a>使用指南</h3><h4 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h4><p><a href="https://github.com/oldj/SwitchHosts/releases">下载地址（release版）</a>选择自己OS对应的版本，如Windows选择<a href="https://github.com/oldj/SwitchHosts/releases/download/v4.1.2/SwitchHosts_windows_installer_4.1.2.6086.exe">SwitchHosts_windows_installer_4.1.2.6086.exe</a>。</p>
+<h4 id="连接远程hosts"><a href="#连接远程hosts" class="headerlink" title="连接远程hosts"></a>连接远程hosts</h4><ol>
+<li>点击加号添加hosts</li>
+<li>选择远程hosts类型</li>
+<li>标题随意取</li>
+<li>URL填 <strong><a href="https://raw.hellogithub.com/hosts">https://raw.hellogithub.com/hosts</a></strong></li>
+<li>设置自动刷新频率（建议1h）</li>
+<li>点击确定</li>
+</ol>
+<h4 id="修改hosts文件属性"><a href="#修改hosts文件属性" class="headerlink" title="修改hosts文件属性"></a>修改hosts文件属性</h4><p>好了，现在大概率会发现无法写入host文件，解决方案如下：</p>
+<ol>
+<li>找到hosts文件，Windows下路径C:\Windows\System32\drivers\etc\</li>
+<li>右键，选择属性，取消“只读”选项</li>
+<li>在属性中选中“安全”tab</li>
+<li>选中User</li>
+<li>点击编辑</li>
+<li>选中“写入”“修改”等权限</li>
+<li>保存</li>
+</ol>
+<h3 id="使用评价"><a href="#使用评价" class="headerlink" title="使用评价"></a>使用评价</h3><p>目前GitHub访问体验完全无痛，不用再担心push的时候老半天push不上去。而且比梯子强的是，这玩意只在访问GitHub的时候重定向了IP地址，访问国内其它网站不会发生绕来绕去过慢的现象。</p>
+]]></content>
+      <categories>
+        <category>工具</category>
+      </categories>
+      <tags>
+        <tag>软件</tag>
       </tags>
   </entry>
 </search>
