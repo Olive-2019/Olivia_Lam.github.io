@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/Olivia_Lam.github.io/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/Olivia_Lam.github.io/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/Olivia_Lam.github.io/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/Olivia_Lam.github.io/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/Olivia_Lam.github.io/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha256-AbA177XfpSnFEvgpYu1jMygiLabzPCJCRIBtR5jGc0k=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"olive-2019.github.io","root":"/Olivia_Lam.github.io/","images":"/Olivia_Lam.github.io/images","scheme":"Gemini","darkmode":false,"version":"8.13.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/Olivia_Lam.github.io/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/Olivia_Lam.github.io/js/config.js"></script>
+
+    <meta name="description" content="一年不写，猛然发现建立的项目跑不动了。谨以此纪念我逝去的spring boot知识">
+<meta property="og:type" content="article">
+<meta property="og:title" content="一个简单的spring boot项目集成SSM框架">
+<meta property="og:url" content="https://olive-2019.github.io/Olivia_Lam.github.io/2022/11/20/%E5%BB%BA%E7%AB%8B%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84spring-boot%E9%A1%B9%E7%9B%AE/index.html">
+<meta property="og:site_name" content="Lam&#39;s Blog">
+<meta property="og:description" content="一年不写，猛然发现建立的项目跑不动了。谨以此纪念我逝去的spring boot知识">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-11-20T12:35:54.000Z">
+<meta property="article:modified_time" content="2022-11-20T16:05:33.383Z">
+<meta property="article:author" content="Olivia Lam">
+<meta property="article:tag" content="Java">
+<meta property="article:tag" content="spring boot">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://olive-2019.github.io/Olivia_Lam.github.io/2022/11/20/%E5%BB%BA%E7%AB%8B%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84spring-boot%E9%A1%B9%E7%9B%AE/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://olive-2019.github.io/Olivia_Lam.github.io/2022/11/20/%E5%BB%BA%E7%AB%8B%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84spring-boot%E9%A1%B9%E7%9B%AE/","path":"2022/11/20/建立一个简单的spring-boot项目/","title":"一个简单的spring boot项目集成SSM框架"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>一个简单的spring boot项目集成SSM框架 | Lam's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/Olivia_Lam.github.io/css/noscript.css">
+  </noscript>
+  <meta name="referrer" content="no-referrer"/>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/Olivia_Lam.github.io/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Lam's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/Olivia_Lam.github.io/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/Olivia_Lam.github.io/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/Olivia_Lam.github.io/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/Olivia_Lam.github.io/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%96%B0%E9%A1%B9%E7%9B%AE%E5%90%91%E5%AF%BC"><span class="nav-number">1.</span> <span class="nav-text">新项目向导</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#initializer"><span class="nav-number">1.1.</span> <span class="nav-text">initializer</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A1%B9%E7%9B%AE%E5%85%83%E6%95%B0%E6%8D%AE"><span class="nav-number">1.2.</span> <span class="nav-text">项目元数据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BE%9D%E8%B5%96%E7%9A%84%E6%A8%A1%E5%9D%97"><span class="nav-number">1.3.</span> <span class="nav-text">依赖的模块</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%AF%E8%83%BD%E5%87%BA%E7%8E%B0%E7%9A%84%E9%97%AE%E9%A2%98"><span class="nav-number">1.4.</span> <span class="nav-text">可能出现的问题</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#application%E5%85%A8%E5%B1%80%E9%85%8D%E7%BD%AE"><span class="nav-number">2.</span> <span class="nav-text">application全局配置</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9application%E6%96%87%E4%BB%B6%E7%B1%BB%E5%9E%8B"><span class="nav-number">2.1.</span> <span class="nav-text">修改application文件类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E5%86%85%E5%AE%B9"><span class="nav-number">2.2.</span> <span class="nav-text">配置内容</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%AF%E8%83%BD%E5%87%BA%E7%8E%B0%E7%9A%84%E9%97%AE%E9%A2%98-1"><span class="nav-number">2.3.</span> <span class="nav-text">可能出现的问题</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%A1%A8%E7%8E%B0%E5%B1%82%E2%80%94%E2%80%94Spring-MVC%E7%B1%BB"><span class="nav-number">3.</span> <span class="nav-text">表现层——Spring MVC类</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#RestController"><span class="nav-number">3.1.</span> <span class="nav-text">@RestController</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RequestMapping"><span class="nav-number">3.2.</span> <span class="nav-text">@RequestMapping</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E4%BE%8B"><span class="nav-number">3.3.</span> <span class="nav-text">实例</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%8C%81%E4%B9%85%E5%B1%82%E2%80%94%E2%80%94MyBatis"><span class="nav-number">4.</span> <span class="nav-text">持久层——MyBatis</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#MyBatis-Generator%E7%94%9F%E6%88%90POJO"><span class="nav-number">4.1.</span> <span class="nav-text">MyBatis Generator生成POJO</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Olivia Lam</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/Olivia_Lam.github.io/archives/">
+          <span class="site-state-item-count">13</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/Olivia_Lam.github.io/categories/">
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/Olivia_Lam.github.io/tags/">
+        <span class="site-state-item-count">19</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Olive-2019" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Olive-2019" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://olive-2019.github.io/Olivia_Lam.github.io/2022/11/20/%E5%BB%BA%E7%AB%8B%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84spring-boot%E9%A1%B9%E7%9B%AE/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/Olivia_Lam.github.io/images/avatar.gif">
+      <meta itemprop="name" content="Olivia Lam">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lam's Blog">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="一个简单的spring boot项目集成SSM框架 | Lam's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          一个简单的spring boot项目集成SSM框架
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2022-11-20 20:35:54" itemprop="dateCreated datePublished" datetime="2022-11-20T20:35:54+08:00">2022-11-20</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2022-11-21 00:05:33" itemprop="dateModified" datetime="2022-11-21T00:05:33+08:00">2022-11-21</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/Olivia_Lam.github.io/categories/%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index"><span itemprop="name">技术</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>1.8k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>2 分钟</span>
+    </span>
+</div>
+
+          
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>一年不写，猛然发现建立的项目跑不动了。谨以此纪念我逝去的spring boot知识</p>
+<span id="more"></span>
+
+<h1 id="新项目向导"><a href="#新项目向导" class="headerlink" title="新项目向导"></a>新项目向导</h1><h2 id="initializer"><a href="#initializer" class="headerlink" title="initializer"></a>initializer</h2><p>使用spring initializr建立新项目，不必改变默认配置</p>
+<h2 id="项目元数据"><a href="#项目元数据" class="headerlink" title="项目元数据"></a>项目元数据</h2><p>group：公司、项目组名</p>
+<p>artifact：项目名</p>
+<p>packaging：spring boot自带tomcat，自启动，可以打包成jar包，直接使用tomcat的要打包成war包</p>
+<p>java version：前面的配置</p>
+<h2 id="依赖的模块"><a href="#依赖的模块" class="headerlink" title="依赖的模块"></a>依赖的模块</h2><p>spring web</p>
+<p>JDBC API</p>
+<p>mybatis framework</p>
+<p>MySQL driven</p>
+<h2 id="可能出现的问题"><a href="#可能出现的问题" class="headerlink" title="可能出现的问题"></a>可能出现的问题</h2><p>问题：报一些gradel相关的错误</p>
+<p>原因：idea版本和gradel版本不兼容</p>
+<p>解决方案：修改gradel.wrapper路径的gradle-wrapper.properties文件下的distributionUrl，寻找idea版本对应的gradel版本。</p>
+<h1 id="application全局配置"><a href="#application全局配置" class="headerlink" title="application全局配置"></a>application全局配置</h1><h2 id="修改application文件类型"><a href="#修改application文件类型" class="headerlink" title="修改application文件类型"></a>修改application文件类型</h2><p>修改为yml文件</p>
+<h2 id="配置内容"><a href="#配置内容" class="headerlink" title="配置内容"></a>配置内容</h2><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 配置服务器端口</span></span><br><span class="line"><span class="attr">server:</span></span><br><span class="line">  <span class="attr">port:</span> <span class="number">8881</span></span><br><span class="line"><span class="comment"># 配置数据源</span></span><br><span class="line"><span class="attr">spring:</span></span><br><span class="line">  <span class="attr">datasource:</span></span><br><span class="line">    <span class="attr">type:</span> <span class="string">com.zaxxer.hikari.HikariDataSource</span></span><br><span class="line">    <span class="attr">driver-class-name:</span> <span class="string">com.mysql.cj.jdbc.Driver</span> <span class="comment">#oracle.jdbc.OracleDriver #</span></span><br><span class="line">    <span class="attr">url:</span> <span class="string">jdbc:mysql://localhost:3306/echart?serverTimezone=UTC&amp;useSSL=false&amp;allowPublicKeyRetrieval=true&amp;useSSL=false</span> <span class="comment"># </span></span><br><span class="line">    <span class="attr">username:</span> <span class="string">root</span></span><br><span class="line">    <span class="attr">password:</span> <span class="string">Lam</span></span><br><span class="line"><span class="comment"># 配置数据库连接池</span></span><br><span class="line">    <span class="attr">hikari:</span></span><br><span class="line">      <span class="attr">minimum-idle:</span> <span class="number">5</span></span><br><span class="line">      <span class="attr">idle-timeout:</span> <span class="number">180000</span></span><br><span class="line">      <span class="attr">maximum-pool-size:</span> <span class="number">10</span></span><br><span class="line">      <span class="attr">auto-commit:</span> <span class="literal">true</span></span><br><span class="line">      <span class="attr">pool-name:</span> <span class="string">MyHikariCP</span></span><br><span class="line">      <span class="attr">max-lifetime:</span> <span class="number">1800000</span></span><br><span class="line">      <span class="attr">connection-timeout:</span> <span class="number">30000</span></span><br><span class="line">      <span class="attr">connection-test-query:</span> <span class="string">select</span> <span class="number">1</span> <span class="string">from</span> <span class="string">dual</span> <span class="comment"># mysql可用：select 1</span></span><br><span class="line"><span class="comment"># 配置mybatis日志打印</span></span><br><span class="line"><span class="attr">mybatis:</span></span><br><span class="line">  <span class="attr">configuration:</span></span><br><span class="line">    <span class="attr">log-impl:</span> <span class="string">org.apache.ibatis.logging.stdout.StdOutImpl</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="可能出现的问题-1"><a href="#可能出现的问题-1" class="headerlink" title="可能出现的问题"></a>可能出现的问题</h2><p>报错：ERROR org.springframework.boot.SpringApplication - Application run failed</p>
+<p>原因：文件编码格式不对，需要改成utf-8</p>
+<p>解决方案：setting-&gt;project encoding-&gt;修改为utf-8</p>
+<h1 id="表现层——Spring-MVC类"><a href="#表现层——Spring-MVC类" class="headerlink" title="表现层——Spring MVC类"></a>表现层——Spring MVC类</h1><h2 id="RestController"><a href="#RestController" class="headerlink" title="@RestController"></a>@RestController</h2><p>使用注解标注类，向服务器说明这是一个控制器</p>
+<h2 id="RequestMapping"><a href="#RequestMapping" class="headerlink" title="@RequestMapping"></a>@RequestMapping</h2><p>使用该注解标注访问路径，可以标注在类或方法上</p>
+<h2 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.ttasm.manger.boundary;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.RequestMapping;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.RestController;</span><br><span class="line"></span><br><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="meta">@RequestMapping(&quot;Manage_Train&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Manage_Train</span> &#123;</span><br><span class="line">    <span class="meta">@RequestMapping(&quot;add_train&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">add_train</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;add train&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h1 id="持久层——MyBatis"><a href="#持久层——MyBatis" class="headerlink" title="持久层——MyBatis"></a>持久层——MyBatis</h1><h2 id="MyBatis-Generator生成POJO"><a href="#MyBatis-Generator生成POJO" class="headerlink" title="MyBatis Generator生成POJO"></a>MyBatis Generator生成POJO</h2><p>MBG下载地址：<a target="_blank" rel="noopener" href="https://github.com/mybatis/generator/releases">Releases · mybatis&#x2F;generator (github.com)</a></p>
+<p>MySQL连接驱动下载地址：<a target="_blank" rel="noopener" href="https://dev.mysql.com/downloads/connector/j/">MySQL :: Download Connector&#x2F;J</a></p>
+<p>配置文件：</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/Olivia_Lam.github.io/tags/Java/" rel="tag"># Java</a>
+              <a href="/Olivia_Lam.github.io/tags/spring-boot/" rel="tag"># spring boot</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/Olivia_Lam.github.io/2022/11/16/springboot1-javaee/" rel="prev" title="springboot系列1——JavaEE/J2EE/Jakarta EE">
+                  <i class="fa fa-chevron-left"></i> springboot系列1——JavaEE/J2EE/Jakarta EE
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Olivia Lam</span>
+</div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+      <span>站点总字数：</span>
+    <span title="站点总字数">30k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span>站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">27 分钟</span>
+  </span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/Olivia_Lam.github.io/js/comments.js"></script><script src="/Olivia_Lam.github.io/js/utils.js"></script><script src="/Olivia_Lam.github.io/js/motion.js"></script><script src="/Olivia_Lam.github.io/js/next-boot.js"></script>
+
+  
+<script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.0/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="/Olivia_Lam.github.io/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+</body>
+</html>
