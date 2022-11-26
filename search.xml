@@ -50,10 +50,13 @@
 <h2 id="RequestMapping"><a href="#RequestMapping" class="headerlink" title="@RequestMapping"></a>@RequestMapping</h2><p>使用该注解标注访问路径，可以标注在类或方法上</p>
 <h2 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> com.ttasm.manger.boundary;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.RequestMapping;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.RestController;</span><br><span class="line"></span><br><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="meta">@RequestMapping(&quot;Manage_Train&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Manage_Train</span> &#123;</span><br><span class="line">    <span class="meta">@RequestMapping(&quot;add_train&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">add_train</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;add train&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-<h1 id="持久层——MyBatis"><a href="#持久层——MyBatis" class="headerlink" title="持久层——MyBatis"></a>持久层——MyBatis</h1><h2 id="MyBatis-Generator生成POJO"><a href="#MyBatis-Generator生成POJO" class="headerlink" title="MyBatis Generator生成POJO"></a>MyBatis Generator生成POJO</h2><p>MBG下载地址：<a href="https://github.com/mybatis/generator/releases">Releases · mybatis&#x2F;generator (github.com)</a></p>
+<h1 id="持久层——MyBatis"><a href="#持久层——MyBatis" class="headerlink" title="持久层——MyBatis"></a>持久层——MyBatis</h1><h2 id="MyBatis-Generator生成POJO和DAO"><a href="#MyBatis-Generator生成POJO和DAO" class="headerlink" title="MyBatis Generator生成POJO和DAO"></a>MyBatis Generator生成POJO和DAO</h2><p>MBG下载地址：<a href="https://github.com/mybatis/generator/releases">Releases · mybatis&#x2F;generator (github.com)</a></p>
 <p>MySQL连接驱动下载地址：<a href="https://dev.mysql.com/downloads/connector/j/">MySQL :: Download Connector&#x2F;J</a></p>
+<p>执行命令：<code>java -jar [generator.jar] -configfile [configration.xml] -overwrite</code></p>
 <p>配置文件：</p>
-]]></content>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=<span class="string">&quot;1.0&quot;</span> encoding=<span class="string">&quot;UTF-8&quot;</span>?&gt;</span></span><br><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">generatorConfiguration</span></span></span><br><span class="line"><span class="meta">        <span class="keyword">PUBLIC</span> <span class="string">&quot;-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN&quot;</span></span></span><br><span class="line"><span class="meta">        <span class="string">&quot;http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">generatorConfiguration</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">classPathEntry</span> <span class="attr">location</span> = <span class="string">&quot;F:\mysql-connector-java-5.1.47.jar&quot;</span>/&gt;</span> </span><br><span class="line">    <span class="tag">&lt;<span class="name">context</span> <span class="attr">id</span>=<span class="string">&quot;MysqlContext&quot;</span> <span class="attr">targetRuntime</span>=<span class="string">&quot;MyBatis3Simple&quot;</span> <span class="attr">defaultModelType</span>=<span class="string">&quot;flat&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">commentGenerator</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;suppressDate&quot;</span> <span class="attr">value</span>=<span class="string">&quot;true&quot;</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">commentGenerator</span>&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;<span class="name">jdbcConnection</span> <span class="attr">driverClass</span>=<span class="string">&quot;com.mysql.jdbc.Driver&quot;</span></span></span><br><span class="line"><span class="tag">                        <span class="attr">connectionURL</span>=<span class="string">&quot;jdbc:mysql://localhost:3306/ttasm&quot;</span></span></span><br><span class="line"><span class="tag">                        <span class="attr">userId</span>=<span class="string">&quot;root&quot;</span></span></span><br><span class="line"><span class="tag">                        <span class="attr">password</span>=<span class="string">&quot;Lam&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">jdbcConnection</span>&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;<span class="name">javaModelGenerator</span> <span class="attr">targetPackage</span>=<span class="string">&quot;com.ttasm.manager.pojo&quot;</span> <span class="attr">targetProject</span>=<span class="string">&quot;F:/gen&quot;</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;trimStrings&quot;</span> <span class="attr">value</span>=<span class="string">&quot;true&quot;</span> /&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">javaModelGenerator</span>&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;<span class="name">sqlMapGenerator</span> <span class="attr">targetPackage</span>=<span class="string">&quot;sqlMap.xml&quot;</span>  <span class="attr">targetProject</span>=<span class="string">&quot;F:/gen&quot;</span>/&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;<span class="name">javaClientGenerator</span> <span class="attr">type</span>=<span class="string">&quot;XMLMAPPER&quot;</span> <span class="attr">targetPackage</span>=<span class="string">&quot;com.ttasm.manager.dao&quot;</span>  <span class="attr">targetProject</span>=<span class="string">&quot;F:/gen&quot;</span>/&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;<span class="name">table</span> <span class="attr">tableName</span>=<span class="string">&quot;banknote&quot;</span> <span class="attr">domainObjectName</span> = <span class="string">&quot;Banknote&quot;</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">table</span> <span class="attr">tableName</span>=<span class="string">&quot;orders&quot;</span> <span class="attr">domainObjectName</span> = <span class="string">&quot;Orders&quot;</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">table</span> <span class="attr">tableName</span>=<span class="string">&quot;train&quot;</span> <span class="attr">domainObjectName</span> = <span class="string">&quot;Train&quot;</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">table</span> <span class="attr">tableName</span>=<span class="string">&quot;train_number&quot;</span> <span class="attr">domainObjectName</span> = <span class="string">&quot;Train_Number&quot;</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">table</span> <span class="attr">tableName</span>=<span class="string">&quot;tricket&quot;</span> <span class="attr">domainObjectName</span> = <span class="string">&quot;Tricket&quot;</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">context</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">generatorConfiguration</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="Mapper"><a href="#Mapper" class="headerlink" title="@Mapper"></a>@Mapper</h2><h2 id=""><a href="#" class="headerlink" title=""></a></h2>]]></content>
       <categories>
         <category>技术</category>
       </categories>
@@ -800,11 +803,11 @@
 <h1 id="Tooling-工具"><a href="#Tooling-工具" class="headerlink" title="Tooling 工具"></a>Tooling 工具</h1><p><img src="https://github.com/Olive-2019/Lam-Blog-resource/blob/master/images/RSinMDE/tooling.jpg?raw=true" alt="工具"></p>
 <p>工具部分介绍了工具的成熟度、工具的独立性、工具中推荐系统的触发方式、推荐系统的互动方式</p>
 <h2 id="Maturity-成熟度"><a href="#Maturity-成熟度" class="headerlink" title="Maturity 成熟度"></a>Maturity 成熟度</h2><p>三个级别的成熟度，没有实现的提议，有概念的原型，完整实现（包含框架、插件、MDE）。</p>
-<div id="echarts8015" style="width: 85%;height: 400px;margin: 0 auto"></div>
+<div id="echarts1422" style="width: 85%;height: 400px;margin: 0 auto"></div>
 <script src="https://cdn.bootcss.com/echarts/3.8.0/echarts.common.min.js"></script>
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts8015'));
+        var myChart = echarts.init(document.getElementById('echarts1422'));
         // 指定图表的配置项和数据
         var option = option = {
   title: {
@@ -844,11 +847,11 @@
 </script>
 
 <p>绝大部分提供了完整实现，下面为完整实现的28个方法中的分类。</p>
-<div id="echarts7292" style="width: 85%;height: 400px;margin: 0 auto"></div>
+<div id="echarts7779" style="width: 85%;height: 400px;margin: 0 auto"></div>
 <script src="https://cdn.bootcss.com/echarts/3.8.0/echarts.common.min.js"></script>
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts7292'));
+        var myChart = echarts.init(document.getElementById('echarts7779'));
         // 指定图表的配置项和数据
         var option = option = {
   title: {
@@ -889,11 +892,11 @@
 </script>
 
 <h2 id="Tool-Independence-工具独立性"><a href="#Tool-Independence-工具独立性" class="headerlink" title="Tool Independence 工具独立性"></a>Tool Independence 工具独立性</h2><p>工具独立性只能在原型和完整实现中讨论，建议不在讨论范围中。根据是否可以集成到其它MDE工具中判断是否具有工具独立性。</p>
-<div id="echarts3247" style="width: 85%;height: 400px;margin: 0 auto"></div>
+<div id="echarts7770" style="width: 85%;height: 400px;margin: 0 auto"></div>
 <script src="https://cdn.bootcss.com/echarts/3.8.0/echarts.common.min.js"></script>
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts3247'));
+        var myChart = echarts.init(document.getElementById('echarts7770'));
         // 指定图表的配置项和数据
         var option = option = {
   title: {
@@ -934,11 +937,11 @@
 </script>
 
 <h2 id="trigger-recommendations-触发方式"><a href="#trigger-recommendations-触发方式" class="headerlink" title="trigger recommendations 触发方式"></a>trigger recommendations 触发方式</h2><p>触发建议的方式：按需、主动。前者，用户需要主动触发建议；后者，系统主动提建议</p>
-<div id="echarts1100" style="width: 85%;height: 400px;margin: 0 auto"></div>
+<div id="echarts1149" style="width: 85%;height: 400px;margin: 0 auto"></div>
 <script src="https://cdn.bootcss.com/echarts/3.8.0/echarts.common.min.js"></script>
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts1100'));
+        var myChart = echarts.init(document.getElementById('echarts1149'));
         // 指定图表的配置项和数据
         var option = option = {
   title: {
@@ -978,11 +981,11 @@
 </script>
 
 <h2 id="Recommendation-enactment-制定建议方式"><a href="#Recommendation-enactment-制定建议方式" class="headerlink" title="Recommendation enactment 制定建议方式"></a>Recommendation enactment 制定建议方式</h2><p>制定建议的方式：<br>手动：给出一个序列，用户决定使用方式<br>交互式：推荐系统允许用户选择项目，然后应用到某个上下文中<br>自动：用户不参与<br>半自动：自动的过程中用户给出一点操作</p>
-<div id="echarts8279" style="width: 85%;height: 400px;margin: 0 auto"></div>
+<div id="echarts9371" style="width: 85%;height: 400px;margin: 0 auto"></div>
 <script src="https://cdn.bootcss.com/echarts/3.8.0/echarts.common.min.js"></script>
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts8279'));
+        var myChart = echarts.init(document.getElementById('echarts9371'));
         // 指定图表的配置项和数据
         var option = option = {
   title: {
@@ -1036,11 +1039,11 @@
 <h2 id="User-Preference-用户偏好"><a href="#User-Preference-用户偏好" class="headerlink" title="User Preference 用户偏好"></a>User Preference 用户偏好</h2><p>获取方式包括显式和隐式。隐式是监控用户动作；显式是直接收集用户信息，如调查问卷等。绝大多数都是隐式收集用户偏好<br>另外，收集的用户偏好可以是长期的也可以是短期的。90%的算法收集的都是短期偏好。</p>
 <h2 id="Recommendation-Item-推荐的项目"><a href="#Recommendation-Item-推荐的项目" class="headerlink" title="Recommendation Item 推荐的项目"></a>Recommendation Item 推荐的项目</h2><p>项目可能是工件（碎片或完整工件）、建模活动中的建议、修复过程中的编辑动作。</p>
 <h2 id="Recommendation-Degree-推荐度"><a href="#Recommendation-Degree-推荐度" class="headerlink" title="Recommendation Degree 推荐度"></a>Recommendation Degree 推荐度</h2><p>推荐度分为两个维度，分别是基数和排序。基数指建议的总数；排序指建议是否被排序。</p>
-<div id="echarts3282" style="width: 85%;height: 400px;margin: 0 auto"></div>
+<div id="echarts4402" style="width: 85%;height: 400px;margin: 0 auto"></div>
 <script src="https://cdn.bootcss.com/echarts/3.8.0/echarts.common.min.js"></script>
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts3282'));
+        var myChart = echarts.init(document.getElementById('echarts4402'));
         // 指定图表的配置项和数据
         var option = option = {
   title: {
@@ -1081,11 +1084,11 @@
 
 <p>排序的指标包括相似性、修复更多的错误、更少的修改、根据一个预训练的机器学习模型计算。</p>
 <h1 id="Evalution-评价"><a href="#Evalution-评价" class="headerlink" title="Evalution 评价"></a>Evalution 评价</h1><p><img src="https://github.com/Olive-2019/Lam-Blog-resource/blob/master/images/RSinMDE/evaluation.jpg?raw=true" alt="评价方法"></p>
-<h2 id="Method-方法"><a href="#Method-方法" class="headerlink" title="Method 方法"></a>Method 方法</h2><div id="echarts8097" style="width: 85%;height: 400px;margin: 0 auto"></div>
+<h2 id="Method-方法"><a href="#Method-方法" class="headerlink" title="Method 方法"></a>Method 方法</h2><div id="echarts9578" style="width: 85%;height: 400px;margin: 0 auto"></div>
 <script src="https://cdn.bootcss.com/echarts/3.8.0/echarts.common.min.js"></script>
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts8097'));
+        var myChart = echarts.init(document.getElementById('echarts9578'));
         // 指定图表的配置项和数据
         var option = option = {
   title: {
